@@ -1,0 +1,17 @@
+repo:
+  - '*'
+
+CMakeLists:
+  - 'PhysicalEngine/CMakeLists.txt'
+
+readme:
+  - 'README.md'
+
+github-actions:
+  - '.github/**/*.yml'
+
+src:
+  - 'PhysicalEngine/**/*.{cpp,hpp}'
+
+main:
+  - 'PhysicalEngine/main.*'
