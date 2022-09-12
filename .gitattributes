@@ -1,4 +1,3 @@
 * text=auto eol=lf
-**/lib/** linguist-vendored
-**/bin/** linguist-vendored
-**/include/** linguist-vendored
+PhysicalEngine/imgui/** linguist-vendored
+PhysicalEngine/glfw/** linguist-vendored
