@@ -1,0 +1,149 @@
+name: Cpp Cmake Publish
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build-windows:
+    name: Build windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configure CMake
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      - name: Build
+        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+      - name: Copy exe to root
+        run: |
+          cp ./build/PhysicalEngine/Release/PhysicalEngine.exe .
+      - name: Upload artifact release
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact-windows
+          path: |
+            ./PhysicalEngine.exe
+  build-ubuntu:
+    name: Build ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install libs
+        run: |
+          sudo apt-get install libsfml-dev
+          sudo apt install xorg-dev
+      - name: Configure CMake
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      - name: Build
+        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+      - name: Copy exe to root
+        run: cp ./build/PhysicalEngine/PhysicalEngine ./PhysicalEngineLauncher
+      - name: Upload artifact release
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact-ubuntu
+          path: |
+            ./PhysicalEngineLauncher
+  build-macos:
+    name: Build macos
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install libs
+        run: brew install sfml
+      - name: Configure CMake
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      - name: Build
+        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+      - name: Copy exe to root
+        run: cp ./build/PhysicalEngine/PhysicalEngine ./PhysicalEngineLauncher
+      - name: Upload artifact release
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact-macos
+          path: |
+            ./PhysicalEngineLauncher
+  release-project:
+    name: Release project
+    runs-on: ubuntu-latest
+    needs: [ build-windows, build-ubuntu, build-macos ]
+    steps:
+      - name: Download windows artifact content
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact-windows
+      - name: View content
+        run: ls -R
+      - name: Create GitHub release
+        id: create-new-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+      - name: Archive windows release
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: release-windows.zip
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+          asset_path: release-windows.zip
+          asset_name: PhysicalEngine-windows-v${{ github.run_number }}.zip
+          asset_content_type: application/zip
+      - name: Delete windows release files
+        run: |
+          rm release-windows.zip
+          rm PhysicalEngine.exe
+      - name: Download ubuntu artifact content
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact-ubuntu
+      - name: View content
+        run: ls -R
+      - name: Archive ubuntu release
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: release-linux.tar.gz
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+          asset_path: release-linux.tar.gz
+          asset_name: PhysicalEngine-linux-v${{ github.run_number }}.tar.gz
+          asset_content_type: application/zip
+      - name: Delete ubuntu release files
+        run: |
+          rm release-linux.tar.gz
+          rm PhysicalEngineLauncher
+      - name: Download macos artifact content
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact-macos
+      - name: View content
+        run: ls -R
+      - name: Archive macos release
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: release-macos.tar.gz
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+          asset_path: release-macos.tar.gz
+          asset_name: PhysicalEngine-macos-v${{ github.run_number }}.tar.gz
+          asset_content_type: application/zip
