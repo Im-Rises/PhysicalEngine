@@ -1,5 +1,5 @@
 ﻿set(SRCS "main.cpp")
-set(HEADERS )
+set(HEADERS)
 
 include_directories("${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/glfw/include")
 include_directories("${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/imgui")
