@@ -1,8 +1,9 @@
-set(SRCS "mainTest.cpp")
-set(HEADERS)
+set(SRCS "mainTest.cpp" "mainTest2.cpp")
 
 enable_testing()
 
-add_executable(${PROJECT_NAME} ${SRCS} ${HEADERS})
-
-add_test(${PROJECT_NAME} ${PROJECT_NAME})
+foreach (test ${SRCS})
+    get_filename_component(testName ${test} NAME_WE)
+    add_executable(${testName} ${test} ${HEADERS})
+    add_test(${testName} ${testName})
+endforeach ()
