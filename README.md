@@ -9,7 +9,7 @@
 
 ## Description
 
-This is a simple physics engine written in C++ using GLFW, OpenGl3 and Dear ImGui.
+This is a simple physics engine written in C++ using Glad, GLFW, OpenGl3 and Dear ImGui.
 
 The project is a work in progress and is not yet complete.
 

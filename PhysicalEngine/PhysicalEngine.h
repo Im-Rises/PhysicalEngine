@@ -15,6 +15,9 @@ public:
     ~PhysicalEngine();
 
     void start();
+
+private:
+    void createTriangle();
 };
 
 

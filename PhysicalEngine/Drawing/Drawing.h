@@ -1,17 +1,10 @@
-#ifndef PHYSICALENGINE_DRAWING_H
-#define PHYSICALENGINE_DRAWING_H
+#ifndef DEF_DRAWING_H
+#define DEF_DRAWING_H
 
+namespace drg {
 
-class Drawing {
-private:
+#include "Triangle.h"
 
-public:
-    Drawing();
+}
 
-    ~Drawing();
-
-    void drawTriangle();
-};
-
-
-#endif //PHYSICALENGINE_DRAWING_H
+#endif //DEF_DRAWING_H
