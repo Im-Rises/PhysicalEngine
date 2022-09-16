@@ -39,6 +39,11 @@ For Windows users you don't need to install the libs. You can just download the 
 .\PhysicalEngine.exe
 ```
 
+> **Warning**  
+> The project is set up to be built using CMake and vc2019 for Windows. If you want to modify the
+> compiler for vc2022 or other you will need to change the CMakeLists.txt .lib linking file accordingly to your vc20**
+> version.
+
 ### Linux
 
 <a href="https://github.com/Im-Rises/PhysicalEngine/releases/latest"><img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="cmakeLogo" style="height:40px;"/></a>
