@@ -218,7 +218,23 @@ The project is set with a set of different scripts:
 
 ## Documentations
 
-PLACEHOLDER
+OpenGL:  
+<https://www.khronos.org/registry/OpenGL-Refpages/gl4/>
+
+OpenGL loading library:  
+<https://www.khronos.org/opengl/wiki/OpenGL_Loading_Library>
+
+GLFW:  
+<https://www.glfw.org/docs/latest/>
+
+Dear ImGui:  
+<https://github.com/ocornut/imgui>
+
+GLAD:  
+<https://glad.dav1d.de/>
+
+Apprendre OpenGL:  
+<https://opengl.developpez.com/tutoriels/apprendre-opengl/?page=creer-une-fenetre#L4-5>
 
 ## Contributors
 

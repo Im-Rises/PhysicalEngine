@@ -5,6 +5,8 @@
 // If you are new to Dear ImGui, read documentation from the docs/ folder + read the top of imgui.cpp.
 // Read online: https://github.com/ocornut/imgui/tree/master/docs
 
+#include <glad/glad.h>
+
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -65,6 +67,10 @@ PhysicalEngine::PhysicalEngine() {
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // Enable vsync
 
+    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
+        exit(1);
+
+
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -122,6 +128,8 @@ void PhysicalEngine::start() {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+
+        /*------------------IMGUI DEMO CODE------------------*/
 
         // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
         if (show_demo_window)
