@@ -1,5 +1,8 @@
-#ifndef VECTOR3D_H // include guard
+#ifndef VECTOR3D_H 
 #define VECTOR3D_H
+
+#include<math.h>
+#include<iostream>
 
 class Vector3D {
 private:
