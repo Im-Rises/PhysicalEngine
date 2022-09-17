@@ -236,6 +236,9 @@ GLAD:
 Apprendre OpenGL:  
 <https://opengl.developpez.com/tutoriels/apprendre-opengl/?page=creer-une-fenetre#L4-5>
 
+Learn OpenGL:  
+<https://learnopengl.com/Getting-started/Hello-Triangle>
+
 ## Contributors
 
 Clémence :
