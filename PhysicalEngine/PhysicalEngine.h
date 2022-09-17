@@ -18,6 +18,9 @@ public:
 
 private:
     void createTriangle();
+
+    unsigned int shaderProgram;
+    unsigned int VBO, VAO;
 };
 
 
