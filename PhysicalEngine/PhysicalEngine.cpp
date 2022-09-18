@@ -136,8 +136,7 @@ void PhysicalEngine::start() {
 ///////////////////////////////////////
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-
+        glDrawArrays(GL_TRIANGLES, 0, 6);
 ///////////////////////////////////////
 
 /*------------------Swap buffers------------------*/
@@ -187,10 +186,13 @@ void PhysicalEngine::generateShaders() {
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
+    // add a new set of vertices to form a second triangle (a total of 6 vertices); the vertex attribute configuration remains the same (still one 3-float position vector per vertex)
     float vertices[] = {
-            -0.5f, -0.5f, 0.0f, // left
-            0.5f, -0.5f, 0.0f, // right
-            0.0f, 0.5f, 0.0f  // top
+            -0.5f, 0.0f, 0.0f,
+            -0.25f, 0.5f, 0.0f,
+            0.0f, 0.0f, 0.0f,
+            0.25f, 0.5f, 0.0f,
+            0.5f, 0.0f, 0.0f,
     };
 
     unsigned int VBO;
