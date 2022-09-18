@@ -1,5 +1,5 @@
-﻿set(SRCS "main.cpp")
-set(HEADERS)
+﻿set(SRCS "main.cpp" "Vector3D/vector3d.cpp")
+set(HEADERS "Vector3D/vector3d.h")
 
 include_directories("${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/glfw/include")
 include_directories("${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/imgui")
