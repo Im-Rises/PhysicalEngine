@@ -1,8 +1,8 @@
-#ifndef VECTOR3D_H 
+#ifndef VECTOR3D_H
 #define VECTOR3D_H
 
-#include<math.h>
-#include<iostream>
+#include <cmath>
+#include <iostream>
 
 class Vector3D {
 private:

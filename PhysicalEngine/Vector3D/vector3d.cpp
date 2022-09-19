@@ -25,9 +25,11 @@ Vector3D::~Vector3D() {
 void Vector3D::setx(double xcoord) {
 	m_x = xcoord;
 }
+
 void Vector3D::sety(double ycoord) {
 	m_y = ycoord;
 }
+
 void Vector3D::setz(double zcoord) {
 	m_z = zcoord;
 }
@@ -35,9 +37,11 @@ void Vector3D::setz(double zcoord) {
 double Vector3D::getx() {
 	return m_x;
 }
+
 double Vector3D::gety() {
 	return m_y;
 }
+
 double Vector3D::getz() {
 	return m_z;
 }
