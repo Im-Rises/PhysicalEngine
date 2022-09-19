@@ -1,12 +1,21 @@
 #ifndef DEF_TRIANGLE_H
 #define DEF_TRIANGLE_H
 
-class Triangle {
-public:
-    Triangle();
+#include "../Shader/Shader.h"
 
-private:
-    
-};
+namespace drg {
 
+    class Triangle {
+    private:
+        Shader shader;
+        unsigned int VBO, VAO;
+    public:
+        Triangle();
+
+        ~Triangle();
+
+        void use();
+
+    };
+}
 #endif //DEF_TRIANGLE_H

@@ -1,10 +1,7 @@
-#ifndef DEF_DRAWING_H
-#define DEF_DRAWING_H
-
-namespace drg {
+#ifndef DEF_DRAWING
+#define DEF_DRAWING
 
 #include "Triangle.h"
+#include "Square.h"
 
-}
-
-#endif //DEF_DRAWING_H
+#endif //DEF_DRAWING

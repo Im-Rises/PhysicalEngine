@@ -8,8 +8,6 @@ struct GLFWwindow;
 class PhysicalEngine {
 private:
     GLFWwindow *window;
-    unsigned int VAOs[2];
-    unsigned int shaderProgramOrange, shaderProgramYellow;
 
 public:
     PhysicalEngine();
@@ -17,9 +15,6 @@ public:
     ~PhysicalEngine();
 
     void start();
-
-private:
-    void generateShaders();
 
 };
 
