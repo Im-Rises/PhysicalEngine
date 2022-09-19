@@ -6,62 +6,62 @@
 
 class Vector3D {
 private:
-	double x, y, z;
+	double m_x, m_y, m_z;
 
 public:
-	// Constructeur par défaut
-	// Vecteur zéro (0,0,0)
+	/// Constructeur par défaut
+	/// Vecteur zéro (0,0,0)
 	Vector3D();
 
-	// Constructeur
-	// Vecteur (x,y,z)
+	/// Constructeur
+	/// Vecteur (x,y,z)
 	Vector3D(double xcoord, double ycoord, double zcoord);
 
-	//Constructeur de copie
+	///Constructeur de copie
 	Vector3D(const Vector3D& v);
 
-	//Destructeur
+	///Destructeur
 	~Vector3D();
 
-	//setters
+	///setters
 	void setx(double xcoord);
 	void sety(double ycoord);
 	void setz(double zcoord);
 
-	//getters
+	///getters
 	double getx();
 	double gety();
 	double getz();
 
-	//Addition
+	///Addition
 	Vector3D operator+(const Vector3D& vec);
 	Vector3D& operator+=(const Vector3D& vec); 
 
-	//Soustraction
+	///Soustraction
 	Vector3D operator-(const Vector3D& vec);
 	Vector3D& operator-=(const Vector3D& vec);
 
-	//Multiplication par un scalaire
+	///Multiplication par un scalaire
 	Vector3D operator*(double s); 
 	Vector3D& operator*=(double s); 
 
-	//Prend la valeur du vecteur
+	///Prend la valeur du vecteur
 	Vector3D operator=(const Vector3D& vec);
 
-	//Calcul de la norme
+	///Calcul de la norme
 	double norm();
 
-	//Normalisation
+	///Normalisation
 	Vector3D normalize();
 
-	//Produit Scalaire
+	///Produit Scalaire
 	double dot(const Vector3D& vec);
 
-	//Produit Vectoriel
+	///Produit Vectoriel
 	Vector3D cross(const Vector3D& vec);
 
-	//Affichage du vecteur
-	void disp_vector();
+	///Affichage du vecteur
+	void dispVector();
 };
 
 #endif /* VECTOR3D_H */
