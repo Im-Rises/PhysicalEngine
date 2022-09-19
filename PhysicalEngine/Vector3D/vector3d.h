@@ -1,67 +1,74 @@
-#ifndef VECTOR3D_H 
+#ifndef VECTOR3D_H
 #define VECTOR3D_H
 
-#include<math.h>
-#include<iostream>
+#include <cmath>
+#include <iostream>
 
 class Vector3D {
 private:
-	double x, y, z;
+    double x, y, z;
 
 public:
-	// Constructeur par défaut
-	// Vecteur zéro (0,0,0)
-	Vector3D();
+    // Constructeur par défaut
+    // Vecteur zéro (0,0,0)
+    Vector3D();
 
-	// Constructeur
-	// Vecteur (x,y,z)
-	Vector3D(double xcoord, double ycoord, double zcoord);
+    // Constructeur
+    // Vecteur (x,y,z)
+    Vector3D(double xcoord, double ycoord, double zcoord);
 
-	//Constructeur de copie
-	Vector3D(const Vector3D& v);
+    //Constructeur de copie
+    Vector3D(const Vector3D &v);
 
-	//Destructeur
-	~Vector3D();
+    //Destructeur
+    ~Vector3D();
 
-	//setters
-	void setx(double xcoord);
-	void sety(double ycoord);
-	void setz(double zcoord);
+    //setters
+    void setx(double xcoord);
 
-	//getters
-	double getx();
-	double gety();
-	double getz();
+    void sety(double ycoord);
 
-	//Addition
-	Vector3D operator+(const Vector3D& vec);
-	Vector3D& operator+=(const Vector3D& vec); 
+    void setz(double zcoord);
 
-	//Soustraction
-	Vector3D operator-(const Vector3D& vec);
-	Vector3D& operator-=(const Vector3D& vec);
+    //getters
+    double getx();
 
-	//Multiplication par un scalaire
-	Vector3D operator*(double s); 
-	Vector3D& operator*=(double s); 
+    double gety();
 
-	//Prend la valeur du vecteur
-	Vector3D operator=(const Vector3D& vec);
+    double getz();
 
-	//Calcul de la norme
-	double norm();
+    //Addition
+    Vector3D operator+(const Vector3D &vec);
 
-	//Normalisation
-	Vector3D normalize();
+    Vector3D &operator+=(const Vector3D &vec);
 
-	//Produit Scalaire
-	double dot(const Vector3D& vec);
+    //Soustraction
+    Vector3D operator-(const Vector3D &vec);
 
-	//Produit Vectoriel
-	Vector3D cross(const Vector3D& vec);
+    Vector3D &operator-=(const Vector3D &vec);
 
-	//Affichage du vecteur
-	void disp_vector();
+    //Multiplication par un scalaire
+    Vector3D operator*(double s);
+
+    Vector3D &operator*=(double s);
+
+    //Prend la valeur du vecteur
+    Vector3D operator=(const Vector3D &vec);
+
+    //Calcul de la norme
+    double norm();
+
+    //Normalisation
+    Vector3D normalize();
+
+    //Produit Scalaire
+    double dot(const Vector3D &vec);
+
+    //Produit Vectoriel
+    Vector3D cross(const Vector3D &vec);
+
+    //Affichage du vecteur
+    void disp_vector();
 };
 
 #endif /* VECTOR3D_H */
