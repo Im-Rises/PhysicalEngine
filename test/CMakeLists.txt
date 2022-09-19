@@ -1,6 +1,6 @@
-set(SRCS_TEST "mainTest.cpp" "mainTest2.cpp" "../PhysicalEngine/Vector3D/vector3d.cpp")
+set(SRCS_TEST "mainTest.cpp" "mainTest2.cpp")
 
-set(HEADERS "../PhysicalEngine/Vector3D/vector3d.h")
+set(HEADERS)
 set(SRCS)
 
 enable_testing()

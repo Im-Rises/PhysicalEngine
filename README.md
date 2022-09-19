@@ -9,7 +9,7 @@
 
 ## Description
 
-This is a simple physics engine written in C++ using GLFW, OpenGl3 and Dear ImGui.
+This is a simple physics engine written in C++ using Glad, GLFW, OpenGl3 and Dear ImGui.
 
 The project is a work in progress and is not yet complete.
 
@@ -38,6 +38,11 @@ For Windows users you don't need to install the libs. You can just download the 
 ```bash
 .\PhysicalEngine.exe
 ```
+
+> **Warning**  
+> The project is set up to be built using CMake and vc2019 for Windows. If you want to modify the
+> compiler for vc2022 or other you will need to change the CMakeLists.txt .lib linking file accordingly to your vc20**
+> version.
 
 ### Linux
 
@@ -213,7 +218,26 @@ The project is set with a set of different scripts:
 
 ## Documentations
 
-PLACEHOLDER
+OpenGL:  
+<https://www.khronos.org/registry/OpenGL-Refpages/gl4/>
+
+OpenGL loading library:  
+<https://www.khronos.org/opengl/wiki/OpenGL_Loading_Library>
+
+GLFW:  
+<https://www.glfw.org/docs/latest/>
+
+Dear ImGui:  
+<https://github.com/ocornut/imgui>
+
+GLAD:  
+<https://glad.dav1d.de/>
+
+Apprendre OpenGL:  
+<https://opengl.developpez.com/tutoriels/apprendre-opengl/?page=creer-une-fenetre#L4-5>
+
+Learn OpenGL:  
+<https://learnopengl.com/Getting-started/Hello-Triangle>
 
 ## Contributors
 
