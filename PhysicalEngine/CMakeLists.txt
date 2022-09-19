@@ -1,5 +1,5 @@
-﻿set(SRCS "main.cpp" "Vector3D/vector3d.cpp")
-set(HEADERS "Vector3D/vector3d.h")
+﻿set(SRCS "main.cpp" "Vector3D/vector3d.cpp" "Particule/Particule.cpp" "Integrator/Integrator.cpp" "Integrable/Integrable.h")
+set(HEADERS "Vector3D/vector3d.h" "Particule/Particule.h" "Integrator/Integrator.h" "Integrable/Integrable.h")
 
 include_directories("${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/glfw/include")
 include_directories("${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/imgui")
@@ -11,7 +11,7 @@ set(SRCS_IMGUI "imgui/imgui.cpp" "imgui/imgui_demo.cpp" "imgui/imgui_draw.cpp" "
 
 find_package(OpenGL REQUIRED)
 
-add_executable(${PROJECT_NAME} ${SRCS} ${SRCS_IMGUI} ${HEADERS} ${HEADERS_IMGUI})
+add_executable(${PROJECT_NAME} ${SRCS} ${SRCS_IMGUI} ${HEADERS} ${HEADERS_IMGUI} "Integrable/Integrable.h")
 
 target_link_libraries(${PROJECT_NAME} "glfw")
 
