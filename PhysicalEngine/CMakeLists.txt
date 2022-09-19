@@ -10,8 +10,8 @@ set(SRCS_IMGUI "imgui/imgui.cpp" "imgui/imgui_demo.cpp" "imgui/imgui_draw.cpp" "
 set(HEADERS_GLAD "glad/include/glad/glad.h" "glad/include/KHR/khrplatform.h")
 set(SRCS_GLAD "glad/src/glad.c")
 
-set(SRCS "main.cpp" "PhysicalEngine.cpp" "Shader/Shader.cpp" "Drawing/Triangle.cpp" "Drawing/Square.cpp")
-set(HEADERS "PhysicalEngine.h" "Drawing/Drawing.h" "Shader/Shader.h" "Drawing/Triangle.h" "Drawing/Drawing.h" "Drawing/Square.h")
+set(SRCS "main.cpp" "PhysicalEngine.cpp" "Shader/Shader.cpp")
+set(HEADERS "PhysicalEngine.h" "Shader/Shader.h")
 
 add_executable(${PROJECT_NAME} ${SRCS} ${SRCS_IMGUI} ${SRCS_GLAD} ${HEADERS} ${HEADERS_IMGUI})
 

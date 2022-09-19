@@ -241,17 +241,17 @@ Learn OpenGL:
 
 ## Contributors
 
-Clémence :
+Clémence Clavel:
 
 - @clemos38
 - <https://github.com/clemos38>
 
-Gabriel :
+Gabriel REBOUL:
 
 - @spiryti
 - <https://github.com/spiryti>
 
-Quentin MOREL :
+Quentin MOREL:
 
 - @Im-Rises
 - <https://github.com/Im-Rises>
