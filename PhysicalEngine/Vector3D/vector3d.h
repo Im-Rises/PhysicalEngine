@@ -4,6 +4,8 @@
 #include <cmath>
 #include <iostream>
 
+using namespace std;
+
 class Vector3D {
 private:
 	double m_x, m_y, m_z;
@@ -48,6 +50,9 @@ public:
 	///Prend la valeur du vecteur
 	Vector3D operator=(const Vector3D& vec);
 
+	///Test d'égalité
+	bool operator==(const Vector3D& vec);
+
 	///Calcul de la norme
 	double norm();
 
@@ -60,8 +65,13 @@ public:
 	///Produit Vectoriel
 	Vector3D cross(const Vector3D& vec);
 
+	///Distance entre deux vecteurs
+	double distance(const Vector3D& vec);
+
 	///Affichage du vecteur
-	void dispVector();
+	friend ostream& operator<<(ostream& os, Vector3D vec) {
+		return os << "(" << vec.getx() << "," << vec.gety() << "," << vec.getz() << ")";
+	}
 };
 
 #endif /* VECTOR3D_H */

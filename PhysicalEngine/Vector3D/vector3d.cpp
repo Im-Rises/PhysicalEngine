@@ -86,6 +86,10 @@ Vector3D Vector3D::operator=(const Vector3D& vec) {
 	return *this;
 }
 
+bool Vector3D::operator==(const Vector3D& vec) {
+	return (m_x == vec.m_x && m_y == vec.m_y && m_z == vec.m_z);
+}
+
 double Vector3D::norm() {
 	return sqrt(m_x * m_x + m_y * m_y + m_z * m_z);
 }
@@ -113,6 +117,8 @@ Vector3D Vector3D::cross(const Vector3D& vec) {
 	return Vector3D(a, b, c);
 }
 
-void Vector3D::dispVector() {
-	std::cout << "(" << m_x << "," << m_y << "," << m_z << ")";
+double Vector3D::distance(const Vector3D& vec) {
+	return (*this-vec).norm();
 }
+
+
