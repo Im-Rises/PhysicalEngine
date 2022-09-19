@@ -1,4 +1,4 @@
-﻿### New CMakeLists.txt to compile from .lib or package installed
+### New CMakeLists.txt to compile from .lib or package installed
 
 include_directories("${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/imgui")
 include_directories("${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/glfw/include")
