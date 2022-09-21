@@ -1,9 +1,11 @@
 #ifndef DEF_PHYSICALENGINE
 #define DEF_PHYSICALENGINE
 
-struct GLFWwindow;
+#include <vector>
 
 #define PROJECT_NAME "Physical Engine 3D"
+
+struct GLFWwindow;
 
 class PhysicalEngine {
 private:
@@ -27,8 +29,6 @@ private:
     void updateScene();
 
     void refreshScreen();
-
-//    void generateSphereVertices(int stackCount, int sectorCount, float radius);
 };
 
 
