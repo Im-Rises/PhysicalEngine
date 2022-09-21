@@ -8,6 +8,9 @@ struct GLFWwindow;
 class PhysicalEngine {
 private:
     GLFWwindow *window;
+    struct {
+        float r, g, b, a;
+    } backgroundColor;
 
 public:
     PhysicalEngine();
@@ -16,6 +19,16 @@ public:
 
     void start();
 
+private:
+    void handleEvents();
+
+    void updateGui();
+
+    void updateScene();
+
+    void refreshScreen();
+
+//    void generateSphereVertices(int stackCount, int sectorCount, float radius);
 };
 
 

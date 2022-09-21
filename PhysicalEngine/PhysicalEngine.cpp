@@ -92,10 +92,14 @@ PhysicalEngine::PhysicalEngine() {
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/Roboto-Medium.ttf", 16.0f);
     //ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesJapanese());
     //IM_ASSERT(font != NULL);
+
+    // Set background color
+    backgroundColor = {
+            0.45f, 0.55f, 0.60f, 1.00f
+    };
 }
 
 PhysicalEngine::~PhysicalEngine() {
-    // Cleanup
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
@@ -105,17 +109,57 @@ PhysicalEngine::~PhysicalEngine() {
 }
 
 void PhysicalEngine::start() {
-    ImVec4 clearColor = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+    char *vertexShaderSource = "#version 330 core\n"
+                               "layout (location = 0) in vec3 aPos;\n"
+                               "\n"
+                               "void main()\n"
+                               "{\n"
+                               "    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+                               "}\0";
+
+    char *fragmentShaderSource = "#version 330 core\n"
+                                 "out vec4 FragColor;\n"
+                                 "\n"
+                                 "void main()\n"
+                                 "{\n"
+                                 "    FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+                                 "}\0";
 
     float vertices[] = {
-            // positions         // colors
-            0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,  // bottom right
-            -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,  // bottom left
-            0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f,  // top
+            -0.5f, -0.5f, 0.0f,
+            0.5f, -0.5f, 0.0f,
+            0.0f, 0.5f, 0.0f
     };
+    unsigned int VBO;
+    glGenBuffers(1, &VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    Shader shader("shaders/shader.vert", "shaders/shader.frag");
-    unsigned int VBO, VAO;
+
+    unsigned int vertexShader;
+    vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+    glCompileShader(vertexShader);
+
+
+    unsigned int fragmentShader;
+    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+    glCompileShader(fragmentShader);
+
+    unsigned int shaderProgram;
+    shaderProgram = glCreateProgram();
+    glAttachShader(shaderProgram, vertexShader);
+    glAttachShader(shaderProgram, fragmentShader);
+    glLinkProgram(shaderProgram);
+    glUseProgram(shaderProgram);
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
+    glEnableVertexAttribArray(0);
+
+    unsigned int VAO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
@@ -124,53 +168,64 @@ void PhysicalEngine::start() {
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) 0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
     glEnableVertexAttribArray(0);
-    // color attribute
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) (3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
+
+    // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
-    // glBindVertexArray(0);
+    glBindVertexArray(0);
 
-    float offset = 0.0f;
 
     while (!glfwWindowShouldClose(window)) {
-        /*------------------Pool events------------------*/
-        glfwPollEvents();
+        handleEvents();
+        updateGui();
+        updateScene();
 
-        /*------------------Start the Dear ImGui frame------------------*/
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-
-        /*------------------IMGUI windows Scene------------------*/
-        {
-            ImGui::Begin("Scene");
-            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
-                        ImGui::GetIO().Framerate);
-            ImGui::End();
-        }
-
-        /*------------------Main Window rendering------------------*/
-        ImGui::Render();
-        int display_w, display_h;
-        glfwGetFramebufferSize(window, &display_w, &display_h);
-        glViewport(0, 0, display_w, display_h);
-        glClearColor(clearColor.x * clearColor.w, clearColor.y * clearColor.w, clearColor.z * clearColor.w,
-                     clearColor.w);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        /*------------------Shader test------------------*/
-        shader.setFloat("xOffset", offset);
-        shader.use();
+        glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
-        /*------------------Swap buffers------------------*/
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-        glfwSwapBuffers(window);
+        refreshScreen();
     }
+}
+
+void PhysicalEngine::handleEvents() {
+    glfwPollEvents();
+}
+
+void PhysicalEngine::updateGui() {
+    /*------------------Start the Dear ImGui frame------------------*/
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+
+    /*------------------ImGui framerate------------------*/
+    {
+        ImGui::Begin("Scene");
+        ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
+                    ImGui::GetIO().Framerate);
+        ImGui::End();
+    }
+
+    /*------------------Main Window rendering------------------*/
+    ImGui::Render();
+    int display_w, display_h;
+    glfwGetFramebufferSize(window, &display_w, &display_h);
+    glViewport(0, 0, display_w, display_h);
+    glClearColor(backgroundColor.r * backgroundColor.a, backgroundColor.g * backgroundColor.a,
+                 backgroundColor.b * backgroundColor.a,
+                 backgroundColor.a);
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void PhysicalEngine::updateScene() {
+
+}
+
+void PhysicalEngine::refreshScreen() {
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    glfwSwapBuffers(window);
 }
