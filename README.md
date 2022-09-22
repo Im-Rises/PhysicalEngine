@@ -233,6 +233,12 @@ Dear ImGui:
 GLAD:  
 <https://glad.dav1d.de/>
 
+GLM:  
+<https://glm.g-truc.net/0.9.8/index.html>
+
+STB:  
+<https://github.com/nothings/stb>
+
 Apprendre OpenGL:  
 <https://opengl.developpez.com/tutoriels/apprendre-opengl/?page=creer-une-fenetre#L4-5>
 
@@ -241,17 +247,17 @@ Learn OpenGL:
 
 ## Contributors
 
-Clémence :
+Clémence Clavel:
 
 - @clemos38
 - <https://github.com/clemos38>
 
-Gabriel :
+Gabriel REBOUL:
 
 - @spiryti
 - <https://github.com/spiryti>
 
-Quentin MOREL :
+Quentin MOREL:
 
 - @Im-Rises
 - <https://github.com/Im-Rises>
