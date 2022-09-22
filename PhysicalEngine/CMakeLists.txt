@@ -11,8 +11,8 @@ set(SRCS_IMGUI "imgui/imgui.cpp" "imgui/imgui_demo.cpp" "imgui/imgui_draw.cpp" "
 set(HEADERS_GLAD "glad/include/glad/glad.h" "glad/include/KHR/khrplatform.h")
 set(SRCS_GLAD "glad/src/glad.c")
 
-set(SRCS "main.cpp" "PhysicalEngine.cpp" "Shader/Shader.cpp" "Drawing/Triangle.cpp" "Drawing/Square.cpp" "Vector3D/vector3d.cpp" "Particule/Particule.cpp" "Integrator/Integrator.cpp" "Integrable/Integrable.h" "Mesh/Sphere/Sphere.cpp" "Mesh/Mesh.cpp" "Mesh/Cuboid/CuboidRectangle.cpp" "Mesh/Cuboid/Cube.cpp")
-set(HEADERS "PhysicalEngine.h" "Drawing/Drawing.h" "Shader/Shader.h" "Drawing/Triangle.h" "Drawing/Drawing.h" "Drawing/Square.h" "Vector3D/vector3d.h" "Particule/Particule.h" "Integrator/Integrator.h" "Integrable/Integrable.h"    "Mesh/Cuboid/CuboidRectangle.h" "Mesh/Cuboid/Cube.h")
+set(SRCS "main.cpp" "PhysicalEngine.cpp" "Shader/Shader.cpp" "Vector3D/vector3d.cpp" "Particule/Particule.cpp" "Integrator/Integrator.cpp" "Integrable/Integrable.h" "Mesh/Sphere/Sphere.cpp" "Mesh/Mesh.cpp" "Mesh/Cuboid/CuboidRectangle.cpp" "Mesh/Cuboid/Cube.cpp")
+set(HEADERS "PhysicalEngine.h" "Shader/Shader.h" "Vector3D/vector3d.h" "Particule/Particule.h" "Integrator/Integrator.h" "Integrable/Integrable.h"    "Mesh/Cuboid/CuboidRectangle.h" "Mesh/Cuboid/Cube.h")
 
 add_executable(${PROJECT_NAME} ${SRCS} ${SRCS_IMGUI} ${SRCS_GLAD} ${HEADERS} ${HEADERS_IMGUI})
 
