@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
 
     int returnValue=0;
 
-    TestParticule t=TestParticule();
+    TestParticule t;
 	returnValue = t.TestCalculePosition();
 
     return returnValue;

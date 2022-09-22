@@ -6,15 +6,15 @@ Particule::Particule(const Particule& particule) {
 	m_position = Vector3D(particule.m_position);
 }
 
-void Particule::calculatePosition(float time) {
+void Particule::calculatePosition(double time) {
 	m_position = m_position + m_speed * time;
 }
 
-void Particule::calculateSpeed(float time) {
+void Particule::calculateSpeed(double time) {
 	m_speed = m_speed + m_acceleration * time;
 }
 
-void Particule::recalculateAll(float time) {
+void Particule::recalculateAll(double time) {
 	calculateSpeed(time);
 	calculatePosition(time);
 	

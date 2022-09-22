@@ -1,7 +1,7 @@
-set(SRCS_TEST "mainTest.cpp" "mainTest2.cpp" "../PhysicalEngine/Vector3D/vector3d.cpp" "../PhysicalEngine/Particule/Particule.cpp" "TestParticule/TestParticule.cpp")
+set(SRCS_TEST "mainTest.cpp" "mainTest2.cpp" )
 
-set(HEADERS "../PhysicalEngine/Vector3D/vector3d.h" "../PhysicalEngine/Particule/Particule.h" "TestParticule/TestParticule.h")
-set(SRCS)
+set(HEADERS "../PhysicalEngine/Vector3D/vector3d.h" "../PhysicalEngine/Particule/Particule.h" "../PhysicalEngine/Integrator/Integrator.h" "TestParticule/TestParticule.h" )
+set(SRCS "../PhysicalEngine/Vector3D/vector3d.cpp" "../PhysicalEngine/Particule/Particule.cpp" "TestParticule/TestParticule.cpp" "../PhysicalEngine/Integrator/Integrator.cpp")
 
 enable_testing()
 

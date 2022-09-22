@@ -34,15 +34,15 @@ void Vector3D::setz(double zcoord) {
     z = zcoord;
 }
 
-double Vector3D::getx() {
+double Vector3D::getx() const {
     return x;
 }
 
-double Vector3D::gety() {
+double Vector3D::gety() const {
     return y;
 }
 
-double Vector3D::getz() {
+double Vector3D::getz() const {
     return z;
 }
 

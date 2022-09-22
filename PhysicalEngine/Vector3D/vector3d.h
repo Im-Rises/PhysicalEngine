@@ -31,11 +31,11 @@ public:
     void setz(double zcoord);
 
     //getters
-    double getx();
+	double getx() const;
 
-    double gety();
+    double gety() const;
 
-    double getz();
+    double getz() const;
 
     //Addition
     Vector3D operator+(const Vector3D &vec);

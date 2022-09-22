@@ -62,20 +62,20 @@ public:
 	/// et du temps en argument
 	/// </summary>
 	/// <param name="time"></param>
-	void calculatePosition(float time);
+	void calculatePosition(double time);
 
 	/// <summary>
 	/// Calcule la nouvelle vitesse à partir de l'accélération de la particule
 	/// et du temps en arguement
 	/// </summary>
 	/// <param name="time"></param>
-	void calculateSpeed(float time);
+	void calculateSpeed(double time);
 
 	/// <summary>
 	/// Calcule toutes les variable dépendante du temps sauf l'acceleration
 	/// </summary>
 	/// <param name="time"></param>
-	void recalculateAll(float time);
+	void recalculateAll(double time);
 
 #pragma endregion
 

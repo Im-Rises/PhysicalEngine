@@ -1,10 +1,15 @@
 #include "Integrator.h"
+#include <chrono>
+#include <thread>
+Integrator::Integrator() {
+
+}
 
 void Integrator::AddIntegrable(Particule& integrable) {
 	m_integrableList.push_back(integrable);
 }
 
-void Integrator::UpdateAll(float time) {
+void Integrator::UpdateAll(double time) {
 
 	for (Particule integrable : m_integrableList) {
 		integrable.recalculateAll(time);
@@ -12,15 +17,21 @@ void Integrator::UpdateAll(float time) {
 }
 
 void Integrator::boucle() {
-	float deltaTime=0;
+	double deltaTime=0;
 	while (!m_StopPhysics) {
 		
 		auto start = std::chrono::high_resolution_clock::now();
-
-
+		if (deltaTime != 0) {
+			UpdateAll(deltaTime);
+		}
+		using namespace std::chrono_literals;
+		std::this_thread::sleep_for(2000ms);
 		auto end = std::chrono::high_resolution_clock::now();
 
-		std::chrono::duration<double, std::milli> float_ms = end - start;
+
+		deltaTime =std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+		deltaTime *= 0.000000001;
+		printf("time = %f \n", deltaTime);
 		
 
 	}

@@ -13,12 +13,12 @@ private:
 	bool m_StopPhysics=false;
 
 public:
+
+	Integrator();
+
 	void AddIntegrable(Particule & integrable);
-	void UpdateAll(float time);
+	void UpdateAll(double time);
 	void boucle();
-
-
-
 
 };
 
