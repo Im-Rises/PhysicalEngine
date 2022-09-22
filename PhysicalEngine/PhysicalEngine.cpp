@@ -1,5 +1,7 @@
 #include "PhysicalEngine.h"
 
+#pragma region Includes
+
 // GLM
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -37,10 +39,17 @@
 #pragma comment(lib, "legacy_stdio_definitions")
 #endif
 
+#pragma endregion
+
+#pragma region Callback functions
+
 static void glfw_error_callback(int error, const char *description) {
     fprintf(stderr, "Glfw Error %d: %s\n", error, description);
 }
 
+#pragma endregion
+
+#pragma region Constructor
 
 PhysicalEngine::PhysicalEngine() {
     // Setup window
@@ -99,6 +108,10 @@ PhysicalEngine::PhysicalEngine() {
     };
 }
 
+#pragma endregion
+
+#pragma region Destructor
+
 PhysicalEngine::~PhysicalEngine() {
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
@@ -107,6 +120,10 @@ PhysicalEngine::~PhysicalEngine() {
     glfwDestroyWindow(window);
     glfwTerminate();
 }
+
+#pragma endregion
+
+#pragma region Start
 
 void PhysicalEngine::start() {
     // build and compile our shader zprogram
@@ -292,6 +309,8 @@ void PhysicalEngine::start() {
         refreshScreen();
     }
 }
+
+#pragma endregion
 
 void PhysicalEngine::handleEvents() {
     glfwPollEvents();
