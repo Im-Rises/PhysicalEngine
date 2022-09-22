@@ -1,3 +1,7 @@
 * text=auto eol=lf
-PhysicalEngine/imgui/** linguist-vendored
+PhysicalEngine/glad/** linguist-vendored
 PhysicalEngine/glfw/** linguist-vendored
+PhysicalEngine/glm/** linguist-vendored
+PhysicalEngine/imgui/** linguist-vendored
+PhysicalEngine/stb/** linguist-vendored
+
