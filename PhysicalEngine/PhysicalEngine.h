@@ -14,7 +14,7 @@ private:
     struct {
         float r, g, b, a;
     } backgroundColor;
-    Scene scene;
+    Scene *scene;
 
 
 public:
@@ -27,7 +27,7 @@ public:
 private:
     void handleEvents();
 
-    void updateGui();
+    void handleGui();
 
     void updateGame();
 

@@ -2,18 +2,14 @@
 
 #pragma region Includes
 
-// GLM
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
-// STB_IMAGE
-#define STB_IMAGE_IMPLEMENTATION
-
-#include <stb_image.h>
-
-// Shader creator
-#include "Shader/Shader.h"
+//// GLM
+//#include <glm/glm.hpp>
+//#include <glm/gtc/matrix_transform.hpp>
+//#include <glm/gtc/type_ptr.hpp>
+//
+//// STB_IMAGE
+//#define STB_IMAGE_IMPLEMENTATION
+//#include <stb_image.h>
 
 // OpenGL Loader
 #include <glad/glad.h>
@@ -103,12 +99,11 @@ PhysicalEngine::PhysicalEngine() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
-//    glfwSetWindowUserPointer(window, this);
-//    glfwSetKeyCallback(window, key_callback);
-
     backgroundColor = {
             0.45f, 0.55f, 0.60f, 1.00f
     };
+
+    scene = new Scene();
 }
 
 PhysicalEngine::~PhysicalEngine() {
@@ -118,6 +113,7 @@ PhysicalEngine::~PhysicalEngine() {
 
     glfwDestroyWindow(window);
     glfwTerminate();
+    delete scene;
 }
 
 #pragma endregion
@@ -129,7 +125,7 @@ void PhysicalEngine::start() {
     while (!glfwWindowShouldClose(window)) {
         //Inputs
         handleEvents();
-        updateGui();
+        handleGui();
 
         //Update game mechanics
         updateGame();
@@ -144,7 +140,7 @@ void PhysicalEngine::handleEvents() {
     int state = glfwGetKey(window, GLFW_KEY_E);
 }
 
-void PhysicalEngine::updateGui() {
+void PhysicalEngine::handleGui() {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
@@ -162,7 +158,7 @@ void PhysicalEngine::updateGui() {
 
 
 void PhysicalEngine::updateGame() {
-    scene.update();
+    scene->update();
 }
 
 void PhysicalEngine::updateScreen() {
@@ -178,7 +174,7 @@ void PhysicalEngine::updateScreen() {
     glClear(GL_COLOR_BUFFER_BIT);
 
     // Draw scene
-    scene.draw();
+    scene->draw();
 
     // Swap buffers
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
