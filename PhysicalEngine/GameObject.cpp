@@ -90,3 +90,14 @@ void GameObject::draw() {
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
+
+//GameObject::GameObject(GameObject &gameObject) {
+//    this->shader = gameObject.shader;
+//    this->vertices = gameObject.vertices;
+//    this->VAO = gameObject.VAO;
+//    this->VBO = gameObject.VBO;
+//}
+//
+//GameObject GameObject::operator=(const GameObject &gameObj) {
+//    return GameObject();
+//}

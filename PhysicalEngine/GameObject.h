@@ -26,6 +26,10 @@ public:
     void update();
 
     void draw();
+
+//    GameObject(GameObject &gameObject);
+
+//    GameObject operator=(const GameObject &gameObj);
 };
 
 
