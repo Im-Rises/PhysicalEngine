@@ -19,12 +19,14 @@ void Scene::update() {
     for (GameObject *gameObject: gameObjects) {
         gameObject->update();
     }
-
-//    camera.update();
 }
 
-void Scene::draw() {
+void Scene::draw(int display_w, int display_h) {
     for (GameObject *gameObject: gameObjects) {
-        gameObject->draw();
+        gameObject->draw(display_w, display_h, camera.getViewMatrix());
     }
+}
+
+void Scene::translateCamera() {
+    camera.translate();
 }

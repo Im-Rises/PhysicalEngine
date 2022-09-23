@@ -245,6 +245,10 @@ Apprendre OpenGL:
 Learn OpenGL:  
 <https://learnopengl.com/Getting-started/Hello-Triangle>
 
+Developpez Learn OpenGL:  
+<https://opengl.developpez.com/tutoriels/opengl-tutorial/3-matrices/#Lno-I>  
+<https://opengl.developpez.com/tutoriels/opengl-tutorial/>
+
 ## Contributors
 
 Clémence Clavel:

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Shader/Shader.h"
+#include "Mesh/Mesh.h"
 
 class GameObject {
 private:
@@ -18,6 +19,7 @@ private:
     // std::vector<GameObject> children;
     // std::vector<Component> components;
 
+
 public:
     GameObject();
 
@@ -32,7 +34,7 @@ public:
 
     void update();
 
-    void draw();
+    void draw(int display_w, int display_h, glm::mat4 view);
 
 //    GameObject(GameObject &gameObject);
 

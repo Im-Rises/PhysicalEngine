@@ -1,13 +1,14 @@
 #ifndef DEF_CAMERA
 #define DEF_CAMERA
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class Camera {
 private:
-    float x, y, z;
-    float rotationX, rotationY, rotationZ;
-    float scaleX, scaleY, scaleZ;
-    float colorR, colorG, colorB, colorA;
+    glm::mat4 viewMatrix;
+    int fov = glm::radians(90.0f);
 
 public:
     Camera();
@@ -19,6 +20,8 @@ public:
     void rotate();
 
     void translate();
+
+    glm::mat4 getViewMatrix();
 };
 
 

@@ -2,11 +2,6 @@
 
 #pragma region Includes
 
-//// GLM
-//#include <glm/glm.hpp>
-//#include <glm/gtc/matrix_transform.hpp>
-//#include <glm/gtc/type_ptr.hpp>
-//
 //// STB_IMAGE
 //#define STB_IMAGE_IMPLEMENTATION
 //#include <stb_image.h>
@@ -138,6 +133,8 @@ void PhysicalEngine::start() {
 void PhysicalEngine::handleEvents() {
     glfwPollEvents();
     int state = glfwGetKey(window, GLFW_KEY_E);
+    if (state)
+        scene->translateCamera();
 }
 
 void PhysicalEngine::handleGui() {
@@ -174,7 +171,7 @@ void PhysicalEngine::updateScreen() {
     glClear(GL_COLOR_BUFFER_BIT);
 
     // Draw scene
-    scene->draw();
+    scene->draw(display_w, display_h);
 
     // Swap buffers
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

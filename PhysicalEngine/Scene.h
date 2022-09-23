@@ -3,6 +3,10 @@
 
 #include <vector>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include "GameObject.h"
 #include "Camera.h"
 
@@ -19,7 +23,9 @@ public:
 
     void update();
 
-    void draw();
+    void draw(int display_w, int display_h);
+
+    void translateCamera();
 };
 
 #endif //DEF_SCENE
