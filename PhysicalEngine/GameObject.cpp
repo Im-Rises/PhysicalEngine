@@ -2,13 +2,9 @@
 
 #include <glad/glad.h>
 
-GameObject::GameObject() : shader("shaders/shader.vert", "shaders/shader.frag") {
-    x = y = z = 0;
-    width = height = depth = 1;
-    rotationX = rotationY = rotationZ = 0;
-    scaleX = scaleY = scaleZ = 1;
-    //colorR = colorG = colorB = colorA = 1;
+#include <utility>
 
+GameObject::GameObject() : shader("shaders/shader.vert", "shaders/shader.frag") {
     //Cube
 //    vertices = {
 //            -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
@@ -60,6 +56,22 @@ GameObject::GameObject() : shader("shaders/shader.vert", "shaders/shader.frag") 
             -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
     };
 
+    create();
+}
+
+GameObject::GameObject(std::vector<float> ver) : shader("shaders/shader.vert", "shaders/shader.frag") {
+    vertices = std::move(ver);
+    create();
+}
+
+
+void GameObject::create() {
+    x = y = z = 0;
+    width = height = depth = 1;
+    rotationX = rotationY = rotationZ = 0;
+    scaleX = scaleY = scaleZ = 1;
+    //colorR = colorG = colorB = colorA = 1;
+
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
 
@@ -90,14 +102,3 @@ void GameObject::draw() {
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
-
-//GameObject::GameObject(GameObject &gameObject) {
-//    this->shader = gameObject.shader;
-//    this->vertices = gameObject.vertices;
-//    this->VAO = gameObject.VAO;
-//    this->VBO = gameObject.VBO;
-//}
-//
-//GameObject GameObject::operator=(const GameObject &gameObj) {
-//    return GameObject();
-//}

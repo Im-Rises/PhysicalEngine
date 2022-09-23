@@ -21,6 +21,13 @@ private:
 public:
     GameObject();
 
+    GameObject(std::vector<float> vertices);
+
+private:
+    void create();
+
+
+public:
     ~GameObject();
 
     void update();
