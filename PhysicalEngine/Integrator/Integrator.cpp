@@ -18,6 +18,7 @@ void Integrator::UpdateAll(double time) {
 
 void Integrator::boucle() {
 	double deltaTime=0;
+	int numbTest = 0;
 	while (!m_StopPhysics) {
 		
 		auto start = std::chrono::high_resolution_clock::now();
@@ -33,6 +34,9 @@ void Integrator::boucle() {
 		deltaTime *= 0.000000001;
 		printf("time = %f \n", deltaTime);
 		
-
+		if (numbTest >= 5) {
+			m_StopPhysics = true;
+		}
+		numbTest += 1;
 	}
 }
