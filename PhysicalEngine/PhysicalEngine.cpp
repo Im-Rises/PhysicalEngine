@@ -47,6 +47,12 @@ static void glfw_error_callback(int error, const char *description) {
     fprintf(stderr, "Glfw Error %d: %s\n", error, description);
 }
 
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
+//    if (key == GLFW_KEY_E && action == GLFW_PRESS)
+    std::cout << "Key pressed" << std::endl;
+    PhysicalEngine *physicalEngine = static_cast<PhysicalEngine *>(glfwGetWindowUserPointer(window));
+}
+
 #pragma endregion
 
 #pragma region Constructor
@@ -102,6 +108,9 @@ PhysicalEngine::PhysicalEngine() {
 
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
+
+//    glfwSetWindowUserPointer(window, this);
+//    glfwSetKeyCallback(window, key_callback);
 
     backgroundColor = {
             0.45f, 0.55f, 0.60f, 1.00f
@@ -314,6 +323,8 @@ void PhysicalEngine::start() {
 
 void PhysicalEngine::handleEvents() {
     glfwPollEvents();
+    int state = glfwGetKey(window, GLFW_KEY_E);
+    std::cout << state << std::endl;
 }
 
 void PhysicalEngine::updateGui() {
