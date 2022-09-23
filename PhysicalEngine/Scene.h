@@ -11,7 +11,9 @@ public:
 
     ~Scene();
 
-    void clock();
+    void update();
+
+    void draw();
 };
 
 #endif //DEF_SCENE

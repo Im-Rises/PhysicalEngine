@@ -162,7 +162,7 @@ void PhysicalEngine::updateGui() {
 
 
 void PhysicalEngine::updateGame() {
-    scene.updatePhysics();
+    scene.update();
 }
 
 void PhysicalEngine::updateScreen() {
