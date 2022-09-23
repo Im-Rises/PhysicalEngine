@@ -2,6 +2,7 @@
 #define DEF_PHYSICALENGINE
 
 #include <vector>
+#include "Scene.h"
 
 #define PROJECT_NAME "Physical Engine 3D"
 
@@ -13,6 +14,7 @@ private:
     struct {
         float r, g, b, a;
     } backgroundColor;
+    Scene scene;
 
 
 public:
@@ -27,9 +29,9 @@ private:
 
     void updateGui();
 
-    void updateScreen();
+    void updateGame();
 
-    void refreshScreen();
+    void updateScreen();
 };
 
 

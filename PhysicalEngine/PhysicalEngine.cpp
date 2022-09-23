@@ -125,11 +125,17 @@ PhysicalEngine::~PhysicalEngine() {
 #pragma region Game Loop methods
 
 void PhysicalEngine::start() {
+    //Game loop
     while (!glfwWindowShouldClose(window)) {
+        //Inputs
         handleEvents();
         updateGui();
+
+        //Update game mechanics
+        updateGame();
+
+        //Refresh screen
         updateScreen();
-        refreshScreen();
     }
 }
 
@@ -154,17 +160,27 @@ void PhysicalEngine::updateGui() {
     ImGui::Render();
 }
 
+
+void PhysicalEngine::updateGame() {
+    scene.updatePhysics();
+}
+
 void PhysicalEngine::updateScreen() {
+    // Update viewport
     int display_w, display_h;
     glfwGetFramebufferSize(window, &display_w, &display_h);
     glViewport(0, 0, display_w, display_h);
+
+    // Draw background color
     glClearColor(backgroundColor.r * backgroundColor.a, backgroundColor.g * backgroundColor.a,
                  backgroundColor.b * backgroundColor.a,
                  backgroundColor.a);
     glClear(GL_COLOR_BUFFER_BIT);
-}
 
-void PhysicalEngine::refreshScreen() {
+    // Draw scene
+    scene.draw();
+
+    // Swap buffers
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     glfwSwapBuffers(window);
 }

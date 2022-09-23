@@ -7,8 +7,8 @@ include_directories("${CMAKE_SOURCE_DIR}/dependencies/stb")
 file(GLOB SRCS_HEADERS_IMGUI "${CMAKE_SOURCE_DIR}/dependencies/imgui/*.cpp" "${CMAKE_SOURCE_DIR}/dependencies/imgui/*.h")
 file(GLOB SRCS_HEADERS_GLAD "${CMAKE_SOURCE_DIR}/dependencies/glad/**/*.c" "${CMAKE_SOURCE_DIR}/dependencies/glad/**/*.h")
 
-set(SRCS "main.cpp" "PhysicalEngine.cpp")
-set(HEADERS "PhysicalEngine.h")
+set(SRCS "main.cpp" "PhysicalEngine.cpp" "Scene.cpp")
+set(HEADERS "PhysicalEngine.h" "Scene.h")
 
 add_executable(${PROJECT_NAME} ${SRCS} ${HEADERS} ${SRCS_HEADERS_IMGUI} ${SRCS_HEADERS_GLAD})
 
