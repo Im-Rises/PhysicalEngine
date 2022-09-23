@@ -25,6 +25,10 @@ public:
     void draw(int display_w, int display_h);
 
     void translateCamera();
+
+    size_t getNbGameObjects();
+
+    std::string getGameObjectName(int index);
 };
 
 #endif //DEF_SCENE

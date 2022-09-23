@@ -30,3 +30,11 @@ void Scene::draw(int display_w, int display_h) {
 void Scene::translateCamera() {
     camera.translate();
 }
+
+size_t Scene::getNbGameObjects() {
+    return gameObjects.size();
+}
+
+std::string Scene::getGameObjectName(int index) {
+    return gameObjects[index]->getName();
+}

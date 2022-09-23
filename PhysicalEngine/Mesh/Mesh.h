@@ -10,32 +10,24 @@ using namespace std;
 class Mesh {
 
 protected:
-    vector<Vector3D> m_points;
-    vector<int[3]> m_triangles;
-    vector<Vector3D> m_normales;
+    vector<float> m_points;
+    vector<float> m_triangles;
+    vector<float> m_normales;
     Vector3D m_position;
-
 
 public:
 
 #pragma region Getter
 
-    const vector<Vector3D> &getPoints();
+    const vector<float> &getPoints();
 
-    const vector<int[3]> &getTriangles();
+    const vector<float> &getTriangles();
 
-    const vector<Vector3D> &getNormales();
+    const vector<float> &getNormales();
 
     const Vector3D &getPosition();
 
 #pragma endregion
-
-#pragma region Translate
-
-    Mesh &translate(const Vector3D &trans);
-
-#pragma endregion
-
 
 };
 

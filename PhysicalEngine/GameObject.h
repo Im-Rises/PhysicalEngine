@@ -13,6 +13,8 @@ private:
     float scaleX, scaleY, scaleZ;
     float colorR, colorG, colorB, colorA;
 
+    Mesh mesh;
+    std::string name;
     unsigned int VBO, VAO;
     Shader shader;
     std::vector<float> vertices;
@@ -21,7 +23,7 @@ private:
 
 
 public:
-    GameObject();
+    GameObject(bool indiced = true);
 
     GameObject(std::vector<float> vertices);
 
@@ -39,6 +41,8 @@ public:
 //    GameObject(GameObject &gameObject);
 
 //    GameObject operator=(const GameObject &gameObj);
+
+    std::string getName();
 };
 
 

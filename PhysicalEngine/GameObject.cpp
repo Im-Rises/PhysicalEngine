@@ -2,7 +2,7 @@
 
 #include <glad/glad.h>
 
-GameObject::GameObject() : shader("shaders/shader.vert", "shaders/shader.frag") {
+GameObject::GameObject(bool indiced) : shader("shaders/shader.vert", "shaders/shader.frag") {
     //Cube
     vertices = {
             -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
@@ -83,6 +83,8 @@ void GameObject::create() {
     glEnableVertexAttribArray(1);
 
     shader.use();
+
+    name = "GameObject";
 }
 
 GameObject::~GameObject() {
@@ -109,4 +111,8 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view) {
     glBindVertexArray(VAO);
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glDrawArrays(GL_TRIANGLES, 0, 36);
+}
+
+std::string GameObject::getName() {
+    return name;
 }

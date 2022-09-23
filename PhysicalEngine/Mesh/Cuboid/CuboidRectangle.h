@@ -4,11 +4,10 @@
 #include "../Mesh.h"
 
 class CuboidRectangle : Mesh {
-	
-	public:
 
+public:
 
-	CuboidRectangle(double longueur, double hauteur, double profondeur,const Vector3D& position=Vector3D(0,0,0));
+    CuboidRectangle(double longueur, double hauteur, double profondeur, const Vector3D &position = Vector3D(0, 0, 0));
 
 };
 
