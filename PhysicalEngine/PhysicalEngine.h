@@ -27,7 +27,7 @@ private:
 
     void updateGui();
 
-    void updateScene();
+    void updateScreen();
 
     void refreshScreen();
 };
