@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
     cout << argc << endl;
 
     Integrator integ;
-//    integ.boucle();
+    integ.boucle();
 
     return 0;
 }

@@ -12,9 +12,8 @@
 
 class Scene {
 private:
-    std::vector<GameObject *> gameObjects;
-//    GameObject gameObject;
     Camera camera;
+    std::vector<GameObject *> gameObjects;
 
 public:
     Scene();
