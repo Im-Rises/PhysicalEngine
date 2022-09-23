@@ -19,6 +19,8 @@ void Scene::update() {
     for (GameObject *gameObject: gameObjects) {
         gameObject->update();
     }
+
+//    camera.update();
 }
 
 void Scene::draw() {

@@ -4,12 +4,13 @@
 #include <vector>
 
 #include "GameObject.h"
+#include "Camera.h"
 
 class Scene {
 private:
     std::vector<GameObject *> gameObjects;
 //    GameObject gameObject;
-//    Camera camera;
+    Camera camera;
 
 public:
     Scene();
