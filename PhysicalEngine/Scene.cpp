@@ -2,11 +2,11 @@
 
 Scene::Scene() {
     gameObjects.push_back(new GameObject());
-    gameObjects.push_back(new GameObject(std::vector<float>{
-            -0.5f, -0.5f, 0.0f,
-            0.5f, -0.5f, 0.0f,
-            0.0f, 0.5f, 0.0f
-    }));
+//    gameObjects.push_back(new GameObject(std::vector<float>{
+//            -0.5f, -0.5f, 0.0f,
+//            0.5f, -0.5f, 0.0f,
+//            0.0f, 0.5f, 0.0f
+//    }));
 }
 
 Scene::~Scene() {
