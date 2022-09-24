@@ -20,7 +20,7 @@ CuboidRectangle::CuboidRectangle(float longueur, float hauteur, float profondeur
             -l2, -h2, -p2,
     };
 
-    float norm = std::sqrt(std::pow(l2, 2) + std::pow(h2, 2) + std::pow(p2, 2));
+    auto norm = static_cast<float>(std::sqrt(std::pow(l2, 2) + std::pow(h2, 2) + std::pow(p2, 2)));
     for (auto &normalized: m_points)
         m_normales.push_back(normalized / norm);
 
