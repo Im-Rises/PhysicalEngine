@@ -90,17 +90,8 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view) {
         glBindVertexArray(VBO);
         glDrawArrays(GL_TRIANGLES, 0, (GLsizei) mesh.getPoints().size());
     }
-    if (wireFrame) {
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    } else {
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    }
 }
 
 std::string GameObject::getName() {
     return name;
-}
-
-void GameObject::setWireFrameState(bool state) {
-    wireFrame = state;
 }

@@ -45,9 +45,6 @@ public:
     void draw(int display_w, int display_h, glm::mat4 view);
 
     std::string getName();
-
-public:
-    void setWireFrameState(bool state);
 };
 
 

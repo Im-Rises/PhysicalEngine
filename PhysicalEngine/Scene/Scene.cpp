@@ -42,8 +42,10 @@ std::string Scene::getGameObjectName(int index) {
 }
 
 bool *Scene::getWireFrameStatePtr() {
-    for (GameObject *gameObject: gameObjects) {
-        gameObject->setWireFrameState(wireFrame);
+    if (wireFrame) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    } else {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
     return &wireFrame;
 }
