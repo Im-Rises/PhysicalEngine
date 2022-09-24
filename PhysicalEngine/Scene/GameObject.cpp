@@ -6,7 +6,7 @@
 
 GameObject::GameObject(Mesh mesh) : shader("shaders/shader.vert", "shaders/shader.frag") {
     name = "GameObject";
-    openglIndicedMesh = mesh.getVerticesUseIndices();
+    mesh.getVerticesUseIndices();
     this->mesh = std::move(mesh);
 
     width = height = depth = 1;
@@ -36,7 +36,7 @@ void GameObject::create() {
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) (3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
-    if (openglIndicedMesh) {
+    if (mesh.getVerticesUseIndices()) {
         glGenBuffers(1, &EBO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mesh.getTriangles().size(),
@@ -69,25 +69,38 @@ void GameObject::update() {
 }
 
 void GameObject::draw(int display_w, int display_h, glm::mat4 view) {
-    shader.use();
+    // Matrix calculations
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
     model = glm::rotate(model, (float) 1, glm::vec3(0.5f, 1.0f, 0.0f));
     view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
     projection = glm::perspective(glm::radians(45.0f), (float) display_w / (float) display_h, 0.1f, 100.0f);
+
+    //Shader use
+    shader.use();
     shader.setMat4("model", model);
     shader.setMat4("view", view);
     shader.setMat4("projection", projection);
 
-    if (openglIndicedMesh) {
+    // Handle the VAO, VBO and EBO depending on the mesh type (with or without indices)
+    if (mesh.getVerticesUseIndices()) {
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, (GLsizei) mesh.getTriangles().size(), GL_UNSIGNED_INT, 0);
     } else {
         glBindVertexArray(VBO);
         glDrawArrays(GL_TRIANGLES, 0, (GLsizei) mesh.getPoints().size());
     }
+    if (wireFrame) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    } else {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
 }
 
 std::string GameObject::getName() {
     return name;
+}
+
+void GameObject::setWireFrameState(bool state) {
+    wireFrame = state;
 }

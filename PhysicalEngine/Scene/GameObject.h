@@ -10,6 +10,8 @@ class GameObject {
 private:
     std::string name;
 
+    bool wireFrame = false;
+
     Vector3D position;
     float width, height, depth;
     float rotationX, rotationY, rotationZ;
@@ -19,7 +21,7 @@ private:
     Mesh mesh;
     unsigned int VBO, VAO, EBO;
     Shader shader;
-    bool openglIndicedMesh;
+
     // std::vector<GameObject> children;
     // std::vector<Component> components;
 
@@ -43,6 +45,9 @@ public:
     void draw(int display_w, int display_h, glm::mat4 view);
 
     std::string getName();
+
+public:
+    void setWireFrameState(bool state);
 };
 
 

@@ -40,3 +40,10 @@ size_t Scene::getNbGameObjects() {
 std::string Scene::getGameObjectName(int index) {
     return gameObjects[index]->getName();
 }
+
+bool *Scene::getWireFrameStatePtr() {
+    for (GameObject *gameObject: gameObjects) {
+        gameObject->setWireFrameState(wireFrame);
+    }
+    return &wireFrame;
+}

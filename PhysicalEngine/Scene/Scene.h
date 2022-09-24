@@ -14,6 +14,7 @@ class Scene {
 private:
     Camera camera;
     std::vector<GameObject *> gameObjects;
+    bool wireFrame = false;
 
 public:
     Scene();
@@ -29,6 +30,9 @@ public:
     size_t getNbGameObjects();
 
     std::string getGameObjectName(int index);
+
+public:
+    bool *getWireFrameStatePtr();
 };
 
 #endif //SCENE_H
