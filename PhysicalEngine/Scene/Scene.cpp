@@ -3,10 +3,12 @@
 #include "Mesh/Mesh.h"
 #include "Mesh/Cuboid/Cube.h"
 #include "Mesh/Cuboid/CuboidRectangle.h"
+#include "Mesh/Cuboid/MyCube.h"
+#include "Mesh/Sphere/Sphere.h"
 
 Scene::Scene() {
-//    gameObjects.push_back(new GameObject(CuboidRectangle(1.0f, 1.0f, 1.0f)));
-    gameObjects.push_back(new GameObject(Cube(1.0f)));
+//    gameObjects.push_back(new GameObject(MyCube(1)));
+    gameObjects.push_back(new GameObject(Sphere(1, 5, 5)));
 }
 
 Scene::~Scene() {
@@ -37,4 +39,13 @@ size_t Scene::getNbGameObjects() {
 
 std::string Scene::getGameObjectName(int index) {
     return gameObjects[index]->getName();
+}
+
+bool *Scene::getWireFrameStatePtr() {
+    if (wireFrame) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    } else {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
+    return &wireFrame;
 }

@@ -157,6 +157,12 @@ void PhysicalEngine::handleGui() {
         ImGui::End();
     }
 
+    {
+        ImGui::Begin("View tools");
+        ImGui::Checkbox("Mesh: Line/Fill", scene->getWireFrameStatePtr());
+        ImGui::End();
+    }
+
     ImGui::Render();
 }
 
