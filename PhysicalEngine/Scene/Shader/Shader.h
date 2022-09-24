@@ -1,5 +1,5 @@
-#ifndef DEF_SHADER
-#define DEF_SHADER
+#ifndef SHADER_H
+#define SHADER_H
 
 #include "glad/glad.h"
 #include <string>
@@ -49,4 +49,4 @@ public:
 };
 
 
-#endif //DEF_SHADER
+#endif //SHADER_H

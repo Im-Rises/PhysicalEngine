@@ -1,5 +1,5 @@
-#ifndef DEF_SCENE
-#define DEF_SCENE
+#ifndef SCENE_H
+#define SCENE_H
 
 #include <vector>
 
@@ -31,4 +31,4 @@ public:
     std::string getGameObjectName(int index);
 };
 
-#endif //DEF_SCENE
+#endif //SCENE_H

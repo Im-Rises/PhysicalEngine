@@ -1,5 +1,5 @@
-#ifndef DEF_PHYSICALENGINE
-#define DEF_PHYSICALENGINE
+#ifndef PHYSICALENGINE_H
+#define PHYSICALENGINE_H
 
 #include <vector>
 #include "Scene/Scene.h"
@@ -35,4 +35,4 @@ private:
 };
 
 
-#endif //DEF_PHYSICALENGINE
+#endif //PHYSICALENGINE_H

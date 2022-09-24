@@ -1,5 +1,5 @@
-#ifndef DEF_GAMEOBJECT
-#define DEF_GAMEOBJECT
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
 
 #include <vector>
 #include "Shader/Shader.h"
@@ -46,4 +46,4 @@ public:
 };
 
 
-#endif //DEF_GAMEOBJECT
+#endif //GAMEOBJECT_H
