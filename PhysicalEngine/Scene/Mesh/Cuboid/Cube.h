@@ -6,7 +6,7 @@
 class Cube : public CuboidRectangle {
 
 public:
-	Cube(double longueur,Vector3D position=Vector3D(0,0,0));
+    Cube(float longueur);
 };
 
 #endif // !CUBE_H
