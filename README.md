@@ -246,6 +246,9 @@ Developpez Learn OpenGL (French):
 <https://opengl.developpez.com/tutoriels/apprendre-opengl/?page=creer-une-fenetre#L4-5>  
 <https://opengl.developpez.com/tutoriels/opengl-tutorial/>
 
+Sphere OpenGL:  
+<http://www.songho.ca/opengl/gl_sphere.html>
+
 ## Contributors
 
 Clémence Clavel:
