@@ -9,11 +9,6 @@ GameObject::GameObject(Mesh mesh, bool indiced) : shader("shaders/shader.vert", 
     create();
 }
 
-//GameObject::GameObject(std::vector<float> ver) : shader("shaders/shader.vert", "shaders/shader.frag") {
-//    create();
-//}
-
-
 void GameObject::create() {
     width = height = depth = 1;
     rotationX = rotationY = rotationZ = 0;
