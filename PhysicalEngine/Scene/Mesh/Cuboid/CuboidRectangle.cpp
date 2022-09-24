@@ -3,7 +3,8 @@
 #include <cmath>
 
 CuboidRectangle::CuboidRectangle(float longueur, float hauteur, float profondeur) {
-
+    verticesUseIndices = true;
+    
     float l2 = longueur / 2;
     float h2 = hauteur / 2;
     float p2 = profondeur / 2;

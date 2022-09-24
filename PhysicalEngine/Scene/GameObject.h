@@ -25,7 +25,7 @@ private:
 
 
 public:
-    GameObject(Mesh mesh, bool indiced = true);
+    GameObject(Mesh mesh);
 
 private:
     void create();

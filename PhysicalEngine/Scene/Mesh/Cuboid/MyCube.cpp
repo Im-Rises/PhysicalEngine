@@ -5,6 +5,7 @@
 #include "MyCube.h"
 
 MyCube::MyCube(float size) {
+    verticesUseIndices = false;
     m_points = {
             -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
             0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,

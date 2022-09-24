@@ -7,9 +7,7 @@
 #include "Mesh/Sphere/Sphere.h"
 
 Scene::Scene() {
-//    gameObjects.push_back(new GameObject(CuboidRectangle(1.0f, 1.0f, 1.0f)));
-//    gameObjects.push_back(new GameObject(Cube(1.0f)));
-    gameObjects.push_back(new GameObject(MyCube(0.5), false));
+//    gameObjects.push_back(new GameObject(MyCube(1)));
     gameObjects.push_back(new GameObject(Sphere(1, 5, 5)));
 }
 

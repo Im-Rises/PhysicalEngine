@@ -14,4 +14,8 @@ const vector<float> &Mesh::getNormales() {
     return m_normales;
 }
 
+const bool &Mesh::getVerticesUseIndices() const {
+    return verticesUseIndices;
+}
+
 

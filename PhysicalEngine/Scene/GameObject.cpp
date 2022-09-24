@@ -4,9 +4,9 @@
 
 #include <utility>
 
-GameObject::GameObject(Mesh mesh, bool indiced) : shader("shaders/shader.vert", "shaders/shader.frag") {
+GameObject::GameObject(Mesh mesh) : shader("shaders/shader.vert", "shaders/shader.frag") {
     name = "GameObject";
-    openglIndicedMesh = indiced;
+    openglIndicedMesh = mesh.getVerticesUseIndices();
     this->mesh = std::move(mesh);
 
     width = height = depth = 1;
@@ -81,11 +81,10 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view) {
 
     if (openglIndicedMesh) {
         glBindVertexArray(VAO);
-//        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-        glDrawElements(GL_TRIANGLES, mesh.getTriangles().size(), GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, (GLsizei) mesh.getTriangles().size(), GL_UNSIGNED_INT, 0);
     } else {
         glBindVertexArray(VBO);
-        glDrawArrays(GL_TRIANGLES, 0, mesh.getPoints().size());
+        glDrawArrays(GL_TRIANGLES, 0, (GLsizei) mesh.getPoints().size());
     }
 }
 

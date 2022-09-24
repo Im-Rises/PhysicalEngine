@@ -5,6 +5,7 @@
 #include <math.h>
 
 void Sphere::generatePointsNormales(float radius, int rings, int sectors) {
+    verticesUseIndices = true;
     float x, y, z, xy;                             // vertex position
     float nx, ny, nz, lengthInv = 1.0f / radius; // vertex normal
     //float s, t;									 // vertex texture Coordonn�es
