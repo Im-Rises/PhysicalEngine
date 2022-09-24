@@ -5,27 +5,23 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
 
 class Mesh {
 
 protected:
-    vector<float> m_points;
-    vector<float> m_triangles;
-    vector<float> m_normales;
-    Vector3D m_position;
+    std::vector<float> m_points;
+    std::vector<float> m_triangles;
+    std::vector<float> m_normales;
 
 public:
 
 #pragma region Getter
 
-    const vector<float> &getPoints();
+    const std::vector<float> &getPoints();
 
-    const vector<float> &getTriangles();
+    const std::vector<float> &getTriangles();
 
-    const vector<float> &getNormales();
-
-    const Vector3D &getPosition();
+    const std::vector<float> &getNormales();
 
 #pragma endregion
 

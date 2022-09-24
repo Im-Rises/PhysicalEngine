@@ -4,76 +4,79 @@
 #include <cmath>
 #include <iostream>
 
-using namespace std;
-
 class Vector3D {
 private:
-	double m_x, m_y, m_z;
+    float m_x, m_y, m_z;
 
 public:
-	/// Constructeur par d�faut
-	/// Vecteur z�ro (0,0,0)
-	Vector3D();
+    /// Constructeur par d�faut
+    /// Vecteur z�ro (0,0,0)
+    Vector3D();
 
-	/// Constructeur
-	/// Vecteur (x,y,z)
-	Vector3D(double xcoord, double ycoord, double zcoord);
+    /// Constructeur
+    /// Vecteur (x,y,z)
+    Vector3D(float xcoord, float ycoord, float zcoord);
 
-	///Constructeur de copie
-	Vector3D(const Vector3D& v);
+    ///Constructeur de copie
+    Vector3D(const Vector3D &v);
 
-	///Destructeur
-	~Vector3D();
+    ///Destructeur
+    ~Vector3D();
 
     //getters
-	double getx() const;
+    float getx() const;
 
-    double gety() const;
+    float gety() const;
 
-    double getz() const;
+    float getz() const;
 
-	///setters
-	void setx(double xcoord);
-	void sety(double ycoord);
-	void setz(double zcoord);
+    ///setters
+    void setx(float xcoord);
 
-	///Addition
-	Vector3D operator+(const Vector3D& vec);
-	Vector3D& operator+=(const Vector3D& vec); 
+    void sety(float ycoord);
 
-	///Soustraction
-	Vector3D operator-(const Vector3D& vec);
-	Vector3D& operator-=(const Vector3D& vec);
+    void setz(float zcoord);
 
-	///Multiplication par un scalaire
-	Vector3D operator*(double s); 
-	Vector3D& operator*=(double s); 
+    ///Addition
+    Vector3D operator+(const Vector3D &vec);
 
-	///Prend la valeur du vecteur
-	Vector3D operator=(const Vector3D& vec);
+    Vector3D &operator+=(const Vector3D &vec);
 
-	///Test d'�galit�
-	bool operator==(const Vector3D& vec);
+    ///Soustraction
+    Vector3D operator-(const Vector3D &vec);
 
-	///Calcul de la norme
-	double norm();
+    Vector3D &operator-=(const Vector3D &vec);
 
-	///Normalisation
-	Vector3D normalize();
+    ///Multiplication par un scalaire
+    Vector3D operator*(float s);
 
-	///Produit Scalaire
-	double dot(const Vector3D& vec);
+    Vector3D &operator*=(float s);
 
-	///Produit Vectoriel
-	Vector3D cross(const Vector3D& vec);
+    ///Prend la valeur du vecteur
+    Vector3D operator=(const Vector3D &vec);
 
-	///Distance entre deux vecteurs
-	double distance(const Vector3D& vec);
+    ///Test d'�galit�
+    bool operator==(const Vector3D &vec);
 
-	///Affichage du vecteur
-	friend ostream& operator<<(ostream& os, Vector3D vec) {
-		return os << "(" << vec.getx() << "," << vec.gety() << "," << vec.getz() << ")";
-	}
+    ///Calcul de la norme
+    float norm();
+
+    ///Normalisation
+    Vector3D normalize();
+
+    ///Produit Scalaire
+    float dot(const Vector3D &vec);
+
+    ///Produit Vectoriel
+    Vector3D cross(const Vector3D &vec);
+
+    ///Distance entre deux vecteurs
+    float distance(const Vector3D &vec);
+
+    ///Affichage du vecteur
+    friend std::ostream &operator<<(std::ostream &os, Vector3D vec) {
+        return os << "(" << vec.getx() << "," << vec.gety() << "," << vec.getz() << ")";
+    }
 };
 
 #endif /* VECTOR3D_H */

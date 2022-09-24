@@ -1,8 +1,9 @@
 #include "CuboidRectangle.h"
 
-CuboidRectangle::CuboidRectangle(double longueur, double hauteur, double profondeur, const Vector3D &position) {
+#include <cmath>
 
-    m_position = position;
+CuboidRectangle::CuboidRectangle(float longueur, float hauteur, float profondeur) {
+
     float l2 = longueur / 2;
     float h2 = hauteur / 2;
     float p2 = profondeur / 2;
@@ -18,6 +19,10 @@ CuboidRectangle::CuboidRectangle(double longueur, double hauteur, double profond
             -l2, -h2, p2,
             -l2, -h2, -p2,
     };
+
+    float norm = std::sqrt(std::pow(l2, 2) + std::pow(h2, 2) + std::pow(p2, 2));
+    for (auto &normalized: m_points)
+        m_normales.push_back(normalized / norm);
 
     m_triangles = {
             0, 1, 3,

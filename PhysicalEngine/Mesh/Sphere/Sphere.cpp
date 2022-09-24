@@ -4,11 +4,11 @@
 
 #include <math.h>
 
-void Sphere::generatePointsNormales(double radius, int rings, int sectors) {
+void Sphere::generatePointsNormales(float radius, int rings, int sectors) {
     float x, y, z, xy;                             // vertex position
     float nx, ny, nz, lengthInv = 1.0f / radius; // vertex normal
     //float s, t;									 // vertex texture Coordonn�es
-    double pi = M_PI;
+    float pi = M_PI;
     float sectorStep = 2 * pi / sectors;
     float ringStep = pi / rings;
     float sectorAngle, ringAngle;
@@ -48,7 +48,7 @@ void Sphere::generatePointsNormales(double radius, int rings, int sectors) {
     }
 }
 
-void Sphere::generateTriangles(double radius, int rings, int sectors) {
+void Sphere::generateTriangles(float radius, int rings, int sectors) {
     int k1, k2;
     for (int i = 0; i < rings; ++i) {
         k1 = i * (sectors + 1); // d�but du ring actuel
@@ -75,9 +75,7 @@ void Sphere::generateTriangles(double radius, int rings, int sectors) {
     }
 }
 
-Sphere::Sphere(double radius, int rings, int sectors, Vector3D centre) {
+Sphere::Sphere(float radius, int rings, int sectors) {
     generatePointsNormales(radius, rings, sectors);
     generateTriangles(radius, rings, sectors);
-    m_position = centre;
-
 }

@@ -2,69 +2,17 @@
 
 #include <glad/glad.h>
 
-GameObject::GameObject(bool indiced) : shader("shaders/shader.vert", "shaders/shader.frag") {
-    //Cube
-    vertices = {
-            -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-            0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-            0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-            0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-            -0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-            -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-
-            -0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-            0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-            0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-            0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-            -0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-            -0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-
-            -0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-            -0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-            -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-            -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-            -0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-            -0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-
-            0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-            0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-            0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-            0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-            0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-            0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-
-            -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-            0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-            0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-            0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-            -0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-            -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-
-            -0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-            0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-            0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-            0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-            -0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-            -0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-    };
-
-//    vertices = {
-//            0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
-//            0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-//            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
-//    };
-
+GameObject::GameObject(Mesh mesh, bool indiced) : shader("shaders/shader.vert", "shaders/shader.frag") {
+    this->mesh = mesh;
     create();
 }
 
-GameObject::GameObject(std::vector<float> ver) : shader("shaders/shader.vert", "shaders/shader.frag") {
-    vertices = std::move(ver);
-    create();
-}
+//GameObject::GameObject(std::vector<float> ver) : shader("shaders/shader.vert", "shaders/shader.frag") {
+//    create();
+//}
 
 
 void GameObject::create() {
-    x = y = z = 0;
     width = height = depth = 1;
     rotationX = rotationY = rotationZ = 0;
     scaleX = scaleY = scaleZ = 1;

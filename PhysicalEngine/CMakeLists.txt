@@ -7,8 +7,11 @@ include_directories("${CMAKE_SOURCE_DIR}/dependencies/stb")
 file(GLOB SRCS_HEADERS_IMGUI "${CMAKE_SOURCE_DIR}/dependencies/imgui/*.cpp" "${CMAKE_SOURCE_DIR}/dependencies/imgui/*.h")
 file(GLOB SRCS_HEADERS_GLAD "${CMAKE_SOURCE_DIR}/dependencies/glad/**/*.c" "${CMAKE_SOURCE_DIR}/dependencies/glad/**/*.h")
 
-set(SRCS "main.cpp" "PhysicalEngine.cpp" "Scene.cpp" "GameObject.cpp" "Shader/Shader.cpp" "Camera.cpp" "Mesh/Mesh.cpp")
-set(HEADERS "PhysicalEngine.h" "Scene.h" "GameObject.h" "Shader/Shader.h" "Camera.h" "Mesh/Mesh.h")
+#set(SRCS "main.cpp" "PhysicalEngine.cpp" "Scene.cpp" "GameObject.cpp" "Shader/Shader.cpp" "Camera.cpp" "Mesh/Mesh.cpp" "Mesh/)
+#set(HEADERS "PhysicalEngine.h" "Scene.h" "GameObject.h" "Shader/Shader.h" "Camera.h" "Mesh/Mesh.h")
+
+file(GLOB SRCS "${CMAKE_SOURCE_DIR}/**/*.cpp" "${CMAKE_SOURCE_DIR}/*.cpp")
+file(GLOB HEADERS "${CMAKE_SOURCE_DIR}/**/*.h" "${CMAKE_SOURCE_DIR}/*.h")
 
 add_executable(${PROJECT_NAME} ${SRCS} ${HEADERS} ${SRCS_HEADERS_IMGUI} ${SRCS_HEADERS_GLAD})
 

@@ -4,10 +4,11 @@
 #include <vector>
 #include "Shader/Shader.h"
 #include "Mesh/Mesh.h"
+#include "Vector3D/Vector3d.h"
 
 class GameObject {
 private:
-    float x, y, z;
+    Vector3D position;
     float width, height, depth;
     float rotationX, rotationY, rotationZ;
     float scaleX, scaleY, scaleZ;
@@ -17,20 +18,20 @@ private:
     std::string name;
     unsigned int VBO, VAO;
     Shader shader;
-    std::vector<float> vertices;
+//    std::vector<float> vertices;
     // std::vector<GameObject> children;
     // std::vector<Component> components;
 
 
 public:
-    GameObject(bool indiced = true);
+    GameObject(Mesh mesh, bool indiced = true);
 
-    GameObject(std::vector<float> vertices);
+//    GameObject(std::vector<float> vertices);
 
 private:
     void create();
 
-
+    
 public:
     ~GameObject();
 
