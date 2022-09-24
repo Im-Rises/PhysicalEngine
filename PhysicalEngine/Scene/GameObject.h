@@ -18,7 +18,6 @@ private:
     std::string name;
     unsigned int VBO, VAO, EBO;
     Shader shader;
-//    std::vector<float> vertices;
     // std::vector<GameObject> children;
     // std::vector<Component> components;
 
