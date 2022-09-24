@@ -3,10 +3,13 @@
 #include "Mesh/Mesh.h"
 #include "Mesh/Cuboid/Cube.h"
 #include "Mesh/Cuboid/CuboidRectangle.h"
+#include "Mesh/Cuboid/MyCube.h"
 
 Scene::Scene() {
 //    gameObjects.push_back(new GameObject(CuboidRectangle(1.0f, 1.0f, 1.0f)));
-    gameObjects.push_back(new GameObject(Cube(1.0f)));
+//    gameObjects.push_back(new GameObject(Cube(1.0f)));
+
+    gameObjects.push_back(new GameObject(MyCube(), false));
 }
 
 Scene::~Scene() {

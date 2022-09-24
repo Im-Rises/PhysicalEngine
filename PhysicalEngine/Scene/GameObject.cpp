@@ -5,20 +5,29 @@
 #include <utility>
 
 GameObject::GameObject(Mesh mesh, bool indiced) : shader("shaders/shader.vert", "shaders/shader.frag") {
+    name = "GameObject";
+    openglIndicedMesh = indiced;
     this->mesh = std::move(mesh);
-    create();
-}
 
-void GameObject::create() {
     width = height = depth = 1;
     rotationX = rotationY = rotationZ = 0;
     scaleX = scaleY = scaleZ = 1;
     //colorR = colorG = colorB = colorA = 1;
 
+    create();
+}
+
+void GameObject::create() {
+    /*
+     * Create the VAO, VBO and EBO here to prevent bug in the constructor (read the bug explanation in the link below)
+     *
+     * https://www.khronos.org/opengl/wiki/Common_Mistakes#The_Object_Oriented_Language_Problem
+     */
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
 
     glBindVertexArray(VAO);
+
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * mesh.getPoints().size(), mesh.getPoints().data(), GL_STATIC_DRAW);
 
@@ -27,20 +36,31 @@ void GameObject::create() {
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) (3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
-    glGenBuffers(1, &EBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mesh.getTriangles().size(), mesh.getTriangles().data(),
-                 GL_STATIC_DRAW);
+    if (openglIndicedMesh) {
+        glGenBuffers(1, &EBO);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mesh.getTriangles().size(),
+                     mesh.getTriangles().data(),
+                     GL_STATIC_DRAW);
+    }
 
     shader.use();
-
-    name = "GameObject";
 }
 
 GameObject::~GameObject() {
+    destroy();
+}
+
+void GameObject::destroy() {
+    /*
+    * Destroy the VAO, VBO and EBO here to prevent bug in the destructor (read the bug explanation in the link below)
+    *
+    * https://www.khronos.org/opengl/wiki/Common_Mistakes#The_Object_Oriented_Language_Problem
+    */
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
 }
+
 
 void GameObject::update() {
 //    for (auto &component : components) {
@@ -58,13 +78,16 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view) {
     shader.setMat4("model", model);
     shader.setMat4("view", view);
     shader.setMat4("projection", projection);
-/*    glBindVertexArray(VAO);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    glDrawArrays(GL_TRIANGLES, 0, 36);*/
 
-    glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, mesh.getTriangles().size(), GL_UNSIGNED_INT, 0);
-    glBindVertexArray(0);
+    if (openglIndicedMesh) {
+        glBindVertexArray(VAO);
+        glDrawElements(GL_TRIANGLES, mesh.getTriangles().size(), GL_UNSIGNED_INT, 0);
+    } else {
+        glBindVertexArray(VBO);
+        glDrawArrays(GL_TRIANGLES, 0, mesh.getPoints().size());
+        std::cout << mesh.getPoints().size() << std::endl;
+    }
+    // glBindVertexArray(0);
 }
 
 std::string GameObject::getName() {

@@ -8,6 +8,8 @@
 
 class GameObject {
 private:
+    std::string name;
+
     Vector3D position;
     float width, height, depth;
     float rotationX, rotationY, rotationZ;
@@ -15,17 +17,15 @@ private:
     float colorR, colorG, colorB, colorA;
 
     Mesh mesh;
-    std::string name;
     unsigned int VBO, VAO, EBO;
     Shader shader;
+    bool openglIndicedMesh;
     // std::vector<GameObject> children;
     // std::vector<Component> components;
 
 
 public:
     GameObject(Mesh mesh, bool indiced = true);
-
-//    GameObject(std::vector<float> vertices);
 
 private:
     void create();
@@ -34,13 +34,13 @@ private:
 public:
     ~GameObject();
 
+private:
+    void destroy();
+
+public:
     void update();
 
     void draw(int display_w, int display_h, glm::mat4 view);
-
-//    GameObject(GameObject &gameObject);
-
-//    GameObject operator=(const GameObject &gameObj);
 
     std::string getName();
 };
