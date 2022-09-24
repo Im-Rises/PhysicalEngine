@@ -239,14 +239,11 @@ GLM:
 STB:  
 <https://github.com/nothings/stb>
 
-Apprendre OpenGL:  
-<https://opengl.developpez.com/tutoriels/apprendre-opengl/?page=creer-une-fenetre#L4-5>
-
 Learn OpenGL:  
 <https://learnopengl.com/Getting-started/Hello-Triangle>
 
-Developpez Learn OpenGL:  
-<https://opengl.developpez.com/tutoriels/opengl-tutorial/3-matrices/#Lno-I>  
+Developpez Learn OpenGL (French):  
+<https://opengl.developpez.com/tutoriels/apprendre-opengl/?page=creer-une-fenetre#L4-5>  
 <https://opengl.developpez.com/tutoriels/opengl-tutorial/>
 
 ## Contributors
