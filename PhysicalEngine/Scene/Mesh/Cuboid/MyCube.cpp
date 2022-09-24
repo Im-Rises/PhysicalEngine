@@ -4,7 +4,7 @@
 
 #include "MyCube.h"
 
-MyCube::MyCube(int size) {
+MyCube::MyCube(float size) {
     m_points = {
             -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
             0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
@@ -48,4 +48,8 @@ MyCube::MyCube(int size) {
             -0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
             -0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
     };
+
+    for (int i = 0; i < m_points.size(); i++) {
+        m_points[i] *= size;
+    }
 }

@@ -81,6 +81,7 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view) {
 
     if (openglIndicedMesh) {
         glBindVertexArray(VAO);
+//        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
         glDrawElements(GL_TRIANGLES, mesh.getTriangles().size(), GL_UNSIGNED_INT, 0);
     } else {
         glBindVertexArray(VBO);
