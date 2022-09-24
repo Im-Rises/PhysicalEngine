@@ -5,8 +5,7 @@
 #include "Mesh/Cuboid/CuboidRectangle.h"
 
 Scene::Scene() {
-    //CuboidRectangle cb(1, 1, 1);
-    gameObjects.push_back(new GameObject(Mesh()));
+    gameObjects.push_back(new GameObject(CuboidRectangle(1.0f, 1.0f, 1.0f)));
 }
 
 Scene::~Scene() {

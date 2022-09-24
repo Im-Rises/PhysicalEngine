@@ -2,8 +2,10 @@
 
 #include <glad/glad.h>
 
+#include <utility>
+
 GameObject::GameObject(Mesh mesh, bool indiced) : shader("shaders/shader.vert", "shaders/shader.frag") {
-    this->mesh = mesh;
+    this->mesh = std::move(mesh);
     create();
 }
 
