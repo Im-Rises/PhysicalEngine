@@ -2,7 +2,7 @@
 #define DEF_PHYSICALENGINE
 
 #include <vector>
-#include "Scene.h"
+#include "Scene/Scene.h"
 
 #define PROJECT_NAME "Physical Engine 3D"
 

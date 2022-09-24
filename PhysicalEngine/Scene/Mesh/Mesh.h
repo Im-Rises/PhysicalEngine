@@ -1,7 +1,7 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include "../Vector3D/Vector3d.h"
+#include "../../Vector3D/Vector3d.h"
 #include <iostream>
 #include <vector>
 

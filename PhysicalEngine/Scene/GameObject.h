@@ -4,7 +4,7 @@
 #include <vector>
 #include "Shader/Shader.h"
 #include "Mesh/Mesh.h"
-#include "Vector3D/Vector3d.h"
+#include "../Vector3D/Vector3d.h"
 
 class GameObject {
 private:
