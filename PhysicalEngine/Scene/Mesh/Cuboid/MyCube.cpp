@@ -4,7 +4,7 @@
 
 #include "MyCube.h"
 
-MyCube::MyCube() {
+MyCube::MyCube(int size) {
     m_points = {
             -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
             0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,

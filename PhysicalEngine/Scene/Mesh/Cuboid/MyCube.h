@@ -5,7 +5,7 @@
 
 class MyCube : public Mesh {
 public:
-    MyCube();
+    MyCube(int size = 1);
 };
 
 

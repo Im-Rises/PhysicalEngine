@@ -85,9 +85,7 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view) {
     } else {
         glBindVertexArray(VBO);
         glDrawArrays(GL_TRIANGLES, 0, mesh.getPoints().size());
-        std::cout << mesh.getPoints().size() << std::endl;
     }
-    // glBindVertexArray(0);
 }
 
 std::string GameObject::getName() {
