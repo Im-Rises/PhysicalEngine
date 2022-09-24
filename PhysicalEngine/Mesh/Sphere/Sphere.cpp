@@ -49,7 +49,7 @@ void Sphere::generatePointsNormales(float radius, int rings, int sectors) {
 }
 
 void Sphere::generateTriangles(float radius, int rings, int sectors) {
-    int k1, k2;
+    unsigned int k1, k2;
     for (int i = 0; i < rings; ++i) {
         k1 = i * (sectors + 1); // d�but du ring actuel
         k2 = k1 + sectors + 1;    // d�but du prochain ring
@@ -58,17 +58,16 @@ void Sphere::generateTriangles(float radius, int rings, int sectors) {
             // 2 triangles par (secteur,ring) sauf pour le premier et dernier ring
             // k1 => k2 => k1+1
             if (i != 0) {
-                /* int triangle1[3] = { k1, k2, k1 + 1 };
-                m_triangles.push_back(triangle1);
-                */
-
+                m_triangles.push_back(k1);
+                m_triangles.push_back(k2);
+                m_triangles.push_back(k1 + 1);
             }
 
             // k1+1 => k2 => k2+1
             if (i != (rings - 1)) {
-                /* int triangle2[3] = { k1 + 1, k2, k2 + 1 };
-                m_triangles.push_back(triangle2);
-                */
+                m_triangles.push_back(k1 + 1);
+                m_triangles.push_back(k2);
+                m_triangles.push_back(k2 + 1);
             }
 
         }

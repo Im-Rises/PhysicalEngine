@@ -10,7 +10,7 @@ class Mesh {
 
 protected:
     std::vector<float> m_points;
-    std::vector<float> m_triangles;
+    std::vector<unsigned int> m_triangles;
     std::vector<float> m_normales;
 
 public:
@@ -19,7 +19,7 @@ public:
 
     const std::vector<float> &getPoints();
 
-    const std::vector<float> &getTriangles();
+    const std::vector<unsigned int> &getTriangles();
 
     const std::vector<float> &getNormales();
 

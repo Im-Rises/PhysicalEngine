@@ -3,7 +3,7 @@
 
 #include "../Mesh.h"
 
-class CuboidRectangle : Mesh {
+class CuboidRectangle : public Mesh {
 
 public:
 

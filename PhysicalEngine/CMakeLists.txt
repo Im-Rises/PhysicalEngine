@@ -10,8 +10,8 @@ file(GLOB SRCS_HEADERS_GLAD "${CMAKE_SOURCE_DIR}/dependencies/glad/**/*.c" "${CM
 #set(SRCS "main.cpp" "PhysicalEngine.cpp" "Scene.cpp" "GameObject.cpp" "Shader/Shader.cpp" "Camera.cpp" "Mesh/Mesh.cpp" "Mesh/)
 #set(HEADERS "PhysicalEngine.h" "Scene.h" "GameObject.h" "Shader/Shader.h" "Camera.h" "Mesh/Mesh.h")
 
-file(GLOB SRCS "${CMAKE_SOURCE_DIR}/**/*.cpp" "${CMAKE_SOURCE_DIR}/*.cpp")
-file(GLOB HEADERS "${CMAKE_SOURCE_DIR}/**/*.h" "${CMAKE_SOURCE_DIR}/*.h")
+file(GLOB SRCS "./**/*.cpp" "./*.cpp")
+file(GLOB HEADERS "$./**/*.h" "./*.h")
 
 add_executable(${PROJECT_NAME} ${SRCS} ${HEADERS} ${SRCS_HEADERS_IMGUI} ${SRCS_HEADERS_GLAD})
 

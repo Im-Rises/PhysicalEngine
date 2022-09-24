@@ -8,7 +8,7 @@
 class Camera {
 private:
     glm::mat4 viewMatrix;
-    int fov = glm::radians(90.0f);
+    double fov = glm::radians(90.0);
 
 public:
     Camera();

@@ -1,12 +1,12 @@
 #include "Scene.h"
 
+#include "Mesh/Mesh.h"
+#include "Mesh/Cuboid/Cube.h"
+#include "Mesh/Cuboid/CuboidRectangle.h"
+
 Scene::Scene() {
-    gameObjects.push_back(new GameObject());
-//    gameObjects.push_back(new GameObject(std::vector<float>{
-//            -0.5f, -0.5f, 0.0f,
-//            0.5f, -0.5f, 0.0f,
-//            0.0f, 0.5f, 0.0f
-//    }));
+    //CuboidRectangle cb(1, 1, 1);
+    gameObjects.push_back(new GameObject(Mesh()));
 }
 
 Scene::~Scene() {

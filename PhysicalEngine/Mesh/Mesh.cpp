@@ -6,7 +6,7 @@ const vector<float> &Mesh::getPoints() {
     return m_points;
 }
 
-const vector<float> &Mesh::getTriangles() {
+const vector<unsigned int> &Mesh::getTriangles() {
     return m_triangles;
 }
 

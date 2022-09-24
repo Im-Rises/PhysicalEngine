@@ -24,7 +24,7 @@ public:
     /// <param name="x"></param>
     /// <param name="y"></param>
     /// <param name="z"></param>
-    Particule(double x, double y, double z) : m_position(x, y, z), m_speed(0, 0, 0), m_acceleration(0, 0, 0) {};
+    Particule(float x, float y, float z) : m_position(x, y, z), m_speed(0, 0, 0), m_acceleration(0, 0, 0) {};
 
     /// <summary>
     /// Constructeur de particule
@@ -48,15 +48,15 @@ public:
 
     const Vector3D &getAcceleration() { return m_acceleration; };
 
-    void setPosition(double x, double y, double z) { m_position = Vector3D(x, y, z); };
+    void setPosition(float x, float y, float z) { m_position = Vector3D(x, y, z); };
 
     void setPosition(const Vector3D &position) { m_position = position; };
 
-    void setSpeed(double x, double y, double z) { m_speed = Vector3D(x, y, z); };
+    void setSpeed(float x, float y, float z) { m_speed = Vector3D(x, y, z); };
 
     void setSpeed(const Vector3D &speed) { m_speed = speed; };
 
-    void setAcceleration(double x, double y, double z) { m_acceleration = Vector3D(x, y, z); };
+    void setAcceleration(float x, float y, float z) { m_acceleration = Vector3D(x, y, z); };
 
     void setAcceleration(const Vector3D &acceleration) { m_acceleration = acceleration; };
 #pragma endregion
@@ -69,20 +69,20 @@ public:
     /// et du temps en argument
     /// </summary>
     /// <param name="time"></param>
-    void calculatePosition(double time);
+    void calculatePosition(float time);
 
     /// <summary>
     /// Calcule la nouvelle vitesse � partir de l'acc�l�ration de la particule
     /// et du temps en arguement
     /// </summary>
     /// <param name="time"></param>
-    void calculateSpeed(double time);
+    void calculateSpeed(float time);
 
     /// <summary>
     /// Calcule toutes les variable d�pendante du temps sauf l'acceleration
     /// </summary>
     /// <param name="time"></param>
-    void recalculateAll(double time);
+    void recalculateAll(float time);
 
 #pragma endregion
 

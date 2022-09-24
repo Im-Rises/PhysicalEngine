@@ -16,7 +16,7 @@ private:
 
     Mesh mesh;
     std::string name;
-    unsigned int VBO, VAO;
+    unsigned int VBO, VAO, EBO;
     Shader shader;
 //    std::vector<float> vertices;
     // std::vector<GameObject> children;
@@ -31,7 +31,7 @@ public:
 private:
     void create();
 
-    
+
 public:
     ~GameObject();
 
