@@ -98,7 +98,7 @@ PhysicalEngine::PhysicalEngine() {
             0.45f, 0.55f, 0.60f, 1.00f
     };
 
-    scene = new Scene();
+    scene = std::make_unique<Scene>();
 }
 
 PhysicalEngine::~PhysicalEngine() {
@@ -108,7 +108,7 @@ PhysicalEngine::~PhysicalEngine() {
 
     glfwDestroyWindow(window);
     glfwTerminate();
-    delete scene;
+//    delete scene;
 }
 
 #pragma endregion
@@ -159,7 +159,7 @@ void PhysicalEngine::handleGui() {
 
     {
         ImGui::Begin("View tools");
-        ImGui::Checkbox("Mesh: Line/Fill", scene->getWireFrameStatePtr());
+        ImGui::Checkbox("Mesh: Fill/Line", scene->getWireFrameStatePtr());
         ImGui::End();
     }
 

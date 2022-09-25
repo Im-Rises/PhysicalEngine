@@ -14,7 +14,7 @@ private:
     struct {
         float r, g, b, a;
     } backgroundColor;
-    Scene *scene;
+    std::unique_ptr<Scene> scene;
 
 
 public:
