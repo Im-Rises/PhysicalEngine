@@ -17,7 +17,6 @@ void Camera::translate(Vector3d vector3D) {
 }
 
 void Camera::rotate(Vector3d vector3D, float angle) {
-//    viewMatrix = glm::rotate(viewMatrix, 0.1f, glm::vec3(1, 0, 0));
     viewMatrix = glm::rotate(viewMatrix, angle, glm::vec3(vector3D.getx(), vector3D.gety(), vector3D.getz()));
 }
 

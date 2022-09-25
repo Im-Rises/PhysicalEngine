@@ -64,7 +64,7 @@ void InputManager::keyRepeated(GLFWwindow *window, int key, PhysicalEngine *engi
             break;
         }
         case GLFW_KEY_RIGHT: {
-            engine->scene->translateCamera(Vector3d(-translationSpeed, 0, translationSpeed));
+            engine->scene->translateCamera(Vector3d(-translationSpeed, 0, 0));
             break;
         }
     }
