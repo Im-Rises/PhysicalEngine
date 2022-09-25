@@ -2,20 +2,21 @@
 
 #pragma region Includes
 
-//// STB_IMAGE
-//#define STB_IMAGE_IMPLEMENTATION
-//#include <stb_image.h>
-
 // OpenGL Loader
 #include <glad/glad.h>
+
+// Includes
+#include "Scene/Scene.h"
+#include "InputManager.h"
 
 //// std library
 #include <iostream>
 
-// Dear Imgui
+// Dear ImGui
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+
 #include <stdio.h>
 
 #if defined(IMGUI_IMPL_OPENGL_ES2)
@@ -24,7 +25,6 @@
 
 #include <GLFW/glfw3.h> // Will drag system OpenGL headers
 #include <cstdlib>
-#include <vector>
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1900) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
 #pragma comment(lib, "legacy_stdio_definitions")
@@ -78,6 +78,10 @@ PhysicalEngine::PhysicalEngine() {
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // Enable vsync
 
+    glfwSetCursorPosCallback(window, InputManager::cursor_position_callback);
+    glfwSetWindowUserPointer(window, this);
+    glfwSetKeyCallback(window, InputManager::key_callback);
+
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
         exit(1);
 
@@ -98,7 +102,7 @@ PhysicalEngine::PhysicalEngine() {
             0.45f, 0.55f, 0.60f, 1.00f
     };
 
-    scene = new Scene();
+    scene = std::make_unique<Scene>();
 }
 
 PhysicalEngine::~PhysicalEngine() {
@@ -108,7 +112,6 @@ PhysicalEngine::~PhysicalEngine() {
 
     glfwDestroyWindow(window);
     glfwTerminate();
-    delete scene;
 }
 
 #pragma endregion
@@ -132,9 +135,9 @@ void PhysicalEngine::start() {
 
 void PhysicalEngine::handleEvents() {
     glfwPollEvents();
-    int state = glfwGetKey(window, GLFW_KEY_E);
-    if (state)
-        scene->translateCamera();
+//    int state = glfwGetKey(window, GLFW_KEY_E);
+//    if (state)
+//        scene->translateCamera();
 }
 
 void PhysicalEngine::handleGui() {
@@ -159,7 +162,7 @@ void PhysicalEngine::handleGui() {
 
     {
         ImGui::Begin("View tools");
-        ImGui::Checkbox("Mesh: Line/Fill", scene->getWireFrameStatePtr());
+        ImGui::Checkbox("Mesh: Fill/Line", scene->getWireFrameStatePtr());
         ImGui::End();
     }
 

@@ -7,9 +7,9 @@
 class Particule {
 
 private:
-    Vector3D m_position;
-    Vector3D m_speed;
-    Vector3D m_acceleration;
+    Vector3d m_position;
+    Vector3d m_speed;
+    Vector3d m_acceleration;
 
 public:
 #pragma region Constructeur
@@ -31,7 +31,7 @@ public:
     ///  vitesse et acceleration � 0 par default
     /// </summary>
     /// <param name="pos">: la Position</param>
-    Particule(const Vector3D &pos) : m_position(pos), m_speed(0, 0, 0), m_acceleration(0, 0, 0) {};
+    Particule(const Vector3d &pos) : m_position(pos), m_speed(0, 0, 0), m_acceleration(0, 0, 0) {};
 
     /// <summary>
     /// Constructeur de copie de Particule
@@ -42,23 +42,23 @@ public:
 #pragma endregion
 #pragma region Getter Setter
 
-    const Vector3D &getPosition() { return m_position; };
+    const Vector3d &getPosition() { return m_position; };
 
-    const Vector3D &getSpeed() { return m_speed; };
+    const Vector3d &getSpeed() { return m_speed; };
 
-    const Vector3D &getAcceleration() { return m_acceleration; };
+    const Vector3d &getAcceleration() { return m_acceleration; };
 
-    void setPosition(float x, float y, float z) { m_position = Vector3D(x, y, z); };
+    void setPosition(float x, float y, float z) { m_position = Vector3d(x, y, z); };
 
-    void setPosition(const Vector3D &position) { m_position = position; };
+    void setPosition(const Vector3d &position) { m_position = position; };
 
-    void setSpeed(float x, float y, float z) { m_speed = Vector3D(x, y, z); };
+    void setSpeed(float x, float y, float z) { m_speed = Vector3d(x, y, z); };
 
-    void setSpeed(const Vector3D &speed) { m_speed = speed; };
+    void setSpeed(const Vector3d &speed) { m_speed = speed; };
 
-    void setAcceleration(float x, float y, float z) { m_acceleration = Vector3D(x, y, z); };
+    void setAcceleration(float x, float y, float z) { m_acceleration = Vector3d(x, y, z); };
 
-    void setAcceleration(const Vector3D &acceleration) { m_acceleration = acceleration; };
+    void setAcceleration(const Vector3d &acceleration) { m_acceleration = acceleration; };
 #pragma endregion
 
 #pragma region Methode

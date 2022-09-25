@@ -1,5 +1,6 @@
 #include "Scene.h"
 
+#include "GameObject.h"
 #include "Mesh/Mesh.h"
 #include "Mesh/Cuboid/Cube.h"
 #include "Mesh/Cuboid/CuboidRectangle.h"
@@ -9,9 +10,9 @@
 
 Scene::Scene() {
 //    gameObjects.push_back(new GameObject(MyCube(1)));
-//    gameObjects.push_back(new GameObject(Sphere(1, 20, 20)));
+    gameObjects.push_back(new GameObject(Sphere(1, 20, 20)));
 //    gameObjects.push_back(new GameObject(MyCube()));
-    gameObjects.push_back(new GameObject(MyCubeUseIndice()));
+//    gameObjects.push_back(new GameObject(MyCubeUseIndice()));
 }
 
 Scene::~Scene() {
@@ -32,8 +33,12 @@ void Scene::draw(int display_w, int display_h) {
     }
 }
 
-void Scene::translateCamera() {
-    camera.translate();
+void Scene::translateCamera(Vector3d vector3D) {
+    camera.translate(vector3D);
+}
+
+void Scene::rotateCamera(Vector3d vector3D, float angle) {
+    camera.rotate(vector3D, angle);
 }
 
 size_t Scene::getNbGameObjects() {
@@ -52,3 +57,4 @@ bool *Scene::getWireFrameStatePtr() {
     }
     return &wireFrame;
 }
+

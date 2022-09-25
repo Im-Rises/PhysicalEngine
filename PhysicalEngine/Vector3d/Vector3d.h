@@ -4,24 +4,24 @@
 #include <cmath>
 #include <iostream>
 
-class Vector3D {
+class Vector3d {
 private:
     float m_x, m_y, m_z;
 
 public:
     /// Constructeur par d�faut
     /// Vecteur z�ro (0,0,0)
-    Vector3D();
+    Vector3d();
 
     /// Constructeur
     /// Vecteur (x,y,z)
-    Vector3D(float xcoord, float ycoord, float zcoord);
+    Vector3d(float xcoord, float ycoord, float zcoord);
 
     ///Constructeur de copie
-    Vector3D(const Vector3D &v);
+    Vector3d(const Vector3d &v);
 
     ///Destructeur
-    ~Vector3D();
+    ~Vector3d();
 
     //getters
     float getx() const;
@@ -38,43 +38,43 @@ public:
     void setz(float zcoord);
 
     ///Addition
-    Vector3D operator+(const Vector3D &vec);
+    Vector3d operator+(const Vector3d &vec);
 
-    Vector3D &operator+=(const Vector3D &vec);
+    Vector3d &operator+=(const Vector3d &vec);
 
     ///Soustraction
-    Vector3D operator-(const Vector3D &vec);
+    Vector3d operator-(const Vector3d &vec);
 
-    Vector3D &operator-=(const Vector3D &vec);
+    Vector3d &operator-=(const Vector3d &vec);
 
     ///Multiplication par un scalaire
-    Vector3D operator*(float s);
+    Vector3d operator*(float s);
 
-    Vector3D &operator*=(float s);
+    Vector3d &operator*=(float s);
 
     ///Prend la valeur du vecteur
-    Vector3D operator=(const Vector3D &vec);
+    Vector3d operator=(const Vector3d &vec);
 
     ///Test d'�galit�
-    bool operator==(const Vector3D &vec);
+    bool operator==(const Vector3d &vec);
 
     ///Calcul de la norme
     float norm();
 
     ///Normalisation
-    Vector3D normalize();
+    Vector3d normalize();
 
     ///Produit Scalaire
-    float dot(const Vector3D &vec);
+    float dot(const Vector3d &vec);
 
     ///Produit Vectoriel
-    Vector3D cross(const Vector3D &vec);
+    Vector3d cross(const Vector3d &vec);
 
     ///Distance entre deux vecteurs
-    float distance(const Vector3D &vec);
+    float distance(const Vector3d &vec);
 
     ///Affichage du vecteur
-    friend std::ostream &operator<<(std::ostream &os, Vector3D vec) {
+    friend std::ostream &operator<<(std::ostream &os, Vector3d vec) {
         return os << "(" << vec.getx() << "," << vec.gety() << "," << vec.getz() << ")";
     }
 };

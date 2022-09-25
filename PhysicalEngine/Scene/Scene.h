@@ -3,12 +3,10 @@
 
 #include <vector>
 
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtc/type_ptr.hpp"
-
-#include "GameObject.h"
+#include "../Vector3d/Vector3d.h"
 #include "Camera.h"
+
+class GameObject;
 
 class Scene {
 private:
@@ -25,7 +23,9 @@ public:
 
     void draw(int display_w, int display_h);
 
-    void translateCamera();
+    void translateCamera(Vector3d vector3D);
+
+    void rotateCamera(Vector3d vector3D, float angle);
 
     size_t getNbGameObjects();
 
