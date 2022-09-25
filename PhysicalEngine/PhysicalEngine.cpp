@@ -12,7 +12,7 @@
 //// std library
 #include <iostream>
 
-// Dear Imgui
+// Dear ImGui
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -25,7 +25,6 @@
 
 #include <GLFW/glfw3.h> // Will drag system OpenGL headers
 #include <cstdlib>
-#include <vector>
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1900) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
 #pragma comment(lib, "legacy_stdio_definitions")
@@ -78,7 +77,7 @@ PhysicalEngine::PhysicalEngine() {
         exit(1);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // Enable vsync
-    
+
     glfwSetCursorPosCallback(window, InputManager::cursor_position_callback);
     glfwSetWindowUserPointer(window, this);
     glfwSetKeyCallback(window, InputManager::key_callback);
