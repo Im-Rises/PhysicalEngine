@@ -12,7 +12,7 @@ private:
 
     bool wireFrame = false;
 
-    Vector3D position;
+    Vector3d position;
     float width, height, depth;
     float rotationX, rotationY, rotationZ;
     float scaleX, scaleY, scaleZ;

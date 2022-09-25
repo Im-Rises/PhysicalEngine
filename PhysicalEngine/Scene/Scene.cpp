@@ -33,8 +33,12 @@ void Scene::draw(int display_w, int display_h) {
     }
 }
 
-void Scene::translateCamera(Vector3D vector3D) {
+void Scene::translateCamera(Vector3d vector3D) {
     camera.translate(vector3D);
+}
+
+void Scene::rotateCamera(Vector3d vector3D, float angle) {
+    camera.rotate(vector3D, angle);
 }
 
 size_t Scene::getNbGameObjects() {
@@ -53,3 +57,4 @@ bool *Scene::getWireFrameStatePtr() {
     }
     return &wireFrame;
 }
+

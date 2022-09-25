@@ -3,29 +3,33 @@
 
 struct GLFWwindow;
 
+class PhysicalEngine;
+
 class InputManager {
 
 private:
-    static InputManager *instance;
+    static float translationSpeed;
+    static float rotationSpeed;
 
-//    InputManager();
-//
-//    ~InputManager();
-
-    bool leftClick = false;
-    bool rightClick = false;
+    static double mouseLastPosX;
+    static double mouseLastPosY;
 
 public:
-//    static void mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
-
     static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
 
 private:
-    static void keyPressed(GLFWwindow *window, int key);
+    static void keyPressed(GLFWwindow *window, int key, PhysicalEngine *engine);
 
-    static void keyReleased(GLFWwindow *window, int key);
+    static void keyReleased(GLFWwindow *window, int key, PhysicalEngine *engine);
 
-    static void keyRepeated(GLFWwindow *window, int key);
+    static void keyRepeated(GLFWwindow *window, int key, PhysicalEngine *engine);
+
+
+public:
+    static void cursor_position_callback(GLFWwindow *window, double xpos, double ypos);
+
+private:
+//    static void mouseButtonPressed(GLFWwindow *window, int button, PhysicalEngine *engine);
 
 
 };

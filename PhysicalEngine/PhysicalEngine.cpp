@@ -78,6 +78,10 @@ PhysicalEngine::PhysicalEngine() {
         exit(1);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // Enable vsync
+    
+    glfwSetCursorPosCallback(window, InputManager::cursor_position_callback);
+    glfwSetWindowUserPointer(window, this);
+    glfwSetKeyCallback(window, InputManager::key_callback);
 
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
         exit(1);
@@ -94,9 +98,6 @@ PhysicalEngine::PhysicalEngine() {
 
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
-
-    glfwSetWindowUserPointer(window, this);
-    glfwSetKeyCallback(window, InputManager::key_callback);
 
     backgroundColor = {
             0.45f, 0.55f, 0.60f, 1.00f

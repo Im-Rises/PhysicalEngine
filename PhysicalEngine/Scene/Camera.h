@@ -19,9 +19,9 @@ public:
 
     void update();
 
-    void translate(Vector3D vector3D);
+    void translate(Vector3d vector3D);
 
-    void rotate();
+    void rotate(Vector3d vector3D, float angle);
 
     glm::mat4 getViewMatrix();
 };

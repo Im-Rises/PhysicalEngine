@@ -23,7 +23,9 @@ public:
 
     void draw(int display_w, int display_h);
 
-    void translateCamera(Vector3D vector3D);
+    void translateCamera(Vector3d vector3D);
+
+    void rotateCamera(Vector3d vector3D, float angle);
 
     size_t getNbGameObjects();
 
