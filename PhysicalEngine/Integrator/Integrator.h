@@ -6,18 +6,19 @@
 #include <iterator>
 #include <list>
 #include <chrono>
+#include "../Integrable/Integrable.h"
 
 class Integrator {
 
 private:
-    std::list<Particule> m_integrableList;
+    std::list<Integrable> m_integrableList;
     bool m_StopPhysics = false;
 
 public:
 
     Integrator();
 
-    void AddIntegrable(Particule &integrable);
+    void AddIntegrable(Integrable &integrable);
 
     void UpdateAll(double time);
 

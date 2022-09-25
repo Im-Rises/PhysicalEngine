@@ -1,13 +1,13 @@
 #ifndef PARTICULE_H
 #define PARTICULE_H
 
+#include "../Integrable/Integrable.h"
 #include"../Vector3d/Vector3d.h"
 
 
-class Particule {
+class Particule : public Integrable {
 
 private:
-    Vector3d m_position;
     Vector3d m_speed;
     Vector3d m_acceleration;
 
@@ -15,7 +15,7 @@ public:
 #pragma region Constructeur
 
 
-    Particule() : m_position(0, 0, 0), m_speed(0, 0, 0), m_acceleration(0, 0, 0) {};
+    Particule() : m_speed(0, 0, 0), m_acceleration(0, 0, 0) { m_position=Vector3d(0, 0, 0); };
 
     /// <summary>
     /// Constructeur de particule
@@ -24,14 +24,14 @@ public:
     /// <param name="x"></param>
     /// <param name="y"></param>
     /// <param name="z"></param>
-    Particule(float x, float y, float z) : m_position(x, y, z), m_speed(0, 0, 0), m_acceleration(0, 0, 0) {};
+	Particule(float x, float y, float z) :  m_speed(0, 0, 0), m_acceleration(0, 0, 0) { m_position = Vector3d(x, y, z); };
 
     /// <summary>
     /// Constructeur de particule
     ///  vitesse et acceleration � 0 par default
     /// </summary>
     /// <param name="pos">: la Position</param>
-    Particule(const Vector3d &pos) : m_position(pos), m_speed(0, 0, 0), m_acceleration(0, 0, 0) {};
+	Particule(const Vector3d& pos) : m_speed(0, 0, 0), m_acceleration(0, 0, 0) { m_position = pos; };
 
     /// <summary>
     /// Constructeur de copie de Particule
@@ -42,11 +42,10 @@ public:
 #pragma endregion
 #pragma region Getter Setter
 
-    const Vector3d &getPosition() { return m_position; };
 
-    const Vector3d &getSpeed() { return m_speed; };
+    const Vector3d &getSpeed() const { return m_speed; };
 
-    const Vector3d &getAcceleration() { return m_acceleration; };
+    const Vector3d &getAcceleration() const { return m_acceleration; };
 
     void setPosition(float x, float y, float z) { m_position = Vector3d(x, y, z); };
 
@@ -82,7 +81,7 @@ public:
     /// Calcule toutes les variable d�pendante du temps sauf l'acceleration
     /// </summary>
     /// <param name="time"></param>
-    void recalculateAll(float time);
+    void recalculateAll(float time) override;
 
 #pragma endregion
 

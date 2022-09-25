@@ -5,13 +5,13 @@ Integrator::Integrator() {
 
 }
 
-void Integrator::AddIntegrable(Particule& integrable) {
+void Integrator::AddIntegrable(Integrable& integrable) {
 	m_integrableList.push_back(integrable);
 }
 
 void Integrator::UpdateAll(double time) {
 
-	for (Particule integrable : m_integrableList) {
+	for (Integrable& integrable : m_integrableList) {
 		integrable.recalculateAll(time);
 	}
 }

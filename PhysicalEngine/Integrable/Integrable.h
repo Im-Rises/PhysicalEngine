@@ -1,8 +1,18 @@
 #ifndef INTEGRABLE_H
 #define INTEGRABLE_H
 
-virtual class Integrable() {
-	virtual void recalculateAll(float time);
-}
+#include "../Vector3d/Vector3d.h"
+
+
+class Integrable {
+
+protected:
+	Vector3d m_position;
+
+public:
+	const Vector3d& getPosition() const { return m_position; };
+
+	virtual void recalculateAll(float time) = 0;
+};
 
 #endif // !INTEGRABLE_H
