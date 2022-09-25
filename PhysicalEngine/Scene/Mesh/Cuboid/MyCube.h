@@ -6,6 +6,7 @@
 class MyCube : public Mesh {
 public:
     MyCube(float size = 1);
+
 };
 
 

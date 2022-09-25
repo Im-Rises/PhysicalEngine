@@ -4,7 +4,7 @@
 
 #include <utility>
 
-GameObject::GameObject(Mesh mesh) : shader("shaders/shader.vert", "shaders/shader.frag") {
+GameObject::GameObject(Mesh mesh) : shader("../../../../shaders/shader.vert", "../../../../shaders/shader.frag") {
     name = "GameObject";
     mesh.getVerticesUseIndices();
     this->mesh = std::move(mesh);

@@ -5,10 +5,13 @@
 #include "Mesh/Cuboid/CuboidRectangle.h"
 #include "Mesh/Cuboid/MyCube.h"
 #include "Mesh/Sphere/Sphere.h"
+#include "Mesh/Cuboid/MyCubeUseIndice.h"
 
 Scene::Scene() {
 //    gameObjects.push_back(new GameObject(MyCube(1)));
-    gameObjects.push_back(new GameObject(Sphere(1, 5, 5)));
+ //   gameObjects.push_back(new GameObject(Sphere(1, 5, 5)));
+//	gameObjects.push_back(new GameObject(MyCube()));
+    gameObjects.push_back(new GameObject(MyCubeUseIndice()));
 }
 
 Scene::~Scene() {
