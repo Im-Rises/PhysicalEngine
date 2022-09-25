@@ -71,7 +71,7 @@ void InputManager::keyRepeated(GLFWwindow *window, int key, PhysicalEngine *engi
 }
 
 void InputManager::cursor_position_callback(GLFWwindow *window, double xpos, double ypos) {
-    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE) == GLFW_PRESS) {
         auto *engine = (PhysicalEngine *) glfwGetWindowUserPointer(window);
         engine->scene->rotateCamera(Vector3d(0, 1, 0), rotationSpeed * (xpos - mouseLastPosX));
         engine->scene->rotateCamera(Vector3d(1, 0, 0), rotationSpeed * (ypos - mouseLastPosY));
