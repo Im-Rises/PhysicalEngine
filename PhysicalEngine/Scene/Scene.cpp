@@ -32,8 +32,8 @@ void Scene::draw(int display_w, int display_h) {
     }
 }
 
-void Scene::translateCamera() {
-    camera.translate();
+void Scene::translateCamera(Vector3D vector3D) {
+    camera.translate(vector3D);
 }
 
 size_t Scene::getNbGameObjects() {

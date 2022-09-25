@@ -2,12 +2,12 @@
 
 #pragma region Includes
 
-//// STB_IMAGE
-//#define STB_IMAGE_IMPLEMENTATION
-//#include <stb_image.h>
-
 // OpenGL Loader
 #include <glad/glad.h>
+
+// Includes
+#include "Scene/Scene.h"
+//#include "InputManager.h"
 
 //// std library
 #include <iostream>
@@ -16,6 +16,7 @@
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+
 #include <stdio.h>
 
 #if defined(IMGUI_IMPL_OPENGL_ES2)
@@ -94,6 +95,9 @@ PhysicalEngine::PhysicalEngine() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
+    glfwSetWindowUserPointer(window, this);
+//    glfwSetKeyCallback(window, InputManager::key_callback);
+
     backgroundColor = {
             0.45f, 0.55f, 0.60f, 1.00f
     };
@@ -108,7 +112,6 @@ PhysicalEngine::~PhysicalEngine() {
 
     glfwDestroyWindow(window);
     glfwTerminate();
-//    delete scene;
 }
 
 #pragma endregion
@@ -132,9 +135,9 @@ void PhysicalEngine::start() {
 
 void PhysicalEngine::handleEvents() {
     glfwPollEvents();
-    int state = glfwGetKey(window, GLFW_KEY_E);
-    if (state)
-        scene->translateCamera();
+//    int state = glfwGetKey(window, GLFW_KEY_E);
+//    if (state)
+//        scene->translateCamera();
 }
 
 void PhysicalEngine::handleGui() {

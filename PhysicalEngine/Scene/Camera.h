@@ -5,6 +5,8 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
+#include "../Vector3D/Vector3d.h"
+
 class Camera {
 private:
     glm::mat4 viewMatrix;
@@ -17,9 +19,9 @@ public:
 
     void update();
 
-    void rotate();
+    void translate(Vector3D vector3D);
 
-    void translate();
+    void rotate();
 
     glm::mat4 getViewMatrix();
 };

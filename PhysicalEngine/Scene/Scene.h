@@ -3,10 +3,7 @@
 
 #include <vector>
 
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtc/type_ptr.hpp"
-
+#include "../Vector3D/Vector3d.h"
 #include "GameObject.h"
 #include "Camera.h"
 
@@ -25,7 +22,7 @@ public:
 
     void draw(int display_w, int display_h);
 
-    void translateCamera();
+    void translateCamera(Vector3D vector3D);
 
     size_t getNbGameObjects();
 

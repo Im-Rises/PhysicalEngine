@@ -1,20 +1,29 @@
 #ifndef PHYSICALENGINE_H
 #define PHYSICALENGINE_H
 
-#include <vector>
-#include "Scene/Scene.h"
-
 #define PROJECT_NAME "Physical Engine 3D"
+
+#include <memory>
+
+//Shallow declarations
+class Scene;
+
+class InputManager;
 
 struct GLFWwindow;
 
+//Class declaration
 class PhysicalEngine {
+    friend class InputManager;
+
 private:
     GLFWwindow *window;
+
+    std::unique_ptr<Scene> scene;
+
     struct {
         float r, g, b, a;
     } backgroundColor;
-    std::unique_ptr<Scene> scene;
 
 
 public:

@@ -12,12 +12,12 @@ void Camera::update() {
 
 }
 
-void Camera::rotate() {
-    viewMatrix = glm::rotate(viewMatrix, 0.1f, glm::vec3(1, 0, 0));
+void Camera::translate(Vector3D vector3D) {
+    viewMatrix = glm::translate(viewMatrix, glm::vec3(vector3D.getx(), vector3D.gety(), vector3D.getz()));
 }
 
-void Camera::translate() {
-    viewMatrix = glm::translate(viewMatrix, glm::vec3(0, 0.1, 0));
+void Camera::rotate() {
+    viewMatrix = glm::rotate(viewMatrix, 0.1f, glm::vec3(1, 0, 0));
 }
 
 glm::mat4 Camera::getViewMatrix() {
