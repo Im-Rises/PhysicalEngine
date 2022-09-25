@@ -4,8 +4,9 @@
 #include <vector>
 
 #include "../Vector3D/Vector3d.h"
-#include "GameObject.h"
 #include "Camera.h"
+
+class GameObject;
 
 class Scene {
 private:

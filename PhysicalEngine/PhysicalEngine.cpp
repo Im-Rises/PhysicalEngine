@@ -7,7 +7,7 @@
 
 // Includes
 #include "Scene/Scene.h"
-//#include "InputManager.h"
+#include "InputManager.h"
 
 //// std library
 #include <iostream>
@@ -96,7 +96,7 @@ PhysicalEngine::PhysicalEngine() {
     ImGui_ImplOpenGL3_Init(glsl_version);
 
     glfwSetWindowUserPointer(window, this);
-//    glfwSetKeyCallback(window, InputManager::key_callback);
+    glfwSetKeyCallback(window, InputManager::key_callback);
 
     backgroundColor = {
             0.45f, 0.55f, 0.60f, 1.00f

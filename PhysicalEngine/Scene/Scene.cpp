@@ -1,5 +1,6 @@
 #include "Scene.h"
 
+#include "GameObject.h"
 #include "Mesh/Mesh.h"
 #include "Mesh/Cuboid/Cube.h"
 #include "Mesh/Cuboid/CuboidRectangle.h"

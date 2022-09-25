@@ -4,6 +4,7 @@
 #include "GLFW/glfw3.h"
 #include "Vector3d/Vector3d.h"
 
+#include "Scene/Scene.h"
 #include <iostream>
 
 void InputManager::key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
@@ -12,7 +13,7 @@ void InputManager::key_callback(GLFWwindow *window, int key, int scancode, int a
     switch (action) {
         case GLFW_PRESS: {
             keyPressed(window, key);
-//            engine->scene->translateCamera();
+            engine->scene->translateCamera(Vector3D(1, 1, 1));
             break;
         }
         case GLFW_RELEASE: {
