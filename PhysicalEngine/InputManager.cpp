@@ -44,16 +44,23 @@ void InputManager::keyPressed(GLFWwindow *window, int key, PhysicalEngine *engin
         }
 		case GLFW_KEY_RIGHT: {
 			engine->m_game.goRight();
+			break;
 		}
 		case GLFW_KEY_LEFT: {
 			engine->m_game.goLeft();
+			break;
 		}
 		case GLFW_KEY_UP: {
 			engine->m_game.goUp();
+			break;
 		}
-		case GLFW_KEY_DOWN: {
+		 case GLFW_KEY_DOWN : {
 			engine->m_game.goDown();
+			break;
 		}
+		 default: {
+			break;
+		 }
     }
 }
 

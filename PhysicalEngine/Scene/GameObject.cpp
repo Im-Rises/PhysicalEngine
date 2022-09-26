@@ -69,6 +69,9 @@ void GameObject::update() {
 //    for (auto &component : components) {
 //        component->update();
 //    }
+    if (m_rigidBody != nullptr) {
+	position = m_rigidBody->getPosition();
+    }
 }
 
 void GameObject::draw(int display_w, int display_h, glm::mat4 view) {
@@ -81,7 +84,7 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view) {
 
     //Shader use
     shader.use();
-    shader.setMat4("model", model);
+    shader.setMat4("model", glm::translate(model,glm::vec3(position.getx(),position.gety(),position.getz())));
     shader.setMat4("view", view);
     shader.setMat4("projection", projection);
 

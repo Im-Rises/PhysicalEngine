@@ -10,7 +10,7 @@
 
 Scene::Scene() {
 //    gameObjects.push_back(new GameObject(MyCube(1)));
-    gameObjects.push_back(new GameObject(Sphere(1, 20, 20)));
+//    gameObjects.push_back(new GameObject(Sphere(1, 20, 20)));
 //    gameObjects.push_back(new GameObject(MyCube()));
 //    gameObjects.push_back(new GameObject(MyCubeUseIndice()));
 }
