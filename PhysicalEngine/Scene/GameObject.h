@@ -1,0 +1,51 @@
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
+
+#include <vector>
+#include "Shader/Shader.h"
+#include "Mesh/Mesh.h"
+#include "../Vector3d/Vector3d.h"
+
+class GameObject {
+private:
+    std::string name;
+
+    bool wireFrame = false;
+
+    Vector3d position;
+    float width, height, depth;
+    float rotationX, rotationY, rotationZ;
+    float scaleX, scaleY, scaleZ;
+    float colorR, colorG, colorB, colorA;
+
+    Mesh mesh;
+    unsigned int VBO, VAO, EBO;
+    Shader shader;
+
+    // std::vector<GameObject> children;
+    // std::vector<Component> components;
+
+
+public:
+    GameObject(Mesh mesh);
+
+private:
+    void create();
+
+
+public:
+    ~GameObject();
+
+private:
+    void destroy();
+
+public:
+    void update();
+
+    void draw(int display_w, int display_h, glm::mat4 view);
+
+    std::string getName();
+};
+
+
+#endif //GAMEOBJECT_H
