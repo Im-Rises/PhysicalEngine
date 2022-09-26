@@ -15,6 +15,7 @@ void Particule::calculateSpeed(float time) {
 }
 
 void Particule::recalculateAll(float time) {
+
     calculateSpeed(time);
     calculatePosition(time);
 

@@ -5,6 +5,7 @@
 #include "Shader/Shader.h"
 #include "Mesh/Mesh.h"
 #include "../Vector3d/Vector3d.h"
+#include "../Integrable/Integrable.h"
 
 class GameObject {
 private:
@@ -17,7 +18,7 @@ private:
     float rotationX, rotationY, rotationZ;
     float scaleX, scaleY, scaleZ;
     float colorR, colorG, colorB, colorA;
-
+	Integrable* m_rigidBody=nullptr;
     Mesh mesh;
     unsigned int VBO, VAO, EBO;
     Shader shader;
@@ -43,6 +44,16 @@ public:
     void update();
 
     void draw(int display_w, int display_h, glm::mat4 view);
+
+	void AddRigidbody(Integrable* integrable) {
+		m_rigidBody = integrable;
+	}
+
+	Integrable* getRigidBody() { return m_rigidBody; }
+
+	bool hasRigidbody() {
+		return m_rigidBody != nullptr;
+	}
 
     std::string getName();
 };

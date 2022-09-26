@@ -85,6 +85,27 @@ Then you can start by double-clicking the executable of typing the following com
 ./PhysicalEngine
 ```
 
+## Controls
+
+### Camera controls
+
+| Description        | Keyboard | Mouse                           |
+|--------------------|----------|---------------------------------|
+| Translate left     | ←        |                                 |
+| Translate right    | →        |                                 |
+| Translate forward  | ↑        |                                 |
+| Translate rearward | ↓        |                                 |
+| Rotate camera      |          | Middle click and mouse movement |
+
+### Game controls
+
+| Action        | Key |
+|---------------|-----|
+| Move forward  | `W` |
+| Move backward | `S` |
+| Move left     | `A` |
+| Move right    | `D` |
+
 ## Project Architecture
 
 ~~~
@@ -100,29 +121,49 @@ PhysicalEngine
 │  │   |── greetings.yml
 │  │   |── label.yml
 │  │   |── stale.yml
+├── dependencies
+|  ├── glad
+|  ├── glfw
+|  ├── glfwglm
+|  ├── imgui
+|  ├── stb
 ├── PhysicalEngine
-│  ├── glfw
+|  ├── Integrable
 │  │   |── *
-│  ├── imgui
+|  ├── Integrator
+│  │   |── *
+|  ├── Particule
+│  │   |── *
+|  ├── Scene
 │  │   |── *
 |  ├── CMakeLists.txt
+|  ├── InputManager.cpp
+|  ├── InputManager.h
 |  ├── main.cpp
+|  ├── PhysicalEngine.cpp
+|  ├── PhysicalEngine.h
 ├── test
+|  ├── TestParticule
+│  │   |── *
 |  ├── CMakeLists.txt
-|  ├── mainTest.cpp
-|  ├── mainTest2.cpp
+|  ├── integratorTest.cpp
+|  ├── particuleTest.cpp
 ├── .clang-format
 ├── .editorconfig
 ├── .gitattributes
 ├── .gitignore
 ├── CMakelists.txt
 ├── CMakePresets.json
+├── CMakeSettings.json
+├── imgui.ini
 ├── README.md
 ~~~
 
 ## Dependencies
 
 - GLFW
+- Glad
+- OpenGl3
 - Dear ImGui
 - CMake
 - C++14
@@ -139,6 +180,10 @@ To compile the app, the first thing you need to do is install a C++ compiler:
 You also need to install Cmake:  
 <https://cmake.org>
 
+> **Note**  
+> If you're using Visual Studio, you can install CMake directly from the IDE (Visual Studio Installer).
+> Then you need to open the Project as a CMake Project, not a Visual Studio Project!
+
 Once your environment is set up, depending on your operating system you'll need to install some libs before compiling
 the project. Refer to the section below `Windows` or `Linux` or `MacOs`.
 
@@ -152,7 +197,7 @@ cmake .
 
 ### Linux
 
-Linux users need to install some libs before compiling the project:
+Linux's users need to install some libs before compiling the project:
 
 First thing to do is to install CMake, type the following command to install it.
 
@@ -214,7 +259,7 @@ The project is set with a set of different scripts:
 
 - CodeQL: This script is used to check the code for security issues.
 - CMake: This script is used to build the project.
-- Cpp Cmake Publish: This script is used to publish the project on Github.
+- Cpp Cmake Publish: This script is used to publish the project on GitHub.
 
 ## Documentations
 

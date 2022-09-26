@@ -4,7 +4,7 @@
 #define PROJECT_NAME "Physical Engine 3D"
 
 #include <memory>
-
+#include "Game.h"
 //Shallow declarations
 class Scene;
 
@@ -19,12 +19,13 @@ class PhysicalEngine {
 private:
     GLFWwindow *window;
 
-    std::unique_ptr<Scene> scene;
+    Scene * scene;
 
     struct {
         float r, g, b, a;
     } backgroundColor;
 
+    Game m_game;
 
 public:
     PhysicalEngine();
