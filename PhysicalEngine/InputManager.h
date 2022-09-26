@@ -8,7 +8,7 @@ class PhysicalEngine;
 class InputManager {
 
 private:
-    static float translationSpeed;
+//    static float translationSpeed;
     static float rotationSpeed;
 
     static double mouseLastPosX;

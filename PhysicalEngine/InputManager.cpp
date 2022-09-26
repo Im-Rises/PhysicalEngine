@@ -7,7 +7,7 @@
 #include "Scene/Scene.h"
 #include "Vector3d/Vector3d.h"
 
-float InputManager::translationSpeed = 0.1f;
+//float InputManager::translationSpeed = 0.1f;
 float InputManager::rotationSpeed = 0.0001f;
 
 double InputManager::mouseLastPosX = 0.0;
