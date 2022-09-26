@@ -180,6 +180,9 @@ To compile the app, the first thing you need to do is install a C++ compiler:
 You also need to install Cmake:  
 <https://cmake.org>
 
+> **Note**  
+> If you're using Visual Studio, you can install CMake directly from the IDE (Visual Studio Installer).
+
 Once your environment is set up, depending on your operating system you'll need to install some libs before compiling
 the project. Refer to the section below `Windows` or `Linux` or `MacOs`.
 
