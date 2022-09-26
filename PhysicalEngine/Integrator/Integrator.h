@@ -1,7 +1,6 @@
 #ifndef INTEGRATOR_H
 #define INTEGRATOR_H
 
-#include "../../PhysicalEngine/Particule/Particule.h"
 #include <iostream>
 #include <iterator>
 #include <list>

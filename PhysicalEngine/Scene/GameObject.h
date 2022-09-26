@@ -18,7 +18,7 @@ private:
     float rotationX, rotationY, rotationZ;
     float scaleX, scaleY, scaleZ;
     float colorR, colorG, colorB, colorA;
-	Integrable* m_rigidBody;
+	Integrable* m_rigidBody=nullptr;
     Mesh mesh;
     unsigned int VBO, VAO, EBO;
     Shader shader;

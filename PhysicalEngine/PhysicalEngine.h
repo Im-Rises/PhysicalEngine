@@ -19,7 +19,7 @@ class PhysicalEngine {
 private:
     GLFWwindow *window;
 
-    std::unique_ptr<Scene> scene;
+    Scene * scene;
 
     struct {
         float r, g, b, a;

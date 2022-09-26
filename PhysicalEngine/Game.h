@@ -11,7 +11,7 @@ private:
 public:
 	Game();
 	~Game();
-	void start(Scene scene);
+	void start(Scene *scene);
 	void goLeft();
 	void goRight();
 	void goUp();

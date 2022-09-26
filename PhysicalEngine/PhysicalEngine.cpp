@@ -102,7 +102,8 @@ PhysicalEngine::PhysicalEngine() {
             0.45f, 0.55f, 0.60f, 1.00f
     };
 
-    scene = std::make_unique<Scene>();
+    scene = new Scene();
+    //scene = std::make_unique<Scene>();
 }
 
 PhysicalEngine::~PhysicalEngine() {
@@ -124,7 +125,7 @@ void PhysicalEngine::start() {
 	int numbTest = 0;
 	auto start = std::chrono::high_resolution_clock::now();
 
-    //m_game.start(*scene);
+    m_game.start(scene);
 
 	//Game loop
 	while (!glfwWindowShouldClose(window)) {

@@ -10,11 +10,11 @@ Game::~Game() {
 	delete m_p;
 }
 
-void Game::start(Scene scene) {
+void Game::start(Scene* scene) {
 	GameObject* gameobject = new GameObject(Sphere(1, 20, 20));
-	scene.addGameObject(gameobject);
+	scene->addGameObject(gameobject);
 	gameobject->AddRigidbody(m_p);
-	scene.addPhysicalComponent();
+	scene->addPhysicalComponent();
 }
 void Game::goLeft() {
 	m_p->setSpeed(0, -0.01, 0);
