@@ -180,13 +180,19 @@ void PhysicalEngine::handleGui() {
         ImGui::Checkbox("Mesh: Fill/Line", scene->getWireFrameStatePtr());
         ImGui::End();
     }
-
+    {
+		ImGui::Begin("Speed handler");
+		ImGui::InputFloat("Speed", &speed, 0.1f, 1.0f, "%0.2f", ImGuiInputTextFlags_AllowTabInput);
+		m_game.setSpeed(speed);
+		ImGui::End();
+    }
     ImGui::Render();
 }
 
 
 void PhysicalEngine::updateGame() {
     scene->update();
+
 }
 
 void PhysicalEngine::updateScreen() {

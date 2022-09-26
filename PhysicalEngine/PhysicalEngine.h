@@ -18,7 +18,7 @@ class PhysicalEngine {
 
 private:
     GLFWwindow *window;
-
+	float speed = 0.5f;
     Scene * scene;
 
     struct {
