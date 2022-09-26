@@ -85,6 +85,27 @@ Then you can start by double-clicking the executable of typing the following com
 ./PhysicalEngine
 ```
 
+## Controls
+
+### Camera controls
+
+| Description        | Keyboard | Mouse                           |
+|--------------------|----------|---------------------------------|
+| Translate left     | ←        |                                 |
+| Translate right    | →        |                                 |
+| Translate forward  | ↑        |                                 |
+| Translate rearward | ↓        |                                 |
+| Rotate camera      |          | Middle click and mouse movement |
+
+### Game controls
+
+| Action        | Key |
+|---------------|-----|
+| Move forward  | `W` |
+| Move backward | `S` |
+| Move left     | `A` |
+| Move right    | `D` |
+
 ## Project Architecture
 
 ~~~
@@ -123,6 +144,8 @@ PhysicalEngine
 ## Dependencies
 
 - GLFW
+- Glad
+- OpenGl3
 - Dear ImGui
 - CMake
 - C++14
