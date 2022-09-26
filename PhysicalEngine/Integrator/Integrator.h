@@ -12,7 +12,7 @@ class Integrator {
 
 private:
 	std::list<Integrable*> m_integrableList;
-	int m_fixeFrameRate = 0;
+	int m_fixeFrameRate = 50;
 	float m_fixedDeltaTime = 0;
 	float m_timeToAdjustFrameRate = 0;
 

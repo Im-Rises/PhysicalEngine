@@ -8,7 +8,7 @@
 // Includes
 #include "Scene/Scene.h"
 #include "InputManager.h"
-
+#include <chrono>
 //// std library
 #include <iostream>
 
@@ -119,14 +119,28 @@ PhysicalEngine::~PhysicalEngine() {
 #pragma region Game Loop methods
 
 void PhysicalEngine::start() {
-    //Game loop
-    while (!glfwWindowShouldClose(window)) {
-        //Inputs
-        handleEvents();
-        handleGui();
+	double DoubledeltaTime = 0;
+	float DeltaTime = 0;
+	int numbTest = 0;
+	auto start = std::chrono::high_resolution_clock::now();
 
-        //Update game mechanics
-        updateGame();
+
+
+	//Game loop
+	while (!glfwWindowShouldClose(window)) {
+
+		//Inputs
+		handleEvents();
+		handleGui();
+
+		auto end = std::chrono::high_resolution_clock::now();
+		DoubledeltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+		DoubledeltaTime *= 0.000000001;
+		DeltaTime = (float)DoubledeltaTime;
+		//Update game mechanics
+		start = std::chrono::high_resolution_clock::now();
+		scene->updatePhysics(DeltaTime);
+		updateGame();
 
         //Refresh screen
         updateScreen();
