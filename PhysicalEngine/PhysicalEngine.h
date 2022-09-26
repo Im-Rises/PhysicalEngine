@@ -4,7 +4,7 @@
 #define PROJECT_NAME "Physical Engine 3D"
 
 #include <memory>
-
+#include "Game.h"
 //Shallow declarations
 class Scene;
 
@@ -25,6 +25,7 @@ private:
         float r, g, b, a;
     } backgroundColor;
 
+    Game m_game;
 
 public:
     PhysicalEngine();

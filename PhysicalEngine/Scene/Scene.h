@@ -37,6 +37,8 @@ public:
 
     std::string getGameObjectName(int index);
 
+	void addGameObject(GameObject* gameObject);
+
 public:
     bool *getWireFrameStatePtr();
 };

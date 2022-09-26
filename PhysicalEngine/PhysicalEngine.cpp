@@ -124,7 +124,7 @@ void PhysicalEngine::start() {
 	int numbTest = 0;
 	auto start = std::chrono::high_resolution_clock::now();
 
-
+    //m_game.start(*scene);
 
 	//Game loop
 	while (!glfwWindowShouldClose(window)) {

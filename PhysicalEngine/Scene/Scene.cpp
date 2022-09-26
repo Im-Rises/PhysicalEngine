@@ -60,6 +60,10 @@ std::string Scene::getGameObjectName(int index) {
     return gameObjects[index]->getName();
 }
 
+void Scene::addGameObject(GameObject* gameObject) {
+	gameObjects.push_back(gameObject);
+}
+
 bool *Scene::getWireFrameStatePtr() {
     if (wireFrame) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
