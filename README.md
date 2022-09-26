@@ -96,6 +96,16 @@ Then you can start by double-clicking the executable of typing the following com
 
 ### Camera controls
 
+TO modify the speed value, you can use the ImGui window named `Speed handler`.
+
+| Action                 | Key |
+|------------------------|-----|
+| Add speed to the left  | ←   |
+| Add speed to the right | →   |
+| Add speed forwardly    | ↑   |
+| Add speed rearwardly   | ↓   |
+
+<!--
 | Description        | Keyboard | Mouse                           |
 |--------------------|----------|---------------------------------|
 | Translate left     | ←        |                                 |
@@ -112,6 +122,7 @@ Then you can start by double-clicking the executable of typing the following com
 | Move backward | `S` |
 | Move left     | `A` |
 | Move right    | `D` |
+-->
 
 ## Project Architecture
 
