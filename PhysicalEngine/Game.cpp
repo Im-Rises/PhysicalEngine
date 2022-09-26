@@ -17,14 +17,14 @@ void Game::start(Scene* scene) {
 	scene->addPhysicalComponent();
 }
 void Game::goLeft() {
-	m_p->setSpeed(0, -0.5, 0);
+	m_p->setSpeed(-0.5, 0, 0);
 }
 void Game::goRight() {
-	m_p->setSpeed(0, 0.5, 0);
-}
-void Game::goUp() {
 	m_p->setSpeed(0.5, 0, 0);
 }
+void Game::goUp() {
+	m_p->setSpeed(0, 0.5, 0);
+}
 void Game::goDown() {
-	m_p->setSpeed(-0.5, 0, 0);
+	m_p->setSpeed(0, -0.5, 0);
 }
