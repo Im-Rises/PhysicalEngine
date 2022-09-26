@@ -78,13 +78,11 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view) {
     // Matrix calculations
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
-    model = glm::rotate(model, (float) 1, glm::vec3(0.5f, 1.0f, 0.0f));
-    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
     projection = glm::perspective(glm::radians(45.0f), (float) display_w / (float) display_h, 0.1f, 100.0f);
 
     //Shader use
     shader.use();
-    shader.setMat4("model", glm::translate(model,glm::vec3(position.getx(),position.gety(),position.getz())));
+    shader.setMat4("model", glm::translate(model,glm::vec3(-position.getx(),-position.gety(),-position.getz())));
     shader.setMat4("view", view);
     shader.setMat4("projection", projection);
 
