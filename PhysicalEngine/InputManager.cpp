@@ -69,24 +69,24 @@ void InputManager::keyReleased(GLFWwindow *window, int key, PhysicalEngine *engi
 }
 
 void InputManager::keyRepeated(GLFWwindow *window, int key, PhysicalEngine *engine) {
-    switch (key) {
-        case GLFW_KEY_UP: {
-            engine->scene->translateCamera(Vector3d(0, 0, translationSpeed));
-            break;
-        }
-        case GLFW_KEY_DOWN: {
-            engine->scene->translateCamera(Vector3d(0, 0, -translationSpeed));
-            break;
-        }
-        case GLFW_KEY_LEFT: {
-            engine->scene->translateCamera(Vector3d(+translationSpeed, 0, 0));
-            break;
-        }
-        case GLFW_KEY_RIGHT: {
-            engine->scene->translateCamera(Vector3d(-translationSpeed, 0, 0));
-            break;
-        }
-    }
+    //switch (key) {
+    //    case GLFW_KEY_UP: {
+    //        engine->scene->translateCamera(Vector3d(0, 0, translationSpeed));
+    //        break;
+    //    }
+    //    case GLFW_KEY_DOWN: {
+    //        engine->scene->translateCamera(Vector3d(0, 0, -translationSpeed));
+    //        break;
+    //    }
+    //    case GLFW_KEY_LEFT: {
+    //        engine->scene->translateCamera(Vector3d(+translationSpeed, 0, 0));
+    //        break;
+    //    }
+    //    case GLFW_KEY_RIGHT: {
+    //        engine->scene->translateCamera(Vector3d(-translationSpeed, 0, 0));
+    //        break;
+    //    }
+    //}
 }
 
 void InputManager::cursor_position_callback(GLFWwindow *window, double xpos, double ypos) {
