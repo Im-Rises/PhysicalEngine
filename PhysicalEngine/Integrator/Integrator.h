@@ -1,23 +1,25 @@
 #ifndef INTEGRATOR_H
 #define INTEGRATOR_H
 
-#include "../../PhysicalEngine/Particule/Particule.h"
 #include <iostream>
 #include <iterator>
 #include <list>
 #include <chrono>
+#include "../Integrable/Integrable.h"
 
 class Integrator {
 
 private:
-    std::list<Particule> m_integrableList;
-    bool m_StopPhysics = false;
+	std::list<Integrable*> m_integrableList;
+	int m_fixeFrameRate = 50;
+	float m_fixedDeltaTime = 0;
+	float m_timeToAdjustFrameRate = 0;
 
 public:
 
     Integrator();
 
-    void AddIntegrable(Particule &integrable);
+    void AddIntegrable(Integrable * integrable);
 
     void UpdateAll(double time);
 
