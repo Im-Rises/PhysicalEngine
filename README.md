@@ -11,7 +11,10 @@
 
 This is a simple physics engine written in C++ using Glad, GLFW, OpenGl3 and Dear ImGui.
 
-The project is a work in progress and is not yet complete.
+You cand find a journal log [here](report/development_log_MOREL_REBOUL_CLAVEL.pdf).
+
+> **Note**  
+> The project is a work in progress and is not yet complete.
 
 ## Images
 
@@ -284,6 +287,9 @@ GLM:
 STB:  
 <https://github.com/nothings/stb>
 
+ImPlot:  
+<https://github.com/epezent/implot>
+
 Learn OpenGL:  
 <https://learnopengl.com/Getting-started/Hello-Triangle>
 
@@ -296,7 +302,7 @@ Sphere OpenGL:
 
 ## Contributors
 
-Clémence Clavel:
+Clémence CLAVEL:
 
 - @clemos38
 - <https://github.com/clemos38>
