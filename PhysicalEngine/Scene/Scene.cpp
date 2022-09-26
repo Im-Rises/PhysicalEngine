@@ -27,6 +27,17 @@ void Scene::update() {
     }
 }
 
+void Scene::updatePhysics(float time) {
+	m_integrator.UpdateAll(time);
+}
+void Scene::addPhysicalComponent() {
+	for (GameObject* gameObject : gameObjects) {
+		if (gameObject->hasRigidbody()) {
+			m_integrator.AddIntegrable(gameObject->getRigidBody());
+		}
+	}
+}
+
 void Scene::draw(int display_w, int display_h) {
     for (GameObject *gameObject: gameObjects) {
         gameObject->draw(display_w, display_h, camera.getViewMatrix());

@@ -11,14 +11,16 @@
 class Integrator {
 
 private:
-    std::list<Integrable> m_integrableList;
-    bool m_StopPhysics = false;
+	std::list<Integrable*> m_integrableList;
+	int m_fixeFrameRate = 50;
+	float m_fixedDeltaTime = 0;
+	float m_timeToAdjustFrameRate = 0;
 
 public:
 
     Integrator();
 
-    void AddIntegrable(Integrable &integrable);
+    void AddIntegrable(Integrable * integrable);
 
     void UpdateAll(double time);
 
