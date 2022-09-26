@@ -121,23 +121,41 @@ PhysicalEngine
 │  │   |── greetings.yml
 │  │   |── label.yml
 │  │   |── stale.yml
+├── dependencies
+|  ├── glad
+|  ├── glfw
+|  ├── glfwglm
+|  ├── imgui
+|  ├── stb
 ├── PhysicalEngine
-│  ├── glfw
+|  ├── Integrable
 │  │   |── *
-│  ├── imgui
+|  ├── Integrator
+│  │   |── *
+|  ├── Particule
+│  │   |── *
+|  ├── Scene
 │  │   |── *
 |  ├── CMakeLists.txt
+|  ├── InputManager.cpp
+|  ├── InputManager.h
 |  ├── main.cpp
+|  ├── PhysicalEngine.cpp
+|  ├── PhysicalEngine.h
 ├── test
+|  ├── TestParticule
+│  │   |── *
 |  ├── CMakeLists.txt
-|  ├── mainTest.cpp
-|  ├── mainTest2.cpp
+|  ├── integratorTest.cpp
+|  ├── particuleTest.cpp
 ├── .clang-format
 ├── .editorconfig
 ├── .gitattributes
 ├── .gitignore
 ├── CMakelists.txt
 ├── CMakePresets.json
+├── CMakeSettings.json
+├── imgui.ini
 ├── README.md
 ~~~
 
@@ -175,7 +193,7 @@ cmake .
 
 ### Linux
 
-Linux users need to install some libs before compiling the project:
+Linux's users need to install some libs before compiling the project:
 
 First thing to do is to install CMake, type the following command to install it.
 
@@ -237,7 +255,7 @@ The project is set with a set of different scripts:
 
 - CodeQL: This script is used to check the code for security issues.
 - CMake: This script is used to build the project.
-- Cpp Cmake Publish: This script is used to publish the project on Github.
+- Cpp Cmake Publish: This script is used to publish the project on GitHub.
 
 ## Documentations
 
