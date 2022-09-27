@@ -3,6 +3,7 @@
 #include "glad/glad.h"
 
 #include "Components/Component.h"
+#include "Components/Particule/Integrable/Integrable.h"
 
 #include <utility>
 
@@ -53,6 +54,9 @@ void GameObject::create() {
 }
 
 GameObject::~GameObject() {
+    for (auto &component: components) {
+        delete component;
+    }
     destroy();
 }
 

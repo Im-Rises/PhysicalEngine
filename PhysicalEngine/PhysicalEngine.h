@@ -5,6 +5,7 @@
 
 #include <memory>
 #include "Game.h"
+
 //Shallow declarations
 class Scene;
 
@@ -18,8 +19,8 @@ class PhysicalEngine {
 
 private:
     GLFWwindow *window;
-	float speed = 0.5f;
-    Scene * scene;
+    float speed = 0.5f;
+    Scene *scene;
 
     struct {
         float r, g, b, a;

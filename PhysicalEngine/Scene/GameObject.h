@@ -5,7 +5,8 @@
 #include "Shader/Shader.h"
 #include "Mesh/Mesh.h"
 #include "../Vector3d/Vector3d.h"
-#include "../Integrable/Integrable.h"
+
+class Integrable;
 
 class Component;
 

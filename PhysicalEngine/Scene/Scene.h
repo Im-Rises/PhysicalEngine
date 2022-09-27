@@ -5,7 +5,7 @@
 
 #include "../Vector3d/Vector3d.h"
 #include "Camera.h"
-#include "../Integrator/Integrator.h"
+#include "Components/Particule/Integrator/Integrator.h"
 
 class GameObject;
 
@@ -14,7 +14,7 @@ private:
     Camera camera;
     std::vector<GameObject *> gameObjects;
     bool wireFrame = false;
-	Integrator m_integrator;
+    Integrator m_integrator;
 
 public:
     Scene();
@@ -37,7 +37,7 @@ public:
 
     std::string getGameObjectName(int index);
 
-	void addGameObject(GameObject* gameObject);
+    void addGameObject(GameObject *gameObject);
 
 public:
     bool *getWireFrameStatePtr();
