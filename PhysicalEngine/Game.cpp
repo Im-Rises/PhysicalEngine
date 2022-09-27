@@ -3,7 +3,7 @@
 #include "Scene/GameObject.h"
 #include "Scene/Mesh/Sphere/Sphere.h"
 #include "Scene/Scene.h"
-#include "Scene/Components/Particule/Particule/Particule.h"
+#include "Scene/Components/Particule/Particule.h"
 
 Game::Game() {
     m_p = new Particule();

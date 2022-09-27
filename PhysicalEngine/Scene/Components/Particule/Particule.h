@@ -1,8 +1,8 @@
 #ifndef PARTICULE_H
 #define PARTICULE_H
 
-#include "../Integrable/Integrable.h"
-#include"../../../../Vector3d/Vector3d.h"
+#include "Integrable/Integrable.h"
+#include"../../../Vector3d/Vector3d.h"
 
 
 class Particule : public Integrable {
