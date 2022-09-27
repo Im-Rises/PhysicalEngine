@@ -7,6 +7,8 @@
 #include "../Vector3d/Vector3d.h"
 #include "../Integrable/Integrable.h"
 
+class Component;
+
 class GameObject {
 private:
     std::string name;
@@ -18,14 +20,14 @@ private:
     float rotationX, rotationY, rotationZ;
     float scaleX, scaleY, scaleZ;
     float colorR, colorG, colorB, colorA;
-	Integrable* m_rigidBody=nullptr;
+    Integrable *m_rigidBody = nullptr;
     Mesh mesh;
     unsigned int VBO, VAO, EBO;
     Shader shader;
 
-    // std::vector<GameObject> children;
-    // std::vector<Component> components;
+    std::vector<Component *> components;
 
+    // std::vector<GameObject *> children;
 
 public:
     GameObject(Mesh mesh);
@@ -45,15 +47,15 @@ public:
 
     void draw(int display_w, int display_h, glm::mat4 view);
 
-	void AddRigidbody(Integrable* integrable) {
-		m_rigidBody = integrable;
-	}
+    void AddRigidbody(Integrable *integrable) {
+        m_rigidBody = integrable;
+    }
 
-	Integrable* getRigidBody() { return m_rigidBody; }
+    Integrable *getRigidBody() { return m_rigidBody; }
 
-	bool hasRigidbody() {
-		return m_rigidBody != nullptr;
-	}
+    bool hasRigidbody() {
+        return m_rigidBody != nullptr;
+    }
 
     std::string getName();
 };
