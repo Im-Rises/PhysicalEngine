@@ -3,7 +3,7 @@
 #include "glad/glad.h"
 
 #include "Components/Component.h"
-#include "Components/Particule/Integrable/Integrable.h"
+#include "Components/Rigidbody/Rigidbody.h"
 
 #include <utility>
 
@@ -75,6 +75,7 @@ void GameObject::update() {
     for (auto &component: components) {
         component->update();
     }
+
     if (m_rigidBody != nullptr) {
         position = m_rigidBody->getPosition();
     }

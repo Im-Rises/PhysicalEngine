@@ -2,13 +2,13 @@
 #include <iostream>
 #include <iterator>
 #include <chrono>
-#include "../Integrable/Integrable.h"
+#include "Components/Rigidbody/Rigidbody.h"
 
 Integrator::Integrator() {
 
 }
 
-void Integrator::AddIntegrable(Integrable *integrable) {
+void Integrator::AddIntegrable(Rigidbody *integrable) {
     m_integrableList.push_back(integrable);
 }
 
@@ -17,7 +17,7 @@ void Integrator::UpdateAll(double time) {
     m_fixedDeltaTime += time;
     m_timeToAdjustFrameRate += time;
     if (m_timeToAdjustFrameRate > 1 / m_fixeFrameRate) {
-        for (Integrable *integrable: m_integrableList) {
+        for (Rigidbody *integrable: m_integrableList) {
             integrable->recalculateAll(m_fixedDeltaTime);
         }
 

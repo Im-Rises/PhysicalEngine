@@ -1,10 +1,10 @@
 #ifndef INTEGRABLE_H
 #define INTEGRABLE_H
 
-#include "../../../../Vector3d/Vector3d.h"
+#include "../../../Vector3d/Vector3d.h"
 
 
-class Integrable {
+class Rigidbody {
 
 protected:
     Vector3d m_position;

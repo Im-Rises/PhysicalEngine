@@ -6,7 +6,7 @@
 #include "Mesh/Mesh.h"
 #include "../Vector3d/Vector3d.h"
 
-class Integrable;
+class Rigidbody;
 
 class Component;
 
@@ -21,7 +21,7 @@ private:
     float rotationX, rotationY, rotationZ;
     float scaleX, scaleY, scaleZ;
     float colorR, colorG, colorB, colorA;
-    Integrable *m_rigidBody = nullptr;
+    Rigidbody *m_rigidBody = nullptr;
     Mesh mesh;
     unsigned int VBO, VAO, EBO;
     Shader shader;
@@ -48,11 +48,11 @@ public:
 
     void draw(int display_w, int display_h, glm::mat4 view);
 
-    void AddRigidbody(Integrable *integrable) {
+    void AddRigidbody(Rigidbody *integrable) {
         m_rigidBody = integrable;
     }
 
-    Integrable *getRigidBody() { return m_rigidBody; }
+    Rigidbody *getRigidBody() { return m_rigidBody; }
 
     bool hasRigidbody() {
         return m_rigidBody != nullptr;

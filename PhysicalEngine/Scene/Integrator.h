@@ -3,12 +3,12 @@
 
 #include <list>
 
-class Integrable;
+class Rigidbody;
 
 class Integrator {
 
 private:
-    std::list<Integrable *> m_integrableList;
+    std::list<Rigidbody *> m_integrableList;
     int m_fixeFrameRate = 50;
     float m_fixedDeltaTime = 0;
     float m_timeToAdjustFrameRate = 0;
@@ -17,7 +17,7 @@ public:
 
     Integrator();
 
-    void AddIntegrable(Integrable *integrable);
+    void AddIntegrable(Rigidbody *integrable);
 
     void UpdateAll(double time);
 

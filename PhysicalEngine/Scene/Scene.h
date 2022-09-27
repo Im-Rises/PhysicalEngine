@@ -5,13 +5,15 @@
 
 #include "../Vector3d/Vector3d.h"
 #include "Camera.h"
-#include "Components/Particule/Integrator/Integrator.h"
+#include "ForceHandler.h"
+#include "Integrator.h"
 
 class GameObject;
 
 class Scene {
 private:
     Camera camera;
+    ForceHandler forceHandler;
     std::vector<GameObject *> gameObjects;
     bool wireFrame = false;
     Integrator m_integrator;
