@@ -120,28 +120,28 @@ PhysicalEngine::~PhysicalEngine() {
 #pragma region Game Loop methods
 
 void PhysicalEngine::start() {
-	double DoubledeltaTime = 0;
-	float DeltaTime = 0;
-	int numbTest = 0;
-	auto start = std::chrono::high_resolution_clock::now();
+    double DoubledeltaTime = 0;
+    float DeltaTime = 0;
+    int numbTest = 0;
+    auto start = std::chrono::high_resolution_clock::now();
 
     m_game.start(scene);
 
-	//Game loop
-	while (!glfwWindowShouldClose(window)) {
+    //Game loop
+    while (!glfwWindowShouldClose(window)) {
 
-		//Inputs
-		handleEvents();
-		handleGui();
+        //Inputs
+        handleEvents();
+        handleGui();
 
-		auto end = std::chrono::high_resolution_clock::now();
-		DoubledeltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-		DoubledeltaTime *= 0.000000001;
-		DeltaTime = (float)DoubledeltaTime;
-		//Update game mechanics
-		start = std::chrono::high_resolution_clock::now();
-		scene->updatePhysics(DeltaTime);
-		updateGame();
+        auto end = std::chrono::high_resolution_clock::now();
+        DoubledeltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+        DoubledeltaTime *= 0.000000001;
+        DeltaTime = (float) DoubledeltaTime;
+        //Update game mechanics
+        start = std::chrono::high_resolution_clock::now();
+        scene->updatePhysics(DeltaTime);
+        updateGame();
 
         //Refresh screen
         updateScreen();
@@ -181,10 +181,10 @@ void PhysicalEngine::handleGui() {
         ImGui::End();
     }
     {
-		ImGui::Begin("Speed handler");
-		ImGui::InputFloat("Speed", &speed, 0.1f, 1.0f, "%0.2f", ImGuiInputTextFlags_AllowTabInput);
-		m_game.setSpeed(speed);
-		ImGui::End();
+        ImGui::Begin("Speed handler");
+        ImGui::InputFloat("Speed", &speed, 0.1f, 1.0f, "%0.2f", ImGuiInputTextFlags_AllowTabInput);
+        m_game.setSpeed(speed);
+        ImGui::End();
     }
     ImGui::Render();
 }
@@ -192,7 +192,6 @@ void PhysicalEngine::handleGui() {
 
 void PhysicalEngine::updateGame() {
     scene->update();
-
 }
 
 void PhysicalEngine::updateScreen() {
