@@ -14,8 +14,8 @@ void Integrator::AddIntegrable(Rigidbody *integrable) {
 
 
 void Integrator::UpdateAll(double time) {
-    m_fixedDeltaTime += time;
-    m_timeToAdjustFrameRate += time;
+    m_fixedDeltaTime += static_cast<float>(time);
+    m_timeToAdjustFrameRate += static_cast<float>(time);
     if (m_timeToAdjustFrameRate > 1 / m_fixeFrameRate) {
         for (Rigidbody *integrable: m_integrableList) {
             integrable->recalculateAll(m_fixedDeltaTime);

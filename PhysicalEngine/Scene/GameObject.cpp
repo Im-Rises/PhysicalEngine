@@ -81,11 +81,12 @@ void GameObject::update() {
     }
 }
 
-void GameObject::draw(int display_w, int display_h, glm::mat4 view) {
+void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
     // Matrix calculations
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
-    projection = glm::perspective(glm::radians(45.0f), (float) display_w / (float) display_h, 0.1f, 100.0f);
+    projection = glm::perspective(glm::radians(fov / 2), static_cast<float>(display_w) / static_cast<float>(display_h),
+                                  0.1f, 100.0f);
 
     //Shader use
     shader.use();

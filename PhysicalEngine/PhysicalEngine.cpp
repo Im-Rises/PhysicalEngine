@@ -137,7 +137,7 @@ void PhysicalEngine::start() {
         auto end = std::chrono::high_resolution_clock::now();
         DoubledeltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
         DoubledeltaTime *= 0.000000001;
-        DeltaTime = (float) DoubledeltaTime;
+        DeltaTime = static_cast<float>(DoubledeltaTime);
         //Update game mechanics
         start = std::chrono::high_resolution_clock::now();
         scene->updatePhysics(DeltaTime);

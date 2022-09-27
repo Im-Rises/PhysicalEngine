@@ -28,19 +28,20 @@ void Scene::update() {
 }
 
 void Scene::updatePhysics(float time) {
-	m_integrator.UpdateAll(time);
+    m_integrator.UpdateAll(time);
 }
+
 void Scene::addPhysicalComponent() {
-	for (GameObject* gameObject : gameObjects) {
-		if (gameObject->hasRigidbody()) {
-			m_integrator.AddIntegrable(gameObject->getRigidBody());
-		}
-	}
+    for (GameObject *gameObject: gameObjects) {
+        if (gameObject->hasRigidbody()) {
+            m_integrator.AddIntegrable(gameObject->getRigidBody());
+        }
+    }
 }
 
 void Scene::draw(int display_w, int display_h) {
     for (GameObject *gameObject: gameObjects) {
-        gameObject->draw(display_w, display_h, camera.getViewMatrix());
+        gameObject->draw(display_w, display_h, camera.getViewMatrix(), camera.getFov());
     }
 }
 
@@ -60,8 +61,8 @@ std::string Scene::getGameObjectName(int index) {
     return gameObjects[index]->getName();
 }
 
-void Scene::addGameObject(GameObject* gameObject) {
-	gameObjects.push_back(gameObject);
+void Scene::addGameObject(GameObject *gameObject) {
+    gameObjects.push_back(gameObject);
 }
 
 bool *Scene::getWireFrameStatePtr() {

@@ -46,7 +46,7 @@ private:
 public:
     void update();
 
-    void draw(int display_w, int display_h, glm::mat4 view);
+    void draw(int display_w, int display_h, glm::mat4 view, float fov);
 
     void AddRigidbody(Rigidbody *integrable) {
         m_rigidBody = integrable;
