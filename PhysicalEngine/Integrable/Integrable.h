@@ -11,7 +11,6 @@ protected:
 
 public:
 	const Vector3d& getPosition() const { return m_position; };
-
 	virtual void recalculateAll(float time){};
 };
 

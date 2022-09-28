@@ -10,12 +10,16 @@ class Particule : public Integrable {
 private:
     Vector3d m_speed;
     Vector3d m_acceleration;
+	float m_mass;
 
 public:
 #pragma region Constructeur
 
 
-    Particule() : m_speed(0, 0, 0), m_acceleration(0, 0, 0) { m_position=Vector3d(0, 0, 0); };
+    Particule() : m_speed(0, 0, 0), m_acceleration(0, 0, 0) {
+		m_position = Vector3d(0, 0, 0);
+		m_mass = 0;
+	};
 
     /// <summary>
     /// Constructeur de particule
@@ -24,14 +28,22 @@ public:
     /// <param name="x"></param>
     /// <param name="y"></param>
     /// <param name="z"></param>
-	Particule(float x, float y, float z) :  m_speed(0, 0, 0), m_acceleration(0, 0, 0) { m_position = Vector3d(x, y, z); };
+    /// <param name="m"></param>
+	Particule(float x, float y, float z, float m) : m_speed(0, 0, 0), m_acceleration(0, 0, 0) {
+		m_position = Vector3d(x, y, z);
+		m_mass = m;
+	};
 
     /// <summary>
     /// Constructeur de particule
     ///  vitesse et acceleration � 0 par default
     /// </summary>
     /// <param name="pos">: la Position</param>
-	Particule(const Vector3d& pos) : m_speed(0, 0, 0), m_acceleration(0, 0, 0) { m_position = pos; };
+    /// /// <param name="m"></param>
+	Particule(const Vector3d& pos, float m) : m_speed(0, 0, 0), m_acceleration(0, 0, 0) {
+		m_position = pos;
+		m_mass = m;
+	};
 
     /// <summary>
     /// Constructeur de copie de Particule
@@ -58,6 +70,8 @@ public:
     void setAcceleration(float x, float y, float z) { m_acceleration = Vector3d(x, y, z); };
 
     void setAcceleration(const Vector3d &acceleration) { m_acceleration = acceleration; };
+
+	float getMass() const { return m_mass; };
 #pragma endregion
 
 #pragma region Methode
@@ -82,6 +96,12 @@ public:
     /// </summary>
     /// <param name="time"></param>
     void recalculateAll(float time) override;
+
+    /// <summary>
+	/// Calcule la distance entre deux particules
+	/// </summary>
+	/// <param name="p"></param>
+	float distance(const Particule& p);
 
 #pragma endregion
 
