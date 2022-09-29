@@ -18,10 +18,16 @@ private:
     bool wireFrame = false;
     Integrator m_integrator;
 
+    unsigned int fbo;
+
 public:
-    Scene();
+    Scene(int width, int height);
+
+    void create(int width, int height);
 
     ~Scene();
+
+    void destroy();
 
     void update();
 
@@ -43,6 +49,8 @@ public:
 
 public:
     bool *getWireFrameStatePtr();
+
+    unsigned int getTextureId();
 };
 
 #endif //SCENE_H

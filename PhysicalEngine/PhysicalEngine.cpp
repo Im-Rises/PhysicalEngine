@@ -71,7 +71,7 @@ PhysicalEngine::PhysicalEngine() {
 #endif
 
     // Create window with graphics context
-    window = glfwCreateWindow(1280, 720, PROJECT_NAME, NULL, NULL);
+    window = glfwCreateWindow(windowWidth, windowHeight, PROJECT_NAME, NULL, NULL);
     if (window == NULL)
         exit(1);
     glfwMakeContextCurrent(window);
@@ -103,8 +103,9 @@ PhysicalEngine::PhysicalEngine() {
             0.45f, 0.55f, 0.60f, 1.00f
     };
 
-    scene = new Scene();
+    scene = new Scene(windowWidth, windowHeight);
     //scene = std::make_unique<Scene>();
+
 }
 
 PhysicalEngine::~PhysicalEngine() {
@@ -151,7 +152,7 @@ void PhysicalEngine::handleGui() {
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
-    /*------------------ImGui framerate------------------*/
+    /*------------------ImGui windows------------------*/
     {
         ImGui::Begin("Framerate");
         ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
@@ -187,6 +188,17 @@ void PhysicalEngine::handleGui() {
         ImGui::End();
     }
 
+    {
+        ImGui::Begin("Scene View");
+        {
+            ImGui::BeginChild("GameRender");
+            ImVec2 wsize = ImGui::GetWindowSize();
+            ImGui::Image((ImTextureID) scene->getTextureId(), wsize, ImVec2(0, 1), ImVec2(1, 0));
+            ImGui::EndChild();
+        }
+        ImGui::End();
+    }
+
     ImGui::Render();
 }
 
@@ -195,7 +207,7 @@ void PhysicalEngine::updateGame(std::chrono::steady_clock::time_point &start) {
     auto end = std::chrono::high_resolution_clock::now();
     double doubledeltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     doubledeltaTime *= 0.000000001;
-    float deltaTime = static_cast<float>(doubledeltaTime);
+    auto deltaTime = static_cast<float>(doubledeltaTime);
     start = std::chrono::high_resolution_clock::now();
     scene->updatePhysics(deltaTime);
     scene->update();

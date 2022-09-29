@@ -20,6 +20,7 @@ class PhysicalEngine {
 
 private:
     GLFWwindow *window;
+    int windowWidth = 1280, windowHeight = 720;
     float speed = 0.5f;
     Scene *scene;
     Game m_game;
@@ -27,6 +28,7 @@ private:
     struct {
         float r, g, b, a;
     } backgroundColor;
+
     bool fullWindowView = false;
 
 public:
