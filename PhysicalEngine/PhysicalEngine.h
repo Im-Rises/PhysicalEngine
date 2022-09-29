@@ -20,7 +20,7 @@ class PhysicalEngine {
 
 private:
     GLFWwindow *window;
-    int windowWidth = 1280, windowHeight = 720;
+    int windowWidth = 1580, windowHeight = 720;
     float speed = 0.5f;
     Scene *scene;
     Game m_game;

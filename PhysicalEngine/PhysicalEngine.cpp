@@ -189,11 +189,23 @@ void PhysicalEngine::handleGui() {
     }
 
     {
+        ImGui::Begin("Inspector");
+
+        ImGui::End();
+    }
+
+    {
+        ImGui::Begin("Project files");
+
+        ImGui::End();
+    }
+
+    {
         ImGui::Begin("Scene View");
         {
             ImGui::BeginChild("GameRender");
             ImVec2 wsize = ImGui::GetWindowSize();
-            ImGui::Image((ImTextureID) scene->getTextureId(), wsize, ImVec2(0, 1), ImVec2(1, 0));
+            ImGui::Image((ImTextureID) scene->getFrameBufferId(), wsize, ImVec2(0, 1), ImVec2(1, 0));
             ImGui::EndChild();
         }
         ImGui::End();
@@ -218,6 +230,7 @@ void PhysicalEngine::updateScreen() {
     int display_w, display_h;
     glfwGetFramebufferSize(window, &display_w, &display_h);
     glViewport(0, 0, display_w, display_h);
+    scene->updateViewport(display_w, display_h);
 
     // Draw background color
     glClearColor(backgroundColor.r * backgroundColor.a, backgroundColor.g * backgroundColor.a,
@@ -226,7 +239,13 @@ void PhysicalEngine::updateScreen() {
     glClear(GL_COLOR_BUFFER_BIT);
 
     // Draw scene
+    glBindFramebuffer(GL_FRAMEBUFFER, scene->getFrameBufferId());
+    glClearColor(backgroundColor.r * backgroundColor.a, backgroundColor.g * backgroundColor.a,
+                 backgroundColor.b * backgroundColor.a,
+                 backgroundColor.a);
+    glClear(GL_COLOR_BUFFER_BIT);
     scene->draw(display_w, display_h);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     // Swap buffers
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

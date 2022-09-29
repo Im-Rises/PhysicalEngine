@@ -12,6 +12,7 @@ class GameObject;
 
 class Scene {
 private:
+    int windowHeight, windowWidth;
     Camera camera;
     ForceHandler forceHandler;
     std::vector<GameObject *> gameObjects;
@@ -21,13 +22,15 @@ private:
     unsigned int fbo;
 
 public:
-    Scene(int width, int height);
+    Scene(int windowWidth, int windowHeight);
 
-    void create(int width, int height);
+    void create();
 
     ~Scene();
 
     void destroy();
+
+    void updateViewport(int width, int height);
 
     void update();
 
@@ -50,7 +53,7 @@ public:
 public:
     bool *getWireFrameStatePtr();
 
-    unsigned int getTextureId();
+    unsigned int getFrameBufferId();
 };
 
 #endif //SCENE_H
