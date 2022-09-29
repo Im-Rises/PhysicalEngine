@@ -9,13 +9,12 @@
 #include "Scene/Scene.h"
 #include "InputManager.h"
 #include <chrono>
-//// std library
-#include <iostream>
 
 // Dear ImGui
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+#include "implot.h"
 
 #include <stdio.h>
 
@@ -98,6 +97,8 @@ PhysicalEngine::PhysicalEngine() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
+    ImPlot::CreateContext();
+
     backgroundColor = {
             0.45f, 0.55f, 0.60f, 1.00f
     };
@@ -111,6 +112,8 @@ PhysicalEngine::~PhysicalEngine() {
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
 
+    ImPlot::DestroyContext();
+
     glfwDestroyWindow(window);
     glfwTerminate();
 }
@@ -120,9 +123,6 @@ PhysicalEngine::~PhysicalEngine() {
 #pragma region Game Loop methods
 
 void PhysicalEngine::start() {
-    double DoubledeltaTime = 0;
-    float DeltaTime = 0;
-    int numbTest = 0;
     auto start = std::chrono::high_resolution_clock::now();
 
     m_game.start(scene);
@@ -134,14 +134,8 @@ void PhysicalEngine::start() {
         handleEvents();
         handleGui();
 
-        auto end = std::chrono::high_resolution_clock::now();
-        DoubledeltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-        DoubledeltaTime *= 0.000000001;
-        DeltaTime = static_cast<float>(DoubledeltaTime);
         //Update game mechanics
-        start = std::chrono::high_resolution_clock::now();
-        scene->updatePhysics(DeltaTime);
-        updateGame();
+        updateGame(start);
 
         //Refresh screen
         updateScreen();
@@ -150,9 +144,6 @@ void PhysicalEngine::start() {
 
 void PhysicalEngine::handleEvents() {
     glfwPollEvents();
-//    int state = glfwGetKey(window, GLFW_KEY_E);
-//    if (state)
-//        scene->translateCamera();
 }
 
 void PhysicalEngine::handleGui() {
@@ -186,11 +177,27 @@ void PhysicalEngine::handleGui() {
         m_game.setSpeed(speed);
         ImGui::End();
     }
+    {
+        ImGui::Begin("Speed graph viewer");
+        if (ImPlot::BeginPlot("GameObject speed")) {
+//            ImPlot::PlotBars("My Bar Plot", bar_data, 11);
+//            ImPlot::PlotLine("My Line Plot", x_data, y_data, 1000);
+            ImPlot::EndPlot();
+        }
+        ImGui::End();
+    }
+
     ImGui::Render();
 }
 
 
-void PhysicalEngine::updateGame() {
+void PhysicalEngine::updateGame(std::chrono::steady_clock::time_point &start) {
+    auto end = std::chrono::high_resolution_clock::now();
+    double doubledeltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+    doubledeltaTime *= 0.000000001;
+    float deltaTime = static_cast<float>(doubledeltaTime);
+    start = std::chrono::high_resolution_clock::now();
+    scene->updatePhysics(deltaTime);
     scene->update();
 }
 

@@ -4,6 +4,7 @@
 #define PROJECT_NAME "Physical Engine 3D"
 
 #include <memory>
+#include <chrono>
 #include "Game.h"
 
 //Shallow declarations
@@ -21,12 +22,12 @@ private:
     GLFWwindow *window;
     float speed = 0.5f;
     Scene *scene;
+    Game m_game;
 
     struct {
         float r, g, b, a;
     } backgroundColor;
-
-    Game m_game;
+    bool fullWindowView = false;
 
 public:
     PhysicalEngine();
@@ -40,7 +41,7 @@ private:
 
     void handleGui();
 
-    void updateGame();
+    void updateGame(std::chrono::steady_clock::time_point &start);
 
     void updateScreen();
 };
