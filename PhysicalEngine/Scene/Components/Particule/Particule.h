@@ -1,11 +1,11 @@
 #ifndef PARTICULE_H
 #define PARTICULE_H
 
-#include "../Integrable/Integrable.h"
-#include"../Vector3d/Vector3d.h"
+#include "../Rigidbody/Rigidbody.h"
+#include"../../../Vector3d/Vector3d.h"
 
 
-class Particule : public Integrable {
+class Particule : public Rigidbody {
 
 private:
     Vector3d m_speed;
@@ -15,7 +15,7 @@ public:
 #pragma region Constructeur
 
 
-    Particule() : m_speed(0, 0, 0), m_acceleration(0, 0, 0) { m_position=Vector3d(0, 0, 0); };
+    Particule() : m_speed(0, 0, 0), m_acceleration(0, 0, 0) { m_position = Vector3d(0, 0, 0); };
 
     /// <summary>
     /// Constructeur de particule
@@ -24,14 +24,16 @@ public:
     /// <param name="x"></param>
     /// <param name="y"></param>
     /// <param name="z"></param>
-	Particule(float x, float y, float z) :  m_speed(0, 0, 0), m_acceleration(0, 0, 0) { m_position = Vector3d(x, y, z); };
+    Particule(float x, float y, float z) : m_speed(0, 0, 0), m_acceleration(0, 0, 0) {
+        m_position = Vector3d(x, y, z);
+    };
 
     /// <summary>
     /// Constructeur de particule
     ///  vitesse et acceleration � 0 par default
     /// </summary>
     /// <param name="pos">: la Position</param>
-	Particule(const Vector3d& pos) : m_speed(0, 0, 0), m_acceleration(0, 0, 0) { m_position = pos; };
+    Particule(const Vector3d &pos) : m_speed(0, 0, 0), m_acceleration(0, 0, 0) { m_position = pos; };
 
     /// <summary>
     /// Constructeur de copie de Particule

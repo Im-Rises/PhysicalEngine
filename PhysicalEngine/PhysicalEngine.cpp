@@ -9,13 +9,12 @@
 #include "Scene/Scene.h"
 #include "InputManager.h"
 #include <chrono>
-//// std library
-#include <iostream>
 
 // Dear ImGui
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+#include "implot.h"
 
 #include <stdio.h>
 
@@ -72,7 +71,7 @@ PhysicalEngine::PhysicalEngine() {
 #endif
 
     // Create window with graphics context
-    window = glfwCreateWindow(1280, 720, PROJECT_NAME, NULL, NULL);
+    window = glfwCreateWindow(windowWidth, windowHeight, PROJECT_NAME, NULL, NULL);
     if (window == NULL)
         exit(1);
     glfwMakeContextCurrent(window);
@@ -98,18 +97,23 @@ PhysicalEngine::PhysicalEngine() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
+    ImPlot::CreateContext();
+
     backgroundColor = {
             0.45f, 0.55f, 0.60f, 1.00f
     };
 
-    scene = new Scene();
-    //scene = std::make_unique<Scene>();
+    scene = new Scene(windowWidth, windowHeight);
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 PhysicalEngine::~PhysicalEngine() {
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
+
+    ImPlot::DestroyContext();
 
     glfwDestroyWindow(window);
     glfwTerminate();
@@ -120,28 +124,19 @@ PhysicalEngine::~PhysicalEngine() {
 #pragma region Game Loop methods
 
 void PhysicalEngine::start() {
-	double DoubledeltaTime = 0;
-	float DeltaTime = 0;
-	int numbTest = 0;
-	auto start = std::chrono::high_resolution_clock::now();
+    auto start = std::chrono::steady_clock::now();
 
     m_game.start(scene);
 
-	//Game loop
-	while (!glfwWindowShouldClose(window)) {
+    //Game loop
+    while (!glfwWindowShouldClose(window)) {
 
-		//Inputs
-		handleEvents();
-		handleGui();
+        //Inputs
+        handleEvents();
+        handleGui();
 
-		auto end = std::chrono::high_resolution_clock::now();
-		DoubledeltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-		DoubledeltaTime *= 0.000000001;
-		DeltaTime = (float)DoubledeltaTime;
-		//Update game mechanics
-		start = std::chrono::high_resolution_clock::now();
-		scene->updatePhysics(DeltaTime);
-		updateGame();
+        //Update game mechanics
+        updateGame(start);
 
         //Refresh screen
         updateScreen();
@@ -150,69 +145,133 @@ void PhysicalEngine::start() {
 
 void PhysicalEngine::handleEvents() {
     glfwPollEvents();
-//    int state = glfwGetKey(window, GLFW_KEY_E);
-//    if (state)
-//        scene->translateCamera();
 }
 
 void PhysicalEngine::handleGui() {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
+    if (!isFullScreen) {
+        /*------------------ImGui windows------------------*/
+        {
+            ImGui::Begin("Framerate");
+            ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
+                        ImGui::GetIO().Framerate);
+            ImGui::End();
+        }
 
-    /*------------------ImGui framerate------------------*/
-    {
-        ImGui::Begin("Framerate");
-        ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
-                    ImGui::GetIO().Framerate);
-        ImGui::End();
-    }
+        {
+            ImGui::Begin("Hierarchy");
+            for (int i = 0; i < scene->getNbGameObjects(); i++)
+                ImGui::Text("%s", scene->getGameObjectName(i).c_str());
+            ImGui::End();
+        }
 
-    {
-        ImGui::Begin("Hierarchy");
-        for (int i = 0; i < scene->getNbGameObjects(); i++)
-            ImGui::Text("%s", scene->getGameObjectName(i).c_str());
-        ImGui::End();
-    }
+        {
+            ImGui::Begin("View tools");
+            ImGui::Checkbox("Mesh: Fill/Line", scene->getWireFrameStatePtr());
+            ImGui::End();
+        }
+        {
+            ImGui::Begin("Speed handler");
+            ImGui::InputFloat("Speed", &gameSpeed, 0.1f, 1.0f, "%0.2f", ImGuiInputTextFlags_AllowTabInput);
+            m_game.setSpeed(gameSpeed);
+            ImGui::End();
+        }
+        {
+            ImGui::Begin("Speed graph viewer");
+            if (ImPlot::BeginPlot("GameObject speed")) {
+//            ImPlot::PlotBars("My Bar Plot", bar_data, 11);
+//            ImPlot::PlotLine("My Line Plot", x_data, y_data, 1000);
+                ImPlot::EndPlot();
+            }
+            ImGui::End();
+        }
 
-    {
-        ImGui::Begin("View tools");
-        ImGui::Checkbox("Mesh: Fill/Line", scene->getWireFrameStatePtr());
-        ImGui::End();
-    }
-    {
-		ImGui::Begin("Speed handler");
-		ImGui::InputFloat("Speed", &speed, 0.1f, 1.0f, "%0.2f", ImGuiInputTextFlags_AllowTabInput);
-		m_game.setSpeed(speed);
-		ImGui::End();
+        {
+            ImGui::Begin("Inspector");
+
+            ImGui::End();
+        }
+
+        {
+            ImGui::Begin("Project files");
+
+            ImGui::End();
+        }
+
+        {
+            ImGui::Begin("Scene View");
+            {
+                ImGui::BeginChild("GameRender");
+                ImVec2 wsize = ImGui::GetWindowSize();
+                ImGui::Image((ImTextureID) scene->getFrameBufferId(), wsize, ImVec2(0, 1), ImVec2(1, 0));
+                ImGui::EndChild();
+            }
+            ImGui::End();
+        }
     }
     ImGui::Render();
 }
 
 
-void PhysicalEngine::updateGame() {
-    scene->update();
-
+void PhysicalEngine::updateGame(std::chrono::steady_clock::time_point &start) {
+    auto deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::steady_clock::now() - start).count();
+    if (deltaTime > 1000 / PHYSICAL_UPDATE_PER_SECOND) {
+		start = std::chrono::steady_clock::now();
+        scene->updatePhysics(deltaTime / 1000.0f);
+        scene->update();
+    }
 }
 
 void PhysicalEngine::updateScreen() {
     // Update viewport
     int display_w, display_h;
     glfwGetFramebufferSize(window, &display_w, &display_h);
-    glViewport(0, 0, display_w, display_h);
+    updateViewport(display_w, display_h);
 
-    // Draw background color
-    glClearColor(backgroundColor.r * backgroundColor.a, backgroundColor.g * backgroundColor.a,
-                 backgroundColor.b * backgroundColor.a,
-                 backgroundColor.a);
-    glClear(GL_COLOR_BUFFER_BIT);
+    // Clear screen
+    clearScreen();
 
     // Draw scene
+    if (!isFullScreen) {
+        glBindFramebuffer(GL_FRAMEBUFFER, scene->getFrameBufferId());
+        clearScreen();
+    }
     scene->draw(display_w, display_h);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     // Swap buffers
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     glfwSwapBuffers(window);
+}
+
+void PhysicalEngine::clearScreen() {
+    glClearColor(backgroundColor.r, backgroundColor.g,
+                 backgroundColor.b,
+                 backgroundColor.a);
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void PhysicalEngine::updateViewport(int width, int height) {
+    glViewport(0, 0, width, height);
+    scene->updateViewport(width, height);
+}
+
+
+void PhysicalEngine::toogleFullScreen() {
+    GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+    const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+    if (isFullScreen) {
+        auto xpos = mode->width / 2 - windowWidth / 2;
+        auto ypos = mode->height / 2 - windowHeight / 2;
+        glfwSetWindowMonitor(window, NULL, xpos, ypos, windowWidth, windowHeight, 0);
+        isFullScreen = false;
+    } else {
+        glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
+        isFullScreen = true;
+    }
 }
 
 #pragma endregion

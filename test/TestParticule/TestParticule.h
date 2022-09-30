@@ -1,16 +1,16 @@
 #ifndef TESTPARTICULE_H
 #define TESTPARTICULE_H
 
-#include "../../PhysicalEngine/Particule/Particule.h"
+#include "../../PhysicalEngine/Scene/Components/Particule/Particule.h"
 
 class TestParticule {
 
-	public:
-	Particule m_testParticule;
-	
-	TestParticule();
+public:
+    Particule m_testParticule;
 
-	int TestCalculePosition();
+    TestParticule();
+
+    int TestCalculePosition();
 };
 
 #endif // !TESTPARTICULE_H
