@@ -124,7 +124,7 @@ PhysicalEngine::~PhysicalEngine() {
 #pragma region Game Loop methods
 
 void PhysicalEngine::start() {
-    auto start = std::chrono::high_resolution_clock::now();
+    auto start = std::chrono::steady_clock::now();
 
     m_game.start(scene);
 
@@ -215,14 +215,14 @@ void PhysicalEngine::handleGui() {
 }
 
 
-void PhysicalEngine::updateGame(std::chrono::time_point<std::chrono::system_clock>& start) {
-    auto end = std::chrono::high_resolution_clock::now();
-    double doubleDeltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-    doubleDeltaTime *= 0.000000001;
-    auto deltaTime = static_cast<float>(doubleDeltaTime);
-    start = std::chrono::high_resolution_clock::now();
-    scene->updatePhysics(deltaTime);
-    scene->update();
+void PhysicalEngine::updateGame(std::chrono::steady_clock::time_point &start) {
+    auto deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::steady_clock::now() - start).count();
+    if (deltaTime > 1000 / PHYSICAL_UPDATE_PER_SECOND) {
+		start = std::chrono::steady_clock::now();
+        scene->updatePhysics(deltaTime / 1000.0f);
+        scene->update();
+    }
 }
 
 void PhysicalEngine::updateScreen() {

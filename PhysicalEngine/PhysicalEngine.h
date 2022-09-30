@@ -19,18 +19,21 @@ class PhysicalEngine {
     friend class InputManager;
 
 private:
+    // Window, Scene and Game objects
     GLFWwindow *window;
     Scene *scene;
     Game m_game;
 
+    // Window variables
     bool isFullScreen = false;
     int windowWidth = 1580, windowHeight = 720;
     struct {
         float r, g, b, a;
     } backgroundColor;
 
-
+    // Variables for the game loop
     float gameSpeed = 0.5f;
+    const int PHYSICAL_UPDATE_PER_SECOND = 50;
 
 public:
     PhysicalEngine();
@@ -44,7 +47,7 @@ private:
 
     void handleGui();
 
-    void updateGame(std::chrono::time_point<std::chrono::system_clock>& start);
+    void updateGame(std::chrono::steady_clock::time_point &start);
 
     void updateScreen();
 
