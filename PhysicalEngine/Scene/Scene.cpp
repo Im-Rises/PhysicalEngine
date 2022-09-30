@@ -57,11 +57,10 @@ void Scene::updateViewport(int width, int height) {
     windowHeight = height;
 }
 
-void Scene::updateGameObjects() {
+void Scene::updateGameObjects(float deltaTime) {
     for (GameObject *gameObject: gameObjects) {
         gameObject->update();
     }
-//    m_integrator.UpdateAll(time);
 }
 
 void Scene::draw(int display_w, int display_h) {
@@ -82,6 +81,14 @@ void Scene::addGameObject(GameObject *gameObject) {
 //    camera.rotate(vector3D, angle);
 //}
 
+unsigned int Scene::getFrameBufferId() const {
+    return fbo;
+}
+
+std::vector<GameObject *> Scene::getGameObjects() const {
+    return gameObjects;
+}
+
 bool *Scene::getPtrWireFrameState() {
     if (wireFrame) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -91,6 +98,3 @@ bool *Scene::getPtrWireFrameState() {
     return &wireFrame;
 }
 
-unsigned int Scene::getFrameBufferId() {
-    return fbo;
-}

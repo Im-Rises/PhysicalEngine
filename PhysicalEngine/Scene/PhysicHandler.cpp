@@ -13,7 +13,7 @@ void PhysicHandler::AddIntegrable(Rigidbody *integrable) {
 }
 
 
-void PhysicHandler::UpdateAll(double time) {
+void PhysicHandler::UpdateAll(float time) {
     m_fixedDeltaTime += static_cast<float>(time);
     m_timeToAdjustFrameRate += static_cast<float>(time);
     if (m_timeToAdjustFrameRate > 1 / m_fixeFrameRate) {

@@ -19,7 +19,7 @@ public:
 
     void AddIntegrable(Rigidbody *integrable);
 
-    void UpdateAll(double time);
+    void UpdateAll(float time);
 
     void boucle();
 

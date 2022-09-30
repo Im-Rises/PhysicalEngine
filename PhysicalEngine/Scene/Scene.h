@@ -36,7 +36,7 @@ public:
     void destroy();
 
 public:
-    void updateGameObjects();
+    void updateGameObjects(float deltaTime);
 
     void draw(int display_w, int display_h);
 
@@ -50,7 +50,9 @@ public:
 //    void rotateCamera(Vector3d vector3D, float angle);
 
 public:
-    unsigned int getFrameBufferId();
+    unsigned int getFrameBufferId() const;
+
+    std::vector<GameObject *> getGameObjects() const;
 
     bool *getPtrWireFrameState();
 };

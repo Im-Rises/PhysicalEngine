@@ -71,10 +71,6 @@ void GameObject::update() {
     for (auto &component: components) {
         component->update();
     }
-
-//    if (m_rigidBody != nullptr) {
-//        position = m_rigidBody->getPosition();
-//    }
 }
 
 void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
@@ -103,7 +99,6 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
 
 void GameObject::addComponent(Component *component) {
     components.push_back(component);
-
 }
 
 std::string GameObject::getName() {

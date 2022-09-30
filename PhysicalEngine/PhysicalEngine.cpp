@@ -165,6 +165,8 @@ void PhysicalEngine::handleGui() {
             ImGui::Begin("Hierarchy");
 //            for (int i = 0; i < scene->getNbGameObjects(); i++)
 //                ImGui::Text("%s", scene->getGameObjectName(i).c_str());
+            for (auto &gameObject: scene->getGameObjects())
+                ImGui::Text("%s", gameObject->getName().c_str());
             ImGui::End();
         }
 
@@ -228,8 +230,7 @@ void PhysicalEngine::updateGame(std::chrono::steady_clock::time_point &start) {
             std::chrono::steady_clock::now() - start).count();
     if (deltaTime > 1000 / PHYSICAL_UPDATE_PER_SECOND) {
         start = std::chrono::steady_clock::now();
-//        scene->updatePhysics(deltaTime / 1000.0f);
-        scene->updateGameObjects();
+        scene->updateGameObjects(deltaTime / 1000.0f);
     }
 }
 
