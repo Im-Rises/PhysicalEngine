@@ -215,7 +215,7 @@ void PhysicalEngine::handleGui() {
 }
 
 
-void PhysicalEngine::updateGame(std::chrono::steady_clock::time_point &start) {
+void PhysicalEngine::updateGame(std::chrono::time_point<std::chrono::system_clock>& start) {
     auto end = std::chrono::high_resolution_clock::now();
     double doubleDeltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
     doubleDeltaTime *= 0.000000001;
