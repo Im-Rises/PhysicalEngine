@@ -2,12 +2,11 @@
 #define GAMEOBJECT_H
 
 #include <vector>
-#include "Shader/Shader.h"
-#include "Mesh/Mesh.h"
+#include "../Shader/Shader.h"
 #include "../Vector3d/Vector3d.h"
-#include "Transform.h"
 
-class Rigidbody;
+#include "Components/Mesh/Mesh.h"
+#include "Components/Transform/Transform.h"
 
 class Component;
 
@@ -20,7 +19,6 @@ private:
     Mesh mesh;
 
     // Optional components
-    Rigidbody *m_rigidBody = nullptr;
     std::vector<Component *> components;
 
     // OpenGL elements
@@ -32,11 +30,10 @@ private:
     // std::vector<GameObject *> children;
 
 public:
-    GameObject(Mesh mesh, Transform transform);
+    GameObject(Mesh mesh);
 
 private:
     void create();
-
 
 public:
     ~GameObject();
@@ -49,19 +46,11 @@ public:
 
     void draw(int display_w, int display_h, glm::mat4 view, float fov);
 
-    void AddRigidbody(Rigidbody *integrable) {
-        m_rigidBody = integrable;
-    }
+//    void AddRigidbody(Rigidbody *integrable);
 
-    Rigidbody *getRigidBody() { return m_rigidBody; }
 
-    bool hasRigidbody() {
-        return m_rigidBody != nullptr;
-    }
-
+public:
     std::string getName();
-
-    Vector3d *getPtrPosition();
 };
 
 

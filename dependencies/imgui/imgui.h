@@ -23,7 +23,7 @@
 // Library Version
 // (Integer encoded as XYYZZ for use in #if preprocessor conditionals, e.g. '#if IMGUI_VERSION_NUM > 12345')
 #define IMGUI_VERSION               "1.89 WIP"
-#define IMGUI_VERSION_NUM           18821
+#define IMGUI_VERSION_NUM           18829
 #define IMGUI_HAS_TABLE
 
 /*
@@ -48,13 +48,12 @@ Index of this file:
 
 #pragma once
 
-// Configuration file with compile-time options (edit imconfig.h or '#define IMGUI_USER_CONFIG "myfilename.h" from your build system')
+// Configuration file with compile-time options
+// (edit imconfig.h or '#define IMGUI_USER_CONFIG "myfilename.h" from your build system')
 #ifdef IMGUI_USER_CONFIG
 #include IMGUI_USER_CONFIG
 #endif
-#if !defined(IMGUI_DISABLE_INCLUDE_IMCONFIG_H) || defined(IMGUI_INCLUDE_IMCONFIG_H)
 #include "imconfig.h"
-#endif
 
 #ifndef IMGUI_DISABLE
 
@@ -162,20 +161,26 @@ struct ImGuiTextBuffer;             // Helper to hold and append into a text buf
 struct ImGuiTextFilter;             // Helper to parse and apply text filters (e.g. "aaaaa[,bbbbb][,ccccc]")
 struct ImGuiViewport;               // A Platform Window (always only one in 'master' branch), in the future may represent Platform Monitor
 
-// Enums/Flags (declared as int for compatibility with old C++, to allow using as flags without overhead, and to not pollute the top of this file)
+// Enumerations
+// - We don't use strongly typed enums much because they add constraints (can't extend in private code, can't store typed in bit fields, extra casting on iteration)
 // - Tip: Use your programming IDE navigation facilities on the names in the _central column_ below to find the actual flags/enum lists!
 //   In Visual Studio IDE: CTRL+comma ("Edit.GoToAll") can follow symbols in comments, whereas CTRL+F12 ("Edit.GoToImplementation") cannot.
 //   With Visual Assist installed: ALT+G ("VAssistX.GoToImplementation") can also follow symbols in comments.
+enum ImGuiKey : int;                // -> enum ImGuiKey              // Enum: A key identifier (ImGuiKey_XXX or ImGuiMod_XXX value)
 typedef int ImGuiCol;               // -> enum ImGuiCol_             // Enum: A color identifier for styling
 typedef int ImGuiCond;              // -> enum ImGuiCond_            // Enum: A condition for many Set*() functions
 typedef int ImGuiDataType;          // -> enum ImGuiDataType_        // Enum: A primary data type
 typedef int ImGuiDir;               // -> enum ImGuiDir_             // Enum: A cardinal direction
-typedef int ImGuiKey;               // -> enum ImGuiKey_             // Enum: A key identifier
 typedef int ImGuiMouseButton;       // -> enum ImGuiMouseButton_     // Enum: A mouse button identifier (0=left, 1=right, 2=middle)
 typedef int ImGuiMouseCursor;       // -> enum ImGuiMouseCursor_     // Enum: A mouse cursor identifier
 typedef int ImGuiSortDirection;     // -> enum ImGuiSortDirection_   // Enum: A sorting direction (ascending or descending)
 typedef int ImGuiStyleVar;          // -> enum ImGuiStyleVar_        // Enum: A variable identifier for styling
 typedef int ImGuiTableBgTarget;     // -> enum ImGuiTableBgTarget_   // Enum: A color target for TableSetBgColor()
+
+// Flags (declared as int for compatibility with old C++, to allow using as flags without overhead, and to not pollute the top of this file)
+// - Tip: Use your programming IDE navigation facilities on the names in the _central column_ below to find the actual flags/enum lists!
+//   In Visual Studio IDE: CTRL+comma ("Edit.GoToAll") can follow symbols in comments, whereas CTRL+F12 ("Edit.GoToImplementation") cannot.
+//   With Visual Assist installed: ALT+G ("VAssistX.GoToImplementation") can also follow symbols in comments.
 typedef int ImDrawFlags;            // -> enum ImDrawFlags_          // Flags: for ImDrawList functions
 typedef int ImDrawListFlags;        // -> enum ImDrawListFlags_      // Flags: for ImDrawList instance
 typedef int ImFontAtlasFlags;       // -> enum ImFontAtlasFlags_     // Flags: for ImFontAtlas build
@@ -188,7 +193,7 @@ typedef int ImGuiDragDropFlags;     // -> enum ImGuiDragDropFlags_   // Flags: f
 typedef int ImGuiFocusedFlags;      // -> enum ImGuiFocusedFlags_    // Flags: for IsWindowFocused()
 typedef int ImGuiHoveredFlags;      // -> enum ImGuiHoveredFlags_    // Flags: for IsItemHovered(), IsWindowHovered() etc.
 typedef int ImGuiInputTextFlags;    // -> enum ImGuiInputTextFlags_  // Flags: for InputText(), InputTextMultiline()
-typedef int ImGuiModFlags;          // -> enum ImGuiModFlags_        // Flags: for io.KeyMods (Ctrl/Shift/Alt/Super)
+typedef int ImGuiKeyChord;          // -> ImGuiKey | ImGuiMod_XXX    // Flags: for storage only for now: an ImGuiKey optionally OR-ed with one or more ImGuiMod_XXX values.
 typedef int ImGuiPopupFlags;        // -> enum ImGuiPopupFlags_      // Flags: for OpenPopup*(), BeginPopupContext*(), IsPopupOpen()
 typedef int ImGuiSelectableFlags;   // -> enum ImGuiSelectableFlags_ // Flags: for Selectable()
 typedef int ImGuiSliderFlags;       // -> enum ImGuiSliderFlags_     // Flags: for DragFloat(), DragInt(), SliderFloat(), SliderInt() etc.
@@ -941,6 +946,7 @@ namespace ImGui
 //-----------------------------------------------------------------------------
 
 // Flags for ImGui::Begin()
+// (Those are per-window flags. There are shared flags in ImGuiIO: io.ConfigWindowsResizeFromEdges and io.ConfigWindowsMoveFromTitleBarOnly)
 enum ImGuiWindowFlags_
 {
     ImGuiWindowFlags_None                   = 0,
@@ -978,6 +984,7 @@ enum ImGuiWindowFlags_
 };
 
 // Flags for ImGui::InputText()
+// (Those are per-item flags. There are shared flags in ImGuiIO: io.ConfigInputTextCursorBlink and io.ConfigInputTextEnterKeepActive)
 enum ImGuiInputTextFlags_
 {
     ImGuiInputTextFlags_None                = 0,
@@ -1001,6 +1008,7 @@ enum ImGuiInputTextFlags_
     ImGuiInputTextFlags_CharsScientific     = 1 << 17,  // Allow 0123456789.+-*/eE (Scientific notation input)
     ImGuiInputTextFlags_CallbackResize      = 1 << 18,  // Callback on buffer capacity changes request (beyond 'buf_size' parameter value), allowing the string to grow. Notify when the string wants to be resized (for string types which hold a cache of their Size). You will be provided a new BufSize in the callback and NEED to honor it. (see misc/cpp/imgui_stdlib.h for an example of using this)
     ImGuiInputTextFlags_CallbackEdit        = 1 << 19,  // Callback on any edit (note that InputText() already returns true on edit, the callback is useful mainly to manipulate the underlying buffer while focus is active)
+    ImGuiInputTextFlags_EscapeClearsAll     = 1 << 20,  // Escape key clears content if not empty, and deactivate otherwise (constrast to default behavior of Escape to revert)
 
     // Obsolete names (will be removed soon)
 #ifndef IMGUI_DISABLE_OBSOLETE_FUNCTIONS
@@ -1349,7 +1357,7 @@ enum ImGuiSortDirection_
 
 // Keys value 0 to 511 are left unused as legacy native/opaque key values (< 1.87)
 // Keys value >= 512 are named keys (>= 1.87)
-enum ImGuiKey_
+enum ImGuiKey : int
 {
     // Keyboard
     ImGuiKey_None = 0,
@@ -1430,22 +1438,33 @@ enum ImGuiKey_
     ImGuiKey_GamepadRStickUp,       // [Analog]
     ImGuiKey_GamepadRStickDown,     // [Analog]
 
-    // Keyboard Modifiers (explicitly submitted by backend via AddKeyEvent() calls)
-    // - This is mirroring the data also written to io.KeyCtrl, io.KeyShift, io.KeyAlt, io.KeySuper, in a format allowing
-    //   them to be accessed via standard key API, allowing calls such as IsKeyPressed(), IsKeyReleased(), querying duration etc.
-    // - Code polling every key (e.g. an interface to detect a key press for input mapping) might want to ignore those
-    //   and prefer using the real keys (e.g. ImGuiKey_LeftCtrl, ImGuiKey_RightCtrl instead of ImGuiKey_ModCtrl).
-    // - In theory the value of keyboard modifiers should be roughly equivalent to a logical or of the equivalent left/right keys.
-    //   In practice: it's complicated; mods are often provided from different sources. Keyboard layout, IME, sticky keys and
-    //   backends tend to interfere and break that equivalence. The safer decision is to relay that ambiguity down to the end-user...
-    ImGuiKey_ModCtrl, ImGuiKey_ModShift, ImGuiKey_ModAlt, ImGuiKey_ModSuper,
-
     // Mouse Buttons (auto-submitted from AddMouseButtonEvent() calls)
     // - This is mirroring the data also written to io.MouseDown[], io.MouseWheel, in a format allowing them to be accessed via standard key API.
     ImGuiKey_MouseLeft, ImGuiKey_MouseRight, ImGuiKey_MouseMiddle, ImGuiKey_MouseX1, ImGuiKey_MouseX2, ImGuiKey_MouseWheelX, ImGuiKey_MouseWheelY,
 
-    // End of list
-    ImGuiKey_COUNT,                 // No valid ImGuiKey is ever greater than this value
+    // [Internal] Reserved for mod storage
+    ImGuiKey_ReservedForModCtrl, ImGuiKey_ReservedForModShift, ImGuiKey_ReservedForModAlt, ImGuiKey_ReservedForModSuper,
+    ImGuiKey_COUNT,
+
+    // Keyboard Modifiers (explicitly submitted by backend via AddKeyEvent() calls)
+    // - This is mirroring the data also written to io.KeyCtrl, io.KeyShift, io.KeyAlt, io.KeySuper, in a format allowing
+    //   them to be accessed via standard key API, allowing calls such as IsKeyPressed(), IsKeyReleased(), querying duration etc.
+    // - Code polling every key (e.g. an interface to detect a key press for input mapping) might want to ignore those
+    //   and prefer using the real keys (e.g. ImGuiKey_LeftCtrl, ImGuiKey_RightCtrl instead of ImGuiMod_Ctrl).
+    // - In theory the value of keyboard modifiers should be roughly equivalent to a logical or of the equivalent left/right keys.
+    //   In practice: it's complicated; mods are often provided from different sources. Keyboard layout, IME, sticky keys and
+    //   backends tend to interfere and break that equivalence. The safer decision is to relay that ambiguity down to the end-user...
+    ImGuiMod_None                   = 0,
+    ImGuiMod_Ctrl                   = 1 << 12,
+    ImGuiMod_Shift                  = 1 << 13,
+    ImGuiMod_Alt                    = 1 << 14, // Option/Menu
+    ImGuiMod_Super                  = 1 << 15, // Cmd/Super/Windows
+    ImGuiMod_Mask_                  = 0xF000,
+#if defined(__APPLE__)
+    ImGuiMod_Shortcut               = ImGuiMod_Super,
+#else
+    ImGuiMod_Shortcut               = ImGuiMod_Ctrl,
+#endif
 
     // [Internal] Prior to 1.87 we required user to fill io.KeysDown[512] using their own native index + the io.KeyMap[] array.
     // We are ditching this method but keeping a legacy path for user code doing e.g. IsKeyPressed(MY_NATIVE_KEY_CODE)
@@ -1461,19 +1480,9 @@ enum ImGuiKey_
 #endif
 
 #ifndef IMGUI_DISABLE_OBSOLETE_FUNCTIONS
+    ImGuiKey_ModCtrl = ImGuiMod_Ctrl, ImGuiKey_ModShift = ImGuiMod_Shift, ImGuiKey_ModAlt = ImGuiMod_Alt, ImGuiKey_ModSuper = ImGuiMod_Super, // Renamed in 1.89
     ImGuiKey_KeyPadEnter = ImGuiKey_KeypadEnter,    // Renamed in 1.87
 #endif
-};
-
-// Helper "flags" version of key-mods to store and compare multiple key-mods easily. Sometimes used for storage (e.g. io.KeyMods) but otherwise not much used in public API.
-enum ImGuiModFlags_
-{
-    ImGuiModFlags_None              = 0,
-    ImGuiModFlags_Ctrl              = 1 << 0,
-    ImGuiModFlags_Shift             = 1 << 1,
-    ImGuiModFlags_Alt               = 1 << 2,   // Option/Menu key
-    ImGuiModFlags_Super             = 1 << 3,   // Cmd/Super/Windows key
-    ImGuiModFlags_All               = 0x0F
 };
 
 #ifndef IMGUI_DISABLE_OBSOLETE_KEYIO
@@ -1670,6 +1679,7 @@ enum ImGuiColorEditFlags_
 
 // Flags for DragFloat(), DragInt(), SliderFloat(), SliderInt() etc.
 // We use the same sets of flags for DragXXX() and SliderXXX() functions as the features are the same and it makes it easier to swap them.
+// (Those are per-item flags. There are shared flags in ImGuiIO: io.ConfigDragClickToInputText)
 enum ImGuiSliderFlags_
 {
     ImGuiSliderFlags_None                   = 0,
@@ -1883,7 +1893,7 @@ struct ImGuiStyle
 //-----------------------------------------------------------------------------
 
 // [Internal] Storage used by IsKeyDown(), IsKeyPressed() etc functions.
-// If prior to 1.87 you used io.KeysDownDuration[] (which was marked as internal), you should use GetKeyData(key)->DownDuration and not io.KeysData[key]->DownDuration.
+// If prior to 1.87 you used io.KeysDownDuration[] (which was marked as internal), you should use GetKeyData(key)->DownDuration and *NOT* io.KeysData[key]->DownDuration.
 struct ImGuiKeyData
 {
     bool        Down;               // True for if key is down
@@ -2024,8 +2034,8 @@ struct ImGuiIO
     bool        KeySuper;                           // Keyboard modifier down: Cmd/Super/Windows
 
     // Other state maintained from data above + IO function calls
-    ImGuiModFlags KeyMods;                          // Key mods flags (same as io.KeyCtrl/KeyShift/KeyAlt/KeySuper but merged into flags), updated by NewFrame()
-    ImGuiKeyData KeysData[ImGuiKey_KeysData_SIZE];  // Key state for all known keys. Use IsKeyXXX() functions to access this.
+    ImGuiKeyChord KeyMods;                          // Key mods flags (any of ImGuiMod_Ctrl/ImGuiMod_Shift/ImGuiMod_Alt/ImGuiMod_Super flags, same as io.KeyCtrl/KeyShift/KeyAlt/KeySuper but merged into flags). Read-only, updated by NewFrame()
+    ImGuiKeyData  KeysData[ImGuiKey_KeysData_SIZE]; // Key state for all known keys. Use IsKeyXXX() functions to access this.
     bool        WantCaptureMouseUnlessPopupClose;   // Alternative to WantCaptureMouse: (WantCaptureMouse == true && WantCaptureMouseUnlessPopupClose == false) when a click over void is expected to close a popup.
     ImVec2      MousePosPrev;                       // Previous mouse position (note that MouseDelta is not necessary == MousePos-MousePosPrev, in case either position is invalid)
     ImVec2      MouseClickedPos[5];                 // Position at time of clicking
@@ -2503,7 +2513,7 @@ struct ImDrawList
 
     // [Internal, used while building lists]
     unsigned int            _VtxCurrentIdx;     // [Internal] generally == VtxBuffer.Size unless we are past 64K vertices, in which case this gets reset to 0.
-    const ImDrawListSharedData* _Data;          // Pointer to shared draw data (you can use ImGui::GetDrawListSharedData() to get the one from current ImGui context)
+    ImDrawListSharedData*   _Data;              // Pointer to shared draw data (you can use ImGui::GetDrawListSharedData() to get the one from current ImGui context)
     const char*             _OwnerName;         // Pointer to owner window's name for debugging
     ImDrawVert*             _VtxWritePtr;       // [Internal] point within VtxBuffer.Data after each add command (to avoid using the ImVector<> operators too much)
     ImDrawIdx*              _IdxWritePtr;       // [Internal] point within IdxBuffer.Data after each add command (to avoid using the ImVector<> operators too much)
@@ -2515,7 +2525,7 @@ struct ImDrawList
     float                   _FringeScale;       // [Internal] anti-alias fringe is scaled by this value, this helps to keep things sharp while zooming at vertex buffer content
 
     // If you want to create ImDrawList instances, pass them ImGui::GetDrawListSharedData() or create and use your own ImDrawListSharedData (so you can use ImDrawList without ImGui)
-    ImDrawList(const ImDrawListSharedData* shared_data) { memset(this, 0, sizeof(*this)); _Data = shared_data; }
+    ImDrawList(ImDrawListSharedData* shared_data) { memset(this, 0, sizeof(*this)); _Data = shared_data; }
 
     ~ImDrawList() { _ClearFreeMemory(); }
     IMGUI_API void  PushClipRect(const ImVec2& clip_rect_min, const ImVec2& clip_rect_max, bool intersect_with_current_clip_rect = false);  // Render-level scissoring. This is passed down to your render function but not used for CPU-side coarse clipping. Prefer using higher-level ImGui::PushClipRect() to affect logic (hit-testing and widget culling)
@@ -2771,6 +2781,7 @@ struct ImFontAtlas
     // NB: Make sure that your string are UTF-8 and NOT in your local code page. In C++11, you can create UTF-8 string literal using the u8"Hello world" syntax. See FAQ for details.
     // NB: Consider using ImFontGlyphRangesBuilder to build glyph ranges from textual data.
     IMGUI_API const ImWchar*    GetGlyphRangesDefault();                // Basic Latin, Extended Latin
+    IMGUI_API const ImWchar*    GetGlyphRangesGreek();                  // Default + Greek and Coptic
     IMGUI_API const ImWchar*    GetGlyphRangesKorean();                 // Default + Korean characters
     IMGUI_API const ImWchar*    GetGlyphRangesJapanese();               // Default + Hiragana, Katakana, Half-Width, Selection of 2999 Ideographs
     IMGUI_API const ImWchar*    GetGlyphRangesChineseFull();            // Default + Half-Width + Japanese Hiragana/Katakana + full set of about 21000 CJK Unified Ideographs
@@ -2950,9 +2961,9 @@ struct ImGuiPlatformImeData
 namespace ImGui
 {
 #ifndef IMGUI_DISABLE_OBSOLETE_KEYIO
-    IMGUI_API int       GetKeyIndex(ImGuiKey key);  // map ImGuiKey_* values into legacy native key index. == io.KeyMap[key]
+    IMGUI_API ImGuiKey     GetKeyIndex(ImGuiKey key);  // map ImGuiKey_* values into legacy native key index. == io.KeyMap[key]
 #else
-    static inline int   GetKeyIndex(ImGuiKey key)   { IM_ASSERT(key >= ImGuiKey_NamedKey_BEGIN && key < ImGuiKey_NamedKey_END && "ImGuiKey and native_index was merged together and native_index is disabled by IMGUI_DISABLE_OBSOLETE_KEYIO. Please switch to ImGuiKey."); return key; }
+    static inline ImGuiKey GetKeyIndex(ImGuiKey key)   { IM_ASSERT(key >= ImGuiKey_NamedKey_BEGIN && key < ImGuiKey_NamedKey_END && "ImGuiKey and native_index was merged together and native_index is disabled by IMGUI_DISABLE_OBSOLETE_KEYIO. Please switch to ImGuiKey."); return key; }
 #endif
 }
 
@@ -3034,9 +3045,12 @@ enum ImDrawCornerFlags_
     ImDrawCornerFlags_Right     = ImDrawCornerFlags_TopRight | ImDrawCornerFlags_BotRight,
 };
 
-// RENAMED ImGuiKeyModFlags -> ImGuiModFlags in 1.88 (from April 2022)
-typedef int ImGuiKeyModFlags;
-enum ImGuiKeyModFlags_ { ImGuiKeyModFlags_None = ImGuiModFlags_None, ImGuiKeyModFlags_Ctrl = ImGuiModFlags_Ctrl, ImGuiKeyModFlags_Shift = ImGuiModFlags_Shift, ImGuiKeyModFlags_Alt = ImGuiModFlags_Alt, ImGuiKeyModFlags_Super = ImGuiModFlags_Super };
+// RENAMED and MERGED both ImGuiKey_ModXXX and ImGuiModFlags_XXX into ImGuiMod_XXX (from September 2022)
+// RENAMED ImGuiKeyModFlags -> ImGuiModFlags in 1.88 (from April 2022). Exceptionally commented out ahead of obscolescence schedule to reduce confusion and because they were not meant to be used in the first place.
+typedef ImGuiKeyChord ImGuiModFlags;      // == int. We generally use ImGuiKeyChord to mean "a ImGuiKey or-ed with any number of ImGuiMod_XXX value", but you may store only mods in there.
+enum ImGuiModFlags_ { ImGuiModFlags_None = 0, ImGuiModFlags_Ctrl = ImGuiMod_Ctrl, ImGuiModFlags_Shift = ImGuiMod_Shift, ImGuiModFlags_Alt = ImGuiMod_Alt, ImGuiModFlags_Super = ImGuiMod_Super };
+//typedef ImGuiKeyChord ImGuiKeyModFlags; // == int
+//enum ImGuiKeyModFlags_ { ImGuiKeyModFlags_None = 0, ImGuiKeyModFlags_Ctrl = ImGuiMod_Ctrl, ImGuiKeyModFlags_Shift = ImGuiMod_Shift, ImGuiKeyModFlags_Alt = ImGuiMod_Alt, ImGuiKeyModFlags_Super = ImGuiMod_Super };
 
 #endif // #ifndef IMGUI_DISABLE_OBSOLETE_FUNCTIONS
 

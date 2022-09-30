@@ -12,13 +12,18 @@ class GameObject;
 
 class Scene {
 private:
+    // Window size
     int windowHeight, windowWidth;
+
+    // Scene elements
     Camera camera;
     PhysicHandler physicHandler;
     std::vector<GameObject *> gameObjects;
-    bool wireFrame = false;
-    PhysicHandler m_integrator;
 
+    // View settings
+    bool wireFrame = false;
+
+    // OpenGL framebuffer
     unsigned int fbo;
 
 public:
@@ -30,32 +35,24 @@ public:
 
     void destroy();
 
-    void updateViewport(int width, int height);
-
-    void update();
-
-    void updatePhysics(float time);
-
-    void addPhysicalComponent();
+public:
+    void updateGameObjects();
 
     void draw(int display_w, int display_h);
 
-    void translateCamera(Vector3d vector3D);
-
-    void rotateCamera(Vector3d vector3D, float angle);
-
-    size_t getNbGameObjects();
-
-    std::string getGameObjectName(int index);
-
-    void addGameObject(GameObject *gameObject);
+    void updateViewport(int width, int height);
 
 public:
-    bool *getWireFrameStatePtr();
+    void addGameObject(GameObject *gameObject);
 
+//    void translateCamera(Vector3d vector3D);
+//
+//    void rotateCamera(Vector3d vector3D, float angle);
+
+public:
     unsigned int getFrameBufferId();
 
-    GameObject *getPtrGameObjectByName(std::string name);
+    bool *getPtrWireFrameState();
 };
 
 #endif //SCENE_H

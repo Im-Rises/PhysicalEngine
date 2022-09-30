@@ -7,7 +7,7 @@
 
 #include <utility>
 
-GameObject::GameObject(Mesh mesh, Transform transform) : shader("", "") {
+GameObject::GameObject(Mesh mesh) : shader("", "") {
     name = "GameObject";
 
     mesh.getVerticesUseIndices();
@@ -72,9 +72,9 @@ void GameObject::update() {
         component->update();
     }
 
-    if (m_rigidBody != nullptr) {
-        position = m_rigidBody->getPosition();
-    }
+//    if (m_rigidBody != nullptr) {
+//        position = m_rigidBody->getPosition();
+//    }
 }
 
 void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
@@ -102,8 +102,4 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
 
 std::string GameObject::getName() {
     return name;
-}
-
-Vector3d *GameObject::getPtrPosition() {
-    return &position;
 }

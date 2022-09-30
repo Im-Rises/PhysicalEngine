@@ -1,17 +1,17 @@
 #include "Scene.h"
 
 #include "GameObject.h"
-#include "Mesh/Mesh.h"
-#include "Mesh/Cuboid/Cube.h"
-#include "Mesh/Cuboid/CuboidRectangle.h"
-#include "Mesh/Cuboid/MyCube.h"
-#include "Mesh/Sphere/Sphere.h"
-#include "Mesh/Cuboid/MyCubeUseIndice.h"
+#include "Components/Mesh/Mesh.h"
+//#include "Components/Mesh/Cuboid/Cube.h"
+//#include "Components/Mesh/Cuboid/CuboidRectangle.h"
+//#include "Components/Mesh/Cuboid/MyCube.h"
+//#include "Components/Mesh/Sphere/Sphere.h"
+//#include "Components/Mesh/Cuboid/MyCubeUseIndice.h"
 
 Scene::Scene(int windowWidth, int windowHeight) {
     this->windowWidth = windowWidth;
     this->windowHeight = windowHeight;
-    gameObjects.push_back(new GameObject(MyCube(1)));
+//    gameObjects.push_back(new GameObject(MyCube(1)));
 //    gameObjects.push_back(new GameObject(Sphere(1, 20, 20)));
 //    gameObjects.push_back(new GameObject(MyCube()));
 //    gameObjects.push_back(new GameObject(MyCubeUseIndice()));
@@ -57,23 +57,20 @@ void Scene::updateViewport(int width, int height) {
     windowHeight = height;
 }
 
-void Scene::update() {
+void Scene::updateGameObjects() {
     for (GameObject *gameObject: gameObjects) {
         gameObject->update();
     }
+//    m_integrator.UpdateAll(time);
 }
 
-void Scene::updatePhysics(float time) {
-    m_integrator.UpdateAll(time);
-}
-
-void Scene::addPhysicalComponent() {
-    for (GameObject *gameObject: gameObjects) {
-        if (gameObject->hasRigidbody()) {
-            m_integrator.AddIntegrable(gameObject->getRigidBody());
-        }
-    }
-}
+//void Scene::addPhysicalComponent() {
+//    for (GameObject *gameObject: gameObjects) {
+//        if (gameObject->hasRigidbody()) {
+//            m_integrator.AddIntegrable(gameObject->getPtrRigidBody());
+//        }
+//    }
+//}
 
 void Scene::draw(int display_w, int display_h) {
     for (GameObject *gameObject: gameObjects) {
@@ -89,19 +86,11 @@ void Scene::rotateCamera(Vector3d vector3D, float angle) {
     camera.rotate(vector3D, angle);
 }
 
-size_t Scene::getNbGameObjects() {
-    return gameObjects.size();
-}
-
-std::string Scene::getGameObjectName(int index) {
-    return gameObjects[index]->getName();
-}
-
 void Scene::addGameObject(GameObject *gameObject) {
     gameObjects.push_back(gameObject);
 }
 
-bool *Scene::getWireFrameStatePtr() {
+bool *Scene::getPtrWireFrameState() {
     if (wireFrame) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     } else {
@@ -113,15 +102,3 @@ bool *Scene::getWireFrameStatePtr() {
 unsigned int Scene::getFrameBufferId() {
     return fbo;
 }
-
-GameObject *Scene::getPtrGameObjectByName(std::string name) {
-    for (GameObject *gameObject: gameObjects) {
-        if (gameObject->getName() == name) {
-            return gameObject;
-        }
-    }
-    return nullptr;
-}
-
-
-

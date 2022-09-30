@@ -12,10 +12,10 @@
 #include <chrono>
 
 // Dear ImGui
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
-#include "implot.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_glfw.h"
+#include "imgui/imgui_impl_opengl3.h"
+#include "imgui/implot.h"
 #include "Scene/Components/Component.h"
 
 #include <stdio.h>
@@ -106,7 +106,6 @@ PhysicalEngine::PhysicalEngine() {
     };
 
     scene = new Scene(windowWidth, windowHeight);
-    gameObject = scene->getPtrGameObjectByName("GameObject");
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
@@ -164,14 +163,14 @@ void PhysicalEngine::handleGui() {
 
         {
             ImGui::Begin("Hierarchy");
-            for (int i = 0; i < scene->getNbGameObjects(); i++)
-                ImGui::Text("%s", scene->getGameObjectName(i).c_str());
+//            for (int i = 0; i < scene->getNbGameObjects(); i++)
+//                ImGui::Text("%s", scene->getGameObjectName(i).c_str());
             ImGui::End();
         }
 
         {
             ImGui::Begin("View tools");
-            ImGui::Checkbox("Mesh: Fill/Line", scene->getWireFrameStatePtr());
+            ImGui::Checkbox("Mesh: Fill/Line", scene->getPtrWireFrameState());
             ImGui::End();
         }
         {
@@ -192,33 +191,13 @@ void PhysicalEngine::handleGui() {
         {
             ImGui::Begin("Inspector");
             if (gameObject != nullptr) {
-                ImGui::Text("Name: %s", gameObject->getName().c_str());
-                Vector3d *position = gameObject->getPtrPosition();
-                if (ImGui::CollapsingHeader("Transform")) {
-                    ImGui::Text("Position");
-                    if (ImGui::BeginTable("Position", 3)) {
-                        ImGui::TableNextColumn();
-                        ImGui::Text("X:");
-                        ImGui::SameLine();
-                        ImGui::InputFloat("", &position->m_x);
-                        ImGui::TableNextColumn();
-                        ImGui::Text("Y:");
-                        ImGui::SameLine();
-                        ImGui::InputFloat("", &position->m_y);
-                        ImGui::TableNextColumn();
-                        ImGui::Text("Z:");
-                        ImGui::SameLine();
-                        ImGui::InputFloat("", &position->m_z);
-                        ImGui::EndTable();
-                    }
-                    ImGui::Text("Rotation");
-                    ImGui::Text("Scale");
-                }
-//            for (Component component : gameObject->getComponents()) {
-//                if (ImGui::CollapsingHeader(component.getName().c_str())) {
-//                    component.drawGui();
+//                gameObject->drawTransformGui();
+//                gameObject->drawMeshGui();
+//                for (Component component: gameObject->getComponents()) {
+//                    if (ImGui::CollapsingHeader(component.getName().c_str())) {
+//                      component.drawGui();
+//                    }
 //                }
-//            }
             }
             ImGui::End();
         }
@@ -249,8 +228,8 @@ void PhysicalEngine::updateGame(std::chrono::steady_clock::time_point &start) {
             std::chrono::steady_clock::now() - start).count();
     if (deltaTime > 1000 / PHYSICAL_UPDATE_PER_SECOND) {
         start = std::chrono::steady_clock::now();
-        scene->updatePhysics(deltaTime / 1000.0f);
-        scene->update();
+//        scene->updatePhysics(deltaTime / 1000.0f);
+        scene->updateGameObjects();
     }
 }
 
