@@ -261,21 +261,17 @@ void PhysicalEngine::updateViewport(int width, int height) {
 
 
 void PhysicalEngine::toogleFullScreen() {
+    GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+    const GLFWvidmode *mode = glfwGetVideoMode(monitor);
     if (isFullScreen) {
-        glfwSetWindowMonitor(window, NULL, 0, 0, windowWidth, windowHeight, 0);
+        auto xpos = mode->width / 2 - windowWidth / 2;
+        auto ypos = mode->height / 2 - windowHeight / 2;
+        glfwSetWindowMonitor(window, NULL, xpos, ypos, windowWidth, windowHeight, 0);
         isFullScreen = false;
     } else {
-        GLFWmonitor *monitor = glfwGetPrimaryMonitor();
-        const GLFWvidmode *mode = glfwGetVideoMode(monitor);
         glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
         isFullScreen = true;
     }
-
-//    if (fullScreen) {
-//        glfwSetWindowMonitor(window, glfwGetPrimaryMonitor(), 0, 0, windowWidth, windowHeight, GLFW_DONT_CARE);
-//    } else {
-//        glfwSetWindowMonitor(window, NULL, 0, 0, windowWidth, windowHeight, GLFW_DONT_CARE);
-//    }
 }
 
 #pragma endregion
