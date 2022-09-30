@@ -21,6 +21,7 @@ You can find a journal log [here](report/development_log_MOREL_REBOUL_CLAVEL.pdf
 |                                                    Mesh view                                                     |                                                  Wireframe view                                                  |
 |:----------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------:|
 | ![image1](https://user-images.githubusercontent.com/59691442/192190493-f1191715-268e-43e4-8f27-5ed0c2823dfa.png) | ![image2](https://user-images.githubusercontent.com/59691442/192190499-457463ae-7a34-432a-bb0b-063771021275.png) |
+|                                                                                                                  |                                                                                                                  |
 
 <!--
 ## Videos
@@ -103,7 +104,13 @@ TO modify the speed value, you can use the ImGui window named `Speed handler`.
 | Add speed to the left  | ←   |
 | Add speed to the right | →   |
 | Add speed forwardly    | ↑   |
-| Add speed rearwardly   | ↓   |
+| Add speed rearward     | ↓   |
+
+### User controls
+
+| Action            | Key |
+|-------------------|-----|
+| Toggle fullscreen | F11 |
 
 <!--
 | Description        | Keyboard | Mouse                           |
