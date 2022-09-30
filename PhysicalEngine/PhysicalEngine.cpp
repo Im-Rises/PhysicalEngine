@@ -104,8 +104,8 @@ PhysicalEngine::PhysicalEngine() {
     };
 
     scene = new Scene(windowWidth, windowHeight);
-    //scene = std::make_unique<Scene>();
 
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 PhysicalEngine::~PhysicalEngine() {
@@ -151,75 +151,75 @@ void PhysicalEngine::handleGui() {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
+    if (!isFullScreen) {
+        /*------------------ImGui windows------------------*/
+        {
+            ImGui::Begin("Framerate");
+            ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
+                        ImGui::GetIO().Framerate);
+            ImGui::End();
+        }
 
-    /*------------------ImGui windows------------------*/
-    {
-        ImGui::Begin("Framerate");
-        ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
-                    ImGui::GetIO().Framerate);
-        ImGui::End();
-    }
+        {
+            ImGui::Begin("Hierarchy");
+            for (int i = 0; i < scene->getNbGameObjects(); i++)
+                ImGui::Text("%s", scene->getGameObjectName(i).c_str());
+            ImGui::End();
+        }
 
-    {
-        ImGui::Begin("Hierarchy");
-        for (int i = 0; i < scene->getNbGameObjects(); i++)
-            ImGui::Text("%s", scene->getGameObjectName(i).c_str());
-        ImGui::End();
-    }
-
-    {
-        ImGui::Begin("View tools");
-        ImGui::Checkbox("Mesh: Fill/Line", scene->getWireFrameStatePtr());
-        ImGui::End();
-    }
-    {
-        ImGui::Begin("Speed handler");
-        ImGui::InputFloat("Speed", &speed, 0.1f, 1.0f, "%0.2f", ImGuiInputTextFlags_AllowTabInput);
-        m_game.setSpeed(speed);
-        ImGui::End();
-    }
-    {
-        ImGui::Begin("Speed graph viewer");
-        if (ImPlot::BeginPlot("GameObject speed")) {
+        {
+            ImGui::Begin("View tools");
+            ImGui::Checkbox("Mesh: Fill/Line", scene->getWireFrameStatePtr());
+            ImGui::End();
+        }
+        {
+            ImGui::Begin("Speed handler");
+            ImGui::InputFloat("Speed", &gameSpeed, 0.1f, 1.0f, "%0.2f", ImGuiInputTextFlags_AllowTabInput);
+            m_game.setSpeed(gameSpeed);
+            ImGui::End();
+        }
+        {
+            ImGui::Begin("Speed graph viewer");
+            if (ImPlot::BeginPlot("GameObject speed")) {
 //            ImPlot::PlotBars("My Bar Plot", bar_data, 11);
 //            ImPlot::PlotLine("My Line Plot", x_data, y_data, 1000);
-            ImPlot::EndPlot();
+                ImPlot::EndPlot();
+            }
+            ImGui::End();
         }
-        ImGui::End();
-    }
 
-    {
-        ImGui::Begin("Inspector");
-
-        ImGui::End();
-    }
-
-    {
-        ImGui::Begin("Project files");
-
-        ImGui::End();
-    }
-
-    {
-        ImGui::Begin("Scene View");
         {
-            ImGui::BeginChild("GameRender");
-            ImVec2 wsize = ImGui::GetWindowSize();
-            ImGui::Image((ImTextureID) scene->getFrameBufferId(), wsize, ImVec2(0, 1), ImVec2(1, 0));
-            ImGui::EndChild();
-        }
-        ImGui::End();
-    }
+            ImGui::Begin("Inspector");
 
+            ImGui::End();
+        }
+
+        {
+            ImGui::Begin("Project files");
+
+            ImGui::End();
+        }
+
+        {
+            ImGui::Begin("Scene View");
+            {
+                ImGui::BeginChild("GameRender");
+                ImVec2 wsize = ImGui::GetWindowSize();
+                ImGui::Image((ImTextureID) scene->getFrameBufferId(), wsize, ImVec2(0, 1), ImVec2(1, 0));
+                ImGui::EndChild();
+            }
+            ImGui::End();
+        }
+    }
     ImGui::Render();
 }
 
 
 void PhysicalEngine::updateGame(std::chrono::steady_clock::time_point &start) {
     auto end = std::chrono::high_resolution_clock::now();
-    double doubledeltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-    doubledeltaTime *= 0.000000001;
-    auto deltaTime = static_cast<float>(doubledeltaTime);
+    double doubleDeltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+    doubleDeltaTime *= 0.000000001;
+    auto deltaTime = static_cast<float>(doubleDeltaTime);
     start = std::chrono::high_resolution_clock::now();
     scene->updatePhysics(deltaTime);
     scene->update();
@@ -229,27 +229,53 @@ void PhysicalEngine::updateScreen() {
     // Update viewport
     int display_w, display_h;
     glfwGetFramebufferSize(window, &display_w, &display_h);
-    glViewport(0, 0, display_w, display_h);
-    scene->updateViewport(display_w, display_h);
+    updateViewport(display_w, display_h);
 
-    // Draw background color
-    glClearColor(backgroundColor.r * backgroundColor.a, backgroundColor.g * backgroundColor.a,
-                 backgroundColor.b * backgroundColor.a,
-                 backgroundColor.a);
-    glClear(GL_COLOR_BUFFER_BIT);
+    // Clear screen
+    clearScreen();
 
     // Draw scene
-    glBindFramebuffer(GL_FRAMEBUFFER, scene->getFrameBufferId());
-    glClearColor(backgroundColor.r * backgroundColor.a, backgroundColor.g * backgroundColor.a,
-                 backgroundColor.b * backgroundColor.a,
-                 backgroundColor.a);
-    glClear(GL_COLOR_BUFFER_BIT);
+    if (!isFullScreen) {
+        glBindFramebuffer(GL_FRAMEBUFFER, scene->getFrameBufferId());
+        clearScreen();
+    }
     scene->draw(display_w, display_h);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     // Swap buffers
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     glfwSwapBuffers(window);
+}
+
+void PhysicalEngine::clearScreen() {
+    glClearColor(backgroundColor.r, backgroundColor.g,
+                 backgroundColor.b,
+                 backgroundColor.a);
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void PhysicalEngine::updateViewport(int width, int height) {
+    glViewport(0, 0, width, height);
+    scene->updateViewport(width, height);
+}
+
+
+void PhysicalEngine::toogleFullScreen() {
+    if (isFullScreen) {
+        glfwSetWindowMonitor(window, NULL, 0, 0, windowWidth, windowHeight, 0);
+        isFullScreen = false;
+    } else {
+        GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+        const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+        glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
+        isFullScreen = true;
+    }
+
+//    if (fullScreen) {
+//        glfwSetWindowMonitor(window, glfwGetPrimaryMonitor(), 0, 0, windowWidth, windowHeight, GLFW_DONT_CARE);
+//    } else {
+//        glfwSetWindowMonitor(window, NULL, 0, 0, windowWidth, windowHeight, GLFW_DONT_CARE);
+//    }
 }
 
 #pragma endregion

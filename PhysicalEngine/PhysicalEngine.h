@@ -20,16 +20,17 @@ class PhysicalEngine {
 
 private:
     GLFWwindow *window;
-    int windowWidth = 1580, windowHeight = 720;
-    float speed = 0.5f;
     Scene *scene;
     Game m_game;
 
+    bool isFullScreen = false;
+    int windowWidth = 1580, windowHeight = 720;
     struct {
         float r, g, b, a;
     } backgroundColor;
 
-    bool fullWindowView = false;
+
+    float gameSpeed = 0.5f;
 
 public:
     PhysicalEngine();
@@ -46,6 +47,13 @@ private:
     void updateGame(std::chrono::steady_clock::time_point &start);
 
     void updateScreen();
+
+private:
+    void clearScreen();
+
+    void updateViewport(int width, int height);
+
+    void toogleFullScreen();
 };
 
 
