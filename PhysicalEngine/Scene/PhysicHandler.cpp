@@ -1,19 +1,19 @@
-#include "Integrator.h"
+#include "PhysicHandler.h"
 #include <iostream>
 #include <iterator>
 #include <chrono>
 #include "Components/Rigidbody/Rigidbody.h"
 
-Integrator::Integrator() {
+PhysicHandler::PhysicHandler() {
 
 }
 
-void Integrator::AddIntegrable(Rigidbody *integrable) {
+void PhysicHandler::AddIntegrable(Rigidbody *integrable) {
     m_integrableList.push_back(integrable);
 }
 
 
-void Integrator::UpdateAll(double time) {
+void PhysicHandler::UpdateAll(double time) {
     m_fixedDeltaTime += static_cast<float>(time);
     m_timeToAdjustFrameRate += static_cast<float>(time);
     if (m_timeToAdjustFrameRate > 1 / m_fixeFrameRate) {
@@ -31,7 +31,7 @@ void Integrator::UpdateAll(double time) {
 
 }
 
-void Integrator::boucle() {
+void PhysicHandler::boucle() {
     //double deltaTime=0;
     //int numbTest = 0;
     //while (!m_StopPhysics) {

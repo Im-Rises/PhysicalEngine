@@ -5,7 +5,7 @@
 
 class Rigidbody;
 
-class Integrator {
+class PhysicHandler {
 
 private:
     std::list<Rigidbody *> m_integrableList;
@@ -15,7 +15,7 @@ private:
 
 public:
 
-    Integrator();
+    PhysicHandler();
 
     void AddIntegrable(Rigidbody *integrable);
 

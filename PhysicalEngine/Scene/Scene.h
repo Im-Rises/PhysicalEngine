@@ -5,8 +5,8 @@
 
 #include "../Vector3d/Vector3d.h"
 #include "Camera.h"
-#include "ForceHandler.h"
-#include "Integrator.h"
+#include "PhysicHandler.h"
+#include "PhysicHandler.h"
 
 class GameObject;
 
@@ -14,10 +14,10 @@ class Scene {
 private:
     int windowHeight, windowWidth;
     Camera camera;
-    ForceHandler forceHandler;
+    PhysicHandler physicHandler;
     std::vector<GameObject *> gameObjects;
     bool wireFrame = false;
-    Integrator m_integrator;
+    PhysicHandler m_integrator;
 
     unsigned int fbo;
 

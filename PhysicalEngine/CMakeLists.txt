@@ -4,11 +4,11 @@ include_directories("${CMAKE_SOURCE_DIR}/dependencies/glm")
 include_directories("${CMAKE_SOURCE_DIR}/dependencies/imgui")
 include_directories("${CMAKE_SOURCE_DIR}/dependencies/stb")
 
-file(GLOB SRCS_HEADERS_IMGUI "${CMAKE_SOURCE_DIR}/dependencies/imgui/*.cpp" "${CMAKE_SOURCE_DIR}/dependencies/imgui/*.h")
-file(GLOB SRCS_HEADERS_GLAD "${CMAKE_SOURCE_DIR}/dependencies/glad/**/*.c" "${CMAKE_SOURCE_DIR}/dependencies/glad/**/*.h")
+file(GLOB_RECURSE SRCS_HEADERS_IMGUI "${CMAKE_SOURCE_DIR}/dependencies/imgui/*.cpp" "${CMAKE_SOURCE_DIR}/dependencies/imgui/*.h")
+file(GLOB_RECURSE SRCS_HEADERS_GLAD "${CMAKE_SOURCE_DIR}/dependencies/glad/*.c" "${CMAKE_SOURCE_DIR}/dependencies/glad/*.h")
 
-set(SRCS main.cpp PhysicalEngine.cpp Scene/Scene.cpp Scene/Camera.cpp InputManager.cpp Scene/GameObject.cpp Scene/Shader/Shader.cpp Vector3d/Vector3d.cpp Scene/Mesh/Mesh.cpp Scene/Mesh/Sphere/Sphere.cpp Scene/Mesh/Cuboid/Cube.cpp Scene/Mesh/Cuboid/CuboidRectangle.cpp Scene/Mesh/Cuboid/MyCube.cpp "Scene/Mesh/Cuboid/MyCubeUseIndice.cpp" "Scene/Integrator.cpp" "Game.cpp" "Scene/Components/Particule/Particule.cpp" "Scene/Components/Component.cpp" "Scene/ForceHandler.cpp")
-set(HEADERS PhysicalEngine.h Scene/Scene.h Scene/Camera.h InputManager.h Scene/GameObject.h Scene/Shader/Shader.h Vector3d/Vector3d.h Scene/Mesh/Mesh.h Scene/Mesh/Sphere/Sphere.h Scene/Mesh/Cuboid/Cube.h Scene/Mesh/Cuboid/CuboidRectangle.h Scene/Mesh/Cuboid/MyCube.h "Scene/Components/Rigidbody/Rigidbody.h" "Scene/Mesh/Cuboid/MyCubeUseIndice.h" "Scene/Integrator.h" "Game.h" "Scene/Components/Particule/Particule.h" "Scene/Components/Component.h" "Scene/ForceHandler.h")
+file(GLOB_RECURSE SRCS "${CMAKE_SOURCE_DIR}/PhysicalEngine/*.cpp")
+file(GLOB_RECURSE HEADERS "${CMAKE_SOURCE_DIR}/PhysicalEngine/*.h")
 
 add_executable(${PROJECT_NAME} ${SRCS} ${HEADERS} ${SRCS_HEADERS_IMGUI} ${SRCS_HEADERS_GLAD})
 
