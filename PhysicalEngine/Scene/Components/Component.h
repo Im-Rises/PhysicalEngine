@@ -1,9 +1,11 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
+#include <string>
 
 class Component {
-private:
+protected:
+    std::string name = "Component";
 
 public:
     Component();

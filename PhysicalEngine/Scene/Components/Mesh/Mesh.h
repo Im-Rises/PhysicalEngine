@@ -5,8 +5,11 @@
 #include <iostream>
 #include <vector>
 
+#include <string>
 
 class Mesh {
+private:
+    std::string name = "Mesh";
 
 protected:
     std::vector<float> m_points;
@@ -25,6 +28,8 @@ public:
     const std::vector<float> &getNormales();
 
     const bool &getVerticesUseIndices() const;
+
+    const std::string &getName() const;
 
 #pragma endregion
 

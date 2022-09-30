@@ -1,6 +1,7 @@
 #include "Particule.h"
 
 Particule::Particule(const Particule &particule) {
+    name = particule.name;
     m_acceleration = Vector3d(particule.m_acceleration);
     m_speed = Vector3d(particule.m_speed);
     m_position = Vector3d(particule.m_position);

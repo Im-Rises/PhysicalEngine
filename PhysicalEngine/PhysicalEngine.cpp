@@ -163,8 +163,6 @@ void PhysicalEngine::handleGui() {
 
         {
             ImGui::Begin("Hierarchy");
-//            for (int i = 0; i < scene->getNbGameObjects(); i++)
-//                ImGui::Text("%s", scene->getGameObjectName(i).c_str());
             for (auto &gameObject: scene->getGameObjects())
                 ImGui::Text("%s", gameObject->getName().c_str());
             ImGui::End();

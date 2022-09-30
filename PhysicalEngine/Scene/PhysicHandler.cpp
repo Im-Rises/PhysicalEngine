@@ -8,12 +8,12 @@ PhysicHandler::PhysicHandler() {
 
 }
 
-void PhysicHandler::AddIntegrable(Rigidbody *integrable) {
+void PhysicHandler::addIntegrable(Rigidbody *integrable) {
     m_integrableList.push_back(integrable);
 }
 
 
-void PhysicHandler::UpdateAll(float time) {
+void PhysicHandler::updateAll(float time) {
     m_fixedDeltaTime += static_cast<float>(time);
     m_timeToAdjustFrameRate += static_cast<float>(time);
     if (m_timeToAdjustFrameRate > 1 / m_fixeFrameRate) {

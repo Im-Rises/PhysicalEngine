@@ -6,7 +6,6 @@
 
 
 class Particule : public Rigidbody {
-
 private:
     Vector3d m_speed;
     Vector3d m_acceleration;
@@ -15,7 +14,10 @@ public:
 #pragma region Constructeur
 
 
-    Particule() : m_speed(0, 0, 0), m_acceleration(0, 0, 0) { m_position = Vector3d(0, 0, 0); };
+    Particule() : m_speed(0, 0, 0), m_acceleration(0, 0, 0) {
+        m_position = Vector3d(0, 0, 0);
+        name = "Particule";
+    };
 
     /// <summary>
     /// Constructeur de particule

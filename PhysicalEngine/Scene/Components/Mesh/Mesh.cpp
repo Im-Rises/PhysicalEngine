@@ -18,4 +18,8 @@ const bool &Mesh::getVerticesUseIndices() const {
     return verticesUseIndices;
 }
 
+const std::string &Mesh::getName() const {
+    return name;
+}
+
 

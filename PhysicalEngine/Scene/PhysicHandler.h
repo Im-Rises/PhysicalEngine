@@ -17,9 +17,9 @@ public:
 
     PhysicHandler();
 
-    void AddIntegrable(Rigidbody *integrable);
+    void addIntegrable(Rigidbody *integrable);
 
-    void UpdateAll(float time);
+    void updateAll(float time);
 
     void boucle();
 
