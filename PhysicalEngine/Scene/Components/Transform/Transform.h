@@ -3,8 +3,8 @@
 
 
 class Transform {
-private:
-    float x, y, z;
+public:
+    float positionX, positionY, positionZ;
     float rotationX, rotationY, rotationZ;
     float scaleX, scaleY, scaleZ;
 
@@ -12,6 +12,8 @@ public:
     Transform();
 
     ~Transform();
+
+
 };
 
 

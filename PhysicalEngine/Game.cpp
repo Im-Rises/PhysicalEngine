@@ -20,8 +20,7 @@ void Game::setSpeed(float speed) {
 void Game::start(Scene *scene) {
     GameObject *gameobject = new GameObject(Sphere(1, 20, 20));
     scene->addGameObject(gameobject);
-    gameobject->AddRigidbody(m_p);
-    scene->addPhysicalComponent();
+    gameobject->addComponent(m_p);
 }
 
 void Game::goLeft() {

@@ -46,8 +46,7 @@ public:
 
     void draw(int display_w, int display_h, glm::mat4 view, float fov);
 
-//    void AddRigidbody(Rigidbody *integrable);
-
+    void addComponent(Component *component);
 
 public:
     std::string getName();

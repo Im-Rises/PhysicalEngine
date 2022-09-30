@@ -5,9 +5,9 @@
 #include "Transform.h"
 
 Transform::Transform() {
-    x = 0;
-    y = 0;
-    z = 0;
+    positionX = 0;
+    positionY = 0;
+    positionZ = 0;
     rotationX = 0;
     rotationY = 0;
     rotationZ = 0;

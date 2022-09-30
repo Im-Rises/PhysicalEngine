@@ -64,31 +64,23 @@ void Scene::updateGameObjects() {
 //    m_integrator.UpdateAll(time);
 }
 
-//void Scene::addPhysicalComponent() {
-//    for (GameObject *gameObject: gameObjects) {
-//        if (gameObject->hasRigidbody()) {
-//            m_integrator.AddIntegrable(gameObject->getPtrRigidBody());
-//        }
-//    }
-//}
-
 void Scene::draw(int display_w, int display_h) {
     for (GameObject *gameObject: gameObjects) {
         gameObject->draw(display_w, display_h, camera.getViewMatrix(), camera.getFov());
     }
 }
 
-void Scene::translateCamera(Vector3d vector3D) {
-    camera.translate(vector3D);
-}
-
-void Scene::rotateCamera(Vector3d vector3D, float angle) {
-    camera.rotate(vector3D, angle);
-}
-
 void Scene::addGameObject(GameObject *gameObject) {
     gameObjects.push_back(gameObject);
 }
+
+//void Scene::translateCamera(Vector3d vector3D) {
+//    camera.translate(vector3D);
+//}
+//
+//void Scene::rotateCamera(Vector3d vector3D, float angle) {
+//    camera.rotate(vector3D, angle);
+//}
 
 bool *Scene::getPtrWireFrameState() {
     if (wireFrame) {

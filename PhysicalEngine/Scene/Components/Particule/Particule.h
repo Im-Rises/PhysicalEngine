@@ -85,6 +85,8 @@ public:
     /// <param name="time"></param>
     void recalculateAll(float time) override;
 
+    void update() override;
+
 #pragma endregion
 
 };

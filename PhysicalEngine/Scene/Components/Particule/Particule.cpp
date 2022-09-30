@@ -20,3 +20,7 @@ void Particule::recalculateAll(float time) {
     calculatePosition(time);
 
 }
+
+void Particule::update() {
+
+}

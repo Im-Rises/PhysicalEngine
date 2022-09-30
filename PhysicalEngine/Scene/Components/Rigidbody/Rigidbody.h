@@ -4,7 +4,7 @@
 #include "../../../Vector3d/Vector3d.h"
 #include "../Component.h"
 
-class Rigidbody {
+class Rigidbody : public Component {
 
 protected:
     Vector3d m_position;
