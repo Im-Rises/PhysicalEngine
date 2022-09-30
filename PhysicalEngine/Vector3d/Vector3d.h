@@ -5,7 +5,7 @@
 #include <iostream>
 
 class Vector3d {
-private:
+public:
     float m_x, m_y, m_z;
 
 public:

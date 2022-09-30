@@ -5,6 +5,7 @@
 #include "Shader/Shader.h"
 #include "Mesh/Mesh.h"
 #include "../Vector3d/Vector3d.h"
+#include "Transform.h"
 
 class Rigidbody;
 
@@ -14,24 +15,24 @@ class GameObject {
 private:
     std::string name;
 
-    bool wireFrame = false;
-
-    Vector3d position;
-    float width, height, depth;
-    float rotationX, rotationY, rotationZ;
-    float scaleX, scaleY, scaleZ;
-    float colorR, colorG, colorB, colorA;
-    Rigidbody *m_rigidBody = nullptr;
+    // Base components
+    Transform transform;
     Mesh mesh;
+
+    // Optional components
+    Rigidbody *m_rigidBody = nullptr;
+    std::vector<Component *> components;
+
+    // OpenGL elements
     unsigned int VBO, VAO, EBO;
     Shader shader;
 
-    std::vector<Component *> components;
 
+    // Engine other elements
     // std::vector<GameObject *> children;
 
 public:
-    GameObject(Mesh mesh);
+    GameObject(Mesh mesh, Transform transform);
 
 private:
     void create();
@@ -59,6 +60,8 @@ public:
     }
 
     std::string getName();
+
+    Vector3d *getPtrPosition();
 };
 
 

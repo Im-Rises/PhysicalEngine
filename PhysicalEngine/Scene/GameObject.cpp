@@ -7,15 +7,11 @@
 
 #include <utility>
 
-GameObject::GameObject(Mesh mesh) : shader("../../../../shaders/shader.vert", "../../../../shaders/shader.frag") {
+GameObject::GameObject(Mesh mesh, Transform transform) : shader("", "") {
     name = "GameObject";
+
     mesh.getVerticesUseIndices();
     this->mesh = std::move(mesh);
-
-    width = height = depth = 1;
-    rotationX = rotationY = rotationZ = 0;
-    scaleX = scaleY = scaleZ = 1;
-    //colorR = colorG = colorB = colorA = 1;
 
     create();
 }
@@ -106,4 +102,8 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
 
 std::string GameObject::getName() {
     return name;
+}
+
+Vector3d *GameObject::getPtrPosition() {
+    return &position;
 }

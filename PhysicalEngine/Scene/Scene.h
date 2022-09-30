@@ -54,6 +54,8 @@ public:
     bool *getWireFrameStatePtr();
 
     unsigned int getFrameBufferId();
+
+    GameObject *getPtrGameObjectByName(std::string name);
 };
 
 #endif //SCENE_H

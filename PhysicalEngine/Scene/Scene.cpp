@@ -11,7 +11,7 @@
 Scene::Scene(int windowWidth, int windowHeight) {
     this->windowWidth = windowWidth;
     this->windowHeight = windowHeight;
-//    gameObjects.push_back(new GameObject(MyCube(1)));
+    gameObjects.push_back(new GameObject(MyCube(1)));
 //    gameObjects.push_back(new GameObject(Sphere(1, 20, 20)));
 //    gameObjects.push_back(new GameObject(MyCube()));
 //    gameObjects.push_back(new GameObject(MyCubeUseIndice()));
@@ -112,6 +112,15 @@ bool *Scene::getWireFrameStatePtr() {
 
 unsigned int Scene::getFrameBufferId() {
     return fbo;
+}
+
+GameObject *Scene::getPtrGameObjectByName(std::string name) {
+    for (GameObject *gameObject: gameObjects) {
+        if (gameObject->getName() == name) {
+            return gameObject;
+        }
+    }
+    return nullptr;
 }
 
 
