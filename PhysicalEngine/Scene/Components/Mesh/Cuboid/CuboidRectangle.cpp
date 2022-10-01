@@ -23,7 +23,7 @@ CuboidRectangle::CuboidRectangle(float longueur, float hauteur, float profondeur
 
     auto norm = static_cast<float>(std::sqrt(std::pow(l2, 2) + std::pow(h2, 2) + std::pow(p2, 2)));
     for (auto &normalized: vertices)
-        normales.push_back(normalized / norm);
+        normals.push_back(normalized / norm);
 
     indices = {
             0, 1, 3,

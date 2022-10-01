@@ -25,16 +25,16 @@ void Mesh::drawGui() {
     }
 }
 
-const vector<float> &Mesh::getPoints() {
+const vector<float> &Mesh::getVertices() {
     return vertices;
 }
 
-const vector<unsigned int> &Mesh::getTriangles() {
+const vector<unsigned int> &Mesh::getIndices() {
     return indices;
 }
 
-const vector<float> &Mesh::getNormales() {
-    return normales;
+const vector<float> &Mesh::getNormals() {
+    return normals;
 }
 
 const bool &Mesh::getVerticesUseIndices() const {

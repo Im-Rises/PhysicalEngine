@@ -14,7 +14,7 @@ private:
 protected:
     std::vector<float> vertices;
     std::vector<unsigned int> indices;
-    std::vector<float> normales;
+    std::vector<float> normals;
     bool verticesUseIndices = true;
 
 public:
@@ -22,11 +22,11 @@ public:
 
 #pragma region Getter
 
-    const std::vector<float> &getPoints();
+    const std::vector<float> &getVertices();
 
-    const std::vector<unsigned int> &getTriangles();
+    const std::vector<unsigned int> &getIndices();
 
-    const std::vector<float> &getNormales();
+    const std::vector<float> &getNormals();
 
     const bool &getVerticesUseIndices() const;
 

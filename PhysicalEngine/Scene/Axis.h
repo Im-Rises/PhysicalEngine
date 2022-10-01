@@ -1,15 +1,15 @@
 #ifndef AXIS_H
 #define AXIS_H
 
-//#include "../Shader/Shader.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
+#include "../Shader/Shader.h"
 
 class Axis {
 private:
     unsigned int VBO, VAO;
-//    Shader shader;
+    Shader shader;
     float vertices[18] = {
             0.75f, 0.0f, 0.0f,// Line 1 (R)
             0.95f, 0.0f, 0.0f,

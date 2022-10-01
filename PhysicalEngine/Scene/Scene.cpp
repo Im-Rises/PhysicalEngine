@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include "Components/Mesh/Mesh.h"
+#include "Components/Mesh/Cuboid/MyCube.h"
 #include "Components/Mesh/Cuboid/Cube.h"
 #include "Components/Mesh/Cuboid/CuboidRectangle.h"
 #include "Components/Mesh/Sphere/Sphere.h"
@@ -13,6 +14,7 @@ Scene::Scene(int windowWidth, int windowHeight) {
     this->windowHeight = windowHeight;
 //    gameObjects.push_back(new GameObject(Cube(1)));
 //    gameObjects.push_back(new GameObject(Sphere(1, 20, 20)));
+//    gameObjects.push_back(new GameObject(MyCube(1)));
     create();
 }
 
@@ -54,16 +56,21 @@ void Scene::destroy() {
 }
 
 void Scene::updateGameObjects(float deltaTime) {
+    // Update the game objects
     for (GameObject *gameObject: gameObjects) {
         gameObject->update();
     }
+
+    // Update the physic handler
     physicHandler.updateAll(deltaTime);
 }
 
 void Scene::draw(int display_w, int display_h) {
+    // Draw the gameObjects
     for (GameObject *gameObject: gameObjects) {
         gameObject->draw(display_w, display_h, camera.getViewMatrix(), camera.getFov());
     }
+    // Draw the axis
     if (showAxis)
         axis.draw(display_w, display_h, camera.getViewMatrix(), camera.getFov());
 }

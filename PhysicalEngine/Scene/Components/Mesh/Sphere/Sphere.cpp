@@ -34,9 +34,9 @@ void Sphere::generatePointsNormales(float radius, int rings, int sectors) {
             nx = x * lengthInv;
             ny = y * lengthInv;
             nz = z * lengthInv;
-            normales.push_back(nx);
-            normales.push_back(ny);
-            normales.push_back(nz);
+            normals.push_back(nx);
+            normals.push_back(ny);
+            normals.push_back(nz);
 
             //coordonn�es du vertex pour les textures  (s, t) entre [0, 1]
             /*

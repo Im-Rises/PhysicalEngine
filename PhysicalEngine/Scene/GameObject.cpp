@@ -7,7 +7,7 @@
 
 #include <utility>
 
-GameObject::GameObject(Mesh mesh) : shader("", "") {
+GameObject::GameObject(Mesh mesh) {
     name = "GameObject";
 
     mesh.getVerticesUseIndices();
@@ -28,7 +28,7 @@ void GameObject::create() {
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * mesh.getPoints().size(), mesh.getPoints().data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * mesh.getVertices().size(), mesh.getVertices().data(), GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
     glEnableVertexAttribArray(0);
@@ -41,8 +41,8 @@ void GameObject::create() {
     if (mesh.getVerticesUseIndices()) {
         glGenBuffers(1, &EBO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mesh.getTriangles().size(),
-                     mesh.getTriangles().data(),
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mesh.getIndices().size(),
+                     mesh.getIndices().data(),
                      GL_STATIC_DRAW);
     }
 
@@ -90,10 +90,10 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
     // Handle the VAO, VBO and EBO depending on the mesh type (with or without indices)
     if (mesh.getVerticesUseIndices()) {
         glBindVertexArray(VAO);
-        glDrawElements(GL_TRIANGLES, (GLsizei) mesh.getTriangles().size(), GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, (GLsizei) mesh.getIndices().size(), GL_UNSIGNED_INT, 0);
     } else {
         glBindVertexArray(VBO);
-        glDrawArrays(GL_TRIANGLES, 0, (GLsizei) mesh.getPoints().size());
+        glDrawArrays(GL_TRIANGLES, 0, mesh.getVertices().size() / 3);
     }
 }
 

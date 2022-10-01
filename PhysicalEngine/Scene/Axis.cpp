@@ -2,7 +2,7 @@
 
 #include "glad/glad.h"
 
-Axis::Axis() {
+Axis::Axis() : shader("", "") {
     create();
 }
 
@@ -18,6 +18,8 @@ void Axis::create() {
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
     glEnableVertexAttribArray(0);
+
+    shader.use();
 }
 
 Axis::~Axis() {
@@ -30,6 +32,7 @@ void Axis::destroy() {
 }
 
 void Axis::draw(int display_w, int display_h, glm::mat4 view, float fov) {
+    shader.use();
     glBindVertexArray(VBO);
     glDrawArrays(GL_LINE_STRIP, 0, 6);
 }
