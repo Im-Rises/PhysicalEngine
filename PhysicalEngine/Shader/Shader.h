@@ -16,7 +16,7 @@ private:
 public:
     Shader();
 
-    Shader(const char *vertexPath, const char *fragmentPath);
+    Shader(const char *vertexPathOrCode, const char *fragmentPathOrCode, const bool isDirectCode = false);
 
 private:
     void create(const char *vShaderCode, const char *fShaderCode);
