@@ -13,28 +13,28 @@ void Mesh::drawGui() {
         ImGui::Text("Y");
         ImGui::TableNextColumn();
         ImGui::Text("Z");
-//        for (int i = 0; i < m_points.size(); i += 3) {
+//        for (int i = 0; i < vertices.size(); i += 3) {
 //            ImGui::TableNextColumn();
-//            ImGui::Text("%f", m_points[i]);
+//            ImGui::Text("%f", vertices[i]);
 //            ImGui::TableNextColumn();
-//            ImGui::Text("%f", m_points[i + 1]);
+//            ImGui::Text("%f", vertices[i + 1]);
 //            ImGui::TableNextColumn();
-//            ImGui::Text("%f", m_points[i + 2]);
+//            ImGui::Text("%f", vertices[i + 2]);
 //        }
         ImGui::EndTable();
     }
 }
 
 const vector<float> &Mesh::getPoints() {
-    return m_points;
+    return vertices;
 }
 
 const vector<unsigned int> &Mesh::getTriangles() {
-    return m_triangles;
+    return indices;
 }
 
 const vector<float> &Mesh::getNormales() {
-    return m_normales;
+    return normales;
 }
 
 const bool &Mesh::getVerticesUseIndices() const {

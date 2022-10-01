@@ -12,6 +12,7 @@ class Component;
 
 class GameObject {
 private:
+    // Object name
     std::string name;
 
     // Base components
@@ -57,8 +58,6 @@ public:
     std::string getName();
 
     std::vector<Component *> getComponents() const;
-
-    float *getPtrTransformX();
 };
 
 

@@ -6,7 +6,7 @@
 #include "../Vector3d/Vector3d.h"
 #include "Camera.h"
 #include "PhysicHandler.h"
-#include "PhysicHandler.h"
+#include "Axis.h"
 
 class GameObject;
 
@@ -16,12 +16,14 @@ private:
     int windowHeight, windowWidth;
 
     // Scene elements
+    Axis axis;
     Camera camera;
     PhysicHandler physicHandler;
     std::vector<GameObject *> gameObjects;
 
     // View settings
     bool wireFrame = false;
+    bool showAxis = true;
 
     // OpenGL framebuffer
     unsigned int fbo;
@@ -55,6 +57,8 @@ public:
     std::vector<GameObject *> getGameObjects() const;
 
     bool *getPtrWireFrameState();
+
+    bool *getPtrShowAxis();
 
     GameObject *getGameObjectByIndex(int index) const;
 };

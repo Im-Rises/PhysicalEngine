@@ -28,14 +28,15 @@ private:
 
     // Window variables
     bool isFullScreen = false;
+    float backgroundColor[4] = {};
     int windowWidth = 1580, windowHeight = 720;
-    struct {
-        float r, g, b, a;
-    } backgroundColor;
 
     // Variables for the game loop
     const int PHYSICAL_UPDATE_PER_SECOND = 50;
     GameObject *gameObject = nullptr;
+
+    // Widgets variables
+    char consoleBuffer[1024] = {};
 
 public:
     PhysicalEngine();

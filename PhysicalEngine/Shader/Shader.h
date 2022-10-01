@@ -1,7 +1,6 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include "glad/glad.h"
 #include <string>
 
 // GLM
@@ -23,6 +22,7 @@ private:
                                "{\n"
                                "    gl_Position = projection * view * model * vec4(aPos, 1.0f);\n"
                                "}\0";
+    
     const char *fragmentShader = "#version 330 core\n"
                                  "out vec4 FragColor;\n"
                                  "\n"
@@ -33,7 +33,7 @@ private:
     unsigned int ID;
 
 public:
-    Shader(const GLchar *vertexPath, const GLchar *fragmentPath);
+    Shader(const char *vertexPath, const char *fragmentPath);
 
     ~Shader();
 

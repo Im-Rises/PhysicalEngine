@@ -117,7 +117,3 @@ std::vector<Component *> GameObject::getComponents() const {
     return components;
 }
 
-float *GameObject::getPtrTransformX() {
-    return &transform.positionX;
-}
-

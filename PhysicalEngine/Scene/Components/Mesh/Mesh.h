@@ -12,9 +12,9 @@ private:
     std::string name = "Mesh";
 
 protected:
-    std::vector<float> m_points;
-    std::vector<unsigned int> m_triangles;
-    std::vector<float> m_normales;
+    std::vector<float> vertices;
+    std::vector<unsigned int> indices;
+    std::vector<float> normales;
     bool verticesUseIndices = true;
 
 public:

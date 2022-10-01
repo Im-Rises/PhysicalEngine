@@ -4,13 +4,13 @@
 
 CuboidRectangle::CuboidRectangle(float longueur, float hauteur, float profondeur) {
     verticesUseIndices = true;
-    
+
     float l2 = longueur / 2;
     float h2 = hauteur / 2;
     float p2 = profondeur / 2;
 
 
-    m_points = {
+    vertices = {
             l2, h2, p2,
             l2, h2, -p2,
             l2, -h2, p2,
@@ -22,10 +22,10 @@ CuboidRectangle::CuboidRectangle(float longueur, float hauteur, float profondeur
     };
 
     auto norm = static_cast<float>(std::sqrt(std::pow(l2, 2) + std::pow(h2, 2) + std::pow(p2, 2)));
-    for (auto &normalized: m_points)
-        m_normales.push_back(normalized / norm);
+    for (auto &normalized: vertices)
+        normales.push_back(normalized / norm);
 
-    m_triangles = {
+    indices = {
             0, 1, 3,
             0, 2, 3,
             0, 4, 6,

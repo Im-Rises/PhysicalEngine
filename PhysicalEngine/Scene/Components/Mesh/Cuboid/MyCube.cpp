@@ -6,7 +6,7 @@
 
 MyCube::MyCube(float size) {
     verticesUseIndices = false;
-    m_points = {
+    vertices = {
             -0.5f, -0.5f, -0.5f,
             0.5f, -0.5f, -0.5f,
             0.5f, 0.5f, -0.5f,
@@ -50,7 +50,7 @@ MyCube::MyCube(float size) {
             -0.5f, 0.5f, -0.5f,
     };
 
-    for (int i = 0; i < m_points.size(); i++) {
-        m_points[i] *= size;
+    for (int i = 0; i < vertices.size(); i++) {
+        vertices[i] *= size;
     }
 }

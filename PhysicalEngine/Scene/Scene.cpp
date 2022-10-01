@@ -8,6 +8,8 @@
 //#include "Components/Mesh/Sphere/Sphere.h"
 //#include "Components/Mesh/Cuboid/MyCubeUseIndice.h"
 
+#include "glad/glad.h"
+
 Scene::Scene(int windowWidth, int windowHeight) {
     this->windowWidth = windowWidth;
     this->windowHeight = windowHeight;
@@ -68,6 +70,8 @@ void Scene::draw(int display_w, int display_h) {
     for (GameObject *gameObject: gameObjects) {
         gameObject->draw(display_w, display_h, camera.getViewMatrix(), camera.getFov());
     }
+    if (showAxis)
+        axis.draw(display_w, display_h, camera.getViewMatrix(), camera.getFov());
 }
 
 void Scene::addGameObject(GameObject *gameObject) {
@@ -97,6 +101,10 @@ bool *Scene::getPtrWireFrameState() {
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
     return &wireFrame;
+}
+
+bool *Scene::getPtrShowAxis() {
+    return &showAxis;
 }
 
 GameObject *Scene::getGameObjectByIndex(int index) const {

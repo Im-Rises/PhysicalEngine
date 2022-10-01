@@ -26,17 +26,17 @@ void Sphere::generatePointsNormales(float radius, int rings, int sectors) {
             // vertex position (x, y, z)
             x = xy * cosf(sectorAngle);
             y = xy * sinf(sectorAngle);
-            m_points.push_back(x);
-            m_points.push_back(y);
-            m_points.push_back(z);
+            vertices.push_back(x);
+            vertices.push_back(y);
+            vertices.push_back(z);
 
             // vertex normal normalisé (nx, ny, nz)
             nx = x * lengthInv;
             ny = y * lengthInv;
             nz = z * lengthInv;
-            m_normales.push_back(nx);
-            m_normales.push_back(ny);
-            m_normales.push_back(nz);
+            normales.push_back(nx);
+            normales.push_back(ny);
+            normales.push_back(nz);
 
             //coordonn�es du vertex pour les textures  (s, t) entre [0, 1]
             /*
@@ -59,16 +59,16 @@ void Sphere::generateTriangles(float radius, int rings, int sectors) {
             // 2 triangles par (secteur,ring) sauf pour le premier et dernier ring
             // k1 => k2 => k1+1
             if (i != 0) {
-                m_triangles.push_back(k1);
-                m_triangles.push_back(k2);
-                m_triangles.push_back(k1 + 1);
+                indices.push_back(k1);
+                indices.push_back(k2);
+                indices.push_back(k1 + 1);
             }
 
             // k1+1 => k2 => k2+1
             if (i != (rings - 1)) {
-                m_triangles.push_back(k1 + 1);
-                m_triangles.push_back(k2);
-                m_triangles.push_back(k2 + 1);
+                indices.push_back(k1 + 1);
+                indices.push_back(k2);
+                indices.push_back(k2 + 1);
             }
 
         }

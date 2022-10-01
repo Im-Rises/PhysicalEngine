@@ -101,9 +101,10 @@ PhysicalEngine::PhysicalEngine() {
 
     ImPlot::CreateContext();
 
-    backgroundColor = {
-            0.45f, 0.55f, 0.60f, 1.00f
-    };
+    backgroundColor[0] = 0.45f;
+    backgroundColor[1] = 0.55f;
+    backgroundColor[2] = 0.60f;
+    backgroundColor[3] = 1.00f;
 
     scene = new Scene(windowWidth, windowHeight);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -162,22 +163,28 @@ void PhysicalEngine::handleGui() {
                         ImGui::GetIO().Framerate);
             ImGui::End();
         }
-
         {
             ImGui::Begin("Hierarchy");
             for (auto &gameObject: scene->getGameObjects())
                 ImGui::Text("%s", gameObject->getName().c_str());
             ImGui::End();
         }
-
         {
             ImGui::Begin("View tools");
+            ImGui::Text("Background color");
+            ImGui::ColorPicker4("Background color", (float *) backgroundColor);
             ImGui::Checkbox("Mesh: Fill/Line", scene->getPtrWireFrameState());
+            ImGui::Checkbox("Show axis", scene->getPtrShowAxis());
             ImGui::End();
         }
         {
-            ImGui::Begin("???");
-
+            ImGui::Begin("Console");
+            ImGui::InputTextMultiline("##console", consoleBuffer, IM_ARRAYSIZE(consoleBuffer),
+                                      ImVec2(-1.0f, ImGui::GetTextLineHeight() * 11),
+                                      ImGuiInputTextFlags_AllowTabInput);
+            ImGui::Button("Enter");
+            ImGui::SameLine();
+            ImGui::Button("Clear");
             ImGui::End();
         }
         {
@@ -188,7 +195,6 @@ void PhysicalEngine::handleGui() {
             ImPlot::EndPlot();
             ImGui::End();
         }
-
         {
             ImGui::Begin("Inspector");
             if (gameObject != nullptr) {
@@ -196,7 +202,6 @@ void PhysicalEngine::handleGui() {
                 if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen)) {
                     gameObject->drawTransformGui();
                 }
-//                ImGui::InputFloat("Transform X: ", gameObject->getPtrTransformX());
                 if (ImGui::CollapsingHeader("Mesh", ImGuiTreeNodeFlags_DefaultOpen)) {
                     gameObject->drawMeshGui();
                 }
@@ -208,13 +213,11 @@ void PhysicalEngine::handleGui() {
             }
             ImGui::End();
         }
-
         {
             ImGui::Begin("Project files");
 
             ImGui::End();
         }
-
         {
             ImGui::Begin("Scene View");
             {
@@ -262,9 +265,7 @@ void PhysicalEngine::updateScreen() {
 }
 
 void PhysicalEngine::clearScreen() {
-    glClearColor(backgroundColor.r, backgroundColor.g,
-                 backgroundColor.b,
-                 backgroundColor.a);
+    glClearColor(backgroundColor[0], backgroundColor[1], backgroundColor[2], backgroundColor[3]);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 

@@ -40,15 +40,15 @@ void Transform::drawGui() {
         ImGui::TableNextColumn();
         ImGui::Text("X:");
         ImGui::SameLine();
-        ImGui::InputFloat("##TransformRotationX", &positionX);
+        ImGui::InputFloat("##TransformRotationX", &rotationX);
         ImGui::TableNextColumn();
         ImGui::Text("Y:");
         ImGui::SameLine();
-        ImGui::InputFloat("##TransformRotationY", &positionY);
+        ImGui::InputFloat("##TransformRotationY", &rotationY);
         ImGui::TableNextColumn();
         ImGui::Text("Z:");
         ImGui::SameLine();
-        ImGui::InputFloat("##TransformRotationZ", &positionZ);
+        ImGui::InputFloat("##TransformRotationZ", &rotationZ);
         ImGui::EndTable();
     }
     ImGui::Text("Scale");
@@ -56,15 +56,15 @@ void Transform::drawGui() {
         ImGui::TableNextColumn();
         ImGui::Text("X:");
         ImGui::SameLine();
-        ImGui::InputFloat("##TransformScaleX", &positionX);
+        ImGui::InputFloat("##TransformScaleX", &scaleX);
         ImGui::TableNextColumn();
         ImGui::Text("Y:");
         ImGui::SameLine();
-        ImGui::InputFloat("##TransformScaleY", &positionY);
+        ImGui::InputFloat("##TransformScaleY", &scaleY);
         ImGui::TableNextColumn();
         ImGui::Text("Z:");
         ImGui::SameLine();
-        ImGui::InputFloat("##TransformScaleZ", &positionZ);
+        ImGui::InputFloat("##TransformScaleZ", &scaleZ);
         ImGui::EndTable();
     }
 }
