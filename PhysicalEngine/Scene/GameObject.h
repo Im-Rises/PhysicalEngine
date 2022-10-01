@@ -43,7 +43,7 @@ private:
     void destroy();
 
 public:
-    void update();
+    void update(float deltaTime);
 
     void draw(int display_w, int display_h, glm::mat4 view, float fov);
 

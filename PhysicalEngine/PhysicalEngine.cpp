@@ -143,7 +143,7 @@ PhysicalEngine::~PhysicalEngine() {
 void PhysicalEngine::start() {
     auto start = std::chrono::steady_clock::now();
 
-    m_game.start(scene);
+    game.start(scene);
 
     gameObject = scene->getGameObjectByIndex(0);
 
@@ -234,6 +234,12 @@ void PhysicalEngine::handleGui() {
             ImGui::End();
         }
         {
+            ImGui::Begin("Game settings");
+            ImGui::Text("Particle speed:");
+            ImGui::InputFloat("##PhysicalEngineParticleSpeed", game.getPtrSpeed(), 0.1f, 1.0f, "%.1f");
+            ImGui::End();
+        }
+        {
             ImGui::Begin("Scene View");
             {
                 ImGui::BeginChild("GameRender");
@@ -251,10 +257,10 @@ void PhysicalEngine::handleGui() {
 void PhysicalEngine::updateGame(std::chrono::steady_clock::time_point &start) {
     auto deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(
             std::chrono::steady_clock::now() - start).count();
-    if (deltaTime > 1000 / PHYSICAL_UPDATE_PER_SECOND) {
-        start = std::chrono::steady_clock::now();
-        scene->updateGameObjects(deltaTime / 1000.0f);
-    }
+//    if (deltaTime > 1000 / PHYSICAL_UPDATE_PER_SECOND) {
+    start = std::chrono::steady_clock::now();
+    scene->updateGameObjects(deltaTime / 1000.0f);
+//    }
 }
 
 void PhysicalEngine::updateScreen() {

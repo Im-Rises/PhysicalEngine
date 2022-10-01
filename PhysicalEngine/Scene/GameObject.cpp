@@ -67,7 +67,7 @@ void GameObject::destroy() {
 }
 
 
-void GameObject::update() {
+void GameObject::update(float deltaTime) {
     for (auto &component: components) {
         component->update();
     }

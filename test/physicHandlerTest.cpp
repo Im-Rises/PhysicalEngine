@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    PhysicHandler phsycalHandler;
-    phsycalHandler.boucle();
+//    PhysicHandler phsycalHandler;
+//    phsycalHandler.updateAll();
     return 0;
 }

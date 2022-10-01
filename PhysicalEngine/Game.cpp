@@ -15,14 +15,16 @@ Game::~Game() {
     delete m_p;
 }
 
-void Game::setSpeed(float speed) {
-    m_speed = speed;
-}
+//void Game::setSpeed(float speed) {
+//    m_speed = speed;
+//}
 
 void Game::start(Scene *scene) {
     GameObject *gameobject = new GameObject(Sphere(1, 20, 20));
     scene->addGameObject(gameobject);
     gameobject->addComponent(m_p);
+//    gameobject->addComponent(new Collider());
+//    gameobject->addComponent(new Particule());
 }
 
 void Game::goLeft() {
@@ -39,4 +41,12 @@ void Game::goUp() {
 
 void Game::goDown() {
     m_p->setSpeed(0, -m_speed, 0);
+}
+
+void Game::setSpeed(float speed) {
+    m_speed = speed;
+}
+
+float *Game::getPtrSpeed() {
+    return &m_speed;
 }

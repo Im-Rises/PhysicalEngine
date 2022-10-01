@@ -1,5 +1,5 @@
-set(SRCS_TEST "physicHandlerTest.cpp" "vector3dTest.cpp")
-#"particuleTest.cpp"
+set(SRCS_TEST "vector3dTest.cpp")
+#"particuleTest.cpp" "physicHandlerTest.cpp"
 
 set(HEADERS "../PhysicalEngine/Vector3d/Vector3d.h" "../PhysicalEngine/Scene/PhysicHandler.h")
 set(SRCS "../PhysicalEngine/Vector3d/Vector3d.cpp" "../PhysicalEngine/Scene/PhysicHandler.cpp")

@@ -24,7 +24,7 @@ private:
     // Window, Scene and Game objects
     GLFWwindow *window;
     Scene *scene;
-    Game m_game;
+    Game game;
 
     // Window variables
     bool isFullScreen = false;

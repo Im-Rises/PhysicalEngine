@@ -11,7 +11,7 @@
 
 This is a simple physics engine written in C++ using Glad, GLFW, OpenGl3 and Dear ImGui.
 
-You can find a journal log [here](report/development_log_MOREL_REBOUL_CLAVEL.pdf).
+It is implemented using Fixed Framerate and Component Oriented Programming.
 
 > **Note**  
 > The project is a work in progress and is not yet complete.
@@ -28,6 +28,11 @@ You can find a journal log [here](report/development_log_MOREL_REBOUL_CLAVEL.pdf
 
 PLACEHOLDER
 -->
+
+## Report
+
+You can find a journal log [here](report/development_log_MOREL_REBOUL_CLAVEL.pdf).  
+It is also located in the `report` folder.
 
 ## Quickstart
 

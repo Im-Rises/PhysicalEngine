@@ -9,7 +9,7 @@ class PhysicHandler {
 
 private:
 //    std::list<Rigidbody *> m_integrableList;
-    int fixeFrameRate = 50;
+//    int fixeFrameRate = 50;
     float fixedDeltaTime = 0;
     float timeToAdjustFrameRate = 0;
 
