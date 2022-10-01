@@ -18,6 +18,7 @@ protected:
     bool verticesUseIndices = true;
 
 public:
+    void drawGui();
 
 #pragma region Getter
 

@@ -13,6 +13,10 @@ public:
     ~Component();
 
     virtual void update() = 0;
+
+    virtual void drawGui() = 0;
+
+    std::string getName() const;
 };
 
 

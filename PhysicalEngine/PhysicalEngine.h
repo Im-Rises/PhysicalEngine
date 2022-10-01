@@ -34,7 +34,6 @@ private:
     } backgroundColor;
 
     // Variables for the game loop
-    float gameSpeed = 0.5f;
     const int PHYSICAL_UPDATE_PER_SECOND = 50;
     GameObject *gameObject = nullptr;
 

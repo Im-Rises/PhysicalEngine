@@ -101,7 +101,23 @@ void GameObject::addComponent(Component *component) {
     components.push_back(component);
 }
 
+void GameObject::drawTransformGui() {
+    transform.drawGui();
+}
+
+void GameObject::drawMeshGui() {
+    mesh.drawGui();
+}
+
 std::string GameObject::getName() {
     return name;
+}
+
+std::vector<Component *> GameObject::getComponents() const {
+    return components;
+}
+
+float *GameObject::getPtrTransformX() {
+    return &transform.positionX;
 }
 

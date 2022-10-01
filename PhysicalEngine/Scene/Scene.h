@@ -55,6 +55,8 @@ public:
     std::vector<GameObject *> getGameObjects() const;
 
     bool *getPtrWireFrameState();
+
+    GameObject *getGameObjectByIndex(int index) const;
 };
 
 #endif //SCENE_H

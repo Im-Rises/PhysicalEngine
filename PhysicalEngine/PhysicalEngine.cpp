@@ -129,6 +129,8 @@ void PhysicalEngine::start() {
 
     m_game.start(scene);
 
+    gameObject = scene->getGameObjectByIndex(0);
+
     //Game loop
     while (!glfwWindowShouldClose(window)) {
 
@@ -175,8 +177,7 @@ void PhysicalEngine::handleGui() {
         }
         {
             ImGui::Begin("Speed handler");
-            ImGui::InputFloat("Speed", &gameSpeed, 0.1f, 1.0f, "%0.2f", ImGuiInputTextFlags_AllowTabInput);
-            m_game.setSpeed(gameSpeed);
+
             ImGui::End();
         }
         {
@@ -191,13 +192,19 @@ void PhysicalEngine::handleGui() {
         {
             ImGui::Begin("Inspector");
             if (gameObject != nullptr) {
-//                gameObject->drawTransformGui();
-//                gameObject->drawMeshGui();
-//                for (Component component: gameObject->getComponents()) {
-//                    if (ImGui::CollapsingHeader(component.getName().c_str())) {
-//                      component.drawGui();
-//                    }
-//                }
+                ImGui::Text("Name: %s", gameObject->getName().c_str());
+                if (ImGui::CollapsingHeader("Transform")) {
+                    gameObject->drawTransformGui();
+                }
+//                ImGui::InputFloat("Transform X: ", gameObject->getPtrTransformX());
+                if (ImGui::CollapsingHeader("Mesh")) {
+                    gameObject->drawMeshGui();
+                }
+                for (Component *component: gameObject->getComponents()) {
+                    if (ImGui::CollapsingHeader(component->getName().c_str())) {
+                        component->drawGui();
+                    }
+                }
             }
             ImGui::End();
         }

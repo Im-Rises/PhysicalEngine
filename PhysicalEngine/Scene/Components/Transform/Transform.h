@@ -16,6 +16,8 @@ public:
 
     ~Transform();
 
+public:
+    void drawGui();
 
 };
 

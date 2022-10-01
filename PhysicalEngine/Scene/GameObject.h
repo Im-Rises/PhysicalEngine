@@ -49,7 +49,16 @@ public:
     void addComponent(Component *component);
 
 public:
+    void drawTransformGui();
+
+    void drawMeshGui();
+
+public:
     std::string getName();
+
+    std::vector<Component *> getComponents() const;
+
+    float *getPtrTransformX();
 };
 
 

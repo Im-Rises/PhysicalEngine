@@ -99,3 +99,7 @@ bool *Scene::getPtrWireFrameState() {
     return &wireFrame;
 }
 
+GameObject *Scene::getGameObjectByIndex(int index) const {
+    return gameObjects[index];
+}
+

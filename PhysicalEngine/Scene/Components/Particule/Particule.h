@@ -89,6 +89,8 @@ public:
 
     void update() override;
 
+    void drawGui() override;
+
 #pragma endregion
 
 };
