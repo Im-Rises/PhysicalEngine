@@ -176,7 +176,7 @@ void PhysicalEngine::handleGui() {
             ImGui::End();
         }
         {
-            ImGui::Begin("Speed handler");
+            ImGui::Begin("???");
 
             ImGui::End();
         }
@@ -193,15 +193,15 @@ void PhysicalEngine::handleGui() {
             ImGui::Begin("Inspector");
             if (gameObject != nullptr) {
                 ImGui::Text("Name: %s", gameObject->getName().c_str());
-                if (ImGui::CollapsingHeader("Transform")) {
+                if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen)) {
                     gameObject->drawTransformGui();
                 }
 //                ImGui::InputFloat("Transform X: ", gameObject->getPtrTransformX());
-                if (ImGui::CollapsingHeader("Mesh")) {
+                if (ImGui::CollapsingHeader("Mesh", ImGuiTreeNodeFlags_DefaultOpen)) {
                     gameObject->drawMeshGui();
                 }
                 for (Component *component: gameObject->getComponents()) {
-                    if (ImGui::CollapsingHeader(component->getName().c_str())) {
+                    if (ImGui::CollapsingHeader(component->getName().c_str(), ImGuiTreeNodeFlags_DefaultOpen)) {
                         component->drawGui();
                     }
                 }
