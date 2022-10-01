@@ -1,5 +1,7 @@
 #include "Vector3d.h"
 
+#include <cmath>
+
 using namespace std;
 
 Vector3d::Vector3d() {
@@ -89,6 +91,10 @@ Vector3d Vector3d::operator=(const Vector3d &vec) {
 
 bool Vector3d::operator==(const Vector3d &vec) {
     return (m_x == vec.m_x && m_y == vec.m_y && m_z == vec.m_z);
+}
+
+bool Vector3d::operator!=(const Vector3d &vec) {
+    return !(*this == vec);
 }
 
 float Vector3d::norm() {
