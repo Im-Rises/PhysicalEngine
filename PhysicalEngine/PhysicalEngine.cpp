@@ -74,15 +74,26 @@ PhysicalEngine::PhysicalEngine() {
 
     // Create window with graphics context
     window = glfwCreateWindow(windowWidth, windowHeight, PROJECT_NAME, NULL, NULL);
+
+    // Check if window was created
     if (window == NULL)
         exit(1);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // Enable vsync
 
+    // Initialize GLFW callbacks
     glfwSetCursorPosCallback(window, InputManager::cursor_position_callback);
     glfwSetWindowUserPointer(window, this);
     glfwSetKeyCallback(window, InputManager::key_callback);
 
+    // Center window
+    GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+    const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+    auto xpos = mode->width / 2 - windowWidth / 2;
+    auto ypos = mode->height / 2 - windowHeight / 2;
+    glfwSetWindowPos(window, xpos, ypos);
+
+    // Initialize OpenGL loader
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
         exit(1);
 
@@ -101,12 +112,16 @@ PhysicalEngine::PhysicalEngine() {
 
     ImPlot::CreateContext();
 
+    // Setup background color
     backgroundColor[0] = 0.45f;
     backgroundColor[1] = 0.55f;
     backgroundColor[2] = 0.60f;
     backgroundColor[3] = 1.00f;
 
+    // Setup scene
     scene = new Scene(windowWidth, windowHeight);
+
+    // Bind default frame buffer
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 

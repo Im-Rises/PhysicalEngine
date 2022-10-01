@@ -2,28 +2,26 @@
 
 #include "GameObject.h"
 #include "Components/Mesh/Mesh.h"
-//#include "Components/Mesh/Cuboid/Cube.h"
-//#include "Components/Mesh/Cuboid/CuboidRectangle.h"
-//#include "Components/Mesh/Cuboid/MyCube.h"
-//#include "Components/Mesh/Sphere/Sphere.h"
-//#include "Components/Mesh/Cuboid/MyCubeUseIndice.h"
+#include "Components/Mesh/Cuboid/Cube.h"
+#include "Components/Mesh/Cuboid/CuboidRectangle.h"
+#include "Components/Mesh/Sphere/Sphere.h"
 
 #include "glad/glad.h"
 
 Scene::Scene(int windowWidth, int windowHeight) {
     this->windowWidth = windowWidth;
     this->windowHeight = windowHeight;
-//    gameObjects.push_back(new GameObject(MyCube(1)));
+//    gameObjects.push_back(new GameObject(Cube(1)));
 //    gameObjects.push_back(new GameObject(Sphere(1, 20, 20)));
-//    gameObjects.push_back(new GameObject(MyCube()));
-//    gameObjects.push_back(new GameObject(MyCubeUseIndice()));
     create();
 }
 
 void Scene::create() {
+    // Create the framebuffer
     glGenFramebuffers(1, &fbo);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
+    // Create the placeholder texture
     unsigned int textureColorbuffer;
     glGenTextures(1, &textureColorbuffer);
     glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
@@ -32,6 +30,7 @@ void Scene::create() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
 
+    // Create the placeholder render buffer
     unsigned int rbo;
     glGenRenderbuffers(1, &rbo);
     glBindRenderbuffer(GL_RENDERBUFFER, rbo);
@@ -54,11 +53,6 @@ void Scene::destroy() {
     glDeleteFramebuffers(1, &fbo);
 }
 
-void Scene::updateViewport(int width, int height) {
-    windowWidth = width;
-    windowHeight = height;
-}
-
 void Scene::updateGameObjects(float deltaTime) {
     for (GameObject *gameObject: gameObjects) {
         gameObject->update();
@@ -72,6 +66,11 @@ void Scene::draw(int display_w, int display_h) {
     }
     if (showAxis)
         axis.draw(display_w, display_h, camera.getViewMatrix(), camera.getFov());
+}
+
+void Scene::updateViewport(int width, int height) {
+    windowHeight = height;
+    windowWidth = width;
 }
 
 void Scene::addGameObject(GameObject *gameObject) {

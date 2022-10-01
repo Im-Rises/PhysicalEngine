@@ -3,25 +3,20 @@
 
 #include <list>
 
-class Rigidbody;
+//class Rigidbody;
 
 class PhysicHandler {
 
 private:
-    std::list<Rigidbody *> m_integrableList;
-    int m_fixeFrameRate = 50;
-    float m_fixedDeltaTime = 0;
-    float m_timeToAdjustFrameRate = 0;
+//    std::list<Rigidbody *> m_integrableList;
+    int fixeFrameRate = 50;
+    float fixedDeltaTime = 0;
+    float timeToAdjustFrameRate = 0;
 
 public:
-
     PhysicHandler();
 
-    void addIntegrable(Rigidbody *integrable);
-
     void updateAll(float time);
-
-    void boucle();
 
 };
 
