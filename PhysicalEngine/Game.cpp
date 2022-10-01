@@ -4,6 +4,8 @@
 #include "Scene/Components/Mesh/Sphere/Sphere.h"
 #include "Scene/Scene.h"
 #include "Scene/Components/Particule/Particule.h"
+#include "Scene/Components/Rigidbody/Rigidbody.h"
+#include "Scene/Components/Collider/Collider.h"
 
 Game::Game() {
     m_p = new Particule();

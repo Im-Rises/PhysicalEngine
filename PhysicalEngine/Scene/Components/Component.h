@@ -4,11 +4,11 @@
 #include <string>
 
 class Component {
-protected:
-    std::string name = "Component";
+private:
+    std::string name;
 
 public:
-    Component();
+    Component(std::string name);
 
     ~Component();
 

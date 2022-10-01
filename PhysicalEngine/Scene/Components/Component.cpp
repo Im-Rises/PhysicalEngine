@@ -1,7 +1,7 @@
 #include "Component.h"
 
-Component::Component() {
-
+Component::Component(std::string name) {
+    this->name = name;
 }
 
 Component::~Component() {

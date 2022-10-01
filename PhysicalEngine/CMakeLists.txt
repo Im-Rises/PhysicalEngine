@@ -21,3 +21,4 @@ elseif (UNIX)
 else ()
     message(FATAL_ERROR "OS not configured in CMakeLists.txt")
 endif ()
+
