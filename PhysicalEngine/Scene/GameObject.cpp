@@ -2,6 +2,9 @@
 
 #include "glad/glad.h"
 
+#include "Components/Component.h"
+#include "Components/Rigidbody/Rigidbody.h"
+
 #include <utility>
 
 GameObject::GameObject(Mesh mesh) : shader("../../../../shaders/shader.vert", "../../../../shaders/shader.frag") {
@@ -51,6 +54,9 @@ void GameObject::create() {
 }
 
 GameObject::~GameObject() {
+    for (auto &component: components) {
+        delete component;
+    }
     destroy();
 }
 
@@ -66,23 +72,25 @@ void GameObject::destroy() {
 
 
 void GameObject::update() {
-//    for (auto &component : components) {
-//        component->update();
-//    }
+    for (auto &component: components) {
+        component->update();
+    }
+
     if (m_rigidBody != nullptr) {
-	position = m_rigidBody->getPosition();
+        position = m_rigidBody->getPosition();
     }
 }
 
-void GameObject::draw(int display_w, int display_h, glm::mat4 view) {
+void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
     // Matrix calculations
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
-    projection = glm::perspective(glm::radians(45.0f), (float) display_w / (float) display_h, 0.1f, 100.0f);
+    projection = glm::perspective(glm::radians(fov / 2), static_cast<float>(display_w) / static_cast<float>(display_h),
+                                  0.1f, 100.0f);
 
     //Shader use
     shader.use();
-    shader.setMat4("model", glm::translate(model,glm::vec3(-position.getx(),-position.gety(),-position.getz())));
+    shader.setMat4("model", glm::translate(model, glm::vec3(-position.getx(), -position.gety(), -position.getz())));
     shader.setMat4("view", view);
     shader.setMat4("projection", projection);
 

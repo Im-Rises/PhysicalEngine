@@ -3,8 +3,8 @@
 <p align="center">
       <img src="https://user-images.githubusercontent.com/59691442/183268126-b3d19e66-8f2d-463a-805e-ae6ef7cc6c01.png" alt="cmakeLogo" style="height:60px;"/>
       <img src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" alt="cppLogo" style="height:60px;"/>
-      <img src="https://user-images.githubusercontent.com/59691442/190315147-ec9dc33f-0090-4f0d-98ab-514eb1463e01.png" alt="glfwLogo" style="height:60px;"/>
       <img src="https://user-images.githubusercontent.com/59691442/190315010-0a84e171-a2bc-42a4-91c8-bb850960209c.png" alt="openglLogo" style="height:60px;"/>
+      <img src="https://user-images.githubusercontent.com/59691442/190315147-ec9dc33f-0090-4f0d-98ab-514eb1463e01.png" alt="glfwLogo" style="height:60px;"/>
 </p>
 
 ## Description
@@ -21,6 +21,7 @@ You can find a journal log [here](report/development_log_MOREL_REBOUL_CLAVEL.pdf
 |                                                    Mesh view                                                     |                                                  Wireframe view                                                  |
 |:----------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------:|
 | ![image1](https://user-images.githubusercontent.com/59691442/192190493-f1191715-268e-43e4-8f27-5ed0c2823dfa.png) | ![image2](https://user-images.githubusercontent.com/59691442/192190499-457463ae-7a34-432a-bb0b-063771021275.png) |
+|                                                                                                                  |                                                                                                                  |
 
 <!--
 ## Videos
@@ -103,7 +104,13 @@ TO modify the speed value, you can use the ImGui window named `Speed handler`.
 | Add speed to the left  | ←   |
 | Add speed to the right | →   |
 | Add speed forwardly    | ↑   |
-| Add speed rearwardly   | ↓   |
+| Add speed rearward     | ↓   |
+
+### User controls
+
+| Action            | Key |
+|-------------------|-----|
+| Toggle fullscreen | F11 |
 
 <!--
 | Description        | Keyboard | Mouse                           |
@@ -198,10 +205,6 @@ To compile the app, the first thing you need to do is install a C++ compiler:
 You also need to install Cmake:  
 <https://cmake.org>
 
-> **Note**  
-> If you're using Visual Studio, you can install CMake directly from the IDE (Visual Studio Installer).
-> Then you need to open the Project as a CMake Project, not a Visual Studio Project!
-
 Once your environment is set up, depending on your operating system you'll need to install some libs before compiling
 the project. Refer to the section below `Windows` or `Linux` or `MacOs`.
 
@@ -212,6 +215,10 @@ Windows users can directly compile the project by typing the following command a
 ```bash
 cmake .
 ```
+
+> **Note**  
+> If you're using Visual Studio, you can install CMake directly from the IDE (Visual Studio Installer).
+> Then you need to open the Project as a CMake Project, not a Visual Studio Project!
 
 ### Linux
 

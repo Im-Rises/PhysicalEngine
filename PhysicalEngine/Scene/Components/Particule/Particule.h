@@ -1,11 +1,11 @@
 #ifndef PARTICULE_H
 #define PARTICULE_H
 
-#include "../Integrable/Integrable.h"
-#include"../Vector3d/Vector3d.h"
+#include "../Rigidbody/Rigidbody.h"
+#include"../../../Vector3d/Vector3d.h"
 
 
-class Particule : public Integrable {
+class Particule : public Rigidbody {
 
 private:
     Vector3d m_speed;

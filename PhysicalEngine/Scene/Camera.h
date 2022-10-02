@@ -10,7 +10,7 @@
 class Camera {
 private:
     glm::mat4 viewMatrix;
-    double fov = glm::radians(90.0);
+    double fov = 90.0f;// In degrees
 
 public:
     Camera();
@@ -24,6 +24,8 @@ public:
     void rotate(Vector3d vector3D, float angle);
 
     glm::mat4 getViewMatrix();
+
+    float getFov();
 };
 
 

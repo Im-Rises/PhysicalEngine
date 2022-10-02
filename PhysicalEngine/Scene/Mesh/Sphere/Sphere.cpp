@@ -9,7 +9,7 @@ void Sphere::generatePointsNormales(float radius, int rings, int sectors) {
     float x, y, z, xy;                             // vertex position
     float nx, ny, nz, lengthInv = 1.0f / radius; // vertex normal
     //float s, t;									 // vertex texture Coordonn�es
-    auto pi = (float) M_PI;
+    auto pi = static_cast<float>(M_PI);
     float sectorStep = 2 * pi / sectors;
     float ringStep = pi / rings;
     float sectorAngle, ringAngle;

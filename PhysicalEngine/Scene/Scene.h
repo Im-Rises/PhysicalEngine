@@ -5,21 +5,32 @@
 
 #include "../Vector3d/Vector3d.h"
 #include "Camera.h"
-#include "../Integrator/Integrator.h"
+#include "PhysicHandler.h"
+#include "PhysicHandler.h"
 
 class GameObject;
 
 class Scene {
 private:
+    int windowHeight, windowWidth;
     Camera camera;
+    PhysicHandler physicHandler;
     std::vector<GameObject *> gameObjects;
     bool wireFrame = false;
-	Integrator m_integrator;
+    PhysicHandler m_integrator;
+
+    unsigned int fbo;
 
 public:
-    Scene();
+    Scene(int windowWidth, int windowHeight);
+
+    void create();
 
     ~Scene();
+
+    void destroy();
+
+    void updateViewport(int width, int height);
 
     void update();
 
@@ -37,10 +48,12 @@ public:
 
     std::string getGameObjectName(int index);
 
-	void addGameObject(GameObject* gameObject);
+    void addGameObject(GameObject *gameObject);
 
 public:
     bool *getWireFrameStatePtr();
+
+    unsigned int getFrameBufferId();
 };
 
 #endif //SCENE_H
