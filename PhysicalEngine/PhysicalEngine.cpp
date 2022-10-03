@@ -197,8 +197,8 @@ void PhysicalEngine::handleGui() {
                 ImGui::EndMainMenuBar();
             }
             if (showAboutPopup)
-                ImGui::OpenPopup("AboutPopup");
-            if (ImGui::BeginPopupModal("AboutPopup", &showAboutPopup,
+                ImGui::OpenPopup("About PhysicalEngine##AboutPopup");
+            if (ImGui::BeginPopupModal("About PhysicalEngine##AboutPopup", &showAboutPopup,
                                        ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize |
                                        ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse)) {
                 ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), PROJECT_NAME);

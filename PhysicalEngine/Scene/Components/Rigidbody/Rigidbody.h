@@ -7,7 +7,7 @@
 class Rigidbody : public Component {
 
 protected:
-    Vector3d m_position;
+//    Vector3d m_position;
 
 public:
     Rigidbody();
@@ -20,7 +20,7 @@ public:
 
     void drawGui() override;
 
-    const Vector3d &getPosition() const;
+//    const Vector3d &getPosition() const;
 };
 
 #endif // !INTEGRABLE_H

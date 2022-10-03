@@ -42,6 +42,10 @@ release section of the GitHub page.
 Depending on you `operating system` you will need to install some libs, they are installed differently depending on your
 system, please follow one of the section below `Windows` or `Linux` or `MacOs`.
 
+> **Warning**
+> Be sure to put the `imgui.ini` file in the same folder as the executable.
+> You can find it in the `root` of the project. If you don't do this, the UI will not be displayed correctly.
+
 ### Windows
 
 <a href="https://github.com/Im-Rises/PhysicalEngine/releases/latest"><img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="cmakeLogo" style="height:40px;"/></a>
