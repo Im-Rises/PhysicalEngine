@@ -54,13 +54,13 @@ public:
 public:
     unsigned int getFrameBufferId() const;
 
-    std::vector<GameObject *> getGameObjects() const;
+    std::vector<GameObject *> getGameObjects();
 
     bool *getPtrWireFrameState();
 
     bool *getPtrShowAxis();
 
-    GameObject *getGameObjectByIndex(int index) const;
+    GameObject *getPtrGameObjectByIndex(int index) const;
 };
 
 #endif //SCENE_H

@@ -59,7 +59,7 @@ private:
 
     void updateViewport(int width, int height);
 
-    void toogleFullScreen();
+    void toggleFullScreen();
 };
 
 

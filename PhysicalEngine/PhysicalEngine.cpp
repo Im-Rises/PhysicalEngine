@@ -145,7 +145,7 @@ void PhysicalEngine::start() {
 
     game.start(scene);
 
-    gameObject = scene->getGameObjectByIndex(0);
+    gameObject = scene->getPtrGameObjectByIndex(0);
 
     //Game loop
     while (!glfwWindowShouldClose(window)) {
@@ -173,6 +173,46 @@ void PhysicalEngine::handleGui() {
     if (!isFullScreen) {
         /*------------------ImGui windows------------------*/
         {
+            static bool my_tool_active = true;
+            bool showAboutPopUp = false;
+            if (ImGui::BeginMainMenuBar()) {
+                if (ImGui::BeginMenu("File")) {
+                    if (ImGui::MenuItem("Open..", "Ctrl+O")) { /* Do stuff */ }
+                    if (ImGui::MenuItem("Save", "Ctrl+S")) { /* Do stuff */ }
+                    if (ImGui::MenuItem("Close", "Ctrl+W")) { my_tool_active = false; }
+                    if (ImGui::MenuItem("Exit", "Alt+F4")) { glfwSetWindowShouldClose(window, true); }
+                    ImGui::EndMenu();
+                }
+                if (ImGui::BeginMenu("View")) {
+                    if (ImGui::MenuItem("FullScreen", "F11")) { toggleFullScreen(); }
+                    ImGui::EndMenu();
+                }
+                if (ImGui::BeginMenu("Help")) {
+
+                    if (ImGui::MenuItem("About PhysicalEngine...")) {
+                        showAboutPopUp = true;
+                        ImGui::OpenPopup("popup");
+                    }
+                    ImGui::EndMenu();
+                }
+                ImGui::EndMainMenuBar();
+            }
+            if (showAboutPopUp)
+                ImGui::OpenPopup("About PhysicalEngine");
+            if (ImGui::BeginPopupModal("popup")) {
+                ImGui::Text("Lorem ipsum");
+                ImGui::EndPopup();
+            }
+        }
+        {
+            ImGui::Begin("Debug");
+            ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
+                        ImGui::GetIO().Framerate);
+            ImGui::Text("Window width: %d", windowWidth);
+            ImGui::Text("Window height: %d", windowHeight);
+            ImGui::End();
+        }
+        {
             ImGui::Begin("Framerate");
             ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
                         ImGui::GetIO().Framerate);
@@ -180,8 +220,15 @@ void PhysicalEngine::handleGui() {
         }
         {
             ImGui::Begin("Hierarchy");
-            for (auto &gameObject: scene->getGameObjects())
-                ImGui::Text("%s", gameObject->getName().c_str());
+            for (int i = 0; i < scene->getGameObjects().size(); i++) {
+                std::string label = gameObject == scene->getPtrGameObjectByIndex(i) ? "Selected" : "Select";
+                label += "##HierarchyGameObject" + std::to_string(i);
+                if (ImGui::Button(label.c_str())) {
+                    this->gameObject = scene->getPtrGameObjectByIndex(i);
+                }
+                ImGui::SameLine();
+                ImGui::Text("%s", scene->getPtrGameObjectByIndex(i)->getName().c_str());
+            }
             ImGui::End();
         }
         {
@@ -296,7 +343,7 @@ void PhysicalEngine::updateViewport(int width, int height) {
 }
 
 
-void PhysicalEngine::toogleFullScreen() {
+void PhysicalEngine::toggleFullScreen() {
     GLFWmonitor *monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode *mode = glfwGetVideoMode(monitor);
     if (isFullScreen) {

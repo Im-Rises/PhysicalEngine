@@ -88,12 +88,11 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
     shader.setMat4("projection", projection);
 
     // Handle the VAO, VBO and EBO depending on the mesh type (with or without indices)
+    glBindVertexArray(VAO);
     if (mesh.getVerticesUseIndices()) {
-        glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, (GLsizei) mesh.getIndices().size(), GL_UNSIGNED_INT, 0);
     } else {
-        glBindVertexArray(VBO);
-        glDrawArrays(GL_TRIANGLES, 0, mesh.getVertices().size() / 3);
+        glDrawArrays(GL_TRIANGLES, 0, (GLsizei) mesh.getVertices().size());
     }
 }
 

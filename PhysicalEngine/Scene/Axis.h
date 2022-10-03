@@ -10,13 +10,13 @@ class Axis {
 private:
     unsigned int VBO, VAO;
     Shader shader;
-    float vertices[18] = {
-            0.75f, -0.5f, 0.0f,// Line 1 (R)
-            0.95f, -0.5f, 0.0f,
-            0.75f, -0.5f, 0.0f,// Line 2 (G)
-            0.75f, -0.30f, 0.0f,
-            0.75f, -0.5f, 0.0f,// Line 3 (B)
-            0.75f, -0.5f, 0.20f,
+    float vertices[36] = {
+            0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,// Line 1 (R)
+            0.95f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+            0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f,// Line 2 (G)
+            0.0f, 0.95f, 0.0f, 0.0f, 1.0f, 0.0f,
+            0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,// Line 3 (B)
+            0.0f, -0.95f, 0.0f, 0.0f, 0.0f, 1.0f,
     };
 
     static const char *vShaderCode;

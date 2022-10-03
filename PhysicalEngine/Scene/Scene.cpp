@@ -96,7 +96,7 @@ unsigned int Scene::getFrameBufferId() const {
     return fbo;
 }
 
-std::vector<GameObject *> Scene::getGameObjects() const {
+std::vector<GameObject *> Scene::getGameObjects() {
     return gameObjects;
 }
 
@@ -113,7 +113,7 @@ bool *Scene::getPtrShowAxis() {
     return &showAxis;
 }
 
-GameObject *Scene::getGameObjectByIndex(int index) const {
+GameObject *Scene::getPtrGameObjectByIndex(int index) const {
     return gameObjects[index];
 }
 

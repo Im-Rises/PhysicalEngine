@@ -59,7 +59,7 @@ void InputManager::keyPressed(GLFWwindow *window, int key, PhysicalEngine *engin
             break;
         }
         case GLFW_KEY_F11: {
-            engine->toogleFullScreen();
+            engine->toggleFullScreen();
             break;
         }
         default: {
