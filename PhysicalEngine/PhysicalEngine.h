@@ -3,6 +3,14 @@
 
 #define PROJECT_NAME "Physical Engine 3D"
 
+#define VERSION_MAJOR "0"
+#define VERSION_MINOR "1"
+#define VERSION_PATCH "5"
+
+#define PROJECT_VERSION VERSION_MAJOR "." VERSION_MINOR "." VERSION_PATCH
+
+#define PROJECT_GITHUB "https://github.com/Im-Rises/PhysicalEngine"
+
 #include <memory>
 #include <chrono>
 #include "Game.h"

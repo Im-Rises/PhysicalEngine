@@ -89,9 +89,9 @@ PhysicalEngine::PhysicalEngine() {
     // Center window
     GLFWmonitor *monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode *mode = glfwGetVideoMode(monitor);
-    auto xpos = mode->width / 2 - windowWidth / 2;
-    auto ypos = mode->height / 2 - windowHeight / 2;
-    glfwSetWindowPos(window, xpos, ypos);
+    auto xPos = mode->width / 2 - windowWidth / 2;
+    auto yPos = mode->height / 2 - windowHeight / 2;
+    glfwSetWindowPos(window, xPos, yPos);
 
     // Initialize OpenGL loader
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
@@ -174,7 +174,7 @@ void PhysicalEngine::handleGui() {
         /*------------------ImGui windows------------------*/
         {
             static bool my_tool_active = true;
-            bool showAboutPopUp = false;
+            static bool showAboutPopup = false;
             if (ImGui::BeginMainMenuBar()) {
                 if (ImGui::BeginMenu("File")) {
                     if (ImGui::MenuItem("Open..", "Ctrl+O")) { /* Do stuff */ }
@@ -190,32 +190,40 @@ void PhysicalEngine::handleGui() {
                 if (ImGui::BeginMenu("Help")) {
 
                     if (ImGui::MenuItem("About PhysicalEngine...")) {
-                        showAboutPopUp = true;
-                        ImGui::OpenPopup("popup");
+                        showAboutPopup = true;
                     }
                     ImGui::EndMenu();
                 }
                 ImGui::EndMainMenuBar();
             }
-            if (showAboutPopUp)
-                ImGui::OpenPopup("About PhysicalEngine");
-            if (ImGui::BeginPopupModal("popup")) {
-                ImGui::Text("Lorem ipsum");
+            if (showAboutPopup)
+                ImGui::OpenPopup("AboutPopup");
+            if (ImGui::BeginPopupModal("AboutPopup", &showAboutPopup,
+                                       ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize |
+                                       ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse)) {
+                ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), PROJECT_NAME);
+                ImGui::Text("Version: %s", PROJECT_VERSION);
+                ImGui::NewLine();
+                ImGui::Text("Developed by: ");
+                ImGui::Text("  - Quentin MOREL");
+                ImGui::Text("  - Clémence CLAVEL");
+                ImGui::Text("  - Gabriel REBOUL");
+                ImGui::NewLine();
+                ImGui::Text("Github: %s", PROJECT_GITHUB);
+                ImGui::NewLine();
+                if (ImGui::Button("Close")) {
+                    ImGui::CloseCurrentPopup();
+                    showAboutPopup = false;
+                }
                 ImGui::EndPopup();
             }
         }
         {
-            ImGui::Begin("Debug");
+            ImGui::Begin("Window info");
             ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
                         ImGui::GetIO().Framerate);
             ImGui::Text("Window width: %d", windowWidth);
             ImGui::Text("Window height: %d", windowHeight);
-            ImGui::End();
-        }
-        {
-            ImGui::Begin("Framerate");
-            ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
-                        ImGui::GetIO().Framerate);
             ImGui::End();
         }
         {
@@ -290,8 +298,8 @@ void PhysicalEngine::handleGui() {
             ImGui::Begin("Scene View");
             {
                 ImGui::BeginChild("GameRender");
-                ImVec2 wsize = ImGui::GetWindowSize();
-                ImGui::Image((ImTextureID) scene->getFrameBufferId(), wsize, ImVec2(0, 1), ImVec2(1, 0));
+                ImVec2 windowSize = ImGui::GetWindowSize();
+                ImGui::Image((ImTextureID) scene->getFrameBufferId(), windowSize, ImVec2(0, 1), ImVec2(1, 0));
                 ImGui::EndChild();
             }
             ImGui::End();
@@ -306,7 +314,7 @@ void PhysicalEngine::updateGame(std::chrono::steady_clock::time_point &start) {
             std::chrono::steady_clock::now() - start).count();
 //    if (deltaTime > 1000 / PHYSICAL_UPDATE_PER_SECOND) {
     start = std::chrono::steady_clock::now();
-    scene->updateGameObjects(deltaTime / 1000.0f);
+    scene->updateGameObjects((float) deltaTime / 1000.0f);
 //    }
 }
 
@@ -340,6 +348,10 @@ void PhysicalEngine::clearScreen() {
 void PhysicalEngine::updateViewport(int width, int height) {
     glViewport(0, 0, width, height);
     scene->updateViewport(width, height);
+    if (!isFullScreen) {
+        windowWidth = width;
+        windowHeight = height;
+    }
 }
 
 
@@ -347,9 +359,9 @@ void PhysicalEngine::toggleFullScreen() {
     GLFWmonitor *monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode *mode = glfwGetVideoMode(monitor);
     if (isFullScreen) {
-        auto xpos = mode->width / 2 - windowWidth / 2;
-        auto ypos = mode->height / 2 - windowHeight / 2;
-        glfwSetWindowMonitor(window, NULL, xpos, ypos, windowWidth, windowHeight, 0);
+        auto xPos = mode->width / 2 - windowWidth / 2;
+        auto yPos = mode->height / 2 - windowHeight / 2;
+        glfwSetWindowMonitor(window, NULL, xPos, yPos, windowWidth, windowHeight, 0);
         isFullScreen = false;
     } else {
         glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);

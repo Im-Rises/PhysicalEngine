@@ -44,19 +44,19 @@ public:
 
     const Vector3d &getSpeed() const;
 
-    const Vector3d &Particule::getAcceleration() const;
+    const Vector3d& getAcceleration() const;
 
-    void Particule::setPosition(float x, float y, float z);
+    void setPosition(float x, float y, float z);
 
-    void Particule::setPosition(const Vector3d &position);
+    void setPosition(const Vector3d &position);
 
-    void Particule::setSpeed(float x, float y, float z);
+    void setSpeed(float x, float y, float z);
 
-    void Particule::setSpeed(const Vector3d &speed);
+    void setSpeed(const Vector3d &speed);
 
-    void Particule::setAcceleration(float x, float y, float z);
+    void setAcceleration(float x, float y, float z);
 
-    void Particule::setAcceleration(const Vector3d &acceleration);
+    void setAcceleration(const Vector3d &acceleration);
 
 
 #pragma endregion
