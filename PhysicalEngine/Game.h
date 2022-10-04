@@ -1,22 +1,34 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Particule/Particule.h"
-#include "Scene/Scene.h"
+class Particule;
+
+class Scene;
 
 class Game {
 private:
-	Particule *m_p;
-	float m_speed=0.5f;
+    Particule *m_p;
+    float m_speed = 0.5f;
 
 public:
-	Game();
-	~Game();
-	void setSpeed(float speed);
-	void start(Scene *scene);
-	void goLeft();
-	void goRight();
-	void goUp();
-	void goDown();
+    Game();
+
+    ~Game();
+
+    void start(Scene *scene);
+
+    void goLeft();
+
+    void goRight();
+
+    void goUp();
+
+    void goDown();
+
+public:
+    void setSpeed(float speed);
+
+    float *getPtrSpeed();
 };
+
 #endif //GAME_H

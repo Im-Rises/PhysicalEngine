@@ -2,37 +2,39 @@
 #define GAMEOBJECT_H
 
 #include <vector>
-#include "Shader/Shader.h"
-#include "Mesh/Mesh.h"
+#include "../Shader/Shader.h"
 #include "../Vector3d/Vector3d.h"
-#include "../Integrable/Integrable.h"
+
+#include "Components/Mesh/Mesh.h"
+#include "Components/Transform/Transform.h"
+
+class Component;
 
 class GameObject {
 private:
+    // Object name
     std::string name;
 
-    bool wireFrame = false;
-
-    Vector3d position;
-    float width, height, depth;
-    float rotationX, rotationY, rotationZ;
-    float scaleX, scaleY, scaleZ;
-    float colorR, colorG, colorB, colorA;
-	Integrable* m_rigidBody=nullptr;
+    // Base components
+    Transform transform;
     Mesh mesh;
+
+    // Optional components
+    std::vector<Component *> components;
+
+    // OpenGL elements
     unsigned int VBO, VAO, EBO;
     Shader shader;
 
-    // std::vector<GameObject> children;
-    // std::vector<Component> components;
 
+    // Engine other elements
+    // std::vector<GameObject *> children;
 
 public:
     GameObject(Mesh mesh);
 
 private:
     void create();
-
 
 public:
     ~GameObject();
@@ -41,21 +43,21 @@ private:
     void destroy();
 
 public:
-    void update();
+    void update(float deltaTime);
 
-    void draw(int display_w, int display_h, glm::mat4 view);
+    void draw(int display_w, int display_h, glm::mat4 view, float fov);
 
-	void AddRigidbody(Integrable* integrable) {
-		m_rigidBody = integrable;
-	}
+    void addComponent(Component *component);
 
-	Integrable* getRigidBody() { return m_rigidBody; }
+public:
+    void drawTransformGui();
 
-	bool hasRigidbody() {
-		return m_rigidBody != nullptr;
-	}
+    void drawMeshGui();
 
+public:
     std::string getName();
+
+    std::vector<Component *> getComponents() const;
 };
 
 

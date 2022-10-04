@@ -149,8 +149,8 @@ typedef int ImGuiLayoutType;            // -> enum ImGuiLayoutType_         // E
 typedef int ImGuiActivateFlags;         // -> enum ImGuiActivateFlags_      // Flags: for navigation/focus function (will be for ActivateItem() later)
 typedef int ImGuiDebugLogFlags;         // -> enum ImGuiDebugLogFlags_      // Flags: for ShowDebugLogWindow(), g.DebugLogFlags
 typedef int ImGuiInputFlags;            // -> enum ImGuiInputFlags_         // Flags: for IsKeyPressedEx()
-typedef int ImGuiItemFlags;             // -> enum ImGuiItemFlags_          // Flags: for PushItemFlag()
-typedef int ImGuiItemStatusFlags;       // -> enum ImGuiItemStatusFlags_    // Flags: for DC.LastItemStatusFlags
+typedef int ImGuiItemFlags;             // -> enum ImGuiItemFlags_          // Flags: for PushItemFlag(), g.LastItemData.InFlags
+typedef int ImGuiItemStatusFlags;       // -> enum ImGuiItemStatusFlags_    // Flags: for g.LastItemData.StatusFlags
 typedef int ImGuiOldColumnFlags;        // -> enum ImGuiOldColumnFlags_     // Flags: for BeginColumns()
 typedef int ImGuiNavHighlightFlags;     // -> enum ImGuiNavHighlightFlags_  // Flags: for RenderNavHighlight()
 typedef int ImGuiNavMoveFlags;          // -> enum ImGuiNavMoveFlags_       // Flags: for navigation requests
@@ -205,7 +205,7 @@ namespace ImStb
 #endif
 
 // Debug Logging for ShowDebugLogWindow(). This is designed for relatively rare events so please don't spam.
-#define IMGUI_DEBUG_LOG(...)            ImGui::DebugLog(__VA_ARGS__);
+#define IMGUI_DEBUG_LOG(...)            ImGui::DebugLog(__VA_ARGS__)
 #define IMGUI_DEBUG_LOG_ACTIVEID(...)   do { if (g.DebugLogFlags & ImGuiDebugLogFlags_EventActiveId) IMGUI_DEBUG_LOG(__VA_ARGS__); } while (0)
 #define IMGUI_DEBUG_LOG_FOCUS(...)      do { if (g.DebugLogFlags & ImGuiDebugLogFlags_EventFocus)    IMGUI_DEBUG_LOG(__VA_ARGS__); } while (0)
 #define IMGUI_DEBUG_LOG_POPUP(...)      do { if (g.DebugLogFlags & ImGuiDebugLogFlags_EventPopup)    IMGUI_DEBUG_LOG(__VA_ARGS__); } while (0)
@@ -334,8 +334,10 @@ IMGUI_API const ImWchar*ImStrbolW(const ImWchar* buf_mid_line, const ImWchar* bu
 IMGUI_API const char*   ImStristr(const char* haystack, const char* haystack_end, const char* needle, const char* needle_end);
 IMGUI_API void          ImStrTrimBlanks(char* str);
 IMGUI_API const char*   ImStrSkipBlank(const char* str);
+IM_MSVC_RUNTIME_CHECKS_OFF
 static inline bool      ImCharIsBlankA(char c)          { return c == ' ' || c == '\t'; }
 static inline bool      ImCharIsBlankW(unsigned int c)  { return c == ' ' || c == '\t' || c == 0x3000; }
+IM_MSVC_RUNTIME_CHECKS_RESTORE
 
 // Helpers: Formatting
 IMGUI_API int           ImFormatString(char* buf, size_t buf_size, const char* fmt, ...) IM_FMTARGS(3);
@@ -732,6 +734,9 @@ struct IMGUI_API ImDrawListSharedData
     ImVec4          ClipRectFullscreen;         // Value for PushClipRectFullscreen()
     ImDrawListFlags InitialFlags;               // Initial flags at the beginning of the frame (it is possible to alter flags on a per-drawlist basis afterwards)
 
+    // [Internal] Temp write buffer
+    ImVector<ImVec2> TempBuffer;
+
     // [Internal] Lookup tables
     ImVec2          ArcFastVtx[IM_DRAWLIST_ARCFAST_TABLE_SIZE]; // Sample points on the quarter of the circle.
     float           ArcFastRadiusCutoff;                        // Cutoff radius after which arc drawing will fallback to slower PathArcTo()
@@ -756,7 +761,10 @@ struct ImDrawDataBuilder
 // [SECTION] Widgets support: flags, enums, data structures
 //-----------------------------------------------------------------------------
 
-// Transient per-window flags, reset at the beginning of the frame. For child window, inherited from parent on first Begin().
+// Flags used by upcoming items
+// - input: PushItemFlag() manipulates g.CurrentItemFlags, ItemAdd() calls may add extra flags.
+// - output: stored in g.LastItemData.InFlags
+// Current window shared by all windows.
 // This is going to be exposed in imgui.h when stabilized enough.
 enum ImGuiItemFlags_
 {
@@ -770,12 +778,14 @@ enum ImGuiItemFlags_
     ImGuiItemFlags_SelectableDontClosePopup = 1 << 5,  // false     // Disable MenuItem/Selectable() automatically closing their popup window
     ImGuiItemFlags_MixedValue               = 1 << 6,  // false     // [BETA] Represent a mixed/indeterminate value, generally multi-selection where values differ. Currently only supported by Checkbox() (later should support all sorts of widgets)
     ImGuiItemFlags_ReadOnly                 = 1 << 7,  // false     // [ALPHA] Allow hovering interactions but underlying value is not changed.
+    ImGuiItemFlags_NoWindowHoverableCheck   = 1 << 8,  // false     // Disable hoverable check in ItemHoverable()
 
     // Controlled by widget code
-    ImGuiItemFlags_Inputable                = 1 << 8,  // false     // [WIP] Auto-activate input mode when tab focused. Currently only used and supported by a few items before it becomes a generic feature.
+    ImGuiItemFlags_Inputable                = 1 << 10, // false     // [WIP] Auto-activate input mode when tab focused. Currently only used and supported by a few items before it becomes a generic feature.
 };
 
-// Storage for LastItem data
+// Status flags for an already submitted item
+// - output: stored in g.LastItemData.StatusFlags
 enum ImGuiItemStatusFlags_
 {
     ImGuiItemStatusFlags_None               = 0,
@@ -1023,7 +1033,7 @@ struct IMGUI_API ImGuiInputTextState
     bool                    CursorFollow;           // set when we want scrolling to follow the current cursor position (not always!)
     bool                    SelectedAllMouseLock;   // after a double-click to select all, we ignore further mouse drags to update selection
     bool                    Edited;                 // edited this frame
-    ImGuiInputTextFlags     Flags;                  // copy of InputText() flags
+    ImGuiInputTextFlags     Flags;                  // copy of InputText() flags. may be used to check if e.g. ImGuiInputTextFlags_Password is set.
 
     ImGuiInputTextState()                   { memset(this, 0, sizeof(*this)); }
     void        ClearText()                 { CurLenW = CurLenA = 0; TextW[0] = 0; TextA[0] = 0; CursorClamp(); }
@@ -1173,28 +1183,25 @@ struct ImGuiPtrOrIndex
 
 typedef ImBitArray<ImGuiKey_NamedKey_COUNT, -ImGuiKey_NamedKey_BEGIN>    ImBitArrayForNamedKeys;
 
-// Extend ImGuiKey_
-enum ImGuiKeyPrivate_
-{
-    ImGuiKey_LegacyNativeKey_BEGIN  = 0,
-    ImGuiKey_LegacyNativeKey_END    = 512,
-    ImGuiKey_Keyboard_BEGIN         = ImGuiKey_NamedKey_BEGIN,
-    ImGuiKey_Keyboard_END           = ImGuiKey_GamepadStart,
-    ImGuiKey_Gamepad_BEGIN          = ImGuiKey_GamepadStart,
-    ImGuiKey_Gamepad_END            = ImGuiKey_GamepadRStickDown + 1,
-    ImGuiKey_Aliases_BEGIN          = ImGuiKey_MouseLeft,
-    ImGuiKey_Aliases_END            = ImGuiKey_COUNT,
+// [Internal] Key ranges
+#define ImGuiKey_LegacyNativeKey_BEGIN  0
+#define ImGuiKey_LegacyNativeKey_END    512
+#define ImGuiKey_Keyboard_BEGIN         (ImGuiKey_NamedKey_BEGIN)
+#define ImGuiKey_Keyboard_END           (ImGuiKey_GamepadStart)
+#define ImGuiKey_Gamepad_BEGIN          (ImGuiKey_GamepadStart)
+#define ImGuiKey_Gamepad_END            (ImGuiKey_GamepadRStickDown + 1)
+#define ImGuiKey_Aliases_BEGIN          (ImGuiKey_MouseLeft)
+#define ImGuiKey_Aliases_END            (ImGuiKey_MouseWheelY + 1)
 
-    // [Internal] Named shortcuts for Navigation
-    ImGuiKey_NavKeyboardTweakSlow   = ImGuiKey_ModCtrl,
-    ImGuiKey_NavKeyboardTweakFast   = ImGuiKey_ModShift,
-    ImGuiKey_NavGamepadTweakSlow    = ImGuiKey_GamepadL1,
-    ImGuiKey_NavGamepadTweakFast    = ImGuiKey_GamepadR1,
-    ImGuiKey_NavGamepadActivate     = ImGuiKey_GamepadFaceDown,
-    ImGuiKey_NavGamepadCancel       = ImGuiKey_GamepadFaceRight,
-    ImGuiKey_NavGamepadMenu         = ImGuiKey_GamepadFaceLeft,
-    ImGuiKey_NavGamepadInput        = ImGuiKey_GamepadFaceUp,
-};
+// [Internal] Named shortcuts for Navigation
+#define ImGuiKey_NavKeyboardTweakSlow   ImGuiMod_Ctrl
+#define ImGuiKey_NavKeyboardTweakFast   ImGuiMod_Shift
+#define ImGuiKey_NavGamepadTweakSlow    ImGuiKey_GamepadL1
+#define ImGuiKey_NavGamepadTweakFast    ImGuiKey_GamepadR1
+#define ImGuiKey_NavGamepadActivate     ImGuiKey_GamepadFaceDown
+#define ImGuiKey_NavGamepadCancel       ImGuiKey_GamepadFaceRight
+#define ImGuiKey_NavGamepadMenu         ImGuiKey_GamepadFaceLeft
+#define ImGuiKey_NavGamepadInput        ImGuiKey_GamepadFaceUp
 
 enum ImGuiInputEventType
 {
@@ -1241,7 +1248,6 @@ struct ImGuiInputEvent
         ImGuiInputEventText         Text;           // if Type == ImGuiInputEventType_Text
         ImGuiInputEventAppFocused   AppFocused;     // if Type == ImGuiInputEventType_Focus
     };
-    bool                            IgnoredAsSame;
     bool                            AddedByTestEngine;
 
     ImGuiInputEvent() { memset(this, 0, sizeof(*this)); }
@@ -1695,7 +1701,7 @@ struct ImGuiContext
     ImGuiActivateFlags      NavActivateFlags;
     ImGuiID                 NavJustMovedToId;                   // Just navigated to this id (result of a successfully MoveRequest).
     ImGuiID                 NavJustMovedToFocusScopeId;         // Just navigated to this focus scope id (result of a successfully MoveRequest).
-    ImGuiModFlags           NavJustMovedToKeyMods;
+    ImGuiKeyChord           NavJustMovedToKeyMods;
     ImGuiID                 NavNextActivateId;                  // Set by ActivateItem(), queued until next frame.
     ImGuiActivateFlags      NavNextActivateFlags;
     ImGuiInputSource        NavInputSource;                     // Keyboard or Gamepad mode? THIS WILL ONLY BE None or NavGamepad or NavKeyboard.
@@ -1716,7 +1722,7 @@ struct ImGuiContext
     bool                    NavMoveForwardToNextFrame;
     ImGuiNavMoveFlags       NavMoveFlags;
     ImGuiScrollFlags        NavMoveScrollFlags;
-    ImGuiModFlags           NavMoveKeyMods;
+    ImGuiKeyChord           NavMoveKeyMods;
     ImGuiDir                NavMoveDir;                         // Direction of the move request (left/right/up/down)
     ImGuiDir                NavMoveDirForDebug;
     ImGuiDir                NavMoveClipDir;                     // FIXME-NAV: Describe the purpose of this better. Might want to rename?
@@ -1920,7 +1926,7 @@ struct ImGuiContext
         NavId = NavFocusScopeId = NavActivateId = NavActivateDownId = NavActivatePressedId = NavActivateInputId = 0;
         NavJustMovedToId = NavJustMovedToFocusScopeId = NavNextActivateId = 0;
         NavActivateFlags = NavNextActivateFlags = ImGuiActivateFlags_None;
-        NavJustMovedToKeyMods = ImGuiModFlags_None;
+        NavJustMovedToKeyMods = ImGuiMod_None;
         NavInputSource = ImGuiInputSource_None;
         NavLayer = ImGuiNavLayer_Main;
         NavIdIsAlive = false;
@@ -1936,7 +1942,7 @@ struct ImGuiContext
         NavMoveForwardToNextFrame = false;
         NavMoveFlags = ImGuiNavMoveFlags_None;
         NavMoveScrollFlags = ImGuiScrollFlags_None;
-        NavMoveKeyMods = ImGuiModFlags_None;
+        NavMoveKeyMods = ImGuiMod_None;
         NavMoveDir = NavMoveDirForDebug = NavMoveClipDir = ImGuiDir_None;
         NavScoringDebugCount = 0;
         NavTabbingDir = 0;
@@ -2108,6 +2114,7 @@ struct IMGUI_API ImGuiWindow
     bool                    HasCloseButton;                     // Set when the window has a close button (p_open != NULL)
     signed char             ResizeBorderHeld;                   // Current border being held for resize (-1: none, otherwise 0-3)
     short                   BeginCount;                         // Number of Begin() during the current frame (generally 0 or 1, 1+ if appending via multiple Begin/End pairs)
+    short                   BeginCountPreviousFrame;            // Number of Begin() during the previous frame
     short                   BeginOrderWithinParent;             // Begin() order within immediate parent window, if we are a child window. Otherwise 0.
     short                   BeginOrderWithinContext;            // Begin() order within entire imgui context. This is mostly used for debugging submission order related issues.
     short                   FocusOrder;                         // Order within WindowsFocusOrder[], altered when windows are focused.
@@ -2651,7 +2658,7 @@ namespace ImGui
     IMGUI_API ImVec2        GetContentRegionMaxAbs();
     IMGUI_API void          ShrinkWidths(ImGuiShrinkWidthItem* items, int count, float width_excess);
 
-    // Parameter stacks
+    // Parameter stacks (shared)
     IMGUI_API void          PushItemFlag(ImGuiItemFlags option, bool enabled);
     IMGUI_API void          PopItemFlag();
 
@@ -2711,19 +2718,28 @@ namespace ImGui
     // Inputs
     // FIXME: Eventually we should aim to move e.g. IsActiveIdUsingKey() into IsKeyXXX functions.
     inline bool             IsNamedKey(ImGuiKey key)                                    { return key >= ImGuiKey_NamedKey_BEGIN && key < ImGuiKey_NamedKey_END; }
+    inline bool             IsNamedKeyOrModKey(ImGuiKey key)                            { return (key >= ImGuiKey_NamedKey_BEGIN && key < ImGuiKey_NamedKey_END) || key == ImGuiMod_Ctrl || key == ImGuiMod_Shift || key == ImGuiMod_Alt || key == ImGuiMod_Super; }
     inline bool             IsLegacyKey(ImGuiKey key)                                   { return key >= ImGuiKey_LegacyNativeKey_BEGIN && key < ImGuiKey_LegacyNativeKey_END; }
     inline bool             IsGamepadKey(ImGuiKey key)                                  { return key >= ImGuiKey_Gamepad_BEGIN && key < ImGuiKey_Gamepad_END; }
     inline bool             IsAliasKey(ImGuiKey key)                                    { return key >= ImGuiKey_Aliases_BEGIN && key < ImGuiKey_Aliases_END; }
+    inline ImGuiKey         ConvertSingleModFlagToKey(ImGuiKey key)
+    {
+        if (key == ImGuiMod_Ctrl) return ImGuiKey_ReservedForModCtrl;
+        if (key == ImGuiMod_Shift) return ImGuiKey_ReservedForModShift;
+        if (key == ImGuiMod_Alt) return ImGuiKey_ReservedForModAlt;
+        if (key == ImGuiMod_Super) return ImGuiKey_ReservedForModSuper;
+        return key;
+    }
+
     IMGUI_API ImGuiKeyData* GetKeyData(ImGuiKey key);
-    IMGUI_API void          GetKeyChordName(ImGuiModFlags mods, ImGuiKey key, char* out_buf, int out_buf_size);
+    IMGUI_API void          GetKeyChordName(ImGuiKeyChord key_chord, char* out_buf, int out_buf_size);
     IMGUI_API void          SetItemUsingMouseWheel();
     IMGUI_API void          SetActiveIdUsingAllKeyboardKeys();
     inline bool             IsActiveIdUsingNavDir(ImGuiDir dir)                         { ImGuiContext& g = *GImGui; return (g.ActiveIdUsingNavDirMask & (1 << dir)) != 0; }
     inline bool             IsActiveIdUsingKey(ImGuiKey key)                            { ImGuiContext& g = *GImGui; return g.ActiveIdUsingKeyInputMask[key]; }
     inline void             SetActiveIdUsingKey(ImGuiKey key)                           { ImGuiContext& g = *GImGui; g.ActiveIdUsingKeyInputMask.SetBit(key); }
-    inline ImGuiKey         MouseButtonToKey(ImGuiMouseButton button)                   { IM_ASSERT(button >= 0 && button < ImGuiMouseButton_COUNT); return ImGuiKey_MouseLeft + button; }
+    inline ImGuiKey         MouseButtonToKey(ImGuiMouseButton button)                   { IM_ASSERT(button >= 0 && button < ImGuiMouseButton_COUNT); return (ImGuiKey)(ImGuiKey_MouseLeft + button); }
     IMGUI_API bool          IsMouseDragPastThreshold(ImGuiMouseButton button, float lock_threshold = -1.0f);
-    IMGUI_API ImGuiModFlags GetMergedModFlags();
     IMGUI_API ImVec2        GetKeyVector2d(ImGuiKey key_left, ImGuiKey key_right, ImGuiKey key_up, ImGuiKey key_down);
     IMGUI_API float         GetNavTweakPressedAmount(ImGuiAxis axis);
     IMGUI_API int           CalcTypematicRepeatAmount(float t0, float t1, float repeat_delay, float repeat_rate);
