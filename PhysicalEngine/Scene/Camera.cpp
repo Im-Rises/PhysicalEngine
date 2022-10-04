@@ -23,3 +23,7 @@ void Camera::rotate(Vector3d vector3D, float angle) {
 glm::mat4 Camera::getViewMatrix() {
     return viewMatrix;
 }
+
+float Camera::getFov() {
+    return fov;
+}
