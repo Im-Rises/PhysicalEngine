@@ -15,8 +15,6 @@ public:
 
     ~Game();
 
-    void setSpeed(float speed);
-
     void start(Scene *scene);
 
     void goLeft();
@@ -26,6 +24,11 @@ public:
     void goUp();
 
     void goDown();
+
+public:
+    void setSpeed(float speed);
+
+    float *getPtrSpeed();
 };
 
 #endif //GAME_H

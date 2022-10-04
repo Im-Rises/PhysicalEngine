@@ -6,7 +6,6 @@
 
 
 class Particule : public Rigidbody {
-
 private:
     Vector3d m_speed;
     Vector3d m_acceleration;
@@ -15,7 +14,7 @@ public:
 #pragma region Constructeur
 
 
-    Particule() : m_speed(0, 0, 0), m_acceleration(0, 0, 0) { m_position = Vector3d(0, 0, 0); };
+    Particule();
 
     /// <summary>
     /// Constructeur de particule
@@ -24,16 +23,14 @@ public:
     /// <param name="x"></param>
     /// <param name="y"></param>
     /// <param name="z"></param>
-    Particule(float x, float y, float z) : m_speed(0, 0, 0), m_acceleration(0, 0, 0) {
-        m_position = Vector3d(x, y, z);
-    };
+    Particule(float x, float y, float z);
 
     /// <summary>
     /// Constructeur de particule
     ///  vitesse et acceleration � 0 par default
     /// </summary>
     /// <param name="pos">: la Position</param>
-    Particule(const Vector3d &pos) : m_speed(0, 0, 0), m_acceleration(0, 0, 0) { m_position = pos; };
+    Particule(const Vector3d &pos);
 
     /// <summary>
     /// Constructeur de copie de Particule
@@ -45,21 +42,23 @@ public:
 #pragma region Getter Setter
 
 
-    const Vector3d &getSpeed() const { return m_speed; };
+    const Vector3d &getSpeed() const;
 
-    const Vector3d &getAcceleration() const { return m_acceleration; };
+    const Vector3d& getAcceleration() const;
 
-    void setPosition(float x, float y, float z) { m_position = Vector3d(x, y, z); };
+    void setPosition(float x, float y, float z);
 
-    void setPosition(const Vector3d &position) { m_position = position; };
+    void setPosition(const Vector3d &position);
 
-    void setSpeed(float x, float y, float z) { m_speed = Vector3d(x, y, z); };
+    void setSpeed(float x, float y, float z);
 
-    void setSpeed(const Vector3d &speed) { m_speed = speed; };
+    void setSpeed(const Vector3d &speed);
 
-    void setAcceleration(float x, float y, float z) { m_acceleration = Vector3d(x, y, z); };
+    void setAcceleration(float x, float y, float z);
 
-    void setAcceleration(const Vector3d &acceleration) { m_acceleration = acceleration; };
+    void setAcceleration(const Vector3d &acceleration);
+
+
 #pragma endregion
 
 #pragma region Methode
@@ -83,7 +82,11 @@ public:
     /// Calcule toutes les variable d�pendante du temps sauf l'acceleration
     /// </summary>
     /// <param name="time"></param>
-    void recalculateAll(float time) override;
+    void recalculateAll(float time);
+
+    void update() override;
+
+    void drawGui() override;
 
 #pragma endregion
 

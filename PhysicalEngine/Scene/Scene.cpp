@@ -1,27 +1,29 @@
 #include "Scene.h"
 
 #include "GameObject.h"
-#include "Mesh/Mesh.h"
-#include "Mesh/Cuboid/Cube.h"
-#include "Mesh/Cuboid/CuboidRectangle.h"
-#include "Mesh/Cuboid/MyCube.h"
-#include "Mesh/Sphere/Sphere.h"
-#include "Mesh/Cuboid/MyCubeUseIndice.h"
+#include "Components/Mesh/Mesh.h"
+#include "Components/Mesh/Cuboid/MyCube.h"
+#include "Components/Mesh/Cuboid/Cube.h"
+#include "Components/Mesh/Cuboid/CuboidRectangle.h"
+#include "Components/Mesh/Sphere/Sphere.h"
+
+#include "glad/glad.h"
 
 Scene::Scene(int windowWidth, int windowHeight) {
     this->windowWidth = windowWidth;
     this->windowHeight = windowHeight;
-//    gameObjects.push_back(new GameObject(MyCube(1)));
+//    gameObjects.push_back(new GameObject(Cube(1)));
 //    gameObjects.push_back(new GameObject(Sphere(1, 20, 20)));
-//    gameObjects.push_back(new GameObject(MyCube()));
-//    gameObjects.push_back(new GameObject(MyCubeUseIndice()));
+//    gameObjects.push_back(new GameObject(MyCube(1)));
     create();
 }
 
 void Scene::create() {
+    // Create the framebuffer
     glGenFramebuffers(1, &fbo);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
+    // Create the placeholder texture
     unsigned int textureColorbuffer;
     glGenTextures(1, &textureColorbuffer);
     glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
@@ -30,6 +32,7 @@ void Scene::create() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
 
+    // Create the placeholder render buffer
     unsigned int rbo;
     glGenRenderbuffers(1, &rbo);
     glBindRenderbuffer(GL_RENDERBUFFER, rbo);
@@ -52,56 +55,52 @@ void Scene::destroy() {
     glDeleteFramebuffers(1, &fbo);
 }
 
-void Scene::updateViewport(int width, int height) {
-    windowWidth = width;
-    windowHeight = height;
-}
-
-void Scene::update() {
+void Scene::updateGameObjects(float deltaTime) {
+    // Update the game objects
     for (GameObject *gameObject: gameObjects) {
-        gameObject->update();
+        gameObject->update(deltaTime);
     }
-}
 
-void Scene::updatePhysics(float time) {
-    m_integrator.UpdateAll(time);
-}
-
-void Scene::addPhysicalComponent() {
-    for (GameObject *gameObject: gameObjects) {
-        if (gameObject->hasRigidbody()) {
-            m_integrator.AddIntegrable(gameObject->getRigidBody());
-        }
-    }
+//    // Update the physic handler
+//    physicHandler.updateAll(deltaTime);
 }
 
 void Scene::draw(int display_w, int display_h) {
+    // Draw the gameObjects
     for (GameObject *gameObject: gameObjects) {
         gameObject->draw(display_w, display_h, camera.getViewMatrix(), camera.getFov());
     }
+    // Draw the axis
+    if (showAxis)
+        axis.draw(display_w, display_h, camera.getViewMatrix(), camera.getFov());
 }
 
-void Scene::translateCamera(Vector3d vector3D) {
-    camera.translate(vector3D);
-}
-
-void Scene::rotateCamera(Vector3d vector3D, float angle) {
-    camera.rotate(vector3D, angle);
-}
-
-size_t Scene::getNbGameObjects() {
-    return gameObjects.size();
-}
-
-std::string Scene::getGameObjectName(int index) {
-    return gameObjects[index]->getName();
+void Scene::updateViewport(int width, int height) {
+    windowHeight = height;
+    windowWidth = width;
 }
 
 void Scene::addGameObject(GameObject *gameObject) {
     gameObjects.push_back(gameObject);
 }
 
-bool *Scene::getWireFrameStatePtr() {
+//void Scene::translateCamera(Vector3d vector3D) {
+//    camera.translate(vector3D);
+//}
+//
+//void Scene::rotateCamera(Vector3d vector3D, float angle) {
+//    camera.rotate(vector3D, angle);
+//}
+
+unsigned int Scene::getFrameBufferId() const {
+    return fbo;
+}
+
+std::vector<GameObject *> Scene::getGameObjects() {
+    return gameObjects;
+}
+
+bool *Scene::getPtrWireFrameState() {
     if (wireFrame) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     } else {
@@ -110,9 +109,11 @@ bool *Scene::getWireFrameStatePtr() {
     return &wireFrame;
 }
 
-unsigned int Scene::getFrameBufferId() {
-    return fbo;
+bool *Scene::getPtrShowAxis() {
+    return &showAxis;
 }
 
-
+GameObject *Scene::getPtrGameObjectByIndex(int index) const {
+    return gameObjects[index];
+}
 
