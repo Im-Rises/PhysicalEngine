@@ -288,12 +288,18 @@ ctest
 [![CodeQL](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/codeql.yml)
 [![CMake](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cmake.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cmake.yml)
 [![Cpp Cmake Publish](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cpp-cmake-publish.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cpp-cmake-publish.yml)
+[![flawfinder](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/flawfinder.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/flawfinder.yml)
+[![Microsoft C++ Code Analysis](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/msvc.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/msvc.yml)
+[![cpp-linter](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cpp-linter.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cpp-linter.yml)
 
 The project is set with a set of different scripts:
 
 - CodeQL: This script is used to check the code for security issues.
 - CMake: This script is used to build the project.
 - Cpp Cmake Publish: This script is used to publish the project on GitHub.
+- Flawfinder: This script is used to check the code for security issues.
+- Microsoft C++ Code Analysis: This script is used to check the code for security issues.
+- Cpp Linter: This script is used to check the code for security issues.
 
 ## Documentations
 
