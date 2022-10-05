@@ -5,7 +5,7 @@
 Particule::Particule() : m_speed(0, 0, 0), m_acceleration(0, 0, 0), Rigidbody("Particule") {
      m_position = Vector3d(0, 0, 0);
 	 m_mass = 0;
-};
+}
 
 Particule::Particule(float x, float y, float z, float m) : m_speed(0, 0, 0), m_acceleration(0, 0, 0), Rigidbody("Particule") {
     m_position = Vector3d(x, y, z);
@@ -60,15 +60,15 @@ void Particule::setAcceleration(const Vector3d &acceleration) {
     m_acceleration = acceleration;
 }
 
-float Particule::getMass() const { return m_mass; };
+float Particule::getMass() const { return m_mass; }
 
-const Vector3d &Particule::getNetForce() const { return m_netForce; };
+const Vector3d &Particule::getNetForce() const { return m_netForce; }
 
-float Particule::getFriction() const { return m_friction; };
+float Particule::getFriction() const { return m_friction; }
 
-void Particule::setNetForce(Vector3d force) { m_netForce = force; };
+void Particule::setNetForce(Vector3d force) { m_netForce = force; }
 
-void Particule::setFriction(float friction) { m_friction = friction; };
+void Particule::setFriction(float friction) { m_friction = friction; }
 
 void Particule::calculatePosition(float time) {
     m_position = m_position + m_speed * time;
@@ -89,6 +89,5 @@ void Particule::recalculateAll(float time) {
 	calculateAcceleration(time);
 }
 
-}
 
 
