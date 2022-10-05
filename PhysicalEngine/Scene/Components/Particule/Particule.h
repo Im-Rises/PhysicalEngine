@@ -7,6 +7,7 @@
 
 class Particule : public Rigidbody {
 private:
+	Vector3d m_position;
     Vector3d m_speed;
     Vector3d m_acceleration;
 	float m_mass;
@@ -15,7 +16,6 @@ private:
 
 public:
 #pragma region Constructeur
-
 
     Particule();
 
@@ -26,14 +26,15 @@ public:
     /// <param name="x"></param>
     /// <param name="y"></param>
     /// <param name="z"></param>
-    Particule(float x, float y, float z);
+    /// <param name="m"></param>
+    Particule(float x, float y, float z, float m);
 
     /// <summary>
     /// Constructeur de particule
     ///  vitesse et acceleration � 0 par default
     /// </summary>
     /// <param name="pos">: la Position</param>
-    Particule(const Vector3d &pos);
+    Particule(const Vector3d &pos, float m);
 
     /// <summary>
     /// Constructeur de copie de Particule
@@ -44,6 +45,7 @@ public:
 #pragma endregion
 #pragma region Getter Setter
 
+    const Vector3d& getPosition() const;
 
     const Vector3d &getSpeed() const;
 
@@ -61,18 +63,15 @@ public:
 
     void setAcceleration(const Vector3d &acceleration);
 
+	float getMass() const;
 
-    void setAcceleration(const Vector3d &acceleration) { m_acceleration = acceleration; };
+    const Vector3d &getNetForce() const;
 
-	float getMass() const { return m_mass; };
+    float getFriction() const;
 
-    const Vector3d& getNetForce() const { return m_netForce; };
+    void setNetForce(Vector3d force);
 
-    float getFriction() const { return m_friction; };
-
-    void setNetForce(Vector3d force) { m_netForce = force; };
-
-    void setFriction(float friction){ m_friction = friction; };
+    void setFriction(float friction);
 
 #pragma endregion
 
