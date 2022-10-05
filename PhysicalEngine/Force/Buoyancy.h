@@ -12,6 +12,9 @@ private:
 	float m_liquidDensity;
 
 public:
+	Buoyancy();
+	Buoyancy(float maxDepth, float volume, float waterHeight, float liquidDensity);
+	Buoyancy(const Buoyancy& buoyancy);
 	void addForce(Particule* particule, float duration);
 };
 

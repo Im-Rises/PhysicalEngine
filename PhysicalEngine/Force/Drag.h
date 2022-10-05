@@ -9,6 +9,9 @@ private:
 	float m_k2;
 
 public:
+	Drag();
+	Drag(float k1, float k2);
+	Drag(const Drag& drag);
 	void addForce(Particule* particule, float duration);
 };
 

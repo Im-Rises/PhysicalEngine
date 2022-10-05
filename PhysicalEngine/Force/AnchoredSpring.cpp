@@ -1,5 +1,23 @@
 #include "AnchoredSpring.h"
 
+AnchoredSpring::AnchoredSpring() {
+	m_anchor = &Vector3d(0, 0, 0);
+	m_k = 0;
+	m_restLength = 0;
+}
+
+AnchoredSpring::AnchoredSpring(Vector3d* anchor, float k, float restLength) {
+	m_anchor = anchor;
+	m_k = k;
+	m_restLength = restLength;
+}
+
+AnchoredSpring::AnchoredSpring(const AnchoredSpring& aSpring) {
+	m_anchor = aSpring.m_anchor;
+	m_k = aSpring.m_k;
+	m_restLength = aSpring.m_restLength;
+}
+
 void AnchoredSpring::addForce(Particule* particule, float duration) {
 	Vector3d pos = particule->getPosition();
 	float delta = pos.distance(*m_anchor);
