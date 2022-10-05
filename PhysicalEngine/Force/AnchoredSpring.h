@@ -10,7 +10,7 @@ private:
 	float m_restLength;
 
 public:
-	void updateForce(Particule* particule, float duration);
+	void addForce(Particule* particule, float duration);
 };
 
 #endif /* ANCHOREDSPRING_H */

@@ -6,7 +6,6 @@
 #include "../Vector3d/Vector3d.h"
 #include "Camera.h"
 #include "PhysicHandler.h"
-#include "PhysicHandler.h"
 
 class GameObject;
 

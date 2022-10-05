@@ -11,6 +11,8 @@ private:
     Vector3d m_speed;
     Vector3d m_acceleration;
 	float m_mass;
+	Vector3d m_netForce;
+	float m_friction;
 
 public:
 #pragma region Constructeur
@@ -72,6 +74,15 @@ public:
     void setAcceleration(const Vector3d &acceleration) { m_acceleration = acceleration; };
 
 	float getMass() const { return m_mass; };
+
+    const Vector3d& getNetForce() const { return m_netForce; };
+
+    float getFriction() const { return m_friction; };
+
+    void setNetForce(Vector3d force) { m_netForce = force; };
+
+    void setFriction(float friction){ m_friction = friction; };
+
 #pragma endregion
 
 #pragma region Methode
@@ -90,6 +101,12 @@ public:
     /// </summary>
     /// <param name="time"></param>
     void calculateSpeed(float time);
+
+    /// <summary>
+	/// Calcule la nouvelle accélération � partir de la deuxième loi de Newton
+	/// </summary>
+	/// <param name="time"></param>
+	void calculateAcceleration(float time);
 
     /// <summary>
     /// Calcule toutes les variable d�pendante du temps sauf l'acceleration

@@ -1,6 +1,6 @@
 #include "Buoyancy.h"
 
-void Buoyancy::updateForce(Particule* particule, float duration) {
+void Buoyancy::addForce(Particule* particule, float duration) {
 	float d = (particule->getPosition().gety() - m_waterHeight - m_maxDepth) / 2 * m_maxDepth;
 	float f;
 	if (d <= 0) {

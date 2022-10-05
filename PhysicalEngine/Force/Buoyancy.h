@@ -12,7 +12,7 @@ private:
 	float m_liquidDensity;
 
 public:
-	void updateForce(Particule* particule, float duration);
+	void addForce(Particule* particule, float duration);
 };
 
 #endif /* BUOYANCY_H */

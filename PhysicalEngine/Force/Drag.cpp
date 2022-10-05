@@ -1,5 +1,5 @@
 #include "Drag.h"
 
-void Drag::updateForce(Particule *particule, float duration) {
+void Drag::addForce(Particule *particule, float duration) {
 
 }

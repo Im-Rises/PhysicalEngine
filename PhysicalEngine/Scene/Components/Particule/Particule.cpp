@@ -15,11 +15,15 @@ void Particule::calculateSpeed(float time) {
     m_speed = m_speed + m_acceleration * time;
 }
 
+void Particule::calculateAcceleration(float time) {
+	m_acceleration = m_netForce * (1/m_mass) * time;
+}
+
 void Particule::recalculateAll(float time) {
 
     calculateSpeed(time);
     calculatePosition(time);
-
+	calculateAcceleration(time);
 }
 
 float Particule::distance(const Particule& p) {
