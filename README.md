@@ -11,7 +11,7 @@
 
 This is a simple physics engine written in C++ using Glad, GLFW, OpenGl3 and Dear ImGui.
 
-You can find a journal log [here](report/development_log_MOREL_REBOUL_CLAVEL.pdf).
+It is implemented using Fixed Framerate and Component Oriented Programming.
 
 > **Note**  
 > The project is a work in progress and is not yet complete.
@@ -29,6 +29,11 @@ You can find a journal log [here](report/development_log_MOREL_REBOUL_CLAVEL.pdf
 PLACEHOLDER
 -->
 
+## Report
+
+You can find a journal log [here](report/development_log_MOREL_REBOUL_CLAVEL.pdf).  
+It is also located in the `report` folder.
+
 ## Quickstart
 
 To download the app, you can click one of the icons below (depending on your operating system). You can also click the
@@ -36,6 +41,10 @@ release section of the GitHub page.
 
 Depending on you `operating system` you will need to install some libs, they are installed differently depending on your
 system, please follow one of the section below `Windows` or `Linux` or `MacOs`.
+
+> **Warning**
+> Be sure to put the `imgui.ini` file in the same folder as the executable.
+> You can find it in the `root` of the project. If you don't do this, the UI will not be displayed correctly.
 
 ### Windows
 
@@ -279,12 +288,18 @@ ctest
 [![CodeQL](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/codeql.yml)
 [![CMake](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cmake.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cmake.yml)
 [![Cpp Cmake Publish](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cpp-cmake-publish.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cpp-cmake-publish.yml)
+[![flawfinder](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/flawfinder.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/flawfinder.yml)
+[![Microsoft C++ Code Analysis](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/msvc.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/msvc.yml)
+[![cpp-linter](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cpp-linter.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cpp-linter.yml)
 
 The project is set with a set of different scripts:
 
 - CodeQL: This script is used to check the code for security issues.
 - CMake: This script is used to build the project.
 - Cpp Cmake Publish: This script is used to publish the project on GitHub.
+- Flawfinder: This script is used to check the code for security issues.
+- Microsoft C++ Code Analysis: This script is used to check the code for security issues.
+- Cpp Linter: This script is used to check the code for security issues.
 
 ## Documentations
 

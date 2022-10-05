@@ -6,18 +6,26 @@
 #include "../Vector3d/Vector3d.h"
 #include "Camera.h"
 #include "PhysicHandler.h"
+#include "Axis.h"
 
 class GameObject;
 
 class Scene {
 private:
+    // Window size
     int windowHeight, windowWidth;
+
+    // Scene elements
+    Axis axis;
     Camera camera;
     PhysicHandler physicHandler;
     std::vector<GameObject *> gameObjects;
-    bool wireFrame = false;
-    PhysicHandler m_integrator;
 
+    // View settings
+    bool wireFrame = false;
+    bool showAxis = true;
+
+    // OpenGL framebuffer
     unsigned int fbo;
 
 public:
@@ -29,30 +37,30 @@ public:
 
     void destroy();
 
-    void updateViewport(int width, int height);
-
-    void update();
-
-    void updatePhysics(float time);
-
-    void addPhysicalComponent();
+public:
+    void updateGameObjects(float deltaTime);
 
     void draw(int display_w, int display_h);
 
-    void translateCamera(Vector3d vector3D);
-
-    void rotateCamera(Vector3d vector3D, float angle);
-
-    size_t getNbGameObjects();
-
-    std::string getGameObjectName(int index);
-
-    void addGameObject(GameObject *gameObject);
+    void updateViewport(int width, int height);
 
 public:
-    bool *getWireFrameStatePtr();
+    void addGameObject(GameObject *gameObject);
 
-    unsigned int getFrameBufferId();
+//    void translateCamera(Vector3d vector3D);
+//
+//    void rotateCamera(Vector3d vector3D, float angle);
+
+public:
+    unsigned int getFrameBufferId() const;
+
+    std::vector<GameObject *> getGameObjects();
+
+    bool *getPtrWireFrameState();
+
+    bool *getPtrShowAxis();
+
+    GameObject *getPtrGameObjectByIndex(int index) const;
 };
 
 #endif //SCENE_H

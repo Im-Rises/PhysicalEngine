@@ -3,6 +3,14 @@
 
 #define PROJECT_NAME "Physical Engine 3D"
 
+#define VERSION_MAJOR "0"
+#define VERSION_MINOR "1"
+#define VERSION_PATCH "5"
+
+#define PROJECT_VERSION VERSION_MAJOR "." VERSION_MINOR "." VERSION_PATCH
+
+#define PROJECT_GITHUB "https://github.com/Im-Rises/PhysicalEngine"
+
 #include <memory>
 #include <chrono>
 #include "Game.h"
@@ -11,6 +19,8 @@
 class Scene;
 
 class InputManager;
+
+class GameObject;
 
 struct GLFWwindow;
 
@@ -22,18 +32,19 @@ private:
     // Window, Scene and Game objects
     GLFWwindow *window;
     Scene *scene;
-    Game m_game;
+    Game game;
 
     // Window variables
     bool isFullScreen = false;
+    float backgroundColor[4] = {};
     int windowWidth = 1580, windowHeight = 720;
-    struct {
-        float r, g, b, a;
-    } backgroundColor;
 
     // Variables for the game loop
-    float gameSpeed = 0.5f;
     const int PHYSICAL_UPDATE_PER_SECOND = 50;
+    GameObject *gameObject = nullptr;
+
+    // Widgets variables
+    char consoleBuffer[1024] = {};
 
 public:
     PhysicalEngine();
@@ -56,7 +67,7 @@ private:
 
     void updateViewport(int width, int height);
 
-    void toogleFullScreen();
+    void toggleFullScreen();
 };
 
 

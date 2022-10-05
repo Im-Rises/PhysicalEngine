@@ -1,8 +1,6 @@
+include_directories("${CMAKE_SOURCE_DIR}/dependencies")
 include_directories("${CMAKE_SOURCE_DIR}/dependencies/glad/include")
 include_directories("${CMAKE_SOURCE_DIR}/dependencies/glfw/include")
-include_directories("${CMAKE_SOURCE_DIR}/dependencies/glm")
-include_directories("${CMAKE_SOURCE_DIR}/dependencies/imgui")
-include_directories("${CMAKE_SOURCE_DIR}/dependencies/stb")
 
 file(GLOB_RECURSE SRCS_HEADERS_IMGUI "${CMAKE_SOURCE_DIR}/dependencies/imgui/*.cpp" "${CMAKE_SOURCE_DIR}/dependencies/imgui/*.h")
 file(GLOB_RECURSE SRCS_HEADERS_GLAD "${CMAKE_SOURCE_DIR}/dependencies/glad/*.c" "${CMAKE_SOURCE_DIR}/dependencies/glad/*.h")

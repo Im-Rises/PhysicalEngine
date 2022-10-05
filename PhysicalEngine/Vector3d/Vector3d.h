@@ -1,11 +1,10 @@
 #ifndef VECTOR3D_H
 #define VECTOR3D_H
 
-#include <cmath>
 #include <iostream>
 
 class Vector3d {
-private:
+public:
     float m_x, m_y, m_z;
 
 public:
@@ -57,6 +56,9 @@ public:
 
     ///Test d'�galit�
     bool operator==(const Vector3d &vec);
+
+///Test de diff�rence
+    bool operator!=(const Vector3d &vec);
 
     ///Calcul de la norme
     float norm();
