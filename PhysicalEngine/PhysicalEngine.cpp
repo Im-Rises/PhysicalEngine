@@ -229,14 +229,21 @@ void PhysicalEngine::handleGui() {
         {
             ImGui::Begin("Hierarchy");
             for (int i = 0; i < scene->getGameObjects().size(); i++) {
-                std::string label = gameObject == scene->getPtrGameObjectByIndex(i) ? "Selected" : "Select";
-                label += "##HierarchyGameObject" + std::to_string(i);
-                if (ImGui::Button(label.c_str())) {
+//                std::string label = gameObject == scene->getPtrGameObjectByIndex(i) ? "Selected" : "Select";
+//                label += "##HierarchyGameObject" + std::to_string(i);
+//                if (ImGui::Button(label.c_str())) {
+//                    this->gameObject = scene->getPtrGameObjectByIndex(i);
+//                }
+//                ImGui::SameLine();
+//                ImGui::Text("%s", scene->getPtrGameObjectByIndex(i)->getName().c_str());
+
+                ImGui::Selectable((scene->getPtrGameObjectByIndex(i)->getName()).c_str(),
+                                  gameObject == scene->getPtrGameObjectByIndex(i));
+                if (ImGui::IsItemClicked()) {
                     this->gameObject = scene->getPtrGameObjectByIndex(i);
                 }
-                ImGui::SameLine();
-                ImGui::Text("%s", scene->getPtrGameObjectByIndex(i)->getName().c_str());
             }
+
             ImGui::End();
         }
         {
@@ -295,7 +302,7 @@ void PhysicalEngine::handleGui() {
             ImGui::End();
         }
         {
-            ImGui::Begin("Scene View");
+            ImGui::Begin("Scene View", nullptr, ImGuiWindowFlags_NoCollapse);
             {
                 ImGui::BeginChild("GameRender");
                 ImVec2 windowSize = ImGui::GetWindowSize();
