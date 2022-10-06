@@ -16,5 +16,5 @@ Drag::Drag(const Drag& drag) {
 }
 
 void Drag::addForce(Particule* particule, float duration) {
-
+	//TO DO
 }

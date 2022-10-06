@@ -33,4 +33,6 @@ void Buoyancy::addForce(Particule* particule, float duration) {
 	else {
 		f = d * m_volume * m_liquidDensity;
 	}
+	float initialFriction = particule->getFriction();
+	particule->setFriction(initialFriction + f);
 }
