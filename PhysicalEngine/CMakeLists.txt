@@ -5,8 +5,8 @@ include_directories("${CMAKE_SOURCE_DIR}/dependencies/glfw/include")
 file(GLOB_RECURSE SRCS_HEADERS_IMGUI "${CMAKE_SOURCE_DIR}/dependencies/imgui/*.cpp" "${CMAKE_SOURCE_DIR}/dependencies/imgui/*.h")
 file(GLOB_RECURSE SRCS_HEADERS_GLAD "${CMAKE_SOURCE_DIR}/dependencies/glad/*.c" "${CMAKE_SOURCE_DIR}/dependencies/glad/*.h")
 
-set(SRCS main.cpp PhysicalEngine.cpp Scene/Scene.cpp Scene/Camera.cpp InputManager.cpp Scene/GameObject.cpp Shader/Shader.cpp Vector3d/Vector3d.cpp Scene/Components/Mesh/Mesh.cpp Scene//Components/Mesh/Sphere/Sphere.cpp Scene//Components/Mesh/Cuboid/Cube.cpp Scene//Components/Mesh/Cuboid/CuboidRectangle.cpp Scene//Components/Mesh/Cuboid/MyCube.cpp "Game.cpp" "Scene/Components/Particule/Particule.cpp" "Force/ForceGenerator.cpp" "Force/Gravity.cpp" "Force/Drag.cpp" "Force/Spring.cpp" "Force/AnchoredSpring.cpp" "Force/Buoyancy.cpp")
-set(HEADERS PhysicalEngine.h Scene/Scene.h Scene/Camera.h InputManager.h Scene/GameObject.h Shader/Shader.h Vector3d/Vector3d.h Scene//Components/Mesh/Mesh.h Scene//Components/Mesh/Sphere/Sphere.h Scene//Components/Mesh/Cuboid/Cube.h Scene//Components/Mesh/Cuboid/CuboidRectangle.h Scene//Components/Mesh/Cuboid/MyCube.h "Game.h" "Scene/Components/Particule/Particule.h" "Force/ForceGenerator.h" "Force/Gravity.h" "Force/Drag.h" "Force/Spring.h" "Force/AnchoredSpring.h" "Force/Buoyancy.h")
+file(GLOB_RECURSE SRCS "${CMAKE_SOURCE_DIR}/PhysicalEngine/*.cpp")
+file(GLOB_RECURSE HEADERS "${CMAKE_SOURCE_DIR}/PhysicalEngine/*.h")
 
 add_executable(${PROJECT_NAME} ${SRCS} ${HEADERS} ${SRCS_HEADERS_IMGUI} ${SRCS_HEADERS_GLAD})
 

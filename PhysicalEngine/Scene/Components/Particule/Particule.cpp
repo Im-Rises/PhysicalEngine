@@ -89,5 +89,16 @@ void Particule::recalculateAll(float time) {
 	calculateAcceleration(time);
 }
 
+void Particule::update() {
+}
+
+void Particule::drawGui() {
+}
+
+float Particule::distance(const Particule& p) {
+	return (this->m_position - p.getPosition()).norm();
+}
+
+
 
 
