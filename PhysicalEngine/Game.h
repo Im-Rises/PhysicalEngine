@@ -5,12 +5,11 @@ class Particule;
 
 class Scene;
 
-class PhysicHandler;
+//class PhysicHandler;
 
 class Game {
 private:
     Particule *m_p;
-//    PhysicHandler *m_physicHandler;
     float m_speed = 0.5f;
 
 public:

@@ -92,6 +92,7 @@ void Particule::calculateAcceleration(float time) {
 }
 
 void Particule::recalculateAll(float time) {
+    std::cout << "recalculateAll in Particule" << std::endl;
     calculateSpeed(time);
     calculatePosition(time);
     calculateAcceleration(time);

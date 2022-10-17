@@ -5,6 +5,8 @@
 
 class Rigidbody;
 
+class GameObject;
+
 class PhysicHandler {
 
 private:
@@ -17,6 +19,8 @@ public:
     PhysicHandler();
 
     void updateAll(float time);
+
+    void update(float time, GameObject *gameObject);
 
     void addRigidbody(Rigidbody *rigidbody);
 

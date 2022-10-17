@@ -15,7 +15,7 @@ Rigidbody::Rigidbody(GameObject *gameObject, std::string name) : Component(std::
 //}
 
 void Rigidbody::recalculateAll(float time) {
-
+    std::cout << "recalculateAll issue in Rigidbody" << std::endl;
 }
 
 void Rigidbody::update() {

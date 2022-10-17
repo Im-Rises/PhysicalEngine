@@ -62,7 +62,8 @@ void Scene::updateGameObjects(float deltaTime) {
     }
 
     // Update the physic handler
-    physicHandler.updateAll(deltaTime);
+//    physicHandler.updateAll(deltaTime);
+    physicHandler.update(deltaTime, gameObjects);
 }
 
 void Scene::draw(int display_w, int display_h) {
