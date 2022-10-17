@@ -3,13 +3,13 @@
 
 #include <list>
 
-//class Rigidbody;
+class Rigidbody;
 
 class PhysicHandler {
 
 private:
-//    std::list<Rigidbody *> m_integrableList;
-//    int fixeFrameRate = 50;
+    std::list<Rigidbody *> m_integrableList;
+    int fixeFrameRate = 50;
     float fixedDeltaTime = 0;
     float timeToAdjustFrameRate = 0;
 
@@ -17,6 +17,8 @@ public:
     PhysicHandler();
 
     void updateAll(float time);
+
+    void addRigidbody(Rigidbody *rigidbody);
 
 };
 

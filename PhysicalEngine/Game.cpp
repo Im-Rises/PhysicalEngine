@@ -26,6 +26,7 @@ void Game::start(Scene *scene) {
     gameobject->addComponent(m_p);
 //    gameobject->addComponent(new Collider());
 //    gameobject->addComponent(new Particule());
+
 }
 
 void Game::goLeft() {

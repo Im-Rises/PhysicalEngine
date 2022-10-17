@@ -68,3 +68,19 @@ void Transform::drawGui() {
         ImGui::EndTable();
     }
 }
+
+void Transform::setPosition(float x, float y, float z) {
+    positionX = x;
+    positionY = y;
+    positionZ = z;
+}
+
+void Transform::setPosition(Vector3d position) {
+    positionX = position.getx();
+    positionY = position.gety();
+    positionZ = position.getz();
+}
+
+Vector3d Transform::getPosition() {
+    return Vector3d(positionX, positionY, positionZ);
+}

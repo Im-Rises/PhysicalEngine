@@ -1,10 +1,11 @@
 #include "Particule.h"
 
 #include "imgui/imgui.h"
+#include "../../GameObject.h"
 
 Particule::Particule(GameObject *gameObject) : m_speed(0, 0, 0), m_acceleration(0, 0, 0),
                                                Rigidbody(gameObject, "Particule") {
-    m_position = Vector3d(0, 0, 0);
+    gameObject->transform.setPosition(Vector3d(0, 0, 0));
     m_mass = 0;
 }
 
@@ -16,19 +17,21 @@ Particule::Particule(GameObject *gameObject) : m_speed(0, 0, 0), m_acceleration(
 
 Particule::Particule(GameObject *gameObject, const Vector3d &pos, float m) : m_speed(0, 0, 0), m_acceleration(0, 0, 0),
                                                                              Rigidbody(gameObject, "Particule") {
-    m_position = pos;
+//    m_position = pos;
+    gameObject->transform.setPosition(pos);
     m_mass = m;
 }
 
 Particule::Particule(const Particule &particule) : Rigidbody(gameObject, "Particule") {
     m_acceleration = Vector3d(particule.m_acceleration);
     m_speed = Vector3d(particule.m_speed);
-    m_position = Vector3d(particule.m_position);
+//    m_position = Vector3d(particule.m_position);
+    gameObject->transform.setPosition(particule.gameObject->transform.getPosition());
     m_mass = particule.m_mass;
 }
 
 const Vector3d &Particule::getPosition() const {
-    return m_position;
+    return gameObject->transform.getPosition();
 }
 
 const Vector3d &Particule::getSpeed() const {
@@ -40,11 +43,13 @@ const Vector3d &Particule::getAcceleration() const {
 }
 
 void Particule::setPosition(float x, float y, float z) {
-    m_position = Vector3d(x, y, z);
+//    m_position = Vector3d(x, y, z);
+    gameObject->transform.setPosition(Vector3d(x, y, z));
 }
 
 void Particule::setPosition(const Vector3d &position) {
-    m_position = position;
+//    m_position = position;
+    gameObject->transform.setPosition(position);
 }
 
 void Particule::setSpeed(float x, float y, float z) {
@@ -74,7 +79,8 @@ void Particule::setNetForce(Vector3d force) { m_netForce = force; }
 void Particule::setFriction(float friction) { m_friction = friction; }
 
 void Particule::calculatePosition(float time) {
-    m_position = m_position + m_speed * time;
+//    m_position = m_position + m_speed * time;
+    gameObject->transform.setPosition(gameObject->transform.getPosition() + m_speed * time);
 }
 
 void Particule::calculateSpeed(float time) {
@@ -98,7 +104,8 @@ void Particule::drawGui() {
 }
 
 float Particule::distance(const Particule &p) {
-    return (this->m_position - p.getPosition()).norm();
+//    return (this->m_position - p.getPosition()).norm();
+    return (gameObject->transform.getPosition() - p.getPosition()).norm();
 }
 
 

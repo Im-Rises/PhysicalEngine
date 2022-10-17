@@ -16,7 +16,7 @@ private:
     std::string name;
 
     // Base components
-    Transform transform;
+//    Transform transform;
     Mesh mesh;
 
     // Optional components
@@ -31,6 +31,9 @@ private:
     // std::vector<GameObject *> children;
 
 public:
+
+    Transform transform;
+
     GameObject(Mesh mesh);
 
 private:

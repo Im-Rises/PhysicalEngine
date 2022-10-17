@@ -12,8 +12,6 @@ protected:
 public:
     Rigidbody(GameObject *gameObject, std::string name = "Rigidbody");
 
-//    Rigidbody(std::string name, GameObject *gameObject);
-
     void recalculateAll(float time);
 
     void update() override;
