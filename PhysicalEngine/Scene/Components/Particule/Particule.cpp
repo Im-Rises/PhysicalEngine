@@ -64,11 +64,7 @@ float Particule::getMass() const { return m_mass; }
 
 const Vector3d &Particule::getNetForce() const { return m_netForce; }
 
-float Particule::getFriction() const { return m_friction; }
-
 void Particule::setNetForce(Vector3d force) { m_netForce = force; }
-
-void Particule::setFriction(float friction) { m_friction = friction; }
 
 void Particule::calculatePosition(float time) {
     m_position = m_position + m_speed * time;

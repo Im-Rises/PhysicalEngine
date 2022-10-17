@@ -12,7 +12,6 @@ private:
     Vector3d m_acceleration;
 	float m_mass;
 	Vector3d m_netForce;
-	float m_friction;
 
 public:
 #pragma region Constructeur
@@ -67,11 +66,7 @@ public:
 
     const Vector3d &getNetForce() const;
 
-    float getFriction() const;
-
     void setNetForce(Vector3d force);
-
-    void setFriction(float friction);
 
 #pragma endregion
 
