@@ -91,14 +91,17 @@ void Particule::calculateAcceleration(float time) {
     m_acceleration = m_netForce * (1 / m_mass) * time;
 }
 
-void Particule::recalculateAll(float time) {
-    std::cout << "recalculateAll in Particule" << std::endl;
+//void Particule::recalculateAll(float time) {
+//    std::cout << "recalculateAll in Particule" << std::endl;
+//    calculateSpeed(time);
+//    calculatePosition(time);
+//    calculateAcceleration(time);
+//}
+
+void Particule::update(float time) {
     calculateSpeed(time);
     calculatePosition(time);
     calculateAcceleration(time);
-}
-
-void Particule::update() {
 }
 
 void Particule::drawGui() {

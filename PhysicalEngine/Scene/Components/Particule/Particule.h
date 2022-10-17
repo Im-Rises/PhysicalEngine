@@ -102,9 +102,9 @@ public:
     /// Calcule toutes les variable d�pendante du temps sauf l'acceleration
     /// </summary>
     /// <param name="time"></param>
-    void recalculateAll(float time);
+//    void recalculateAll(float time);
 
-    void update() override;
+    void update(float time) override;
 
     void drawGui() override;
 

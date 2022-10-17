@@ -16,7 +16,7 @@ public:
 
     ~Component();
 
-    virtual void update() = 0;
+    virtual void update(float time) = 0;
 
     virtual void drawGui() = 0;
 

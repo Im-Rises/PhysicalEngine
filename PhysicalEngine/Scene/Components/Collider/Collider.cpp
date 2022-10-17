@@ -15,7 +15,7 @@ Collider::Collider(GameObject *gameObject, float mass, float friction, float res
     restitution = restitution;
 }
 
-void Collider::update() {
+void Collider::update(float time) {
 
 }
 

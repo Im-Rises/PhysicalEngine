@@ -12,9 +12,9 @@ protected:
 public:
     Rigidbody(GameObject *gameObject, std::string name = "Rigidbody");
 
-    void recalculateAll(float time);
+//    void recalculateAll(float time);
 
-    void update() override;
+    void update(float time) override;
 
     void drawGui() override;
 

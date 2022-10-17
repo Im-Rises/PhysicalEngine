@@ -14,11 +14,11 @@ Rigidbody::Rigidbody(GameObject *gameObject, std::string name) : Component(std::
 //    m_position = Vector3d(0, 0, 0);
 //}
 
-void Rigidbody::recalculateAll(float time) {
-    std::cout << "recalculateAll issue in Rigidbody" << std::endl;
-}
+//void Rigidbody::recalculateAll(float time) {
+//    std::cout << "recalculateAll issue in Rigidbody" << std::endl;
+//}
 
-void Rigidbody::update() {
+void Rigidbody::update(float time) {
 
 }
 

@@ -14,7 +14,7 @@ public:
 
     Collider(GameObject *gameObject, float mass, float friction, float restitution);
 
-    void update() override;
+    void update(float time) override;
 
     float getMass() const;
 
