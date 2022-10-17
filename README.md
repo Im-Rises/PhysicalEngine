@@ -1,4 +1,4 @@
-# PhysicalEngine
+# ParticleEngine
 
 <p align="center">
       <img src="https://user-images.githubusercontent.com/59691442/183268126-b3d19e66-8f2d-463a-805e-ae6ef7cc6c01.png" alt="cmakeLogo" style="height:60px;"/>
@@ -18,10 +18,13 @@ It is implemented using Fixed Framerate and Component Oriented Programming.
 
 ## Images
 
-|                                                    Mesh view                                                     |                                                  Wireframe view                                                  |
-|:----------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------:|
-| ![image1](https://user-images.githubusercontent.com/59691442/192190493-f1191715-268e-43e4-8f27-5ed0c2823dfa.png) | ![image2](https://user-images.githubusercontent.com/59691442/192190499-457463ae-7a34-432a-bb0b-063771021275.png) |
-|                                                                                                                  |                                                                                                                  |
+| User Interface view                                                                                                         |
+|-----------------------------------------------------------------------------------------------------------------------------|
+| ![previw_screenshot](https://user-images.githubusercontent.com/59691442/196303021-781cf236-4bab-4523-9f08-2a85c7dd491c.png) |
+
+[//]: # (|                                                    Mesh view                                                     |                                                  Wireframe view                                                  |)
+[//]: # (|:----------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------:|)
+[//]: # (| ![image1]&#40;https://user-images.githubusercontent.com/59691442/192190493-f1191715-268e-43e4-8f27-5ed0c2823dfa.png&#41; | ![image2]&#40;https://user-images.githubusercontent.com/59691442/192190499-457463ae-7a34-432a-bb0b-063771021275.png&#41; |)
 
 <!--
 ## Videos
@@ -48,12 +51,12 @@ system, please follow one of the section below `Windows` or `Linux` or `MacOs`.
 
 ### Windows
 
-<a href="https://github.com/Im-Rises/PhysicalEngine/releases/latest"><img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="cmakeLogo" style="height:40px;"/></a>
+<a href="https://github.com/Im-Rises/ParticleEngine/releases/latest"><img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="cmakeLogo" style="height:40px;"/></a>
 
 For Windows users you don't need to install the libs. You can just download the app and run it.
 
 ```bash
-.\PhysicalEngine.exe
+.\ParticleEngine.exe
 ```
 
 > **Warning**  
@@ -63,7 +66,7 @@ For Windows users you don't need to install the libs. You can just download the 
 
 ### Linux
 
-<a href="https://github.com/Im-Rises/PhysicalEngine/releases/latest"><img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="cmakeLogo" style="height:40px;"/></a>
+<a href="https://github.com/Im-Rises/ParticleEngine/releases/latest"><img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="cmakeLogo" style="height:40px;"/></a>
 
 For Linux users, you need to install the GLFW lib, to do so type one of the following commands:
 
@@ -80,12 +83,12 @@ sudo apt-get install libglfw3-dev
 Then you can start by double-clicking the executable of typing the following command next to it:
 
 ```bash
-./PhysicalEngine
+./ParticleEngine
 ```
 
 ### MacOs
 
-<a href="https://github.com/Im-Rises/PhysicalEngine/releases/latest"><img src="https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=apple&logoColor=white" alt="cmakeLogo" style="height:40px;"/></a>
+<a href="https://github.com/Im-Rises/ParticleEngine/releases/latest"><img src="https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=apple&logoColor=white" alt="cmakeLogo" style="height:40px;"/></a>
 
 For macOS users you will need to install Brew, please follow the instruction in the link below:  
 <https://brew.sh>
@@ -99,7 +102,7 @@ brew install glfw
 Then you can start by double-clicking the executable of typing the following command next to it:
 
 ```bash
-./PhysicalEngine
+./ParticleEngine
 ```
 
 ## Controls
@@ -143,7 +146,7 @@ TO modify the speed value, you can use the ImGui window named `Speed handler`.
 ## Project Architecture
 
 ~~~
-PhysicalEngine
+ParticleEngine
 ├── .github
 |  ├── labels.yml
 |  ├── release.yml
@@ -161,7 +164,7 @@ PhysicalEngine
 |  ├── glfwglm
 |  ├── imgui
 |  ├── stb
-├── PhysicalEngine
+├── ParticleEngine
 |  ├── Integrable
 │  │   |── *
 |  ├── Integrator
@@ -174,8 +177,8 @@ PhysicalEngine
 |  ├── InputManager.cpp
 |  ├── InputManager.h
 |  ├── main.cpp
-|  ├── PhysicalEngine.cpp
-|  ├── PhysicalEngine.h
+|  ├── ParticleEngine.cpp
+|  ├── ParticleEngine.h
 ├── test
 |  ├── TestParticule
 │  │   |── *
@@ -285,12 +288,12 @@ ctest
 
 ## Github-Actions
 
-[![CodeQL](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/codeql.yml)
-[![CMake](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cmake.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cmake.yml)
-[![Cpp Cmake Publish](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cpp-cmake-publish.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cpp-cmake-publish.yml)
-[![flawfinder](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/flawfinder.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/flawfinder.yml)
-[![Microsoft C++ Code Analysis](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/msvc.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/msvc.yml)
-[![cpp-linter](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cpp-linter.yml/badge.svg?branch=main)](https://github.com/Im-Rises/PhysicalEngine/actions/workflows/cpp-linter.yml)
+[![CodeQL](https://github.com/Im-Rises/ParticleEngine/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/Im-Rises/ParticleEngine/actions/workflows/codeql.yml)
+[![CMake](https://github.com/Im-Rises/ParticleEngine/actions/workflows/cmake.yml/badge.svg?branch=main)](https://github.com/Im-Rises/ParticleEngine/actions/workflows/cmake.yml)
+[![Cpp Cmake Publish](https://github.com/Im-Rises/ParticleEngine/actions/workflows/cpp-cmake-publish.yml/badge.svg?branch=main)](https://github.com/Im-Rises/ParticleEngine/actions/workflows/cpp-cmake-publish.yml)
+[![flawfinder](https://github.com/Im-Rises/ParticleEngine/actions/workflows/flawfinder.yml/badge.svg?branch=main)](https://github.com/Im-Rises/ParticleEngine/actions/workflows/flawfinder.yml)
+[![Microsoft C++ Code Analysis](https://github.com/Im-Rises/ParticleEngine/actions/workflows/msvc.yml/badge.svg?branch=main)](https://github.com/Im-Rises/ParticleEngine/actions/workflows/msvc.yml)
+[![cpp-linter](https://github.com/Im-Rises/ParticleEngine/actions/workflows/cpp-linter.yml/badge.svg?branch=main)](https://github.com/Im-Rises/ParticleEngine/actions/workflows/cpp-linter.yml)
 
 The project is set with a set of different scripts:
 
@@ -354,4 +357,4 @@ Quentin MOREL:
 - @Im-Rises
 - <https://github.com/Im-Rises>
 
-[![GitHub contributors](https://contrib.rocks/image?repo=Im-Rises/PhysicalEngine)](https://github.com/Im-Rises/PhysicalEngine/graphs/contributors)
+[![GitHub contributors](https://contrib.rocks/image?repo=Im-Rises/ParticleEngine)](https://github.com/Im-Rises/ParticleEngine/graphs/contributors)
