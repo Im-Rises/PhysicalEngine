@@ -20,7 +20,7 @@ Transform::~Transform() {
 
 void Transform::drawGui() {
     ImGui::Text("Position");
-    if (ImGui::BeginTable("Position", 3)) {
+    if (ImGui::BeginTable("TransformPosition", 3)) {
         ImGui::TableNextColumn();
         ImGui::Text("X:");
         ImGui::SameLine();
@@ -36,7 +36,7 @@ void Transform::drawGui() {
         ImGui::EndTable();
     }
     ImGui::Text("Rotation");
-    if (ImGui::BeginTable("Rotation", 3)) {
+    if (ImGui::BeginTable("TransformRotation", 3)) {
         ImGui::TableNextColumn();
         ImGui::Text("X:");
         ImGui::SameLine();
@@ -52,7 +52,7 @@ void Transform::drawGui() {
         ImGui::EndTable();
     }
     ImGui::Text("Scale");
-    if (ImGui::BeginTable("Scale", 3)) {
+    if (ImGui::BeginTable("TransformScale", 3)) {
         ImGui::TableNextColumn();
         ImGui::Text("X:");
         ImGui::SameLine();

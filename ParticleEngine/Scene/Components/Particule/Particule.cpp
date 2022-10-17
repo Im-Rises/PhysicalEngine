@@ -105,6 +105,38 @@ void Particule::update(float time) {
 }
 
 void Particule::drawGui() {
+    ImGui::Text("Speed");
+    if (ImGui::BeginTable("ParticleSpeed", 3)) {
+        ImGui::TableNextColumn();
+        ImGui::Text("X:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##ParticleSpeedX", &m_speed.m_x);
+        ImGui::TableNextColumn();
+        ImGui::Text("Y:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##ParticleSpeedY", &m_speed.m_y);
+        ImGui::TableNextColumn();
+        ImGui::Text("Z:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##ParticleSpeedZ", &m_speed.m_z);
+        ImGui::EndTable();
+    }
+    ImGui::Text("Acceleration");
+    if (ImGui::BeginTable("ParticleAcceleration", 3)) {
+        ImGui::TableNextColumn();
+        ImGui::Text("X:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##ParticleAccelerationX", &m_speed.m_x);
+        ImGui::TableNextColumn();
+        ImGui::Text("Y:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##ParticleAccelerationY", &m_speed.m_y);
+        ImGui::TableNextColumn();
+        ImGui::Text("Z:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##ParticleAccelerationZ", &m_speed.m_z);
+        ImGui::EndTable();
+    }
 }
 
 float Particule::distance(const Particule &p) {

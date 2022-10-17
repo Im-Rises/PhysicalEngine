@@ -1,8 +1,8 @@
 set(SRCS_TEST "vector3dTest.cpp")
 #"particuleTest.cpp" "physicHandlerTest.cpp"
 
-set(HEADERS "../PhysicalEngine/Vector3d/Vector3d.h" "../PhysicalEngine/Scene/PhysicHandler.h")
-set(SRCS "../PhysicalEngine/Vector3d/Vector3d.cpp" "../PhysicalEngine/Scene/PhysicHandler.cpp")
+set(HEADERS "../ParticleEngine/Vector3d/Vector3d.h" "../ParticleEngine/Scene/PhysicHandler.h")
+set(SRCS "../ParticleEngine/Vector3d/Vector3d.cpp" "../ParticleEngine/Scene/PhysicHandler.cpp")
 
 enable_testing()
 

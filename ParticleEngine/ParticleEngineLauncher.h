@@ -1,15 +1,15 @@
 #ifndef PHYSICALENGINE_H
 #define PHYSICALENGINE_H
 
-#define PROJECT_NAME "Physical Engine 3D"
+#define PROJECT_NAME "Particle Engine 3D"
 
 #define VERSION_MAJOR "0"
-#define VERSION_MINOR "1"
-#define VERSION_PATCH "5"
+#define VERSION_MINOR "2"
+#define VERSION_PATCH "0"
 
 #define PROJECT_VERSION VERSION_MAJOR "." VERSION_MINOR "." VERSION_PATCH
 
-#define PROJECT_GITHUB "https://github.com/Im-Rises/PhysicalEngine"
+#define PROJECT_GITHUB "https://github.com/Im-Rises/ParticleEngineLauncher"
 
 #include <memory>
 #include <chrono>
@@ -25,7 +25,7 @@ class GameObject;
 struct GLFWwindow;
 
 //Class declaration
-class PhysicalEngine {
+class ParticleEngineLauncher {
     friend class InputManager;
 
 private:
@@ -50,9 +50,9 @@ private:
     float graphData[100] = {};
 
 public:
-    PhysicalEngine();
+    ParticleEngineLauncher();
 
-    ~PhysicalEngine();
+    ~ParticleEngineLauncher();
 
     void start();
 

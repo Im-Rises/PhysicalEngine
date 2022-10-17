@@ -1,4 +1,4 @@
-#include "PhysicalEngine.h"
+#include "ParticleEngineLauncher.h"
 
 #pragma region Includes
 
@@ -43,7 +43,7 @@ static void glfw_error_callback(int error, const char *description) {
 
 #pragma region Constructor and Destructor
 
-PhysicalEngine::PhysicalEngine() {
+ParticleEngineLauncher::ParticleEngineLauncher() {
     // Setup window
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
@@ -125,7 +125,7 @@ PhysicalEngine::PhysicalEngine() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-PhysicalEngine::~PhysicalEngine() {
+ParticleEngineLauncher::~ParticleEngineLauncher() {
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
@@ -140,7 +140,7 @@ PhysicalEngine::~PhysicalEngine() {
 
 #pragma region Game Loop methods
 
-void PhysicalEngine::start() {
+void ParticleEngineLauncher::start() {
     auto start = std::chrono::steady_clock::now();
 
     game.start(scene);
@@ -159,11 +159,11 @@ void PhysicalEngine::start() {
     }
 }
 
-void PhysicalEngine::handleEvents() {
+void ParticleEngineLauncher::handleEvents() {
     glfwPollEvents();
 }
 
-void PhysicalEngine::handleGui() {
+void ParticleEngineLauncher::handleGui() {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
@@ -185,7 +185,7 @@ void PhysicalEngine::handleGui() {
                     ImGui::EndMenu();
                 }
                 if (ImGui::BeginMenu("Help")) {
-                    if (ImGui::MenuItem("About PhysicalEngine...")) {
+                    if (ImGui::MenuItem("About ParticleEngineLauncher...")) {
                         showAboutPopup = true;
                     }
                     ImGui::EndMenu();
@@ -193,8 +193,8 @@ void PhysicalEngine::handleGui() {
                 ImGui::EndMainMenuBar();
             }
             if (showAboutPopup)
-                ImGui::OpenPopup("About PhysicalEngine##AboutPopup");
-            if (ImGui::BeginPopupModal("About PhysicalEngine##AboutPopup", &showAboutPopup,
+                ImGui::OpenPopup("About ParticleEngineLauncher##AboutPopup");
+            if (ImGui::BeginPopupModal("About ParticleEngineLauncher##AboutPopup", &showAboutPopup,
                                        ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize |
                                        ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse)) {
                 ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), PROJECT_NAME);
@@ -263,10 +263,10 @@ void PhysicalEngine::handleGui() {
         {
             ImGui::Begin("Speed graph viewer");
             if (!isMinimized()) {
-//                if (ImPlot::BeginPlot("GameObject speed") && gameObject != nullptr) {
-////                ImPlot::PlotLine("Speed", gameObject->getSpeedHistory().data(), gameObject->getSpeedHistory().size());
-//                }
-//                ImPlot::EndPlot();
+                if (ImPlot::BeginPlot("GameObject speed") && gameObject != nullptr) {
+//                ImPlot::PlotLine("Speed", gameObject->getSpeedHistory().data(), gameObject->getSpeedHistory().size());
+                }
+                ImPlot::EndPlot();
             }
             ImGui::End();
         }
@@ -295,8 +295,8 @@ void PhysicalEngine::handleGui() {
         }
         {
             ImGui::Begin("Game settings");
-            ImGui::Text("Particle speed:");
-            ImGui::InputFloat("##PhysicalEngineParticleSpeed", game.getPtrSpeed(), 0.1f, 1.0f, "%.1f");
+//            ImGui::Text("Particle speed:");
+//            ImGui::InputFloat("##PhysicalEngineParticleSpeed", game.getPtrSpeed(), 0.1f, 1.0f, "%.1f");
             ImGui::End();
         }
         {
@@ -314,7 +314,7 @@ void PhysicalEngine::handleGui() {
 }
 
 
-void PhysicalEngine::updateGame(std::chrono::steady_clock::time_point &start) {
+void ParticleEngineLauncher::updateGame(std::chrono::steady_clock::time_point &start) {
     auto deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(
             std::chrono::steady_clock::now() - start).count();
 //    if (deltaTime > 1000 / PHYSICAL_UPDATE_PER_SECOND) {
@@ -323,7 +323,7 @@ void PhysicalEngine::updateGame(std::chrono::steady_clock::time_point &start) {
 //    }
 }
 
-void PhysicalEngine::updateScreen() {
+void ParticleEngineLauncher::updateScreen() {
     // Update viewport
     int display_w, display_h;
     glfwGetFramebufferSize(window, &display_w, &display_h);
@@ -351,12 +351,12 @@ void PhysicalEngine::updateScreen() {
     glfwSwapBuffers(window);
 }
 
-void PhysicalEngine::clearScreen() {
+void ParticleEngineLauncher::clearScreen() {
     glClearColor(backgroundColor[0], backgroundColor[1], backgroundColor[2], backgroundColor[3]);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void PhysicalEngine::updateViewport(int width, int height) {
+void ParticleEngineLauncher::updateViewport(int width, int height) {
     glViewport(0, 0, width, height);
     scene->updateViewport(width, height);
     if (!isFullScreen) {
@@ -366,7 +366,7 @@ void PhysicalEngine::updateViewport(int width, int height) {
 }
 
 
-void PhysicalEngine::toggleFullScreen() {
+void ParticleEngineLauncher::toggleFullScreen() {
     GLFWmonitor *monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode *mode = glfwGetVideoMode(monitor);
     if (isFullScreen) {
@@ -380,7 +380,7 @@ void PhysicalEngine::toggleFullScreen() {
     }
 }
 
-bool PhysicalEngine::isMinimized() {
+bool ParticleEngineLauncher::isMinimized() {
     return (windowWidth == 0 && windowHeight == 0);
 }
 
