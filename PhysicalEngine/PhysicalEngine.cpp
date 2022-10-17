@@ -329,7 +329,7 @@ void PhysicalEngine::updateScreen() {
     glfwGetFramebufferSize(window, &display_w, &display_h);
     updateViewport(display_w, display_h);
 
-    // If window is minimized, don't draw anything (to avoid crash from ImPlot)
+    // If window is minimized, don't draw anything (to avoid draw in a 0x0 window)
     if (!isMinimized()) {
 
         // Clear Main Screen
