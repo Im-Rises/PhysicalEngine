@@ -1,9 +1,13 @@
 #include "AnchoredSpring.h"
 
 AnchoredSpring::AnchoredSpring() {
-	m_anchor = &Vector3d(0, 0, 0);
+	m_anchor = new Vector3d(0, 0, 0);
 	m_k = 0;
 	m_restLength = 0;
+}
+
+AnchoredSpring::~AnchoredSpring() {
+	delete m_anchor;
 }
 
 AnchoredSpring::AnchoredSpring(Vector3d* anchor, float k, float restLength) {

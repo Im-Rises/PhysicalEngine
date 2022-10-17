@@ -11,6 +11,7 @@ private:
 
 public:
 	AnchoredSpring();
+	~AnchoredSpring();
 	AnchoredSpring(Vector3d* anchor, float k, float restLength);
 	AnchoredSpring(const AnchoredSpring& aSpring);
 	void addForce(Particule* particule, float duration);

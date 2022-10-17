@@ -1,9 +1,13 @@
 #include "Spring.h"
 
 Spring::Spring() {
-	m_otherParticule = &Particule(0, 0, 0, 0);
+	m_otherParticule = new Particule(0, 0, 0, 0);
 	m_k = 0;
 	m_restLength = 0;
+}
+
+Spring::~Spring() {
+	delete m_otherParticule;
 }
 
 Spring::Spring(Particule* otherParticule, float k, float restLength) {

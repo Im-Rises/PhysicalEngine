@@ -11,6 +11,7 @@ private:
 
 public:
 	Spring();
+	~Spring();
 	Spring(Particule* otherParticule, float k, float restLength);
 	Spring(const Spring& spring);
 	void addForce(Particule* particule, float duration);
