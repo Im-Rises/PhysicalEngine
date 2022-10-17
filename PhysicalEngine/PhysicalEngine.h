@@ -46,6 +46,9 @@ private:
     // Widgets variables
     char consoleBuffer[1024] = {};
 
+    // Graph variables
+    float graphData[100] = {};
+
 public:
     PhysicalEngine();
 

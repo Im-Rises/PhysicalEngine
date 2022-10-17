@@ -145,11 +145,8 @@ void PhysicalEngine::start() {
 
     game.start(scene);
 
-    gameObject = scene->getPtrGameObjectByIndex(0);
-
     //Game loop
     while (!glfwWindowShouldClose(window)) {
-
         //Inputs
         handleEvents();
         handleGui();
@@ -188,7 +185,6 @@ void PhysicalEngine::handleGui() {
                     ImGui::EndMenu();
                 }
                 if (ImGui::BeginMenu("Help")) {
-
                     if (ImGui::MenuItem("About PhysicalEngine...")) {
                         showAboutPopup = true;
                     }
@@ -266,10 +262,10 @@ void PhysicalEngine::handleGui() {
         }
         {
             ImGui::Begin("Speed graph viewer");
-            if (ImPlot::BeginPlot("GameObject speed") && gameObject != nullptr) {
-//                ImPlot::PlotLine("Speed", gameObject->getSpeedHistory().data(), gameObject->getSpeedHistory().size());
-            }
-            ImPlot::EndPlot();
+//            if (ImPlot::BeginPlot("GameObject speed") && gameObject != nullptr) {
+////                ImPlot::PlotLine("Speed", gameObject->getSpeedHistory().data(), gameObject->getSpeedHistory().size());
+//            }
+//            ImPlot::EndPlot();
             ImGui::End();
         }
         {
@@ -331,6 +327,7 @@ void PhysicalEngine::updateScreen() {
     glfwGetFramebufferSize(window, &display_w, &display_h);
     updateViewport(display_w, display_h);
 
+    ///////////////////////////////////////////////////////////////////////////////////////
     // Clear screen
     clearScreen();
 
@@ -339,8 +336,12 @@ void PhysicalEngine::updateScreen() {
         glBindFramebuffer(GL_FRAMEBUFFER, scene->getFrameBufferId());
         clearScreen();
     }
-    scene->draw(display_w, display_h);
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    if (!(windowWidth == 0 && windowHeight == 0)) {
+        scene->draw(display_w, display_h);
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////
 
     // Swap buffers
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
