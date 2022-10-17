@@ -7,7 +7,6 @@ Spring::Spring() {
 }
 
 Spring::~Spring() {
-	delete m_otherParticule;
 }
 
 Spring::Spring(Particule* otherParticule, float k, float restLength) {

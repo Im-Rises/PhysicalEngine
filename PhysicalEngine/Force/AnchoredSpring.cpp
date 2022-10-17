@@ -7,7 +7,7 @@ AnchoredSpring::AnchoredSpring() {
 }
 
 AnchoredSpring::~AnchoredSpring() {
-	delete m_anchor;
+	// delete m_anchor
 }
 
 AnchoredSpring::AnchoredSpring(Vector3d* anchor, float k, float restLength) {

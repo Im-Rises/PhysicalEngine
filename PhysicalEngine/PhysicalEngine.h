@@ -71,6 +71,8 @@ private:
     void updateViewport(int width, int height);
 
     void toggleFullScreen();
+
+    bool isMinimized();
 };
 
 

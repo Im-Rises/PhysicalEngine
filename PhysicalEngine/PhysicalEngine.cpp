@@ -262,10 +262,12 @@ void PhysicalEngine::handleGui() {
         }
         {
             ImGui::Begin("Speed graph viewer");
-//            if (ImPlot::BeginPlot("GameObject speed") && gameObject != nullptr) {
+            if (!isMinimized()) {
+//                if (ImPlot::BeginPlot("GameObject speed") && gameObject != nullptr) {
 ////                ImPlot::PlotLine("Speed", gameObject->getSpeedHistory().data(), gameObject->getSpeedHistory().size());
-//            }
-//            ImPlot::EndPlot();
+//                }
+//                ImPlot::EndPlot();
+            }
             ImGui::End();
         }
         {
@@ -327,21 +329,22 @@ void PhysicalEngine::updateScreen() {
     glfwGetFramebufferSize(window, &display_w, &display_h);
     updateViewport(display_w, display_h);
 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    // Clear screen
-    clearScreen();
+    // If window is minimized, don't draw anything (to avoid crash from ImPlot)
+    if (!isMinimized()) {
 
-    // Draw scene
-    if (!isFullScreen) {
-        glBindFramebuffer(GL_FRAMEBUFFER, scene->getFrameBufferId());
+        // Clear Main Screen
         clearScreen();
-    }
 
-    if (!(windowWidth == 0 && windowHeight == 0)) {
+        // If not in fullscreen, clear the opengl window
+        if (!isFullScreen) {
+            glBindFramebuffer(GL_FRAMEBUFFER, scene->getFrameBufferId());
+            clearScreen();
+        }
+
+        // Draw game
         scene->draw(display_w, display_h);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
-    ///////////////////////////////////////////////////////////////////////////////////////
 
     // Swap buffers
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -375,6 +378,10 @@ void PhysicalEngine::toggleFullScreen() {
         glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
         isFullScreen = true;
     }
+}
+
+bool PhysicalEngine::isMinimized() {
+    return (windowWidth == 0 && windowHeight == 0);
 }
 
 #pragma endregion
