@@ -2,13 +2,14 @@
 
 #include "imgui/imgui.h"
 
-Collider::Collider() : Component("Collider") {
+Collider::Collider(GameObject *gameObject) : Component("Collider", gameObject) {
     mass = 0;
     friction = 0;
     restitution = 0;
 }
 
-Collider::Collider(float mass, float friction, float restitution) : Component("Collider") {
+Collider::Collider(GameObject *gameObject, float mass, float friction, float restitution) : Component("Collider",
+                                                                                                      gameObject) {
     mass = mass;
     friction = friction;
     restitution = restitution;

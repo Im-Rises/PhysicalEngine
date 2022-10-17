@@ -2,33 +2,36 @@
 
 #include "imgui/imgui.h"
 
-Particule::Particule() : m_speed(0, 0, 0), m_acceleration(0, 0, 0), Rigidbody("Particule") {
-     m_position = Vector3d(0, 0, 0);
-	 m_mass = 0;
+Particule::Particule(GameObject *gameObject) : m_speed(0, 0, 0), m_acceleration(0, 0, 0),
+                                               Rigidbody(gameObject, "Particule") {
+    m_position = Vector3d(0, 0, 0);
+    m_mass = 0;
 }
 
-Particule::Particule(float x, float y, float z, float m) : m_speed(0, 0, 0), m_acceleration(0, 0, 0), Rigidbody("Particule") {
-    m_position = Vector3d(x, y, z);
-	m_mass = m;
-}
+//Particule::Particule(float x, float y, float z, float m) : m_speed(0, 0, 0), m_acceleration(0, 0, 0),
+//                                                           Rigidbody("Particule") {
+//    m_position = Vector3d(x, y, z);
+//    m_mass = m;
+//}
 
-Particule::Particule(const Vector3d &pos, float m) : m_speed(0, 0, 0), m_acceleration(0, 0, 0), Rigidbody("Particule") {
+Particule::Particule(GameObject *gameObject, const Vector3d &pos, float m) : m_speed(0, 0, 0), m_acceleration(0, 0, 0),
+                                                                             Rigidbody(gameObject, "Particule") {
     m_position = pos;
-	m_mass = m;
+    m_mass = m;
 }
 
-Particule::Particule(const Particule &particule) {
+Particule::Particule(const Particule &particule) : Rigidbody(gameObject, "Particule") {
     m_acceleration = Vector3d(particule.m_acceleration);
     m_speed = Vector3d(particule.m_speed);
     m_position = Vector3d(particule.m_position);
-	m_mass = particule.m_mass;
+    m_mass = particule.m_mass;
 }
 
-const Vector3d& Particule::getPosition() const {
-	return m_position;
+const Vector3d &Particule::getPosition() const {
+    return m_position;
 }
 
-const Vector3d& Particule::getSpeed() const {
+const Vector3d &Particule::getSpeed() const {
     return m_speed;
 }
 
@@ -79,14 +82,13 @@ void Particule::calculateSpeed(float time) {
 }
 
 void Particule::calculateAcceleration(float time) {
-	m_acceleration = m_netForce * (1/m_mass) * time;
+    m_acceleration = m_netForce * (1 / m_mass) * time;
 }
 
 void Particule::recalculateAll(float time) {
-
     calculateSpeed(time);
     calculatePosition(time);
-	calculateAcceleration(time);
+    calculateAcceleration(time);
 }
 
 void Particule::update() {
@@ -95,8 +97,8 @@ void Particule::update() {
 void Particule::drawGui() {
 }
 
-float Particule::distance(const Particule& p) {
-	return (this->m_position - p.getPosition()).norm();
+float Particule::distance(const Particule &p) {
+    return (this->m_position - p.getPosition()).norm();
 }
 
 

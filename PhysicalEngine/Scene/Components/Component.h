@@ -3,12 +3,16 @@
 
 #include <string>
 
+class GameObject;
+
 class Component {
 private:
     std::string name;
+protected:
+    GameObject *gameObject;
 
 public:
-    Component(std::string name);
+    Component(std::string name, GameObject *gameObject);
 
     ~Component();
 

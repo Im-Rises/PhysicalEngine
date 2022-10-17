@@ -21,7 +21,6 @@ It is implemented using Fixed Framerate and Component Oriented Programming.
 |                                                    Mesh view                                                     |                                                  Wireframe view                                                  |
 |:----------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------:|
 | ![image1](https://user-images.githubusercontent.com/59691442/192190493-f1191715-268e-43e4-8f27-5ed0c2823dfa.png) | ![image2](https://user-images.githubusercontent.com/59691442/192190499-457463ae-7a34-432a-bb0b-063771021275.png) |
-|                                                                                                                  |                                                                                                                  |
 
 <!--
 ## Videos

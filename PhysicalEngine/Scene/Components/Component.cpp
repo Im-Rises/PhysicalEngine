@@ -1,7 +1,8 @@
 #include "Component.h"
 
-Component::Component(std::string name) {
+Component::Component(std::string name, GameObject *gameObject) {
     this->name = name;
+    this->gameObject = gameObject;
 }
 
 Component::~Component() {

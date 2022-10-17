@@ -12,9 +12,9 @@
 Scene::Scene(int windowWidth, int windowHeight) {
     this->windowWidth = windowWidth;
     this->windowHeight = windowHeight;
-    gameObjects.push_back(new GameObject(Cube(1)));
-    gameObjects.push_back(new GameObject(Sphere(1, 20, 20)));
-    gameObjects.push_back(new GameObject(MyCube(1)));
+//    gameObjects.push_back(new GameObject(Cube(1)));
+//    gameObjects.push_back(new GameObject(Sphere(1, 20, 20)));
+//    gameObjects.push_back(new GameObject(MyCube(1)));
     create();
 }
 

@@ -10,9 +10,9 @@ protected:
 //    Vector3d m_position;
 
 public:
-    Rigidbody();
+    Rigidbody(GameObject *gameObject, std::string name = "Rigidbody");
 
-    Rigidbody(std::string name);
+//    Rigidbody(std::string name, GameObject *gameObject);
 
     void recalculateAll(float time);
 

@@ -10,9 +10,9 @@ private:
     float restitution;
 
 public:
-    Collider();
+    Collider(GameObject *gameObject);
 
-    Collider(float mass, float friction, float restitution);
+    Collider(GameObject *gameObject, float mass, float friction, float restitution);
 
     void update() override;
 
