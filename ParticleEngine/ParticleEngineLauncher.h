@@ -13,6 +13,7 @@
 
 #include <memory>
 #include <chrono>
+#include <string>
 #include "Game.h"
 
 //Shallow declarations
@@ -48,6 +49,9 @@ private:
 
     // Graph variables
     float graphData[100] = {};
+
+    // Components names list
+    std::string componentsNamesList[3] = {"Rigidbody", "Particle", "Collider"};
 
 public:
     ParticleEngineLauncher();

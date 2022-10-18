@@ -281,14 +281,15 @@ void ParticleEngineLauncher::handleGui() {
                     ImGui::OpenPopup("Add component##popup");
                 }
                 if (ImGui::BeginPopup("Add component##popup")) {
-                    if (ImGui::MenuItem("Rigidbody")) {
-//                        gameObject->addComponent(new Rigidbody(gameObject));
-                    }
-                    if (ImGui::MenuItem("Particle")) {
-//                        gameObject->addComponent(new ParticleComponent(gameObject));
-                    }
-                    if (ImGui::MenuItem("Collider")) {
-//                        gameObject->addComponent(new ParticleComponent(gameObject));
+//                    for (const auto &component: Component::getComponents()) {
+//                        if (ImGui::Selectable(component.getName().c_str())) {
+
+//                        }
+//                    }
+                    for (auto &componentName: componentsNamesList) {
+                        if (ImGui::MenuItem(componentName.c_str())) {
+//                            gameObject->addComponent(componentName.c_str());
+                        }
                     }
                     ImGui::EndPopup();
                 }
