@@ -2,7 +2,7 @@ repo:
   - '*'
 
 CMakeLists:
-  - 'PhysicalEngine/CMakeLists.txt'
+  - 'ParticleEngine/CMakeLists.txt'
 
 readme:
   - 'README.md'
@@ -11,10 +11,10 @@ github-actions:
   - '.github/**/*.yml'
 
 src:
-  - 'PhysicalEngine/**/*.{cpp,hpp}'
+  - 'ParticleEngine/**/*.{cpp,hpp}'
 
 main:
-  - 'PhysicalEngine/main.*'
+  - 'ParticleEngine/main.*'
 
 test:
   - 'test/**/*.{cpp,hpp}'
