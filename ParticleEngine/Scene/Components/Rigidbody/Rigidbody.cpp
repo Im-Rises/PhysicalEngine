@@ -5,7 +5,7 @@
 #include "imgui/imgui.h"
 #include "../../GameObject.h"
 
-Rigidbody::Rigidbody(GameObject *gameObject, std::string name) : Component(std::move(name), gameObject) {
+Rigidbody::Rigidbody(GameObject *gameObject, std::string name) : Component(name, gameObject) {
 //    m_position = Vector3d(0, 0, 0);
     gameObject->transform.setPosition(0, 0, 0);
 }

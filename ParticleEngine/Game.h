@@ -1,7 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-class Particule;
+class Particle;
 
 class Scene;
 
@@ -9,7 +9,7 @@ class Scene;
 
 class Game {
 private:
-    Particule *m_p;
+    Particle *m_p;
     float m_speed = 0.5f;
 
 public:

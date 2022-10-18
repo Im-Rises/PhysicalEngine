@@ -1,7 +1,7 @@
 #include "Spring.h"
 
 //Spring::Spring() {
-//	m_otherParticule = new Particule(0, 0, 0, 0);
+//	m_otherParticule = new Particle(0, 0, 0, 0);
 //	m_k = 0;
 //	m_restLength = 0;
 //}
@@ -9,7 +9,7 @@
 Spring::~Spring() {
 }
 
-Spring::Spring(Particule *otherParticule, float k, float restLength) {
+Spring::Spring(Particle *otherParticule, float k, float restLength) {
     m_otherParticule = otherParticule;
     m_k = k;
     m_restLength = restLength;
@@ -21,7 +21,7 @@ Spring::Spring(const Spring &spring) {
     m_restLength = spring.m_restLength;
 }
 
-void Spring::addForce(Particule *particule, float duration) {
+void Spring::addForce(Particle *particule, float duration) {
     float delta = m_otherParticule->distance(*particule);
     Vector3d F;
     if (delta > m_restLength) {

@@ -5,7 +5,7 @@
 
 class Spring : ForceGenerator {
 private:
-    Particule *m_otherParticule;
+    Particle *m_otherParticule;
     float m_k;
     float m_restLength;
 
@@ -13,11 +13,11 @@ public:
 //	Spring();
     ~Spring();
 
-    Spring(Particule *otherParticule, float k, float restLength);
+    Spring(Particle *otherParticule, float k, float restLength);
 
     Spring(const Spring &spring);
 
-    void addForce(Particule *particule, float duration);
+    void addForce(Particle *particule, float duration);
 };
 
 #endif /* SPRING_H */

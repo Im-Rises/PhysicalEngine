@@ -23,7 +23,9 @@ It is implemented using Fixed Framerate and Component Oriented Programming.
 | ![previw_screenshot](https://user-images.githubusercontent.com/59691442/196303021-781cf236-4bab-4523-9f08-2a85c7dd491c.png) |
 
 [//]: # (|                                                    Mesh view                                                     |                                                  Wireframe view                                                  |)
+
 [//]: # (|:----------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------:|)
+
 [//]: # (| ![image1]&#40;https://user-images.githubusercontent.com/59691442/192190493-f1191715-268e-43e4-8f27-5ed0c2823dfa.png&#41; | ![image2]&#40;https://user-images.githubusercontent.com/59691442/192190499-457463ae-7a34-432a-bb0b-063771021275.png&#41; |)
 
 <!--
@@ -169,7 +171,7 @@ ParticleEngine
 |  ├── stb
 ├── ParticleEngine
 │  │   |── *
-|  ├── Particule
+|  ├── Particle
 │  │   |── *
 |  ├── Scene
 │  │   |── *

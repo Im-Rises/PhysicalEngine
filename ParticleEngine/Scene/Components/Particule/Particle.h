@@ -5,7 +5,7 @@
 #include"../../../Vector3d/Vector3d.h"
 
 
-class Particule : public Rigidbody {
+class Particle : public Rigidbody {
 private:
 //    Vector3d m_position;
     Vector3d m_speed;
@@ -17,7 +17,7 @@ private:
 public:
 #pragma region Constructeur
 
-    Particule(GameObject *gameObject);
+    Particle(GameObject *gameObject);
 
     /// <summary>
     /// Constructeur de particule
@@ -27,20 +27,20 @@ public:
     /// <param name="y"></param>
     /// <param name="z"></param>
     /// <param name="m"></param>
-//    Particule(float x, float y, float z, float m);
+//    Particle(float x, float y, float z, float m);
 
     /// <summary>
     /// Constructeur de particule
     ///  vitesse et acceleration � 0 par default
     /// </summary>
     /// <param name="pos">: la Position</param>
-    Particule(GameObject *gameObject, const Vector3d &pos, float m);
+    Particle(GameObject *gameObject, const Vector3d &pos, float m);
 
     /// <summary>
-    /// Constructeur de copie de Particule
+    /// Constructeur de copie de Particle
     /// </summary>
     /// <param name="particule"></param>
-    Particule(const Particule &particule);
+    Particle(const Particle &particule);
 
 #pragma endregion
 #pragma region Getter Setter
@@ -112,7 +112,7 @@ public:
     /// Calcule la distance entre deux particules
     /// </summary>
     /// <param name="p"></param>
-    float distance(const Particule &p);
+    float distance(const Particle &p);
 
 #pragma endregion
 

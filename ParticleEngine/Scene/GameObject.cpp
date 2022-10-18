@@ -100,6 +100,21 @@ void GameObject::addComponent(Component *component) {
     components.push_back(component);
 }
 
+void GameObject::addComponent(std::string name) {
+    for (auto &componentName: Component::componentsNamesList) {
+        if (componentName == name) {
+            Component *component = Component::createComponent(name, this);
+            if (component != nullptr && getComponentByName(name) == nullptr) {
+                components.push_back(component);
+            }
+        }
+    }
+}
+
+//void GameObject::removeComponent(Component *component) {
+//    components.erase(std::remove(components.begin(), components.end(), component), components.end());
+//}
+
 void GameObject::drawTransformGui() {
     transform.drawGui();
 }
@@ -108,11 +123,20 @@ void GameObject::drawMeshGui() {
     mesh.drawGui();
 }
 
-std::string GameObject::getName() {
+std::string GameObject::getName() const {
     return name;
 }
 
-std::vector<Component *> GameObject::getComponents() const {
+const std::vector<Component *> &GameObject::getComponents() const {
     return components;
 }
 
+Component *GameObject::getComponentByName(std::string name) const {
+    for (auto &component: components) {
+        if (component->getName() == name) {
+            std::cout << "Component found" << std::endl;
+            return component;
+        }
+    }
+    return nullptr;
+}

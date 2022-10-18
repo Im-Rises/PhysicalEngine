@@ -52,15 +52,19 @@ public:
 
     void addComponent(Component *component);
 
+    void addComponent(std::string name);
+
 public:
     void drawTransformGui();
 
     void drawMeshGui();
 
 public:
-    std::string getName();
+    std::string getName() const;
 
-    std::vector<Component *> getComponents() const;
+    const std::vector<Component *> &getComponents() const;
+
+    Component *getComponentByName(std::string name) const;
 };
 
 

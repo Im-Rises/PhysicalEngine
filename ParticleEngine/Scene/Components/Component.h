@@ -2,6 +2,7 @@
 #define COMPONENT_H
 
 #include <string>
+#include <map>
 
 class GameObject;
 
@@ -10,6 +11,9 @@ private:
     std::string name;
 protected:
     GameObject *gameObject;
+
+public:
+    static constexpr const char *componentsNamesList[3] = {"Rigidbody", "Particle", "Collider"};
 
 public:
     Component(std::string name, GameObject *gameObject);
@@ -21,6 +25,9 @@ public:
     virtual void drawGui() = 0;
 
     std::string getName() const;
+
+    static Component *createComponent(const std::string &name, GameObject *gameObject);
+
 };
 
 

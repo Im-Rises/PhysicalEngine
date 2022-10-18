@@ -9,6 +9,7 @@
 #include "Scene/Scene.h"
 #include "Scene/GameObject.h"
 #include "InputManager.h"
+//#include "Scene/Components/Component.h"
 #include <chrono>
 
 // Dear ImGui
@@ -286,9 +287,9 @@ void ParticleEngineLauncher::handleGui() {
 
 //                        }
 //                    }
-                    for (auto &componentName: componentsNamesList) {
-                        if (ImGui::MenuItem(componentName.c_str())) {
-//                            gameObject->addComponent(componentName.c_str());
+                    for (auto &componentName: Component::componentsNamesList) {
+                        if (ImGui::MenuItem(componentName)) {
+                            gameObject->addComponent(componentName);
                         }
                     }
                     ImGui::EndPopup();

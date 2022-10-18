@@ -1,5 +1,5 @@
-#ifndef PHYSICALENGINE_H
-#define PHYSICALENGINE_H
+#ifndef PARTICLE_ENGINE_H
+#define PARTICLE_ENGINE_H
 
 #define PROJECT_NAME "Particle Engine 3D"
 
@@ -50,8 +50,6 @@ private:
     // Graph variables
     float graphData[100] = {};
 
-    // Components names list
-    std::string componentsNamesList[3] = {"Rigidbody", "Particle", "Collider"};
 
 public:
     ParticleEngineLauncher();
@@ -78,8 +76,8 @@ private:
 
     bool isMinimized() const;
 
-    bool ButtonCenteredOnLine(const char *label, float alignment = 0.5f);
+    static bool ButtonCenteredOnLine(const char *label, float alignment = 0.5f);
 };
 
 
-#endif //PHYSICALENGINE_H
+#endif //PARTICLE_ENGINE_H
