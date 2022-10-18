@@ -45,7 +45,7 @@ public:
 #pragma endregion
 #pragma region Getter Setter
 
-    const Vector3d &getPosition() const;
+    const Vector3d getPosition() const;
 
     const Vector3d &getSpeed() const;
 

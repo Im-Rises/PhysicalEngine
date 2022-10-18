@@ -1,3 +1,4 @@
+include_directories("${CMAKE_SOURCE_DIR}/dependencies")
 set(SRCS_TEST "vector3dTest.cpp")
 #"particuleTest.cpp" "physicHandlerTest.cpp"
 
@@ -11,3 +12,4 @@ foreach (test ${SRCS_TEST})
     add_executable(${testName} ${test} ${HEADERS} ${SRCS})
     add_test(${testName} ${testName})
 endforeach ()
+

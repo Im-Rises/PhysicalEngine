@@ -30,7 +30,7 @@ Particule::Particule(const Particule &particule) : Rigidbody(gameObject, "Partic
     m_mass = particule.m_mass;
 }
 
-const Vector3d &Particule::getPosition() const {
+const Vector3d Particule::getPosition() const {
     return gameObject->transform.getPosition();
 }
 
