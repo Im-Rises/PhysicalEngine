@@ -1,7 +1,7 @@
 #include "TestParticule.h"
 
 TestParticule::TestParticule() {
-    m_testParticule = Particule(1, 1, 1);
+    m_testParticule = Particule(1, 1, 1, 0);
 }
 
 int TestParticule::TestCalculePosition() {
