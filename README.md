@@ -154,9 +154,12 @@ ParticleEngine
 │  │   |── cmake.yml
 │  │   |── codeql.yml
 │  │   |── cpp-cmake-publish.yml
+│  │   |── cpp-linter.yml
 │  │   |── dependency-review.yml
+│  │   |── flawfinder.yml
 │  │   |── greetings.yml
 │  │   |── label.yml
+│  │   |── msvc.yml
 │  │   |── stale.yml
 ├── dependencies
 |  ├── glad
@@ -165,9 +168,6 @@ ParticleEngine
 |  ├── imgui
 |  ├── stb
 ├── ParticleEngine
-|  ├── Integrable
-│  │   |── *
-|  ├── Integrator
 │  │   |── *
 |  ├── Particule
 │  │   |── *
@@ -184,6 +184,7 @@ ParticleEngine
 │  │   |── *
 |  ├── CMakeLists.txt
 |  ├── integratorTest.cpp
+|  ├── physicHandlerTest.cpp
 |  ├── particuleTest.cpp
 ├── .clang-format
 ├── .editorconfig
@@ -198,13 +199,13 @@ ParticleEngine
 
 ## Dependencies
 
-- GLFW
-- Glad
-- OpenGl3
-- Dear ImGui
-- CMake
 - C++14
+- CMake
 - C++ compiler (MSVC, Mingw, ...)
+- Glad
+- GLFW
+- OpenGl 3.3
+- Dear ImGui
 
 ## Compilation
 
@@ -342,19 +343,19 @@ Sphere OpenGL:
 
 ## Contributors
 
-Clémence CLAVEL:
+Quentin MOREL:
 
-- @clemos38
-- <https://github.com/clemos38>
+- @Im-Rises
+- <https://github.com/Im-Rises>
 
 Gabriel REBOUL:
 
 - @spiryti
 - <https://github.com/spiryti>
 
-Quentin MOREL:
+Clémence CLAVEL:
 
-- @Im-Rises
-- <https://github.com/Im-Rises>
+- @clemos38
+- <https://github.com/clemos38>
 
 [![GitHub contributors](https://contrib.rocks/image?repo=Im-Rises/ParticleEngine)](https://github.com/Im-Rises/ParticleEngine/graphs/contributors)

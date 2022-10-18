@@ -225,21 +225,12 @@ void ParticleEngineLauncher::handleGui() {
         {
             ImGui::Begin("Hierarchy");
             for (int i = 0; i < scene->getGameObjects().size(); i++) {
-//                std::string label = gameObject == scene->getPtrGameObjectByIndex(i) ? "Selected" : "Select";
-//                label += "##HierarchyGameObject" + std::to_string(i);
-//                if (ImGui::Button(label.c_str())) {
-//                    this->gameObject = scene->getPtrGameObjectByIndex(i);
-//                }
-//                ImGui::SameLine();
-//                ImGui::Text("%s", scene->getPtrGameObjectByIndex(i)->getName().c_str());
-
                 ImGui::Selectable((scene->getPtrGameObjectByIndex(i)->getName()).c_str(),
                                   gameObject == scene->getPtrGameObjectByIndex(i));
                 if (ImGui::IsItemClicked()) {
                     this->gameObject = scene->getPtrGameObjectByIndex(i);
                 }
             }
-
             ImGui::End();
         }
         {
@@ -285,6 +276,22 @@ void ParticleEngineLauncher::handleGui() {
                         component->drawGui();
                     }
                 }
+                ImGui::NewLine();
+                if (ButtonCenteredOnLine("Add component", 0.5f)) {
+                    ImGui::OpenPopup("Add component##popup");
+                }
+                if (ImGui::BeginPopup("Add component##popup")) {
+                    if (ImGui::MenuItem("Rigidbody")) {
+//                        gameObject->addComponent(new Rigidbody(gameObject));
+                    }
+                    if (ImGui::MenuItem("Particle")) {
+//                        gameObject->addComponent(new ParticleComponent(gameObject));
+                    }
+                    if (ImGui::MenuItem("Collider")) {
+//                        gameObject->addComponent(new ParticleComponent(gameObject));
+                    }
+                    ImGui::EndPopup();
+                }
             }
             ImGui::End();
         }
@@ -295,8 +302,8 @@ void ParticleEngineLauncher::handleGui() {
         }
         {
             ImGui::Begin("Game settings");
-//            ImGui::Text("Particle speed:");
-//            ImGui::InputFloat("##PhysicalEngineParticleSpeed", game.getPtrSpeed(), 0.1f, 1.0f, "%.1f");
+            ImGui::Text("Particle speed:");
+            ImGui::InputFloat("##PhysicalEngineParticleSpeed", game.getPtrSpeed(), 0.1f, 1.0f, "%.1f");
             ImGui::End();
         }
         {
@@ -313,14 +320,11 @@ void ParticleEngineLauncher::handleGui() {
     ImGui::Render();
 }
 
-
 void ParticleEngineLauncher::updateGame(std::chrono::steady_clock::time_point &start) {
     auto deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(
             std::chrono::steady_clock::now() - start).count();
-//    if (deltaTime > 1000 / PHYSICAL_UPDATE_PER_SECOND) {
     start = std::chrono::steady_clock::now();
     scene->updateGameObjects((float) deltaTime / 1000.0f);
-//    }
 }
 
 void ParticleEngineLauncher::updateScreen() {
@@ -380,8 +384,22 @@ void ParticleEngineLauncher::toggleFullScreen() {
     }
 }
 
-bool ParticleEngineLauncher::isMinimized() {
+bool ParticleEngineLauncher::isMinimized() const {
     return (windowWidth == 0 && windowHeight == 0);
 }
+
+bool ParticleEngineLauncher::ButtonCenteredOnLine(const char *label, float alignment) {
+    ImGuiStyle &style = ImGui::GetStyle();
+
+    float size = ImGui::CalcTextSize(label).x + style.FramePadding.x * 2.0f;
+    float avail = ImGui::GetContentRegionAvail().x;
+
+    float off = (avail - size) * alignment;
+    if (off > 0.0f)
+        ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
+
+    return ImGui::Button(label);
+}
+
 
 #pragma endregion

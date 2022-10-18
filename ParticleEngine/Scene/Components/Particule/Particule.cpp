@@ -126,15 +126,15 @@ void Particule::drawGui() {
         ImGui::TableNextColumn();
         ImGui::Text("X:");
         ImGui::SameLine();
-        ImGui::InputFloat("##ParticleAccelerationX", &m_speed.m_x);
+        ImGui::InputFloat("##ParticleAccelerationX", &m_acceleration.m_x);
         ImGui::TableNextColumn();
         ImGui::Text("Y:");
         ImGui::SameLine();
-        ImGui::InputFloat("##ParticleAccelerationY", &m_speed.m_y);
+        ImGui::InputFloat("##ParticleAccelerationY", &m_acceleration.m_y);
         ImGui::TableNextColumn();
         ImGui::Text("Z:");
         ImGui::SameLine();
-        ImGui::InputFloat("##ParticleAccelerationZ", &m_speed.m_z);
+        ImGui::InputFloat("##ParticleAccelerationZ", &m_acceleration.m_z);
         ImGui::EndTable();
     }
 }

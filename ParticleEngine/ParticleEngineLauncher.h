@@ -72,7 +72,9 @@ private:
 
     void toggleFullScreen();
 
-    bool isMinimized();
+    bool isMinimized() const;
+
+    bool ButtonCenteredOnLine(const char *label, float alignment = 0.5f);
 };
 
 
