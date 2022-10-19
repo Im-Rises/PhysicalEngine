@@ -1,7 +1,7 @@
 #include "Gravity.h"
 
 Gravity::Gravity() {
-    m_gravity = Vector3d(0, -9.81, 0);
+    m_gravity = Vector3d(0.0f, -9.81f, 0.0f);
 }
 
 Gravity::Gravity(Vector3d g) {

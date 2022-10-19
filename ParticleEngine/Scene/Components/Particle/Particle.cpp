@@ -17,7 +17,6 @@ Particle::Particle(GameObject *gameObject) : m_speed(0, 0, 0), m_acceleration(0,
 
 Particle::Particle(GameObject *gameObject, const Vector3d &pos, float m) : m_speed(0, 0, 0), m_acceleration(0, 0, 0),
                                                                            Rigidbody(gameObject, "Particle") {
-//    m_position = pos;
     gameObject->transform.setPosition(pos);
     m_mass = m;
 }
@@ -25,7 +24,6 @@ Particle::Particle(GameObject *gameObject, const Vector3d &pos, float m) : m_spe
 Particle::Particle(const Particle &particule) : Rigidbody(gameObject, "Particle") {
     m_acceleration = Vector3d(particule.m_acceleration);
     m_speed = Vector3d(particule.m_speed);
-//    m_position = Vector3d(particule.m_position);
     gameObject->transform.setPosition(particule.gameObject->transform.getPosition());
     m_mass = particule.m_mass;
 }
@@ -43,12 +41,10 @@ const Vector3d &Particle::getAcceleration() const {
 }
 
 void Particle::setPosition(float x, float y, float z) {
-//    m_position = Vector3d(x, y, z);
     gameObject->transform.setPosition(Vector3d(x, y, z));
 }
 
 void Particle::setPosition(const Vector3d &position) {
-//    m_position = position;
     gameObject->transform.setPosition(position);
 }
 
@@ -79,7 +75,6 @@ void Particle::setNetForce(Vector3d force) { m_netForce = force; }
 void Particle::setFriction(float friction) { m_friction = friction; }
 
 void Particle::calculatePosition(float time) {
-//    m_position = m_position + m_speed * time;
     gameObject->transform.setPosition(gameObject->transform.getPosition() + m_speed * time);
 }
 
@@ -140,7 +135,6 @@ void Particle::drawGui() {
 }
 
 float Particle::distance(const Particle &p) {
-//    return (this->m_position - p.getPosition()).norm();
     return (gameObject->transform.getPosition() - p.getPosition()).norm();
 }
 

@@ -7,18 +7,24 @@
 class Rigidbody : public Component {
 
 protected:
-//    Vector3d m_position;
+//    float m_mass;
+//    float m_damping;
+//    float m_inverseMass;
+//    float m_inverseInertiaTensor;
+//    float m_gravity;
+//    float m_friction;
+//    float m_restitution;
 
 public:
     Rigidbody(GameObject *gameObject, std::string name = "Rigidbody");
-
-//    void recalculateAll(float time);
 
     void update(float time) override;
 
     void drawGui() override;
 
-//    const Vector3d &getPosition() const;
+    void getTest() {
+        std::cout << "test" << std::endl;
+    }
 };
 
 #endif // !INTEGRABLE_H

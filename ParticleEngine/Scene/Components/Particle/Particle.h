@@ -7,7 +7,6 @@
 
 class Particle : public Rigidbody {
 private:
-//    Vector3d m_position;
     Vector3d m_speed;
     Vector3d m_acceleration;
     float m_mass;
