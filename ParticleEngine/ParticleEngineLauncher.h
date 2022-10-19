@@ -11,9 +11,7 @@
 
 #define PROJECT_GITHUB "https://github.com/Im-Rises/ParticleEngineLauncher"
 
-#include <memory>
 #include <chrono>
-#include <string>
 #include "Game.h"
 
 //Shallow declarations
@@ -47,10 +45,6 @@ private:
     // Widgets variables
     char consoleBuffer[1024] = {};
 
-    // Graph variables
-    float graphData[100] = {};
-
-
 public:
     ParticleEngineLauncher();
 
@@ -77,6 +71,7 @@ private:
     bool isMinimized() const;
 
     static bool ButtonCenteredOnLine(const char *label, float alignment = 0.5f);
+
 };
 
 

@@ -2,6 +2,7 @@
 #define GAMEOBJECT_H
 
 #include <vector>
+#include <map>
 #include "../Shader/Shader.h"
 #include "../Vector3d/Vector3d.h"
 
@@ -15,23 +16,20 @@ private:
     // Object name
     std::string name;
 
-    // Base components
-//    Transform transform;
-    Mesh mesh;
-
     // Optional components
     std::vector<Component *> components;
+//    std::map<std::string, Component *> components;
 
     // OpenGL elements
     unsigned int VBO, VAO, EBO;
     Shader shader;
 
-
     // Engine other elements
     // std::vector<GameObject *> children;
 
 public:
-
+    // Base components
+    Mesh mesh;
     Transform transform;
 
     GameObject(Mesh mesh);
@@ -65,6 +63,8 @@ public:
     const std::vector<Component *> &getComponents() const;
 
     Component *getComponentByName(std::string name) const;
+
+    float getSpeed() const;
 };
 
 

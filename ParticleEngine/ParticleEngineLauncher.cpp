@@ -9,8 +9,7 @@
 #include "Scene/Scene.h"
 #include "Scene/GameObject.h"
 #include "InputManager.h"
-//#include "Scene/Components/Component.h"
-#include <chrono>
+#include "Utility/RollingBuffer.h"
 
 // Dear ImGui
 #include "imgui/imgui.h"
@@ -254,11 +253,25 @@ void ParticleEngineLauncher::handleGui() {
         }
         {
             ImGui::Begin("Speed graph viewer");
-            if (!isMinimized()) {
-                if (ImPlot::BeginPlot("GameObject speed") && gameObject != nullptr) {
-//                ImPlot::PlotLine("Speed", gameObject->getSpeedHistory().data(), gameObject->getSpeedHistory().size());
+            {
+                static RollingBuffer rdata1;
+                ImVec2 mouse = ImGui::GetMousePos();
+                static float t = 0;
+                t += ImGui::GetIO().DeltaTime;
+                rdata1.AddPoint(t, mouse.x * 0.0005f);
+                static float history = 10.0f;
+                static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
+
+                if (ImPlot::BeginPlot("GameObject Speed##Rolling", ImVec2(-1, 150))) {
+                    ImPlot::SetupAxes(NULL, NULL, flags, flags);
+                    ImPlot::SetupAxisLimits(ImAxis_X1, 0, history, ImGuiCond_Always);
+                    ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1);
+                    ImPlot::PlotLine("Speed X", &rdata1.Data[0].x, &rdata1.Data[0].y, rdata1.Data.size(), 0, 0,
+                                     2 * sizeof(float));
+                    ImPlot::EndPlot();
                 }
-                ImPlot::EndPlot();
+                ImGui::SliderFloat("History", &history, 1, 30, "%.1f s");
+                rdata1.Span = history;
             }
             ImGui::End();
         }
@@ -282,11 +295,6 @@ void ParticleEngineLauncher::handleGui() {
                     ImGui::OpenPopup("Add component##popup");
                 }
                 if (ImGui::BeginPopup("Add component##popup")) {
-//                    for (const auto &component: Component::getComponents()) {
-//                        if (ImGui::Selectable(component.getName().c_str())) {
-
-//                        }
-//                    }
                     for (auto &componentName: Component::componentsNamesList) {
                         if (ImGui::MenuItem(componentName)) {
                             gameObject->addComponent(componentName);

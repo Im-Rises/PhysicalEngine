@@ -3,7 +3,7 @@
 #include "Scene/GameObject.h"
 #include "Scene/Components/Mesh/Sphere/Sphere.h"
 #include "Scene/Scene.h"
-#include "Scene/Components/Particule/Particle.h"
+#include "Scene/Components/Particle/Particle.h"
 #include "Scene/Components/Rigidbody/Rigidbody.h"
 #include "Scene/Components/Collider/Collider.h"
 

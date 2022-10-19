@@ -4,6 +4,7 @@
 
 #include "Components/Component.h"
 #include "Components/Rigidbody/Rigidbody.h"
+#include "Components/Particle/Particle.h"
 
 #include <utility>
 
@@ -134,9 +135,16 @@ const std::vector<Component *> &GameObject::getComponents() const {
 Component *GameObject::getComponentByName(std::string name) const {
     for (auto &component: components) {
         if (component->getName() == name) {
-            std::cout << "Component found" << std::endl;
             return component;
         }
     }
     return nullptr;
+}
+
+float GameObject::getSpeed() const {
+//    Component *particle = (getComponentByName("Particle"));
+//    if (particle != nullptr) {
+//        return particle->getSpeed().m_x;
+//    }
+    return 0;
 }

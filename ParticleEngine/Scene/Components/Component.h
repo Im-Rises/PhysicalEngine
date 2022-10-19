@@ -7,6 +7,8 @@
 class GameObject;
 
 class Component {
+public:
+//    static constexpr const char *COMPONENT_TYPE = "Component";
 private:
     std::string name;
 protected:
