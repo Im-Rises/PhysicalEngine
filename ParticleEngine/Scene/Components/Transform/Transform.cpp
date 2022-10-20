@@ -84,3 +84,7 @@ void Transform::setPosition(Vector3d position) {
 Vector3d Transform::getPosition() {
     return Vector3d(positionX, positionY, positionZ);
 }
+
+std::string Transform::getName() const {
+    return COMPONENT_TYPE;
+}

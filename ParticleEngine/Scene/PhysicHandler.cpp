@@ -28,7 +28,7 @@ void PhysicHandler::update(float time, GameObject *gameObject) {
     fixedDeltaTime += static_cast<float>(time);
     timeToAdjustFrameRate += static_cast<float>(time);
     if (timeToAdjustFrameRate > 1.0f / fixeFrameRate) {
-//        gameObject->->recalculateAll(fixedDeltaTime);
+//        m_gameObject->->recalculateAll(fixedDeltaTime);
         timeToAdjustFrameRate -= 1.0f / fixeFrameRate;
         if (timeToAdjustFrameRate > 1) {
             timeToAdjustFrameRate -= 1;

@@ -54,7 +54,7 @@ public:
 public:
     unsigned int getFrameBufferId() const;
 
-    std::vector<GameObject *> getGameObjects();
+    std::vector<GameObject *> &getGameObjects();
 
     bool *getPtrWireFrameState();
 

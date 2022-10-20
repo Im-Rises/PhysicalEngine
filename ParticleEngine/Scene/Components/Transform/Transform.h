@@ -3,10 +3,12 @@
 
 #include <string>
 #include "../../../Vector3d/Vector3d.h"
+#include "../Component.h"
+#include "../DefaultComponent.h"
 
-class Transform {
+class Transform : private DefaultComponent {
 private:
-    std::string name = "Transform";
+    static constexpr const char *COMPONENT_TYPE = "Transform";
 
 public:
     float positionX, positionY, positionZ;
@@ -19,7 +21,7 @@ public:
     ~Transform();
 
 public:
-    void drawGui();
+    void drawGui() override;
 
     void setPosition(float x, float y, float z);
 
@@ -27,6 +29,7 @@ public:
 
     Vector3d getPosition();
 
+    std::string getName() const override;
 };
 
 

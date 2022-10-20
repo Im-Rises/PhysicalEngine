@@ -5,16 +5,15 @@
 
 #include <iostream>
 
-Component::Component(std::string name, GameObject *gameObject) {
-    this->name = name;
-    this->gameObject = gameObject;
+Component::Component(GameObject *gameObject) {
+    this->m_gameObject = gameObject;
 }
 
 Component::~Component() {
 }
 
 std::string Component::getName() const {
-    return name;
+    return Component::COMPONENT_TYPE;
 }
 
 Component *Component::createComponent(const std::string &name, GameObject *gameObject) {

@@ -28,8 +28,6 @@ public:
     void goDown();
 
 public:
-    void setSpeed(float speed);
-
     float *getPtrSpeed();
 };
 

@@ -45,9 +45,9 @@ void Game::goDown() {
     m_p->setSpeed(0, -m_speed, 0);
 }
 
-void Game::setSpeed(float speed) {
-    m_speed = speed;
-}
+//void Game::setSpeed(float speed) {
+//    m_speed = speed;
+//}
 
 float *Game::getPtrSpeed() {
     return &m_speed;

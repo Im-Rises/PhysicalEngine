@@ -5,6 +5,8 @@
 #include "../Component.h"
 
 class Rigidbody : public Component {
+private:
+    static constexpr const char *COMPONENT_TYPE = "Rigidbody";
 
 protected:
 //    float m_mass;
@@ -14,6 +16,7 @@ protected:
 //    float m_gravity;
 //    float m_friction;
 //    float m_restitution;
+//    bool isKinematic = false;
 
 public:
     Rigidbody(GameObject *gameObject, std::string name = "Rigidbody");
@@ -22,9 +25,8 @@ public:
 
     void drawGui() override;
 
-    void getTest() {
-        std::cout << "test" << std::endl;
-    }
+    std::string getName() const override;
+
 };
 
 #endif // !INTEGRABLE_H

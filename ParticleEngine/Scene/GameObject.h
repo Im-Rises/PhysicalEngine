@@ -14,7 +14,7 @@ class Component;
 class GameObject {
 private:
     // Object name
-    std::string name;
+    std::string gameObjectName;
 
     // Optional components
     std::vector<Component *> components;
@@ -62,9 +62,9 @@ public:
 
     const std::vector<Component *> &getComponents() const;
 
-    Component *getComponentByName(std::string name) const;
+//    float getSpeed() const;
 
-    float getSpeed() const;
+    Component *getComponentByName(const std::string &name) const;
 };
 
 

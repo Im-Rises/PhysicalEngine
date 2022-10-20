@@ -97,7 +97,7 @@ unsigned int Scene::getFrameBufferId() const {
     return fbo;
 }
 
-std::vector<GameObject *> Scene::getGameObjects() {
+std::vector<GameObject *> &Scene::getGameObjects() {
     return gameObjects;
 }
 
