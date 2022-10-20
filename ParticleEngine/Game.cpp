@@ -45,6 +45,14 @@ void Game::goDown() {
     m_p->setSpeed(0, -m_speed, 0);
 }
 
+void Game::applyGravity() {
+	m_G.addForce(m_p, 1);
+}
+
+void Game::applySpring() {
+	m_S.addForce(m_p, 1);
+}
+
 void Game::setSpeed(float speed) {
     m_speed = speed;
 }

@@ -58,6 +58,11 @@ void InputManager::keyPressed(GLFWwindow *window, int key, ParticleEngineLaunche
             engine->game.goDown();
             break;
         }
+		case GLFW_KEY_F: {
+			engine->game.applyGravity();
+			//engine->game.applySpring();
+			break;
+		}
         case GLFW_KEY_F11: {
             engine->toggleFullScreen();
             break;
