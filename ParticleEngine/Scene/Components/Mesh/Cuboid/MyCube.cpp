@@ -1,7 +1,3 @@
-//
-// Created by Quentin on 24/09/2022.
-//
-
 #include "MyCube.h"
 
 MyCube::MyCube(float size) {
