@@ -23,7 +23,7 @@ private:
 
     // View settings
     bool wireFrame = false;
-    bool showAxis = true;
+    bool showAxis = false;
 
     // OpenGL framebuffer
     unsigned int fbo;
