@@ -45,11 +45,11 @@ public:
 #pragma endregion
 #pragma region Getter Setter
 
-    const Vector3d getPosition() const;
+    Vector3d& getPosition() const;
 
-    const Vector3d &getSpeed() const;
+    Vector3d& getSpeed() const;
 
-    const Vector3d &getAcceleration() const;
+    Vector3d& getAcceleration() const;
 
     void setPosition(float x, float y, float z);
 
