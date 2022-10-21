@@ -15,7 +15,7 @@ private:
 
 private:
     float m_mass;
-    float m_friction;
+//    float m_friction;
     Vector3d m_netForce;
 
     Vector3d m_speed;
@@ -79,11 +79,11 @@ public:
 
     const Vector3d &getNetForce() const;
 
-    float getFriction() const;
+//    float getFriction() const;
 
     void setNetForce(const Vector3d &force);
 
-    void setFriction(float friction);
+//    void setFriction(float friction);
 
 #pragma endregion
 

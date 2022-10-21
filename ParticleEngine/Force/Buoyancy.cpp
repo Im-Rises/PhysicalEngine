@@ -25,14 +25,14 @@ Buoyancy::Buoyancy(const Buoyancy &buoyancy) {
 
 void Buoyancy::addForce(Particle *particle, float duration) {
     float d = (particle->getPosition().gety() - m_waterHeight - m_maxDepth) / 2 * m_maxDepth;
-    float f;
+    Vector3d F(0, 1, 0);
     if (d <= 0) {
-        f = 0;
+        F * 0;
     } else if (d >= 1) {
-        f = m_volume * m_liquidDensity;
+        F * m_volume * m_liquidDensity;
     } else {
-        f = d * m_volume * m_liquidDensity;
+        F * d * m_volume * m_liquidDensity;
     }
-    float initialFriction = particle->getFriction();
-    particle->setFriction(initialFriction + f);
+    Vector3d initialForce = particle->getNetForce();
+    particle->setNetForce(initialForce + F);
 }

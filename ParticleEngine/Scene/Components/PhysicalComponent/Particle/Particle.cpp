@@ -70,11 +70,11 @@ float Particle::getMass() const { return m_mass; }
 
 const Vector3d &Particle::getNetForce() const { return m_netForce; }
 
-float Particle::getFriction() const { return m_friction; }
+//float Particle::getFriction() const { return m_friction; }
 
 void Particle::setNetForce(const Vector3d &force) { m_netForce = force; }
 
-void Particle::setFriction(float friction) { m_friction = friction; }
+//void Particle::setFriction(float friction) { m_friction = friction; }
 
 void Particle::calculatePosition(float time) {
     m_gameObject->transform.setPosition(m_gameObject->transform.getPosition() + m_speed * time);

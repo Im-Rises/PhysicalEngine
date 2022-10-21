@@ -18,5 +18,8 @@ Drag::Drag(const Drag &drag) {
 }
 
 void Drag::addForce(Particle *particle, float duration) {
-    //TO DO
+    Vector3d vit = particle->getSpeed();
+    Vector3d F = vit.normalize() * (-1) * (m_k1 * vit.norm() + m_k2 * vit.norm() * vit.norm());
+    Vector3d initialForce = particle->getNetForce();
+    particle->setNetForce(initialForce + F);
 }
