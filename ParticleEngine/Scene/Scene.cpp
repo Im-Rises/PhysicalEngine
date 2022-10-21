@@ -8,6 +8,8 @@
 #include "Components/Mesh/Sphere/Sphere.h"
 
 #include "glad/glad.h"
+#include "Components/Particle/Particle.h"
+#include "Components/Collider/Collider.h"
 
 Scene::Scene(int windowWidth, int windowHeight) {
     this->windowWidth = windowWidth;

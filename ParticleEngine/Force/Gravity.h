@@ -6,14 +6,15 @@
 class Gravity : ForceGenerator {
 private:
     Vector3d m_gravity;
+
 public:
     Gravity();
 
-    Gravity(Vector3d g);
+    explicit Gravity(Vector3d g);
 
     Gravity(const Gravity &grav);
 
-    void addForce(Particle *particule, float duration);
+    void addForce(Particle *particle, float duration) override;
 };
 
 #endif /* GRAVITY_H */

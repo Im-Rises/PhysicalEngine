@@ -20,12 +20,12 @@ Game::~Game() {
 //}
 
 void Game::start(Scene *scene) {
-    GameObject *gameobject = new GameObject(Sphere(1, 20, 20));
-    scene->addGameObject(gameobject);
-    m_p = new Particle(gameobject, Vector3d(0, 0, 0), 1);
-    gameobject->addComponent(m_p);
-//    gameobject->addComponent(new Collider());
-//    gameobject->addComponent(new Particle());
+    GameObject *gameObject = new GameObject(Sphere(1, 20, 20));
+    scene->addGameObject(gameObject);
+    m_p = new Particle(gameObject, Vector3d(0, 0, 0), 1);
+    gameObject->addComponent(m_p);
+//    gameObject->addComponentByName(new Collider());
+//    gameObject->addComponentByName(new Particle());
 
 }
 

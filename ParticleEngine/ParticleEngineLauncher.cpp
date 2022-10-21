@@ -297,7 +297,7 @@ void ParticleEngineLauncher::handleGui() {
                 if (ImGui::BeginPopup("Add component##popup")) {
                     for (auto &componentName: Component::componentsNamesList) {
                         if (ImGui::MenuItem(componentName)) {
-                            gameObject->addComponent(componentName);
+                            gameObject->addComponentByName(componentName);
                         }
                     }
                     ImGui::EndPopup();
