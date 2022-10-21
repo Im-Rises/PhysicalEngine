@@ -14,6 +14,8 @@ public:
 //    Gravity(const Gravity &grav);
 
     void addForce(Particle *particle, float duration) override;
+
+    Vector3d &getGravityRef();
 };
 
 #endif /* GRAVITY_H */

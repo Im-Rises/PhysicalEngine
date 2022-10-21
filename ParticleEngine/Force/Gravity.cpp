@@ -16,3 +16,7 @@ void Gravity::addForce(Particle *particle, float duration) {
 //    particle->setNetForce(initialForce + F);
     particle->setAcceleration(m_gravity * particle->getMass());
 }
+
+Vector3d &Gravity::getGravityRef() {
+    return m_gravity;
+}

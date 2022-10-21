@@ -20,7 +20,7 @@
 #include "imgui/implot.h"
 #include "Utility/imGuiUtility.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 #if defined(IMGUI_IMPL_OPENGL_ES2)
 #include <GLES2/gl2.h>
