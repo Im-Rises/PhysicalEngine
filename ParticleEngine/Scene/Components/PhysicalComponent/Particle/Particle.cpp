@@ -118,6 +118,27 @@ void Particle::drawGui() {
     ImGui::Text("Weight");
     ImGui::SameLine();
     ImGui::DragFloat("##ParticleWeight", &m_mass, 0.1f, 0.0f, 100.0f);
+    
+    // Gravity
+    ImGui::Text("Gravity");
+    if (ImGui::BeginTable("ParticleGravity", 3)) {
+        ImGui::TableNextColumn();
+        ImGui::Text("X:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##ParticleWeight", &gravity.getGravityRef().m_x);
+        ImGui::SameLine();
+        ImGui::TableNextColumn();
+        ImGui::Text("Y:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##ParticleWeight", &gravity.getGravityRef().m_y);
+        ImGui::SameLine();
+        ImGui::TableNextColumn();
+        ImGui::SameLine();
+        ImGui::Text("Z:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##ParticleWeight", &gravity.getGravityRef().m_z);
+        ImGui::EndTable();
+    }
 
     // Speed, acceleration
     ImGui::Text("Speed");
