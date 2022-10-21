@@ -4,7 +4,7 @@
 #include <vector>
 #include <map>
 #include "../Shader/Shader.h"
-#include "../Vector3d/Vector3d.h"
+#include "../Utility/Vector3d.h"
 
 #include "Components/Mesh/Mesh.h"
 #include "Components/Transform/Transform.h"
@@ -30,9 +30,10 @@ private:
 public:
     // Base components
     Mesh mesh;
+//    std::unique_ptr<Mesh> mesh;
     Transform transform;
 
-    GameObject(Mesh mesh);
+    explicit GameObject(Mesh mesh);
 
 private:
     void create();

@@ -1,7 +1,7 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include "../../../Vector3d/Vector3d.h"
+#include "../../../Utility/Vector3d.h"
 #include "../Component.h"
 #include "../DefaultComponent.h"
 #include <iostream>

@@ -14,7 +14,6 @@
 #include <chrono>
 #include "Game.h"
 
-//Shallow declarations
 class Scene;
 
 class InputManager;
@@ -30,8 +29,12 @@ class ParticleEngineLauncher {
 private:
     // Window, Scene and Game objects
     GLFWwindow *window;
-    Scene *scene;
     Game game;
+    Scene *scene;
+    //    std::unique_ptr<Scene> scene;
+
+    // Physical update
+    const int PHYSICAL_UPDATE_PER_SECOND = 50;
 
     // Window variables
     bool isFullScreen = false;
@@ -39,7 +42,6 @@ private:
     int windowWidth = 1580, windowHeight = 720;
 
     // Variables for the game loop
-    const int PHYSICAL_UPDATE_PER_SECOND = 50;
     GameObject *gameObject = nullptr;
 
     // Widgets variables

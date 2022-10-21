@@ -111,14 +111,12 @@ void Particle::update(float deltaTime) {
 void Particle::drawGui() {
     // Is kinematic
     ImGui::Text("Is kinematic");
-    ImGui::SameLine();
     ImGui::Checkbox("##ParticleKinematic", &isKinematic);
 
     // Weight
     ImGui::Text("Weight");
-    ImGui::SameLine();
     ImGui::DragFloat("##ParticleWeight", &m_mass, 0.1f, 0.0f, 100.0f);
-    
+
     // Gravity
     ImGui::Text("Gravity");
     if (ImGui::BeginTable("ParticleGravity", 3)) {

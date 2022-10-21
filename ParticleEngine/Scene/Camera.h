@@ -5,7 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "../Vector3d/Vector3d.h"
+#include "../Utility/Vector3d.h"
 
 class Camera {
 private:

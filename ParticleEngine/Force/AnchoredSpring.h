@@ -2,7 +2,7 @@
 #define ANCHOREDSPRING_H
 
 #include "ForceGenerator.h"
-#include "../Vector3d/Vector3d.h"
+#include "../Utility/Vector3d.h"
 
 class AnchoredSpring : ForceGenerator {
 private:

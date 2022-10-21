@@ -5,7 +5,7 @@
 
 #include "ParticleEngineLauncher.h"
 #include "Scene/Scene.h"
-#include "Vector3d/Vector3d.h"
+#include "Utility/Vector3d.h"
 
 //float InputManager::translationSpeed = 0.1f;
 //float InputManager::rotationSpeed = 0.0001f;
