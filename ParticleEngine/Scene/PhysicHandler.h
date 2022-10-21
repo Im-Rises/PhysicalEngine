@@ -3,6 +3,8 @@
 
 #include <list>
 
+class Particle;
+
 class Rigidbody;
 
 class GameObject;
@@ -10,7 +12,7 @@ class GameObject;
 class PhysicHandler {
 
 private:
-    std::list<Rigidbody *> m_integrableList;
+    std::list<Particle *> m_integrableList;
     int fixeFrameRate = 50;
     float fixedDeltaTime = 0;
     float timeToAdjustFrameRate = 0;

@@ -1,7 +1,8 @@
 #include "PhysicHandler.h"
 #include <iostream>
-#include "Components/Rigidbody/Rigidbody.h"
+#include "Components/PhysicalComponent/Particle/Particle.h"
 #include "GameObject.h"
+#include "Components/PhysicalComponent/Particle/Particle.h"
 
 PhysicHandler::PhysicHandler() {
 

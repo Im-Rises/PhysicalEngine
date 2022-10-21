@@ -3,9 +3,9 @@
 #include "glad/glad.h"
 
 #include "Components/Component.h"
-#include "Components/Rigidbody/Rigidbody.h"
-#include "Components/Particle/Particle.h"
-#include "Components/Collider/Collider.h"
+#include "Components/PhysicalComponent/Particle/Particle.h"
+#include "Components/PhysicalComponent/Particle/Particle.h"
+#include "Components/PhysicalComponent/Particle/Particle.h"
 
 #include <utility>
 

@@ -1,7 +1,7 @@
 #include "Particle.h"
 
 #include "imgui/imgui.h"
-#include "../../GameObject.h"
+#include "../../../GameObject.h"
 
 Particle::Particle(GameObject *gameObject) : m_speed(0, 0, 0), m_acceleration(0, 0, 0),
                                              Component(gameObject) {

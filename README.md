@@ -286,10 +286,10 @@ Placeholder
 
 <!--
     //////////////////////////////////
-//    // Méthod 1
+//    // Method 1
 //    gameObjects[0]->addComponentByName("Collider");
 
-//    // Méthod 2
+//    // Method 2
 //    Collider *collider = nullptr;
 //    gameObjects[0]->addComponentByClass<Collider>(collider);
     //////////////////////////////////

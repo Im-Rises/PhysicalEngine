@@ -2,7 +2,8 @@
 #define PARTICULE_H
 
 #include "../Rigidbody/Rigidbody.h"
-#include"../../../Vector3d/Vector3d.h"
+#include"../../../../Vector3d/Vector3d.h"
+#include "../PhysicalComponent.h"
 
 
 class Particle : public Component {
