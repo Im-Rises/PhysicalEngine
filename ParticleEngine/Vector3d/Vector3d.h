@@ -8,13 +8,9 @@ public:
     float m_x, m_y, m_z;
 
 public:
-    /// Constructeur par d�faut
-    /// Vecteur z�ro (0,0,0)
-    Vector3d();
-
     /// Constructeur
     /// Vecteur (x,y,z)
-    Vector3d(float xcoord, float ycoord, float zcoord);
+    Vector3d(float xCoord = 0, float yCoord = 0, float zCoord = 0);
 
     ///Constructeur de copie
     Vector3d(const Vector3d &v);
@@ -30,11 +26,11 @@ public:
     float getz() const;
 
     ///setters
-    void setx(float xcoord);
+    void setx(float xCoord);
 
-    void sety(float ycoord);
+    void sety(float yCoord);
 
-    void setz(float zcoord);
+    void setz(float zCoord);
 
     ///Addition
     Vector3d operator+(const Vector3d &vec);
@@ -52,7 +48,7 @@ public:
     Vector3d &operator*=(float s);
 
     ///Prend la valeur du vecteur
-    Vector3d operator=(const Vector3d &vec);
+    Vector3d &operator=(const Vector3d &vec);
 
     ///Test d'�galit�
     bool operator==(const Vector3d &vec);

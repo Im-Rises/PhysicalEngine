@@ -1,6 +1,6 @@
 #include "Component.h"
-#include "Rigidbody/Rigidbody.h"
-#include "Particle/Particle.h"
+#include "PhysicalComponent/Rigidbody/Rigidbody.h"
+#include "PhysicalComponent/Particle/Particle.h"
 #include "Collider/Collider.h"
 
 #include <iostream>

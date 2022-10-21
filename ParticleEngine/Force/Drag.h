@@ -15,7 +15,7 @@ public:
 
     Drag(const Drag &drag);
 
-    void addForce(Particle *particule, float duration);
+    void addForce(Particle *particle, float duration) override;
 };
 
 #endif /* DRAG_H */

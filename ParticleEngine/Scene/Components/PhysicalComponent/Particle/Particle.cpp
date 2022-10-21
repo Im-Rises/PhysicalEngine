@@ -2,6 +2,7 @@
 
 #include "imgui/imgui.h"
 #include "../../../GameObject.h"
+#include "../../../../Force/ForceGenerator.h"
 
 Particle::Particle(GameObject *gameObject) : m_speed(0, 0, 0), m_acceleration(0, 0, 0),
                                              Component(gameObject) {
@@ -93,10 +94,18 @@ void Particle::calculateAcceleration(float time) {
 //    calculateAcceleration(time);
 //}
 
-void Particle::update(float time) {
-    calculateSpeed(time);
-    calculatePosition(time);
-    calculateAcceleration(time);
+void Particle::update(float deltaTime) {
+    // Update sum of forces
+//    if (isKinematic) {
+//
+//    } else {
+//        m_netForce = Vector3d();
+//    }
+
+    // Update state
+    calculateSpeed(deltaTime);
+    calculatePosition(deltaTime);
+    calculateAcceleration(deltaTime);
 }
 
 void Particle::drawGui() {

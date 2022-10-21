@@ -1,19 +1,29 @@
 #ifndef PARTICULE_H
 #define PARTICULE_H
 
-#include "../Rigidbody/Rigidbody.h"
 #include"../../../../Vector3d/Vector3d.h"
 #include "../PhysicalComponent.h"
 
+//#include "../../../../Force/Gravity.h"
+
+//class ForceGenerator;
 
 class Particle : public Component {
 private:
     static constexpr const char *COMPONENT_TYPE = "Particle";
+
+private:
+    float m_mass;
+    float m_friction;
+    Vector3d m_netForce;
+
     Vector3d m_speed;
     Vector3d m_acceleration;
-    float m_mass;
-    Vector3d m_netForce;
-    float m_friction;
+
+//    Gravity gravity;
+//    std::vector<ForceGenerator *> forceGeneratorsList;
+
+    bool isKinematic = true;
 
 public:
 #pragma region Constructeur
@@ -105,7 +115,7 @@ public:
     /// <param name="time"></param>
 //    void recalculateAll(float time);
 
-    void update(float time) override;
+    void update(float deltaTime) override;
 
     void drawGui() override;
 

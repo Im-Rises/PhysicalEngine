@@ -15,6 +15,6 @@ Drag::Drag(const Drag &drag) {
     m_k2 = drag.m_k2;
 }
 
-void Drag::addForce(Particle *particule, float duration) {
+void Drag::addForce(Particle *particle, float duration) {
     //TO DO
 }
