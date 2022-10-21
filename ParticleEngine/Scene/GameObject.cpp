@@ -3,8 +3,9 @@
 #include "glad/glad.h"
 
 #include "Components/Component.h"
-#include "Components/Rigidbody/Rigidbody.h"
-#include "Components/Particle/Particle.h"
+#include "Components/PhysicalComponent/Particle/Particle.h"
+#include "Components/PhysicalComponent/Particle/Particle.h"
+#include "Components/PhysicalComponent/Particle/Particle.h"
 
 #include <utility>
 
@@ -97,11 +98,15 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
     }
 }
 
+const std::vector<Component *> &GameObject::getComponents() const {
+    return components;
+}
+
 void GameObject::addComponent(Component *component) {
     components.push_back(component);
 }
 
-void GameObject::addComponent(std::string name) {
+void GameObject::addComponentByName(std::string name) {
     for (auto &componentName: Component::componentsNamesList) {
         if (componentName == name) {
             Component *component = Component::createComponent(name, this);
@@ -128,17 +133,6 @@ std::string GameObject::getName() const {
     return gameObjectName;
 }
 
-const std::vector<Component *> &GameObject::getComponents() const {
-    return components;
-}
-
-//float GameObject::getSpeed() const {
-////    Component *particle = (getComponentByName("Particle"));
-////    if (particle != nullptr) {
-////        return particle->getSpeed().m_x;
-////    }
-//    return 0;
-//}
 
 Component *GameObject::getComponentByName(const std::string &name) const {
     for (auto &component: components) {
@@ -148,5 +142,17 @@ Component *GameObject::getComponentByName(const std::string &name) const {
     }
     return nullptr;
 }
+
+void GameObject::deleteComponentByName(const std::string &name) {
+    for (auto it = components.begin(); it != components.end(); ++it) {
+        if ((*it)->getName() == name) {
+            components.erase(it);
+            delete *it;
+            return;
+        }
+    }
+}
+
+
 
 

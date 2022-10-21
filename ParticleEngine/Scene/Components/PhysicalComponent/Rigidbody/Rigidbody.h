@@ -1,8 +1,9 @@
 #ifndef INTEGRABLE_H
 #define INTEGRABLE_H
 
-#include "../../../Vector3d/Vector3d.h"
-#include "../Component.h"
+#include "../../../../Vector3d/Vector3d.h"
+#include "../../Component.h"
+#include "../PhysicalComponent.h"
 
 class Rigidbody : public Component {
 private:

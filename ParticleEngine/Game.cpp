@@ -3,30 +3,23 @@
 #include "Scene/GameObject.h"
 #include "Scene/Components/Mesh/Sphere/Sphere.h"
 #include "Scene/Scene.h"
-#include "Scene/Components/Particle/Particle.h"
-#include "Scene/Components/Rigidbody/Rigidbody.h"
+#include "Scene/Components/PhysicalComponent/Particle/Particle.h"
+#include "Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "Scene/Components/Collider/Collider.h"
 
 Game::Game() {
-//    m_p = new Particle();
 }
 
 Game::~Game() {
-//    delete m_p;
 }
 
-//void Game::setSpeed(float speed) {
-//    m_speed = speed;
-//}
-
 void Game::start(Scene *scene) {
-    GameObject *gameobject = new GameObject(Sphere(1, 20, 20));
-    scene->addGameObject(gameobject);
-    m_p = new Particle(gameobject, Vector3d(0, 0, 0), 1);
-    gameobject->addComponent(m_p);
-//    gameobject->addComponent(new Collider());
-//    gameobject->addComponent(new Particle());
-
+    GameObject *gameObject = new GameObject(Sphere(1, 20, 20));
+    scene->addGameObject(gameObject);
+    m_p = new Particle(gameObject, Vector3d(0, 0, 0), 1);
+    gameObject->addComponent(m_p);
+//    gameObject->addComponentByName(new Collider());
+//    gameObject->addComponentByName(new Particle());
 }
 
 void Game::goLeft() {
@@ -45,8 +38,12 @@ void Game::goDown() {
     m_p->setSpeed(0, -m_speed, 0);
 }
 
-//void Game::setSpeed(float speed) {
-//    m_speed = speed;
+//void Game::applyGravity() {
+//    m_G.addForce(m_p, 1);
+//}
+//
+//void Game::applySpring() {
+//    m_S.addForce(m_p, 1);
 //}
 
 float *Game::getPtrSpeed() {

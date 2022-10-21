@@ -8,6 +8,8 @@
 #include "Components/Mesh/Sphere/Sphere.h"
 
 #include "glad/glad.h"
+#include "Components/PhysicalComponent/Particle/Particle.h"
+#include "Components/Collider/Collider.h"
 
 Scene::Scene(int windowWidth, int windowHeight) {
     this->windowWidth = windowWidth;
@@ -55,11 +57,20 @@ void Scene::destroy() {
     glDeleteFramebuffers(1, &fbo);
 }
 
-void Scene::updateGameObjects(float deltaTime) {
+void Scene::update(float deltaTime) {
     // Update the game objects
     for (GameObject *gameObject: gameObjects) {
         gameObject->update(deltaTime);
     }
+
+//    //Method 1
+//    Particle *particle = dynamic_cast<Particle *>(gameObjects[0]->getComponentByName("Particle"));
+//
+////    // Method 2
+////    Collider *particle = nullptr;
+////    gameObjects[0]->getComponentByClass<Collider>(particle);
+//
+//    std::cout << particle->getSpeed() << std::endl;
 
     // Update the physic handler
 //    physicHandler.updateAll(deltaTime);

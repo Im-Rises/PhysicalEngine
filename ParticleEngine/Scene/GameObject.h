@@ -48,10 +48,6 @@ public:
 
     void draw(int display_w, int display_h, glm::mat4 view, float fov);
 
-    void addComponent(Component *component);
-
-    void addComponent(std::string name);
-
 public:
     void drawTransformGui();
 
@@ -60,11 +56,44 @@ public:
 public:
     std::string getName() const;
 
+public:
     const std::vector<Component *> &getComponents() const;
 
-//    float getSpeed() const;
+    void addComponent(Component *component);
+
+    void addComponentByName(std::string name);
+
+    template<typename T>
+    void addComponentByClass(T *&c) {
+        c = new T(this);
+        if (c != nullptr) {
+            components.push_back(c);
+        }
+    }
 
     Component *getComponentByName(const std::string &name) const;
+
+    template<class T>
+    void getComponentByClass(T *&c) {
+        for (auto &component: components) {
+            if (dynamic_cast<T *>(component) != nullptr) {
+                c = dynamic_cast<T *>(component);
+            }
+        }
+    }
+
+    void deleteComponentByName(const std::string &name);
+
+    template<class T>
+    void deleteComponentByClass(T *&c) {
+        for (auto it = components.begin(); it != components.end(); ++it) {
+            if (dynamic_cast<T *>(*it) != nullptr) {
+                components.erase(it);
+                delete *it;
+                return;
+            }
+        }
+    }
 };
 
 

@@ -1,7 +1,9 @@
 #include "Particle.h"
 
 #include "imgui/imgui.h"
-#include "../../GameObject.h"
+#include "../../../GameObject.h"
+#include "../../../../Force/ForceGenerator.h"
+#include "../../../../Utility/imGuiUtility.h"
 
 Particle::Particle(GameObject *gameObject) : m_speed(0, 0, 0), m_acceleration(0, 0, 0),
                                              Component(gameObject) {
@@ -21,14 +23,14 @@ Particle::Particle(GameObject *gameObject, const Vector3d &pos, float m) : m_spe
     m_mass = m;
 }
 
-Particle::Particle(const Particle &particule) : Component(particule.m_gameObject) {
-    m_acceleration = Vector3d(particule.m_acceleration);
-    m_speed = Vector3d(particule.m_speed);
-    m_gameObject->transform.setPosition(particule.m_gameObject->transform.getPosition());
-    m_mass = particule.m_mass;
+Particle::Particle(const Particle &particle) : Component(particle.m_gameObject) {
+    m_acceleration = Vector3d(particle.m_acceleration);
+    m_speed = Vector3d(particle.m_speed);
+    m_gameObject->transform.setPosition(particle.m_gameObject->transform.getPosition());
+    m_mass = particle.m_mass;
 }
 
-const Vector3d Particle::getPosition() const {
+Vector3d Particle::getPosition() const {
     return m_gameObject->transform.getPosition();
 }
 
@@ -70,7 +72,7 @@ const Vector3d &Particle::getNetForce() const { return m_netForce; }
 
 float Particle::getFriction() const { return m_friction; }
 
-void Particle::setNetForce(Vector3d force) { m_netForce = force; }
+void Particle::setNetForce(const Vector3d &force) { m_netForce = force; }
 
 void Particle::setFriction(float friction) { m_friction = friction; }
 
@@ -93,13 +95,31 @@ void Particle::calculateAcceleration(float time) {
 //    calculateAcceleration(time);
 //}
 
-void Particle::update(float time) {
-    calculateSpeed(time);
-    calculatePosition(time);
-    calculateAcceleration(time);
+void Particle::update(float deltaTime) {
+    // Update sum of forces
+    m_netForce = Vector3d();
+    if (isKinematic) {
+        gravity.addForce(this, deltaTime);
+    }
+
+    // Update state
+    calculateSpeed(deltaTime);
+    calculatePosition(deltaTime);
+    calculateAcceleration(deltaTime);
 }
 
 void Particle::drawGui() {
+    // Is kinematic
+    ImGui::Text("Is kinematic");
+    ImGui::SameLine();
+    ImGui::Checkbox("##ParticleKinematic", &isKinematic);
+
+    // Weight
+    ImGui::Text("Weight");
+    ImGui::SameLine();
+    ImGui::DragFloat("##ParticleWeight", &m_mass, 0.1f, 0.0f, 100.0f);
+
+    // Speed, acceleration
     ImGui::Text("Speed");
     if (ImGui::BeginTable("ParticleSpeed", 3)) {
         ImGui::TableNextColumn();
@@ -131,6 +151,15 @@ void Particle::drawGui() {
         ImGui::SameLine();
         ImGui::InputFloat("##ParticleAccelerationZ", &m_acceleration.m_z);
         ImGui::EndTable();
+    }
+
+    // Add force
+    if (ButtonCenteredOnLine("Add Force", 0.5f)) {
+        ImGui::OpenPopup("ParticleAddForce##popup");
+    }
+    if (ImGui::BeginPopup("ParticleAddForce##popup")) {
+
+        ImGui::EndPopup();
     }
 }
 

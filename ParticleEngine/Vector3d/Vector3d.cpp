@@ -4,16 +4,10 @@
 
 using namespace std;
 
-Vector3d::Vector3d() {
-    m_x = 0;
-    m_y = 0;
-    m_z = 0;
-}
-
-Vector3d::Vector3d(float xcoord, float ycoord, float zcoord) {
-    m_x = xcoord;
-    m_y = ycoord;
-    m_z = zcoord;
+Vector3d::Vector3d(float xCoord, float yCoord, float zCoord) {
+    m_x = xCoord;
+    m_y = yCoord;
+    m_z = zCoord;
 }
 
 Vector3d::Vector3d(const Vector3d &vec) {
@@ -25,16 +19,16 @@ Vector3d::Vector3d(const Vector3d &vec) {
 Vector3d::~Vector3d() {
 }
 
-void Vector3d::setx(float xcoord) {
-    m_x = xcoord;
+void Vector3d::setx(float xCoord) {
+    m_x = xCoord;
 }
 
-void Vector3d::sety(float ycoord) {
-    m_y = ycoord;
+void Vector3d::sety(float yCoord) {
+    m_y = yCoord;
 }
 
-void Vector3d::setz(float zcoord) {
-    m_z = zcoord;
+void Vector3d::setz(float zCoord) {
+    m_z = zCoord;
 }
 
 float Vector3d::getx() const {
@@ -82,7 +76,7 @@ Vector3d &Vector3d::operator*=(float s) {
     return *this;
 }
 
-Vector3d Vector3d::operator=(const Vector3d &vec) {
+Vector3d &Vector3d::operator=(const Vector3d &vec) {
     m_x = vec.m_x;
     m_y = vec.m_y;
     m_z = vec.m_z;

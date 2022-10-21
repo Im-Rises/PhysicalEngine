@@ -1,18 +1,30 @@
 #ifndef PARTICULE_H
 #define PARTICULE_H
 
-#include "../Rigidbody/Rigidbody.h"
-#include"../../../Vector3d/Vector3d.h"
+#include <vector>
 
+#include"../../../../Vector3d/Vector3d.h"
+#include "../PhysicalComponent.h"
+#include "../../../../Force/Gravity.h"
+
+class ForceGenerator;
 
 class Particle : public Component {
 private:
     static constexpr const char *COMPONENT_TYPE = "Particle";
+
+private:
+    float m_mass;
+    float m_friction;
+    Vector3d m_netForce;
+
     Vector3d m_speed;
     Vector3d m_acceleration;
-    float m_mass;
-    Vector3d m_netForce;
-    float m_friction;
+
+    Gravity gravity;
+    std::vector<ForceGenerator *> forceGeneratorsList;
+
+    bool isKinematic = true;
 
 public:
 #pragma region Constructeur
@@ -39,13 +51,13 @@ public:
     /// <summary>
     /// Constructeur de copie de Particle
     /// </summary>
-    /// <param name="particule"></param>
-    Particle(const Particle &particule);
+    /// <param name="particle"></param>
+    Particle(const Particle &particle);
 
 #pragma endregion
 #pragma region Getter Setter
 
-    const Vector3d getPosition() const;
+    Vector3d getPosition() const;
 
     const Vector3d &getSpeed() const;
 
@@ -69,7 +81,7 @@ public:
 
     float getFriction() const;
 
-    void setNetForce(Vector3d force);
+    void setNetForce(const Vector3d &force);
 
     void setFriction(float friction);
 
@@ -104,7 +116,7 @@ public:
     /// <param name="time"></param>
 //    void recalculateAll(float time);
 
-    void update(float time) override;
+    void update(float deltaTime) override;
 
     void drawGui() override;
 

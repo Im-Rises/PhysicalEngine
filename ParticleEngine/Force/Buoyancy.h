@@ -18,7 +18,7 @@ public:
 
     Buoyancy(const Buoyancy &buoyancy);
 
-    void addForce(Particle *particule, float duration);
+    void addForce(Particle *particle, float duration) override;
 };
 
 #endif /* BUOYANCY_H */

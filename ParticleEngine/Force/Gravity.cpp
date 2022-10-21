@@ -1,19 +1,18 @@
 #include "Gravity.h"
 
-Gravity::Gravity() {
-    m_gravity = Vector3d(0.0f, -9.81f, 0.0f);
-}
+#include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
 
-Gravity::Gravity(Vector3d g) {
+Gravity::Gravity(const Vector3d &g) {
     m_gravity = g;
 }
 
-Gravity::Gravity(const Gravity &grav) {
-    m_gravity = grav.m_gravity;
-}
+//Gravity::Gravity(const Gravity &grav) {
+//    m_gravity = grav.m_gravity;
+//}
 
-void Gravity::addForce(Particle *particule, float duration) {
-    Vector3d F = m_gravity * particule->getMass();
-    Vector3d initialForce = particule->getNetForce();
-    particule->setNetForce(initialForce + F);
+void Gravity::addForce(Particle *particle, float duration) {
+    Vector3d F = m_gravity * particle->getMass();
+    Vector3d initialForce = particle->getNetForce();
+//    particle->setNetForce(initialForce + F);
+    particle->setAcceleration(m_gravity * particle->getMass());
 }

@@ -3,7 +3,7 @@
 #include <utility>
 
 #include "imgui/imgui.h"
-#include "../../GameObject.h"
+#include "../../../GameObject.h"
 
 Rigidbody::Rigidbody(GameObject *gameObject, std::string name) : Component(gameObject) {
 //    m_position = Vector3d(0, 0, 0);

@@ -280,6 +280,36 @@ You are now able to compile the project. Go to the project root and type the fol
 cmake .
 ```
 
+## Oriented Components Architecture
+
+Placeholder
+
+<!--
+    //////////////////////////////////
+//    // Method 1
+//    gameObjects[0]->addComponentByName("Collider");
+
+//    // Method 2
+//    Collider *collider = nullptr;
+//    gameObjects[0]->addComponentByClass<Collider>(collider);
+    //////////////////////////////////
+//    //Method 1
+//    Particle *particle = dynamic_cast<Particle *>(gameObjects[0]->getComponentByName("Particle"));
+
+//    // Method 2
+//    Collider *particle = nullptr;
+//    gameObjects[0]->getComponentByClass<Collider>(particle);
+//    std::cout << particle->getName() << std::endl;
+    //////////////////////////////////
+//    //Method 1
+//    Particle *particle = dynamic_cast<Particle *>(gameObjects[0]->addComponentByName("Particle"));
+
+//    // Method 2
+//    Collider *particle = nullptr;
+//    gameObjects[0]->deleteComponentByClass<Collider>(particle);
+    //////////////////////////////////
+-->
+
 ## Run tests
 
 A CMake test is set up to directly test the program. You can find it in the `test`folder and start it by typing the

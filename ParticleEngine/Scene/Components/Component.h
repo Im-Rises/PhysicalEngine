@@ -14,7 +14,7 @@ protected:
     GameObject *m_gameObject;
 
 public:
-    static constexpr const char *componentsNamesList[3] = {"Rigidbody", "Particle", "Collider"};
+	const static char* componentsNamesList[3];
 
 public:
     explicit Component(GameObject *gameObject);

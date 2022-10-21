@@ -1,5 +1,7 @@
 #include "Buoyancy.h"
 
+#include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
+
 Buoyancy::Buoyancy() {
     m_maxDepth = 0;
     m_volume = 0;
@@ -21,8 +23,8 @@ Buoyancy::Buoyancy(const Buoyancy &buoyancy) {
     m_liquidDensity = buoyancy.m_liquidDensity;
 }
 
-void Buoyancy::addForce(Particle *particule, float duration) {
-    float d = (particule->getPosition().gety() - m_waterHeight - m_maxDepth) / 2 * m_maxDepth;
+void Buoyancy::addForce(Particle *particle, float duration) {
+    float d = (particle->getPosition().gety() - m_waterHeight - m_maxDepth) / 2 * m_maxDepth;
     float f;
     if (d <= 0) {
         f = 0;
@@ -31,6 +33,6 @@ void Buoyancy::addForce(Particle *particule, float duration) {
     } else {
         f = d * m_volume * m_liquidDensity;
     }
-    float initialFriction = particule->getFriction();
-    particule->setFriction(initialFriction + f);
+    float initialFriction = particle->getFriction();
+    particle->setFriction(initialFriction + f);
 }

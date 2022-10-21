@@ -1,5 +1,7 @@
 #include "Drag.h"
 
+#include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
+
 Drag::Drag() {
     m_k1 = 0;
     m_k2 = 0;
@@ -15,6 +17,6 @@ Drag::Drag(const Drag &drag) {
     m_k2 = drag.m_k2;
 }
 
-void Drag::addForce(Particle *particule, float duration) {
+void Drag::addForce(Particle *particle, float duration) {
     //TO DO
 }
