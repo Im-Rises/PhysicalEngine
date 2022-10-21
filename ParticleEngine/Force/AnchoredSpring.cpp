@@ -1,7 +1,7 @@
 #include "AnchoredSpring.h"
 
 AnchoredSpring::AnchoredSpring() {
-    m_anchor = new Vector3d(0, 0, 0);
+    m_anchor = Vector3d(0, 0, 0);
     m_k = 0;
     m_restLength = 0;
 }
@@ -10,7 +10,7 @@ AnchoredSpring::~AnchoredSpring() {
     // delete m_anchor
 }
 
-AnchoredSpring::AnchoredSpring(Vector3d *anchor, float k, float restLength) {
+AnchoredSpring::AnchoredSpring(Vector3d anchor, float k, float restLength) {
     m_anchor = anchor;
     m_k = k;
     m_restLength = restLength;
@@ -22,13 +22,13 @@ AnchoredSpring::AnchoredSpring(const AnchoredSpring &aSpring) {
     m_restLength = aSpring.m_restLength;
 }
 
-void AnchoredSpring::addForce(Particle *particule, float duration) {
-    Vector3d pos = particule->getPosition();
-    float delta = pos.distance(*m_anchor);
+void AnchoredSpring::addForce(Particle *particle, float duration) {
+    Vector3d pos = particle->getPosition();
+    float delta = pos.distance(m_anchor);
     Vector3d F;
     if (delta > m_restLength) {
-        F = (pos - *m_anchor).normalize() * (-m_k) * (delta - m_restLength);
+        F = (pos - m_anchor).normalize() * (-m_k) * (delta - m_restLength);
     }
-    Vector3d initialForce = particule->getNetForce();
-    particule->setNetForce(initialForce + F);
+    Vector3d initialForce = particle->getNetForce();
+    particle->setNetForce(initialForce + F);
 }

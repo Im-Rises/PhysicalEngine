@@ -5,7 +5,7 @@
 
 class AnchoredSpring : ForceGenerator {
 private:
-    Vector3d *m_anchor;
+    Vector3d m_anchor;
     float m_k;
     float m_restLength;
 
@@ -14,11 +14,11 @@ public:
 
     ~AnchoredSpring();
 
-    AnchoredSpring(Vector3d *anchor, float k, float restLength);
+    AnchoredSpring(Vector3d anchor, float k, float restLength);
 
     AnchoredSpring(const AnchoredSpring &aSpring);
 
-    void addForce(Particle *particule, float duration);
+    void addForce(Particle *particle, float duration);
 };
 
 #endif /* ANCHOREDSPRING_H */
