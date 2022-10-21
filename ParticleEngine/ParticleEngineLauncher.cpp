@@ -10,15 +10,15 @@
 #include "Scene/GameObject.h"
 #include "InputManager.h"
 #include "Utility/RollingBuffer.h"
+#include "Scene/Components/PhysicalComponent/Particle/Particle.h"
+#include "Scene/Components/Component.h"
 
 // Dear ImGui
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/implot.h"
-#include "Scene/Components/Component.h"
 #include "Utility/imGuiUtility.h"
-#include "Scene/Components/PhysicalComponent/Particle/Particle.h"
 
 #include <stdio.h>
 
