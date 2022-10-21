@@ -18,9 +18,12 @@ public:
 
     void addForce(Particle *particle, float duration) override;
 
-    Vector3d &getGravityRef();
+    void drawGui() override;
 
+public:
     std::string getName() const override;
+
+    Vector3d &getGravityRef();
 };
 
 #endif /* GRAVITY_H */

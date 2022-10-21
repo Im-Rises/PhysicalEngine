@@ -5,7 +5,10 @@
 
 class Spring : public ForceGenerator {
 private:
-    Particle *m_otherParticule;
+    static constexpr const char *FORCE_TYPE = SPRING_FORCE;
+
+private:
+    Particle *m_otherParticle;
     float m_k;
     float m_restLength;
 
@@ -18,6 +21,11 @@ public:
     Spring(const Spring &spring);
 
     void addForce(Particle *particule, float duration) override;
+
+    void drawGui() override;
+
+public:
+    std::string getName() const override;
 };
 
 #endif /* SPRING_H */

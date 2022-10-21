@@ -40,7 +40,7 @@ public:
     ///  vitesse et acceleration � 0 par default
     /// </summary>
     /// <param name="pos">: la Position</param>
-    Particle(GameObject *gameObject, const Vector3d &pos, float m);
+    Particle(GameObject *gameObject, float m);
 
     /// <summary>
     /// Constructeur de copie de Particle
@@ -81,8 +81,6 @@ public:
 #pragma region Add Delete Get Force
 
     void addForce(ForceGenerator *forceGenerator);
-
-    void addForceGeneratorByName(const std::string &name);
 
 //
 //    template<typename T>

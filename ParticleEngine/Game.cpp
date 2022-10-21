@@ -13,9 +13,9 @@ Game::~Game() {
 }
 
 void Game::start(Scene *scene) {
-    GameObject *gameObject = new GameObject(Sphere(1, 20, 20));
+    auto *gameObject = new GameObject(Sphere(1, 20, 20));
     scene->addGameObject(gameObject);
-    m_p = new Particle(gameObject, Vector3d(0, 0, 0), 1);
+    m_p = new Particle(gameObject, 1);
     gameObject->addComponent(m_p);
 }
 

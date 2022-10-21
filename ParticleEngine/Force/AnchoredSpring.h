@@ -17,11 +17,13 @@ public:
 
     ~AnchoredSpring();
 
-    AnchoredSpring(Vector3d anchor, float k, float restLength);
+    AnchoredSpring(const Vector3d &anchor, float k, float restLength);
 
     AnchoredSpring(const AnchoredSpring &aSpring);
 
     void addForce(Particle *particle, float duration) override;
+
+    void drawGui() override;
 
     std::string getName() const override;
 };

@@ -1,6 +1,7 @@
 #include "Buoyancy.h"
 
 #include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
+#include "imgui/imgui.h"
 
 Buoyancy::Buoyancy() {
     m_maxDepth = 0;
@@ -35,4 +36,14 @@ void Buoyancy::addForce(Particle *particle, float duration) {
     }
     Vector3d initialForce = particle->getNetForce();
     particle->setNetForce(initialForce + F);
+}
+
+void Buoyancy::drawGui() {
+    if (ImGui::CollapsingHeader(BUOYANCY_FORCE)) {
+
+    }
+}
+
+std::string Buoyancy::getName() const {
+    return FORCE_TYPE;
 }

@@ -16,10 +16,14 @@ void Gravity::addForce(Particle *particle, float duration) {
     particle->setNetForce(initialForce + F);
 }
 
-Vector3d &Gravity::getGravityRef() {
-    return m_gravity;
+void Gravity::drawGui() {
+
 }
 
 std::string Gravity::getName() const {
     return FORCE_TYPE;
+}
+
+Vector3d &Gravity::getGravityRef() {
+    return m_gravity;
 }

@@ -1,6 +1,7 @@
 #include "AnchoredSpring.h"
 
 #include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
+#include "imgui/imgui.h"
 
 AnchoredSpring::AnchoredSpring() {
     m_anchor = Vector3d(0, 0, 0);
@@ -9,10 +10,9 @@ AnchoredSpring::AnchoredSpring() {
 }
 
 AnchoredSpring::~AnchoredSpring() {
-    // delete m_anchor
 }
 
-AnchoredSpring::AnchoredSpring(Vector3d anchor, float k, float restLength) {
+AnchoredSpring::AnchoredSpring(const Vector3d &anchor, float k, float restLength) {
     m_anchor = anchor;
     m_k = k;
     m_restLength = restLength;
@@ -37,4 +37,18 @@ void AnchoredSpring::addForce(Particle *particle, float duration) {
 
 std::string AnchoredSpring::getName() const {
     return FORCE_TYPE;
+}
+
+void AnchoredSpring::drawGui() {
+    if (ImGui::CollapsingHeader(getName().c_str())) {
+        ImGui::Text("Anchor: ");
+//        ImGui::SameLine();
+//        ImGui::Text(m_anchor));
+        ImGui::Text("K: ");
+        ImGui::SameLine();
+        ImGui::Text("%s", std::to_string(m_k).c_str());
+        ImGui::Text("Rest Length: ");
+        ImGui::SameLine();
+        ImGui::Text("%s", std::to_string(m_restLength).c_str());
+    }
 }

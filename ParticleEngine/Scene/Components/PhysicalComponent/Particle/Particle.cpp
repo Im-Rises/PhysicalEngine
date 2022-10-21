@@ -6,15 +6,15 @@
 #include "../../../../Utility/imGuiUtility.h"
 #include "../../../../Force/AnchoredSpring.h"
 
-Particle::Particle(GameObject *gameObject) : speed(0, 0, 0), acceleration(0, 0, 0),
-                                             Component(gameObject) {
-    gameObject->transform.setPosition(Vector3d(0, 0, 0));
+Particle::Particle(GameObject *gameObject) : Component(gameObject) {
+    speed = {0, 0, 0};
+    acceleration = {0, 0, 0};
     mass = 0;
 }
 
-Particle::Particle(GameObject *gameObject, const Vector3d &pos, float m) : speed(0, 0, 0), acceleration(0, 0, 0),
-                                                                           Component(gameObject) {
-    gameObject->transform.setPosition(pos);
+Particle::Particle(GameObject *gameObject, float m) : Component(gameObject) {
+    speed = {0, 0, 0};
+    acceleration = {0, 0, 0};
     mass = m;
 }
 
@@ -150,8 +150,10 @@ void Particle::drawGui() {
         ImGui::OpenPopup("ParticleAddForce##popup");
     }
     if (ImGui::BeginPopup("ParticleAddForce##popup")) {
-        if (ImGui::Button("Anchor Spring")) {
-            forceGeneratorsList.push_back(new AnchoredSpring(Vector3d(5, 0, 0), 155, 1));
+        for (auto &forcesName: ForceGenerator::forcesNamesList) {
+            if (ImGui::MenuItem(forcesName)) {
+                addForce(ForceGenerator::createForceGenerator(forcesName));
+            }
         }
         ImGui::EndPopup();
     }
@@ -160,17 +162,6 @@ void Particle::drawGui() {
 void Particle::addForce(ForceGenerator *forceGenerator) {
     forceGeneratorsList.push_back(forceGenerator);
 }
-
-//void Particle::addForceGeneratorByName(const std::string &name) {
-//    for (auto &forceName: ForceGenerator::forcesNamesList) {
-//        if (forceName == name) {
-//            ForceGenerator *force = ForceGenerator::createForceGenerator(name);
-//            if (force != nullptr && getForceByName(name) == nullptr) {
-//                forceGeneratorsList.push_back(force);
-//            }
-//        }
-//    }
-//}
 
 std::string Particle::getName() const {
     return COMPONENT_TYPE;

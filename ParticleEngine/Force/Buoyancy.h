@@ -4,6 +4,9 @@
 #include "ForceGenerator.h"
 
 class Buoyancy : public ForceGenerator {
+public:
+    static constexpr const char *FORCE_TYPE = BUOYANCY_FORCE;
+
 private:
     float m_maxDepth;
     float m_volume;
@@ -19,6 +22,11 @@ public:
     Buoyancy(const Buoyancy &buoyancy);
 
     void addForce(Particle *particle, float duration) override;
+
+    void drawGui() override;
+
+public:
+    std::string getName() const override;
 };
 
 #endif /* BUOYANCY_H */

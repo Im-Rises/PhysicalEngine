@@ -2,7 +2,7 @@
 #define COMPONENT_H
 
 #include <string>
-#include <map>
+//#include <map>
 
 #define RIGIDBODY_COMPONENT "Rigidbody"
 #define PARTICLE_COMPONENT "Particle"

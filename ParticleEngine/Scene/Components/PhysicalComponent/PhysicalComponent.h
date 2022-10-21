@@ -5,7 +5,7 @@
 
 class PhysicalComponent : public Component {
 private:
-    static constexpr const char *COMPONENT_TYPE = "PhysicalComponent";
+//    static constexpr const char *COMPONENT_TYPE = "PhysicalComponent";
 
 public:
 //    PhysicalComponent();
