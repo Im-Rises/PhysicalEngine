@@ -4,8 +4,6 @@
 #include "Force/Gravity.h"
 #include "Force/AnchoredSpring.h"
 
-//class PhysicHandler;
-
 class Particle;
 
 class Scene;
