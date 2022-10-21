@@ -8,10 +8,10 @@
 #include "Vector3d/Vector3d.h"
 
 //float InputManager::translationSpeed = 0.1f;
-float InputManager::rotationSpeed = 0.0001f;
-
-double InputManager::mouseLastPosX = 0.0;
-double InputManager::mouseLastPosY = 0.0;
+//float InputManager::rotationSpeed = 0.0001f;
+//
+//double InputManager::mouseLastPosX = 0.0;
+//double InputManager::mouseLastPosY = 0.0;
 
 void InputManager::key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
     auto *engine = (ParticleEngineLauncher *) glfwGetWindowUserPointer(window);
@@ -74,7 +74,7 @@ void InputManager::keyPressed(GLFWwindow *window, int key, ParticleEngineLaunche
 }
 
 void InputManager::keyReleased(GLFWwindow *window, int key, ParticleEngineLauncher *engine) {
-//    std::cout << "Key released" << std::endl;
+
 }
 
 void InputManager::keyRepeated(GLFWwindow *window, int key, ParticleEngineLauncher *engine) {
@@ -98,13 +98,13 @@ void InputManager::keyRepeated(GLFWwindow *window, int key, ParticleEngineLaunch
     //}
 }
 
-void InputManager::cursor_position_callback(GLFWwindow *window, double xpos, double ypos) {
+void InputManager::cursor_position_callback(GLFWwindow *window, double xPos, double yPos) {
 //    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE) == GLFW_PRESS) {
 //        auto *engine = (ParticleEngineLauncher *) glfwGetWindowUserPointer(window);
-//        engine->scene->rotateCamera(Vector3d(0, 1, 0), rotationSpeed * (xpos - mouseLastPosX));
-//        engine->scene->rotateCamera(Vector3d(1, 0, 0), rotationSpeed * (ypos - mouseLastPosY));
+//        engine->scene->rotateCamera(Vector3d(0, 1, 0), rotationSpeed * (xPos - mouseLastPosX));
+//        engine->scene->rotateCamera(Vector3d(1, 0, 0), rotationSpeed * (yPos - mouseLastPosY));
 //    } else {
-//        mouseLastPosX = xpos;
-//        mouseLastPosY = ypos;
+//        mouseLastPosX = xPos;
+//        mouseLastPosY = yPos;
 //    }
 }

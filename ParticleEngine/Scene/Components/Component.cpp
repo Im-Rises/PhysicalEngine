@@ -1,20 +1,19 @@
 #include "Component.h"
 #include "Rigidbody/Rigidbody.h"
-#include "Particule/Particle.h"
+#include "Particle/Particle.h"
 #include "Collider/Collider.h"
 
 #include <iostream>
 
-Component::Component(std::string name, GameObject *gameObject) {
-    this->name = name;
-    this->gameObject = gameObject;
+Component::Component(GameObject *gameObject) {
+    this->m_gameObject = gameObject;
 }
 
 Component::~Component() {
 }
 
 std::string Component::getName() const {
-    return name;
+    return Component::COMPONENT_TYPE;
 }
 
 Component *Component::createComponent(const std::string &name, GameObject *gameObject) {

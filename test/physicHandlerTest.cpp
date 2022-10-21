@@ -1,9 +1,7 @@
-#include "../PhysicalEngine/Scene/PhysicHandler.h"
+#include "../ParticleEngine/Scene/PhysicHandler.h"
 
-using namespace std;
-
-int main(int argc, char *argv[]) {
-//    PhysicHandler phsycalHandler;
-//    phsycalHandler.updateAll();
+int main() {
+//    PhysicHandler physicalHandler;
+//    physicalHandler.updateAll();
     return 0;
 }

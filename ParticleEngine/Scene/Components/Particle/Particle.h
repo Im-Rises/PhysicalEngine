@@ -5,9 +5,9 @@
 #include"../../../Vector3d/Vector3d.h"
 
 
-class Particle : public Rigidbody {
+class Particle : public Component {
 private:
-//    Vector3d m_position;
+    static constexpr const char *COMPONENT_TYPE = "Particle";
     Vector3d m_speed;
     Vector3d m_acceleration;
     float m_mass;
@@ -17,7 +17,7 @@ private:
 public:
 #pragma region Constructeur
 
-    Particle(GameObject *gameObject);
+    explicit Particle(GameObject *gameObject);
 
     /// <summary>
     /// Constructeur de particule
@@ -113,6 +113,8 @@ public:
     /// </summary>
     /// <param name="p"></param>
     float distance(const Particle &p);
+
+    std::string getName() const override;
 
 #pragma endregion
 

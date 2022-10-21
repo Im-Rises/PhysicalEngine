@@ -2,17 +2,16 @@
 
 #include "imgui/imgui.h"
 
-Collider::Collider(GameObject *gameObject) : Component("Collider", gameObject) {
-    mass = 0;
-    friction = 0;
-    restitution = 0;
+Collider::Collider(GameObject *gameObject) : Component(gameObject) {
+    m_mass = 0;
+    m_friction = 0;
+    m_restitution = 0;
 }
 
-Collider::Collider(GameObject *gameObject, float mass, float friction, float restitution) : Component("Collider",
-                                                                                                      gameObject) {
-    mass = mass;
-    friction = friction;
-    restitution = restitution;
+Collider::Collider(GameObject *gameObject, float mass, float friction, float restitution) : Component(gameObject) {
+    this->m_mass = mass;
+    this->m_friction = friction;
+    this->m_restitution = restitution;
 }
 
 void Collider::update(float time) {
@@ -20,27 +19,27 @@ void Collider::update(float time) {
 }
 
 float Collider::getMass() const {
-    return mass;
+    return m_mass;
 }
 
 float Collider::getFriction() const {
-    return friction;
+    return m_friction;
 }
 
 float Collider::getRestitution() const {
-    return restitution;
+    return m_restitution;
 }
 
 void Collider::setMass(float mass) {
-    mass = mass;
+    this->m_mass = mass;
 }
 
 void Collider::setFriction(float friction) {
-    friction = friction;
+    this->m_friction = friction;
 }
 
 void Collider::setRestitution(float restitution) {
-    restitution = restitution;
+    this->m_restitution = restitution;
 }
 
 void Collider::drawGui() {
@@ -50,3 +49,7 @@ void Collider::drawGui() {
         ImGui::EndTable();
     }
 }
+
+std::string Collider::getName() const {
+    return COMPONENT_TYPE;
+};

@@ -5,20 +5,28 @@
 #include "../Component.h"
 
 class Rigidbody : public Component {
+private:
+    static constexpr const char *COMPONENT_TYPE = "Rigidbody";
 
 protected:
-//    Vector3d m_position;
+//    float m_mass;
+//    float m_damping;
+//    float m_inverseMass;
+//    float m_inverseInertiaTensor;
+//    float m_gravity;
+//    float m_friction;
+//    float m_restitution;
+//    bool isKinematic = false;
 
 public:
     Rigidbody(GameObject *gameObject, std::string name = "Rigidbody");
-
-//    void recalculateAll(float time);
 
     void update(float time) override;
 
     void drawGui() override;
 
-//    const Vector3d &getPosition() const;
+    std::string getName() const override;
+
 };
 
 #endif // !INTEGRABLE_H

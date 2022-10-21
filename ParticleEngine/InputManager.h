@@ -26,7 +26,7 @@ private:
 
 
 public:
-    static void cursor_position_callback(GLFWwindow *window, double xpos, double ypos);
+    static void cursor_position_callback(GLFWwindow *window, double xPos, double yPos);
 
 private:
 //    static void mouseButtonPressed(GLFWwindow *window, int button, ParticleEngineLauncher *engine);

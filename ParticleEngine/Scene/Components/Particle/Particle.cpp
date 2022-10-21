@@ -4,7 +4,7 @@
 #include "../../GameObject.h"
 
 Particle::Particle(GameObject *gameObject) : m_speed(0, 0, 0), m_acceleration(0, 0, 0),
-                                             Rigidbody(gameObject, "Particle") {
+                                             Component(gameObject) {
     gameObject->transform.setPosition(Vector3d(0, 0, 0));
     m_mass = 0;
 }
@@ -16,22 +16,20 @@ Particle::Particle(GameObject *gameObject) : m_speed(0, 0, 0), m_acceleration(0,
 //}
 
 Particle::Particle(GameObject *gameObject, const Vector3d &pos, float m) : m_speed(0, 0, 0), m_acceleration(0, 0, 0),
-                                                                           Rigidbody(gameObject, "Particle") {
-//    m_position = pos;
+                                                                           Component(gameObject) {
     gameObject->transform.setPosition(pos);
     m_mass = m;
 }
 
-Particle::Particle(const Particle &particule) : Rigidbody(gameObject, "Particle") {
+Particle::Particle(const Particle &particule) : Component(particule.m_gameObject) {
     m_acceleration = Vector3d(particule.m_acceleration);
     m_speed = Vector3d(particule.m_speed);
-//    m_position = Vector3d(particule.m_position);
-    gameObject->transform.setPosition(particule.gameObject->transform.getPosition());
+    m_gameObject->transform.setPosition(particule.m_gameObject->transform.getPosition());
     m_mass = particule.m_mass;
 }
 
 const Vector3d Particle::getPosition() const {
-    return gameObject->transform.getPosition();
+    return m_gameObject->transform.getPosition();
 }
 
 const Vector3d &Particle::getSpeed() const {
@@ -43,13 +41,11 @@ const Vector3d &Particle::getAcceleration() const {
 }
 
 void Particle::setPosition(float x, float y, float z) {
-//    m_position = Vector3d(x, y, z);
-    gameObject->transform.setPosition(Vector3d(x, y, z));
+    m_gameObject->transform.setPosition(Vector3d(x, y, z));
 }
 
 void Particle::setPosition(const Vector3d &position) {
-//    m_position = position;
-    gameObject->transform.setPosition(position);
+    m_gameObject->transform.setPosition(position);
 }
 
 void Particle::setSpeed(float x, float y, float z) {
@@ -79,8 +75,7 @@ void Particle::setNetForce(Vector3d force) { m_netForce = force; }
 void Particle::setFriction(float friction) { m_friction = friction; }
 
 void Particle::calculatePosition(float time) {
-//    m_position = m_position + m_speed * time;
-    gameObject->transform.setPosition(gameObject->transform.getPosition() + m_speed * time);
+    m_gameObject->transform.setPosition(m_gameObject->transform.getPosition() + m_speed * time);
 }
 
 void Particle::calculateSpeed(float time) {
@@ -140,10 +135,10 @@ void Particle::drawGui() {
 }
 
 float Particle::distance(const Particle &p) {
-//    return (this->m_position - p.getPosition()).norm();
-    return (gameObject->transform.getPosition() - p.getPosition()).norm();
+    return (m_gameObject->transform.getPosition() - p.getPosition()).norm();
 }
 
 
-
-
+std::string Particle::getName() const {
+    return COMPONENT_TYPE;
+}

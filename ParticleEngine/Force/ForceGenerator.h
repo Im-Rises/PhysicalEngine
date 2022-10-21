@@ -1,7 +1,7 @@
 #ifndef FORCEGENERATOR_H
 #define FORCEGENERATOR_H
 
-#include "../Scene/Components/Particule/Particle.h"
+#include "../Scene/Components/Particle/Particle.h"
 
 class ForceGenerator {
     virtual void addForce(Particle *particule, float duration) = 0;

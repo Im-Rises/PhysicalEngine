@@ -55,7 +55,7 @@ void Scene::destroy() {
     glDeleteFramebuffers(1, &fbo);
 }
 
-void Scene::updateGameObjects(float deltaTime) {
+void Scene::update(float deltaTime) {
     // Update the game objects
     for (GameObject *gameObject: gameObjects) {
         gameObject->update(deltaTime);
@@ -97,7 +97,7 @@ unsigned int Scene::getFrameBufferId() const {
     return fbo;
 }
 
-std::vector<GameObject *> Scene::getGameObjects() {
+std::vector<GameObject *> &Scene::getGameObjects() {
     return gameObjects;
 }
 

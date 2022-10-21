@@ -37,8 +37,6 @@ public:
     void applySpring();
 
 public:
-    void setSpeed(float speed);
-
     float *getPtrSpeed();
 };
 

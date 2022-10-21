@@ -4,11 +4,12 @@
 
 #include "Components/Component.h"
 #include "Components/Rigidbody/Rigidbody.h"
+#include "Components/Particle/Particle.h"
 
 #include <utility>
 
 GameObject::GameObject(Mesh mesh) {
-    name = "GameObject";
+    gameObjectName = "GameObject";
 
     mesh.getVerticesUseIndices();
     this->mesh = std::move(mesh);
@@ -124,19 +125,28 @@ void GameObject::drawMeshGui() {
 }
 
 std::string GameObject::getName() const {
-    return name;
+    return gameObjectName;
 }
 
 const std::vector<Component *> &GameObject::getComponents() const {
     return components;
 }
 
-Component *GameObject::getComponentByName(std::string name) const {
+//float GameObject::getSpeed() const {
+////    Component *particle = (getComponentByName("Particle"));
+////    if (particle != nullptr) {
+////        return particle->getSpeed().m_x;
+////    }
+//    return 0;
+//}
+
+Component *GameObject::getComponentByName(const std::string &name) const {
     for (auto &component: components) {
         if (component->getName() == name) {
-            std::cout << "Component found" << std::endl;
             return component;
         }
     }
     return nullptr;
 }
+
+

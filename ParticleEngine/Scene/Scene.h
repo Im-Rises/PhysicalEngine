@@ -38,7 +38,7 @@ public:
     void destroy();
 
 public:
-    void updateGameObjects(float deltaTime);
+    void update(float deltaTime);
 
     void draw(int display_w, int display_h);
 
@@ -54,7 +54,7 @@ public:
 public:
     unsigned int getFrameBufferId() const;
 
-    std::vector<GameObject *> getGameObjects();
+    std::vector<GameObject *> &getGameObjects();
 
     bool *getPtrWireFrameState();
 
