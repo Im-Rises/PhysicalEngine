@@ -360,6 +360,7 @@ void ParticleEngineLauncher::updateGame(std::chrono::steady_clock::time_point &s
             std::chrono::steady_clock::now() - start).count();
     start = std::chrono::steady_clock::now();
     scene->update((float) deltaTime / 1000.0f);
+//    scene->update(1000.0f / ImGui::GetIO().Framerate);
 }
 
 void ParticleEngineLauncher::updateScreen() {

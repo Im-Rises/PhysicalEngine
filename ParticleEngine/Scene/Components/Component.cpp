@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-const char* Component::componentsNamesList[] = { "Rigidbody", "Particle", "Collider" };
+const char *Component::componentsNamesList[] = {"Rigidbody", "Particle", "Collider"};
 
 Component::Component(GameObject *gameObject) {
     this->m_gameObject = gameObject;
@@ -34,13 +34,15 @@ Component *Component::createComponent(const std::string &name, GameObject *gameO
                     return new Collider(gameObject);
                 }
                 default: {
-                    std::cerr << "Component::createComponent: Unknown component name" << std::endl;
-                    return nullptr;
+//                    std::cerr << "Component::createComponent: Unknown component name" << std::endl;
+//                    return nullptr;
                 }
             }
         }
         index++;
     }
+    std::cerr << "Component::createComponent: Unknown component name" << std::endl;
+    return nullptr;
 }
 
 //Component *Component::createComponent(std::string name) {

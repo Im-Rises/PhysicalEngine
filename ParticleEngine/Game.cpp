@@ -4,10 +4,9 @@
 #include "Scene/Components/Mesh/Sphere/Sphere.h"
 #include "Scene/Scene.h"
 #include "Scene/Components/PhysicalComponent/Particle/Particle.h"
-#include "Scene/Components/PhysicalComponent/Particle/Particle.h"
-#include "Scene/Components/Collider/Collider.h"
 
 Game::Game() {
+    // Generate particles here
 }
 
 Game::~Game() {
@@ -18,8 +17,6 @@ void Game::start(Scene *scene) {
     scene->addGameObject(gameObject);
     m_p = new Particle(gameObject, Vector3d(0, 0, 0), 1);
     gameObject->addComponent(m_p);
-//    gameObject->addComponentByName(new Collider());
-//    gameObject->addComponentByName(new Particle());
 }
 
 void Game::goLeft() {
@@ -37,14 +34,6 @@ void Game::goUp() {
 void Game::goDown() {
     m_p->setSpeed(0, -m_speed, 0);
 }
-
-//void Game::applyGravity() {
-//    m_G.addForce(m_p, 1);
-//}
-//
-//void Game::applySpring() {
-//    m_S.addForce(m_p, 1);
-//}
 
 float *Game::getPtrSpeed() {
     return &m_speed;

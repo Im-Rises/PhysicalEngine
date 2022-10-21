@@ -3,7 +3,7 @@
 
 #include "ForceGenerator.h"
 
-class Buoyancy : ForceGenerator {
+class Buoyancy : public ForceGenerator {
 private:
     float m_maxDepth;
     float m_volume;

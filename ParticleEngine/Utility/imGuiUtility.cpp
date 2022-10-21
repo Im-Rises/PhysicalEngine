@@ -14,3 +14,16 @@ bool ButtonCenteredOnLine(const char *label, float alignment) {
 
     return ImGui::Button(label);
 }
+
+void AlignForWidth(float width, float alignment) {
+    ImGuiStyle &style = ImGui::GetStyle();
+    float avail = ImGui::GetContentRegionAvail().x;
+    float off = (avail - width) * alignment;
+    if (off > 0.0f)
+        ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
+}
+
+float CalculateTextWidth(const char *text) {
+    ImGuiStyle &style = ImGui::GetStyle();
+    return ImGui::CalcTextSize(text).x + style.ItemSpacing.x;
+}

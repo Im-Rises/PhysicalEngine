@@ -34,3 +34,7 @@ void AnchoredSpring::addForce(Particle *particle, float duration) {
     Vector3d initialForce = particle->getNetForce();
     particle->setNetForce(initialForce + F);
 }
+
+std::string AnchoredSpring::getName() const {
+    return FORCE_TYPE;
+}

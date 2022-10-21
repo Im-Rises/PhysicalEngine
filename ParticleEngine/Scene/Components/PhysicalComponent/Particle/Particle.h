@@ -14,32 +14,26 @@ private:
     static constexpr const char *COMPONENT_TYPE = "Particle";
 
 private:
-    float m_mass;
+    // State
+    float mass;
+    bool isKinematic = true;
 //    float m_friction;
-    Vector3d m_netForce;
 
-    Vector3d m_speed;
-    Vector3d m_acceleration;
+    // Resulting force
+    Vector3d netForce;
 
+    // Velocity and acceleration
+    Vector3d speed;
+    Vector3d acceleration;
+
+    // Forces
     Gravity gravity;
     std::vector<ForceGenerator *> forceGeneratorsList;
-
-    bool isKinematic = true;
 
 public:
 #pragma region Constructeur
 
     explicit Particle(GameObject *gameObject);
-
-    /// <summary>
-    /// Constructeur de particule
-    ///  vitesse et acceleration � 0 par default
-    /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <param name="z"></param>
-    /// <param name="m"></param>
-//    Particle(float x, float y, float z, float m);
 
     /// <summary>
     /// Constructeur de particule
@@ -55,7 +49,38 @@ public:
     Particle(const Particle &particle);
 
 #pragma endregion
+#pragma region Methode
+
+    void update(float deltaTime) override;
+
+    float distance(const Particle &p);
+
+    /// <summary>
+    /// Calcule la nouvelle position � partir de la vitesse de la particule
+    /// et du temps en argument
+    /// </summary>
+    /// <param name="time"></param>
+    void calculatePosition(float time);
+
+    /// <summary>
+    /// Calcule la nouvelle vitesse � partir de l'acc�l�ration de la particule
+    /// et du temps en arguement
+    /// </summary>
+    /// <param name="time"></param>
+    void calculateSpeed(float time);
+
+    /// <summary>
+    /// Calcule la nouvelle accélération � partir de la deuxième loi de Newton
+    /// </summary>
+    /// <param name="time"></param>
+    void calculateAcceleration();
+
+    void drawGui() override;
+
+#pragma endregion
 #pragma region Getter Setter
+
+    std::string getName() const override;
 
     Vector3d getPosition() const;
 
@@ -79,58 +104,10 @@ public:
 
     const Vector3d &getNetForce() const;
 
-//    float getFriction() const;
-
     void setNetForce(const Vector3d &force);
-
-//    void setFriction(float friction);
-
-#pragma endregion
-
-#pragma region Methode
-
-
-    /// <summary>
-    /// Calcule la nouvelle position � partir de la vitesse de la particule
-    /// et du temps en argument
-    /// </summary>
-    /// <param name="time"></param>
-    void calculatePosition(float time);
-
-    /// <summary>
-    /// Calcule la nouvelle vitesse � partir de l'acc�l�ration de la particule
-    /// et du temps en arguement
-    /// </summary>
-    /// <param name="time"></param>
-    void calculateSpeed(float time);
-
-    /// <summary>
-    /// Calcule la nouvelle accélération � partir de la deuxième loi de Newton
-    /// </summary>
-    /// <param name="time"></param>
-    void calculateAcceleration(float time);
-
-    /// <summary>
-    /// Calcule toutes les variable d�pendante du temps sauf l'acceleration
-    /// </summary>
-    /// <param name="time"></param>
-//    void recalculateAll(float time);
-
-    void update(float deltaTime) override;
-
-    void drawGui() override;
-
-    /// <summary>
-    /// Calcule la distance entre deux particules
-    /// </summary>
-    /// <param name="p"></param>
-    float distance(const Particle &p);
-
-    std::string getName() const override;
 
 #pragma endregion
 
 };
-
 
 #endif

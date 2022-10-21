@@ -5,17 +5,22 @@
 #include "../Utility/Vector3d.h"
 
 class Gravity : public ForceGenerator {
+public:
+    static constexpr const char *FORCE_TYPE = "Gravity";
+
 private:
     Vector3d m_gravity;
 
 public:
     explicit Gravity(const Vector3d &g = Vector3d(0.0f, -9.81f, 0.0f));
 
-//    Gravity(const Gravity &grav);
+    Gravity(const Gravity &grav);
 
     void addForce(Particle *particle, float duration) override;
 
     Vector3d &getGravityRef();
+
+    std::string getName() const override;
 };
 
 #endif /* GRAVITY_H */

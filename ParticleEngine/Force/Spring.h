@@ -17,7 +17,7 @@ public:
 
     Spring(const Spring &spring);
 
-    void addForce(Particle *particule, float duration);
+    void addForce(Particle *particule, float duration) override;
 };
 
 #endif /* SPRING_H */

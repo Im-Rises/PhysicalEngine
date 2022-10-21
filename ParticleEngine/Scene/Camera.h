@@ -10,7 +10,7 @@
 class Camera {
 private:
     glm::mat4 viewMatrix;
-    double fov = 90.0f;// In degrees
+    const float fov = 90.0f;// In degrees
 
 public:
     Camera();
@@ -19,13 +19,13 @@ public:
 
     void update();
 
-    void translate(Vector3d vector3D);
+    void translate(const Vector3d &vector3D);
 
-    void rotate(Vector3d vector3D, float angle);
+    void rotate(const Vector3d &vector3D, float angle);
 
     glm::mat4 getViewMatrix();
 
-    float getFov();
+    float getFov() const;
 };
 
 

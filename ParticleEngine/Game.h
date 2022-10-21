@@ -30,10 +30,6 @@ public:
 
     void goDown();
 
-//    void applyGravity();
-//
-//    void applySpring();
-
 public:
     float *getPtrSpeed();
 };

@@ -3,7 +3,7 @@
 
 #include "ForceGenerator.h"
 
-class Drag : ForceGenerator {
+class Drag : public ForceGenerator {
 private:
     float m_k1;
     float m_k2;

@@ -4,8 +4,10 @@
 #include "ForceGenerator.h"
 #include "../Utility/Vector3d.h"
 
-class AnchoredSpring : ForceGenerator {
+class AnchoredSpring : public ForceGenerator {
 private:
+    static constexpr const char *FORCE_TYPE = "Gravity";
+
     Vector3d m_anchor;
     float m_k;
     float m_restLength;
@@ -20,6 +22,8 @@ public:
     AnchoredSpring(const AnchoredSpring &aSpring);
 
     void addForce(Particle *particle, float duration) override;
+
+    std::string getName() const override;
 };
 
 #endif /* ANCHOREDSPRING_H */

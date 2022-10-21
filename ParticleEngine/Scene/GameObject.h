@@ -29,9 +29,9 @@ private:
 
 public:
     // Base components
+    Transform transform;
     Mesh mesh;
 //    std::unique_ptr<Mesh> mesh;
-    Transform transform;
 
     explicit GameObject(Mesh mesh);
 
