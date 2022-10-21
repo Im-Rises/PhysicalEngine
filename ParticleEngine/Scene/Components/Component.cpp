@@ -34,8 +34,8 @@ Component *Component::createComponent(const std::string &name, GameObject *gameO
                     return new Collider(gameObject);
                 }
                 default: {
-//                    std::cerr << "Component::createComponent: Unknown component name" << std::endl;
-//                    return nullptr;
+                    std::cerr << "Component::createComponent: Unknown component name" << std::endl;
+                    return nullptr;
                 }
             }
         }

@@ -6,17 +6,8 @@
 #include "../../../GameObject.h"
 
 Rigidbody::Rigidbody(GameObject *gameObject) : Component(gameObject) {
-//    m_position = Vector3d(0, 0, 0);
-    gameObject->transform.setPosition(0, 0, 0);
+    m_mass = 0;
 }
-
-//Rigidbody::Rigidbody(std::string name) : Component(name) {
-//    m_position = Vector3d(0, 0, 0);
-//}
-
-//void Rigidbody::recalculateAll(float time) {
-//    std::cout << "recalculateAll issue in Rigidbody" << std::endl;
-//}
 
 void Rigidbody::update(float time) {
 

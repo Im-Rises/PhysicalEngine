@@ -157,7 +157,11 @@ void Particle::drawGui() {
     }
 }
 
-void Particle::addForceByName(const std::string &name) {
+void Particle::addForce(ForceGenerator *forceGenerator) {
+    forceGeneratorsList.push_back(forceGenerator);
+}
+
+//void Particle::addForceGeneratorByName(const std::string &name) {
 //    for (auto &forceName: ForceGenerator::forcesNamesList) {
 //        if (forceName == name) {
 //            ForceGenerator *force = ForceGenerator::createForceGenerator(name);
@@ -166,7 +170,7 @@ void Particle::addForceByName(const std::string &name) {
 //            }
 //        }
 //    }
-}
+//}
 
 std::string Particle::getName() const {
     return COMPONENT_TYPE;
@@ -214,4 +218,5 @@ const Vector3d &Particle::getNetForce() const { return netForce; }
 
 
 void Particle::setNetForce(const Vector3d &force) { netForce = force; }
+
 

@@ -10,7 +10,7 @@ private:
     static constexpr const char *COMPONENT_TYPE = RIGIDBODY_COMPONENT;
 
 protected:
-//    float m_mass;
+    float m_mass;
 //    float m_damping;
 //    float m_inverseMass;
 //    float m_inverseInertiaTensor;

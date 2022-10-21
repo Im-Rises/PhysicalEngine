@@ -83,6 +83,18 @@ public:
         }
     }
 
+    bool hasComponentByName(const std::string &name) const;
+
+    template<class T>
+    bool hasComponentByClass(T *&c) {
+        for (auto &component: components) {
+            if (dynamic_cast<T *>(component) != nullptr) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     void deleteComponentByName(const std::string &name);
 
     template<class T>

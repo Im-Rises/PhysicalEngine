@@ -112,6 +112,8 @@ void GameObject::addComponentByName(const std::string &name) {
             Component *component = Component::createComponent(name, this);
             if (component != nullptr && getComponentByName(name) == nullptr) {
                 components.push_back(component);
+            } else if (component != nullptr) {
+                delete component;
             }
         }
     }
@@ -141,6 +143,15 @@ Component *GameObject::getComponentByName(const std::string &name) const {
         }
     }
     return nullptr;
+}
+
+bool GameObject::hasComponentByName(const std::string &name) const {
+    for (auto &component: components) {
+        if (component->getName() == name) {
+            return true;
+        }
+    }
+    return false;
 }
 
 void GameObject::deleteComponentByName(const std::string &name) {
