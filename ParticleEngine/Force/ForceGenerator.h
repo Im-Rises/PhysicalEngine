@@ -4,7 +4,7 @@
 #include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
 
 class ForceGenerator {
-    virtual void addForce(Particle *particule, float duration) = 0;
+    virtual void addForce(Particle *particle, float duration) = 0;
 };
 
 #endif /* FORCEGENERATOR_H */

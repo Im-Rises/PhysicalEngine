@@ -3,7 +3,7 @@
 
 #include "ForceGenerator.h"
 
-class Gravity : ForceGenerator {
+class Gravity : public ForceGenerator {
 private:
     Vector3d m_gravity;
 

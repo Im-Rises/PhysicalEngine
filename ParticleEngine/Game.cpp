@@ -20,7 +20,6 @@ void Game::start(Scene *scene) {
     gameObject->addComponent(m_p);
 //    gameObject->addComponentByName(new Collider());
 //    gameObject->addComponentByName(new Particle());
-
 }
 
 void Game::goLeft() {

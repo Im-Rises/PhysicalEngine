@@ -3,7 +3,7 @@
 
 #include "ForceGenerator.h"
 
-class Spring : ForceGenerator {
+class Spring : public ForceGenerator {
 private:
     Particle *m_otherParticule;
     float m_k;
