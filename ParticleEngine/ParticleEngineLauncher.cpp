@@ -17,6 +17,8 @@
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/implot.h"
 #include "Scene/Components/Component.h"
+#include "Utility/imGuiUtility.h"
+#include "Scene/Components/PhysicalComponent/Particle/Particle.h"
 
 #include <stdio.h>
 
@@ -254,11 +256,27 @@ void ParticleEngineLauncher::handleGui() {
         {
             ImGui::Begin("Speed graph viewer");
             {
-                static RollingBuffer rdata1;
-                ImVec2 mouse = ImGui::GetMousePos();
+                static RollingBuffer rdata1, rdata2, rdata3;
                 static float t = 0;
                 t += ImGui::GetIO().DeltaTime;
-                rdata1.AddPoint(t, mouse.x * 0.0005f);
+//                ImVec2 mouse = ImGui::GetMousePos();
+//                rdata1.AddPoint(t, mouse.x * 0.0005f);
+
+                Particle *particle = nullptr;
+                if (gameObject != nullptr) {
+                    particle = dynamic_cast<Particle *>(gameObject->getComponentByName("Particle"));
+                }
+                if (particle != nullptr) {
+                    Vector3d speed = particle->getSpeed();
+                    rdata1.AddPoint(t, speed.m_x);
+                    rdata2.AddPoint(t, speed.m_y);
+                    rdata3.AddPoint(t, speed.m_z);
+                } else {
+                    rdata1.AddPoint(t, 0);
+                    rdata2.AddPoint(t, 0);
+                    rdata3.AddPoint(t, 0);
+                }
+
                 static float history = 10.0f;
                 static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
 
@@ -266,7 +284,14 @@ void ParticleEngineLauncher::handleGui() {
                     ImPlot::SetupAxes(NULL, NULL, flags, flags);
                     ImPlot::SetupAxisLimits(ImAxis_X1, 0, history, ImGuiCond_Always);
                     ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1);
-                    ImPlot::PlotLine("Speed X", &rdata1.Data[0].x, &rdata1.Data[0].y, rdata1.Data.size(), 0, 0,
+                    ImPlot::PlotLine("Speed X##ImPlotSpeedX", &rdata1.Data[0].x, &rdata1.Data[0].y, rdata1.Data.size(),
+                                     0, 0,
+                                     2 * sizeof(float));
+                    ImPlot::PlotLine("Speed Y##ImPlotSpeedY", &rdata2.Data[0].x, &rdata2.Data[0].y, rdata2.Data.size(),
+                                     0, 0,
+                                     2 * sizeof(float));
+                    ImPlot::PlotLine("Speed Z##ImPlotSpeedZ", &rdata3.Data[0].x, &rdata3.Data[0].y, rdata3.Data.size(),
+                                     0, 0,
                                      2 * sizeof(float));
                     ImPlot::EndPlot();
                 }
@@ -397,19 +422,5 @@ void ParticleEngineLauncher::toggleFullScreen() {
 bool ParticleEngineLauncher::isMinimized() const {
     return (windowWidth == 0 && windowHeight == 0);
 }
-
-bool ParticleEngineLauncher::ButtonCenteredOnLine(const char *label, float alignment) {
-    ImGuiStyle &style = ImGui::GetStyle();
-
-    float size = ImGui::CalcTextSize(label).x + style.FramePadding.x * 2.0f;
-    float avail = ImGui::GetContentRegionAvail().x;
-
-    float off = (avail - size) * alignment;
-    if (off > 0.0f)
-        ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
-
-    return ImGui::Button(label);
-}
-
 
 #pragma endregion

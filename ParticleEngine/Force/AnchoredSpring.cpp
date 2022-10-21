@@ -1,5 +1,7 @@
 #include "AnchoredSpring.h"
 
+#include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
+
 AnchoredSpring::AnchoredSpring() {
     m_anchor = Vector3d(0, 0, 0);
     m_k = 0;

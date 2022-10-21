@@ -1,5 +1,7 @@
 #include "Buoyancy.h"
 
+#include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
+
 Buoyancy::Buoyancy() {
     m_maxDepth = 0;
     m_volume = 0;

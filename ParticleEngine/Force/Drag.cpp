@@ -1,5 +1,7 @@
 #include "Drag.h"
 
+#include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
+
 Drag::Drag() {
     m_k1 = 0;
     m_k2 = 0;

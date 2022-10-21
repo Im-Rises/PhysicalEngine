@@ -92,7 +92,9 @@ public:
         for (auto &component: components) {
             if (dynamic_cast<T *>(component) != nullptr) {
                 c = dynamic_cast<T *>(component);
-                components.erase(std::remove(components.begin(), components.end(), c), components.end());
+//                components.erase(std::remove(components.begin(), components.end(), c), components.end());
+                std::cerr << "Component delete by class issue" << std::endl;
+                exit(1);
             }
         }
     }

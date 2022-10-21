@@ -1,5 +1,7 @@
 #include "Spring.h"
 
+#include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
+
 //Spring::Spring() {
 //	m_otherParticule = new Particle(0, 0, 0, 0);
 //	m_k = 0;

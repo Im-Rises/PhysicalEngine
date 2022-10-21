@@ -2,6 +2,7 @@
 #define ANCHOREDSPRING_H
 
 #include "ForceGenerator.h"
+#include "../Vector3d/Vector3d.h"
 
 class AnchoredSpring : ForceGenerator {
 private:
@@ -18,7 +19,7 @@ public:
 
     AnchoredSpring(const AnchoredSpring &aSpring);
 
-    void addForce(Particle *particle, float duration);
+    void addForce(Particle *particle, float duration) override;
 };
 
 #endif /* ANCHOREDSPRING_H */
