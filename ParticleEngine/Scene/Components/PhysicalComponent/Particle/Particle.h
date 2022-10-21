@@ -11,7 +11,7 @@ class ForceGenerator;
 
 class Particle : public Component {
 private:
-    static constexpr const char *COMPONENT_TYPE = "Particle";
+    static constexpr const char *COMPONENT_TYPE = PARTICLE_COMPONENT;
 
 private:
     // State
@@ -76,6 +76,11 @@ public:
     void calculateAcceleration();
 
     void drawGui() override;
+
+#pragma endregion
+#pragma region Add Delete Get Force
+
+    void addForceByName(const std::string &name);
 
 #pragma endregion
 #pragma region Getter Setter

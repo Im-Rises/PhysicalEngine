@@ -4,17 +4,21 @@
 #include <string>
 #include <map>
 
+#define RIGIDBODY_COMPONENT "Rigidbody"
+#define PARTICLE_COMPONENT "Particle"
+#define COLLIDER_COMPONENT "Collider"
+
 class GameObject;
 
 class Component {
+public:
+    static constexpr const char *componentsNamesList[] = {RIGIDBODY_COMPONENT, PARTICLE_COMPONENT, COLLIDER_COMPONENT};
+
 private:
     static constexpr const char *COMPONENT_TYPE = "Component";
 
 protected:
     GameObject *m_gameObject;
-
-public:
-	const static char* componentsNamesList[3];
 
 public:
     explicit Component(GameObject *gameObject);

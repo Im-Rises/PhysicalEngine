@@ -7,7 +7,7 @@
 
 class Rigidbody : public Component {
 private:
-    static constexpr const char *COMPONENT_TYPE = "Rigidbody";
+    static constexpr const char *COMPONENT_TYPE = RIGIDBODY_COMPONENT;
 
 protected:
 //    float m_mass;
@@ -20,7 +20,7 @@ protected:
 //    bool isKinematic = false;
 
 public:
-    Rigidbody(GameObject *gameObject, std::string name = "Rigidbody");
+    explicit Rigidbody(GameObject *gameObject);
 
     void update(float time) override;
 

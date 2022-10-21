@@ -96,10 +96,10 @@ void Scene::addGameObject(GameObject *gameObject) {
     gameObjects.push_back(gameObject);
 }
 
-//void Scene::translateCamera(Vector3d vector3D) {
-//    camera.translate(vector3D);
-//}
-//
+void Scene::translateCamera(const Vector3d &vector3D) {
+    camera.translate(vector3D);
+}
+
 //void Scene::rotateCamera(Vector3d vector3D, float angle) {
 //    camera.rotate(vector3D, angle);
 //}
@@ -128,4 +128,3 @@ bool *Scene::getPtrShowAxis() {
 GameObject *Scene::getPtrGameObjectByIndex(int index) const {
     return gameObjects[index];
 }
-

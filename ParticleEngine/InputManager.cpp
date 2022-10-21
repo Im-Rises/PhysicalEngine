@@ -98,6 +98,12 @@ void InputManager::keyRepeated(GLFWwindow *window, int key, ParticleEngineLaunch
     //}
 }
 
+void InputManager::scroll_callback(GLFWwindow *window, double xOffset, double yOffset) {
+    auto *engine = (ParticleEngineLauncher *) glfwGetWindowUserPointer(window);
+    engine->scene->translateCamera(Vector3d(0, 0, 0.1f * (float) yOffset));
+
+}
+
 void InputManager::cursor_position_callback(GLFWwindow *window, double xPos, double yPos) {
 //    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE) == GLFW_PRESS) {
 //        auto *engine = (ParticleEngineLauncher *) glfwGetWindowUserPointer(window);

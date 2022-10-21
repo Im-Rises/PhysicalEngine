@@ -106,7 +106,7 @@ void GameObject::addComponent(Component *component) {
     components.push_back(component);
 }
 
-void GameObject::addComponentByName(std::string name) {
+void GameObject::addComponentByName(const std::string &name) {
     for (auto &componentName: Component::componentsNamesList) {
         if (componentName == name) {
             Component *component = Component::createComponent(name, this);

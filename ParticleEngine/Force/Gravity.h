@@ -6,7 +6,7 @@
 
 class Gravity : public ForceGenerator {
 public:
-    static constexpr const char *FORCE_TYPE = "Gravity";
+    static constexpr const char *FORCE_TYPE = GRAVITY_FORCE;
 
 private:
     Vector3d m_gravity;

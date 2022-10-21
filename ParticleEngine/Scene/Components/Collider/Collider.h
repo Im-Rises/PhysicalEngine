@@ -5,7 +5,7 @@
 
 class Collider : public Component {
 private:
-    static constexpr const char *COMPONENT_TYPE = "Collider";
+    static constexpr const char *COMPONENT_TYPE = COLLIDER_COMPONENT;
     float m_mass;
     float m_friction;
     float m_restitution;

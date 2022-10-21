@@ -6,7 +6,7 @@
 
 class AnchoredSpring : public ForceGenerator {
 private:
-    static constexpr const char *FORCE_TYPE = "Gravity";
+    static constexpr const char *FORCE_TYPE = ANCHORED_SPRING_FORCE;
 
     Vector3d m_anchor;
     float m_k;

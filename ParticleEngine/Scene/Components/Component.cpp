@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-const char *Component::componentsNamesList[] = {"Rigidbody", "Particle", "Collider"};
+//const char *Component::componentsNamesList[] = {"Rigidbody", "Particle", "Collider"};
 
 Component::Component(GameObject *gameObject) {
     this->m_gameObject = gameObject;

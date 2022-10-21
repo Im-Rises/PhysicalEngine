@@ -62,7 +62,7 @@ public:
 
     void addComponent(Component *component);
 
-    void addComponentByName(std::string name);
+    void addComponentByName(const std::string &name);
 
     template<typename T>
     void addComponentByClass(T *&c) {

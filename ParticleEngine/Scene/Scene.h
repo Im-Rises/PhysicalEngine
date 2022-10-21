@@ -47,8 +47,8 @@ public:
 public:
     void addGameObject(GameObject *gameObject);
 
-//    void translateCamera(Vector3d vector3D);
-//
+    void translateCamera(const Vector3d &vector3D);
+
 //    void rotateCamera(Vector3d vector3D, float angle);
 
 public:

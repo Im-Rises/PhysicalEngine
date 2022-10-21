@@ -109,7 +109,7 @@ Then you can start by double-clicking the executable of typing the following com
 
 ## Controls
 
-### Camera controls
+### Game controls
 
 TO modify the speed value, you can use the ImGui window named `Speed handler`.
 
@@ -122,9 +122,10 @@ TO modify the speed value, you can use the ImGui window named `Speed handler`.
 
 ### User controls
 
-| Action            | Key |
-|-------------------|-----|
-| Toggle fullscreen | F11 |
+| Action            | Key         |
+|-------------------|-------------|
+| Toggle fullscreen | F11         |
+| Camera zoom       | Mouse wheel |
 
 <!--
 | Description        | Keyboard | Mouse                           |

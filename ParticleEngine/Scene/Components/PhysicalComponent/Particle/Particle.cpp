@@ -134,19 +134,12 @@ void Particle::drawGui() {
         ImGui::OpenPopup("ParticleForcesList##popup");
     }
     if (ImGui::BeginPopup("ParticleForcesList##popup")) {
-        if (ImGui::BeginTable("ParticleForces", 2)) {
-            ImGui::TableNextColumn();
-            ImGui::Text("Name");
-            ImGui::TableNextColumn();
-            ImGui::Text("Value");
-            for (ForceGenerator *forceGenerator: forceGeneratorsList) {
-                ImGui::TableNextColumn();
-                ImGui::Text("%s", forceGenerator->getName().c_str());
-//            ImGui::TableNextColumn();
-//            ImGui::Text(forceGenerator->getValue().c_str());
+        if (forceGeneratorsList.empty())
+            ImGui::Text("Empty");
+        else
+            for (auto &forceGenerator: forceGeneratorsList) {
+                forceGenerator->drawGui();
             }
-            ImGui::EndTable();
-        }
         ImGui::EndPopup();
     }
 
@@ -158,12 +151,22 @@ void Particle::drawGui() {
     }
     if (ImGui::BeginPopup("ParticleAddForce##popup")) {
         if (ImGui::Button("Anchor Spring")) {
-            forceGeneratorsList.push_back(new AnchoredSpring());
+            forceGeneratorsList.push_back(new AnchoredSpring(Vector3d(5, 0, 0), 155, 1));
         }
         ImGui::EndPopup();
     }
 }
 
+void Particle::addForceByName(const std::string &name) {
+//    for (auto &forceName: ForceGenerator::forcesNamesList) {
+//        if (forceName == name) {
+//            ForceGenerator *force = ForceGenerator::createForceGenerator(name);
+//            if (force != nullptr && getForceByName(name) == nullptr) {
+//                forceGeneratorsList.push_back(force);
+//            }
+//        }
+//    }
+}
 
 std::string Particle::getName() const {
     return COMPONENT_TYPE;
@@ -211,3 +214,4 @@ const Vector3d &Particle::getNetForce() const { return netForce; }
 
 
 void Particle::setNetForce(const Vector3d &force) { netForce = force; }
+

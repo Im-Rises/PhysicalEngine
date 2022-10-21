@@ -1,6 +1,8 @@
 #ifndef IMGUIUTILITY_H
 #define IMGUIUTILITY_H
 
+// https://github.com/ocornut/imgui/discussions/3862
+
 bool ButtonCenteredOnLine(const char *label, float alignment);
 
 void AlignForWidth(float width, float alignment = 0.5f);
