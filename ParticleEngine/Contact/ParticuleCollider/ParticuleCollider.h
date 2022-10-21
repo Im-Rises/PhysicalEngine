@@ -3,7 +3,7 @@
 
 #include "../../Scene/Components/Particule/Particule.h"
 
-class ParticuleCollider : Component {
+class ParticuleCollider {
 	
 	
 
@@ -16,8 +16,6 @@ class ParticuleCollider : Component {
 
 	public:
 	
-	void drawGui();
-	void update(float time);
 	ParticuleCollider(Particule* particule, float radius);
 	
 	#pragma region Getter setter

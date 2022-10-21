@@ -11,7 +11,7 @@ class ParticuleCable : public ParticuleLink {
 
 	public:
 
-	void addContact(ParticuleContact* particuleContact, int size) const = 0;
+	int addContact(ParticuleContact* particuleContact, unsigned int limit, unsigned int current);
 };
 
 #endif // !PARTICULECABLE

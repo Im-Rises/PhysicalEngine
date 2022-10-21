@@ -8,6 +8,6 @@ class ParticuleRode : public ParticuleLink{
 	float length;
 
 
-	void addContact(ParticuleContact* particuleContact, int size);
+	int addContact(ParticuleContact* particuleContact,unsigned int limit,unsigned int current);
 };
 #endif // !PARTICULELINK_H

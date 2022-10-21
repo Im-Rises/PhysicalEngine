@@ -2,15 +2,14 @@
 #define PARTICLE_CONTACT_H
 
 #include "../Scene/Components/Particule/Particule.h"
-#include "ParticuleCollider/ParticuleCollider.h"
 
 class ParticuleContact {
 private:
-	ParticuleCollider m_particulesCollider[2];
+	Particule* m_particules[2];
 
-	float m_collision_elasticity;
+	float m_collision_elasticity=0;
 
-	float m_penetration;
+	float m_penetration=0;
 
 	Vector3d m_contactNormal;
 
@@ -25,7 +24,17 @@ private:
 
 public:
 
-	ParticuleContact(ParticuleCollider particule1,ParticuleCollider particule2,float elasticity);
+	ParticuleContact();
+
+	void setPenetration(float penetration);
+	
+	void setElasticity(float elasticity);
+
+	void setContactNormal(Vector3d const contactNormal);
+
+	Particule** GetParticules();
+
+	void SetParticules(Particule* particules[2]);
 
 	void resolve(float time);
 

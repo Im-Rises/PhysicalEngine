@@ -5,14 +5,14 @@
 
 class ParticuleLink : public ParticuleContactGenerator {
 	
-	private:
-	Particule* particules[2];
+	protected:
+	Particule* m_particules[2];
 
 	public:
 	float currentLength() const;
 
 
-	virtual void addContact(ParticuleContact* particuleContact, int size);
+	virtual int addContact(ParticuleContact* particuleContact, unsigned int limit, unsigned int current) = 0;
 
 
 

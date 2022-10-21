@@ -1,10 +1,6 @@
 #include "ParticuleCollider.h"
 
-void ParticuleCollider::drawGui() {
-}
 
-void ParticuleCollider::update(float time) {
-}
 
 ParticuleCollider::ParticuleCollider(Particule* particule, float radius) {
 	m_radius = radius;
@@ -13,4 +9,8 @@ ParticuleCollider::ParticuleCollider(Particule* particule, float radius) {
 
 float ParticuleCollider::getRadius() {
 	return m_radius;
+}
+
+Particule* ParticuleCollider::getParticule() {
+	return m_particule;
 }
