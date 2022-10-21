@@ -54,9 +54,6 @@ public:
     void drawMeshGui();
 
 public:
-//    float getSpeed() const;
-
-public:
     std::string getName() const;
 
 public:
@@ -89,12 +86,11 @@ public:
 
     template<class T>
     void deleteComponentByClass(T *&c) {
-        for (auto &component: components) {
-            if (dynamic_cast<T *>(component) != nullptr) {
-                c = dynamic_cast<T *>(component);
-//                components.erase(std::remove(components.begin(), components.end(), c), components.end());
-                std::cerr << "Component delete by class issue" << std::endl;
-                exit(1);
+        for (auto it = components.begin(); it != components.end(); ++it) {
+            if (dynamic_cast<T *>(*it) != nullptr) {
+                components.erase(it);
+                delete *it;
+                return;
             }
         }
     }

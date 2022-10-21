@@ -129,14 +129,6 @@ void GameObject::drawMeshGui() {
     mesh.drawGui();
 }
 
-//float GameObject::getSpeed() const {
-////    Component *particle = (getComponentByClass("Particle"));
-////    if (particle != nullptr) {
-////        return particle->getSpeed().m_x;
-////    }
-//    return 0;
-//}
-
 std::string GameObject::getName() const {
     return gameObjectName;
 }
@@ -152,10 +144,10 @@ Component *GameObject::getComponentByName(const std::string &name) const {
 }
 
 void GameObject::deleteComponentByName(const std::string &name) {
-    for (auto &component: components) {
-        if (component->getName() == name) {
-            components.erase(std::remove(components.begin(), components.end(), component), components.end());
-            delete component;
+    for (auto it = components.begin(); it != components.end(); ++it) {
+        if ((*it)->getName() == name) {
+            components.erase(it);
+            delete *it;
             return;
         }
     }
