@@ -23,7 +23,9 @@ It is implemented using Fixed Framerate and Component Oriented Programming.
 | ![previw_screenshot](https://user-images.githubusercontent.com/59691442/196303021-781cf236-4bab-4523-9f08-2a85c7dd491c.png) |
 
 [//]: # (|                                                    Mesh view                                                     |                                                  Wireframe view                                                  |)
+
 [//]: # (|:----------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------:|)
+
 [//]: # (| ![image1]&#40;https://user-images.githubusercontent.com/59691442/192190493-f1191715-268e-43e4-8f27-5ed0c2823dfa.png&#41; | ![image2]&#40;https://user-images.githubusercontent.com/59691442/192190499-457463ae-7a34-432a-bb0b-063771021275.png&#41; |)
 
 <!--
@@ -107,7 +109,7 @@ Then you can start by double-clicking the executable of typing the following com
 
 ## Controls
 
-### Camera controls
+### Game controls
 
 TO modify the speed value, you can use the ImGui window named `Speed handler`.
 
@@ -120,28 +122,14 @@ TO modify the speed value, you can use the ImGui window named `Speed handler`.
 
 ### User controls
 
-| Action            | Key |
-|-------------------|-----|
-| Toggle fullscreen | F11 |
-
-<!--
-| Description        | Keyboard | Mouse                           |
-|--------------------|----------|---------------------------------|
-| Translate left     | ←        |                                 |
-| Translate right    | →        |                                 |
-| Translate forward  | ↑        |                                 |
-| Translate rearward | ↓        |                                 |
-| Rotate camera      |          | Middle click and mouse movement |
-
-### Game controls
-
-| Action        | Key |
-|---------------|-----|
-| Move forward  | `W` |
-| Move backward | `S` |
-| Move left     | `A` |
-| Move right    | `D` |
--->
+| Action                        | Key                                   |
+|-------------------------------|---------------------------------------|
+| Toggle fullscreen             | F11                                   |
+| Camera zoom                   | Mouse wheel                           |
+| Translate camera to the left  | Right Mouse Button + Mouse ← movement |
+| Translate camera to the right | Right Mouse Button + Mouse → movement |
+| Translate camera upwards      | Right Mouse Button + Mouse ↑ movement |
+| Translate camera downwards    | Right Mouse Button + Mouse ↓ movement |
 
 ## Project Architecture
 
@@ -154,9 +142,12 @@ ParticleEngine
 │  │   |── cmake.yml
 │  │   |── codeql.yml
 │  │   |── cpp-cmake-publish.yml
+│  │   |── cpp-linter.yml
 │  │   |── dependency-review.yml
+│  │   |── flawfinder.yml
 │  │   |── greetings.yml
 │  │   |── label.yml
+│  │   |── msvc.yml
 │  │   |── stale.yml
 ├── dependencies
 |  ├── glad
@@ -165,11 +156,8 @@ ParticleEngine
 |  ├── imgui
 |  ├── stb
 ├── ParticleEngine
-|  ├── Integrable
 │  │   |── *
-|  ├── Integrator
-│  │   |── *
-|  ├── Particule
+|  ├── Particle
 │  │   |── *
 |  ├── Scene
 │  │   |── *
@@ -184,6 +172,7 @@ ParticleEngine
 │  │   |── *
 |  ├── CMakeLists.txt
 |  ├── integratorTest.cpp
+|  ├── physicHandlerTest.cpp
 |  ├── particuleTest.cpp
 ├── .clang-format
 ├── .editorconfig
@@ -198,13 +187,13 @@ ParticleEngine
 
 ## Dependencies
 
-- GLFW
-- Glad
-- OpenGl3
-- Dear ImGui
-- CMake
 - C++14
+- CMake
 - C++ compiler (MSVC, Mingw, ...)
+- Glad
+- GLFW
+- OpenGl 3.3
+- Dear ImGui
 
 ## Compilation
 
@@ -277,6 +266,36 @@ You are now able to compile the project. Go to the project root and type the fol
 cmake .
 ```
 
+## Oriented Components Architecture
+
+Placeholder
+
+<!--
+    //////////////////////////////////
+//    // Method 1
+//    gameObjects[0]->addComponentByName("Collider");
+
+//    // Method 2
+//    Collider *collider = nullptr;
+//    gameObjects[0]->addComponentByClass<Collider>(collider);
+    //////////////////////////////////
+//    //Method 1
+//    Particle *particle = dynamic_cast<Particle *>(gameObjects[0]->getComponentByName("Particle"));
+
+//    // Method 2
+//    Collider *particle = nullptr;
+//    gameObjects[0]->getComponentByClass<Collider>(particle);
+//    std::cout << particle->getName() << std::endl;
+    //////////////////////////////////
+//    //Method 1
+//    Particle *particle = dynamic_cast<Particle *>(gameObjects[0]->addComponentByName("Particle"));
+
+//    // Method 2
+//    Collider *particle = nullptr;
+//    gameObjects[0]->deleteComponentByClass<Collider>(particle);
+    //////////////////////////////////
+-->
+
 ## Run tests
 
 A CMake test is set up to directly test the program. You can find it in the `test`folder and start it by typing the
@@ -342,19 +361,19 @@ Sphere OpenGL:
 
 ## Contributors
 
-Clémence CLAVEL:
+Quentin MOREL:
 
-- @clemos38
-- <https://github.com/clemos38>
+- @Im-Rises
+- <https://github.com/Im-Rises>
 
 Gabriel REBOUL:
 
 - @spiryti
 - <https://github.com/spiryti>
 
-Quentin MOREL:
+Clémence CLAVEL:
 
-- @Im-Rises
-- <https://github.com/Im-Rises>
+- @clemos38
+- <https://github.com/clemos38>
 
 [![GitHub contributors](https://contrib.rocks/image?repo=Im-Rises/ParticleEngine)](https://github.com/Im-Rises/ParticleEngine/graphs/contributors)

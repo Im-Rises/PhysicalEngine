@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../ParticleEngine/Vector3d/Vector3d.h"
+#include "../ParticleEngine/Utility/Vector3d.h"
 
 int main() {
     Vector3d v1(1, 2, 3);

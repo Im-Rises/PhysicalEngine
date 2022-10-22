@@ -3,9 +3,12 @@
 
 #include "ForceGenerator.h"
 
-class Spring : ForceGenerator {
+class Spring : public ForceGenerator {
 private:
-    Particule *m_otherParticule;
+    static constexpr const char *FORCE_TYPE = SPRING_FORCE;
+
+private:
+    Particle *m_otherParticle;
     float m_k;
     float m_restLength;
 
@@ -13,11 +16,16 @@ public:
 //	Spring();
     ~Spring();
 
-    Spring(Particule *otherParticule, float k, float restLength);
+    Spring(Particle *otherParticule, float k, float restLength);
 
     Spring(const Spring &spring);
 
-    void addForce(Particule *particule, float duration);
+    void addForce(Particle *particule, float duration) override;
+
+    void drawGui() override;
+
+public:
+    std::string getName() const override;
 };
 
 #endif /* SPRING_H */

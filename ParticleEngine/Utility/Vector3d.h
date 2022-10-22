@@ -8,13 +8,9 @@ public:
     float m_x, m_y, m_z;
 
 public:
-    /// Constructeur par d�faut
-    /// Vecteur z�ro (0,0,0)
-    Vector3d();
-
     /// Constructeur
     /// Vecteur (x,y,z)
-    Vector3d(float xcoord, float ycoord, float zcoord);
+    Vector3d(float xCoord = 0, float yCoord = 0, float zCoord = 0);
 
     ///Constructeur de copie
     Vector3d(const Vector3d &v);
@@ -30,11 +26,11 @@ public:
     float getz() const;
 
     ///setters
-    void setx(float xcoord);
+    void setx(float xCoord);
 
-    void sety(float ycoord);
+    void sety(float yCoord);
 
-    void setz(float zcoord);
+    void setz(float zCoord);
 
     ///Addition
     Vector3d operator+(const Vector3d &vec);
@@ -42,38 +38,43 @@ public:
     Vector3d &operator+=(const Vector3d &vec);
 
     ///Soustraction
-    Vector3d operator-(const Vector3d &vec);
+    Vector3d operator-(const Vector3d &vec) const;
 
     Vector3d &operator-=(const Vector3d &vec);
 
     ///Multiplication par un scalaire
-    Vector3d operator*(float s);
+    Vector3d operator*(float s) const;
 
     Vector3d &operator*=(float s);
 
+    ///Division par un scalaire
+    Vector3d operator/(float s);
+
+    Vector3d &operator/=(float s);
+
     ///Prend la valeur du vecteur
-    Vector3d operator=(const Vector3d &vec);
+    Vector3d &operator=(const Vector3d &vec);
 
     ///Test d'�galit�
-    bool operator==(const Vector3d &vec);
+    bool operator==(const Vector3d &vec) const;
 
 ///Test de diff�rence
-    bool operator!=(const Vector3d &vec);
+    bool operator!=(const Vector3d &vec) const;
 
     ///Calcul de la norme
-    float norm();
+    float norm() const;
 
     ///Normalisation
-    Vector3d normalize();
+    Vector3d normalize() const;
 
     ///Produit Scalaire
-    float dot(const Vector3d &vec);
+    float dot(const Vector3d &vec) const;
 
     ///Produit Vectoriel
-    Vector3d cross(const Vector3d &vec);
+    Vector3d cross(const Vector3d &vec) const;
 
     ///Distance entre deux vecteurs
-    float distance(const Vector3d &vec);
+    float distance(const Vector3d &vec) const;
 
     ///Affichage du vecteur
     friend std::ostream &operator<<(std::ostream &os, Vector3d vec) {

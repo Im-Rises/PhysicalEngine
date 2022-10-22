@@ -1,15 +1,17 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include "../../../Vector3d/Vector3d.h"
+#include "../../../Utility/Vector3d.h"
+#include "../Component.h"
+#include "../DefaultComponent.h"
 #include <iostream>
 #include <vector>
 
 #include <string>
 
-class Mesh {
+class Mesh : private DefaultComponent {
 private:
-    std::string name = "Mesh";
+    static constexpr const char *COMPONENT_TYPE = "Mesh";
 
 protected:
     std::vector<float> vertices;
@@ -18,7 +20,7 @@ protected:
     bool verticesUseIndices = true;
 
 public:
-    void drawGui();
+    void drawGui() override;
 
 #pragma region Getter
 
@@ -30,7 +32,7 @@ public:
 
     const bool &getVerticesUseIndices() const;
 
-    const std::string &getName() const;
+    std::string getName() const override;
 
 #pragma endregion
 

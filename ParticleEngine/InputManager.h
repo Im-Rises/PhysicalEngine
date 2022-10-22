@@ -11,8 +11,14 @@ private:
 //    static float translationSpeed;
     static float rotationSpeed;
 
-    static double mouseLastPosX;
-    static double mouseLastPosY;
+    static bool mouseRightButtonPressed;
+    static bool mouseLeftButtonPressed;
+
+    static float mouseLastPosX;
+    static float mouseLastPosY;
+    static float mouseDirection; // Use Vector3 ?
+
+    static float movementSpeed;
 
 public:
     static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
@@ -24,12 +30,12 @@ private:
 
     static void keyRepeated(GLFWwindow *window, int key, ParticleEngineLauncher *engine);
 
-
 public:
-    static void cursor_position_callback(GLFWwindow *window, double xpos, double ypos);
+    static void scroll_callback(GLFWwindow *window, double xOffset, double yOffset);
 
-private:
-//    static void mouseButtonPressed(GLFWwindow *window, int button, ParticleEngineLauncher *engine);
+    static void cursor_position_callback(GLFWwindow *window, double xPos, double yPos);
+
+    static void mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
 
 
 };

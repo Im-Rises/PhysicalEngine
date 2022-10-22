@@ -8,6 +8,8 @@
 #include "Components/Mesh/Sphere/Sphere.h"
 
 #include "glad/glad.h"
+#include "Components/PhysicalComponent/Particle/Particle.h"
+#include "Components/Collider/Collider.h"
 
 Scene::Scene(int windowWidth, int windowHeight) {
     this->windowWidth = windowWidth;
@@ -55,15 +57,11 @@ void Scene::destroy() {
     glDeleteFramebuffers(1, &fbo);
 }
 
-void Scene::updateGameObjects(float deltaTime) {
+void Scene::update(float deltaTime) {
     // Update the game objects
     for (GameObject *gameObject: gameObjects) {
         gameObject->update(deltaTime);
     }
-
-    // Update the physic handler
-//    physicHandler.updateAll(deltaTime);
-//    physicHandler.update(deltaTime, gameObjects);
 }
 
 void Scene::draw(int display_w, int display_h) {
@@ -85,19 +83,23 @@ void Scene::addGameObject(GameObject *gameObject) {
     gameObjects.push_back(gameObject);
 }
 
-//void Scene::translateCamera(Vector3d vector3D) {
-//    camera.translate(vector3D);
-//}
-//
+void Scene::translateCamera(const Vector3d &vector3D) {
+    camera.translate(vector3D);
+}
+
 //void Scene::rotateCamera(Vector3d vector3D, float angle) {
 //    camera.rotate(vector3D, angle);
 //}
+
+void Scene::setCameraPosition(const Vector3d &position) {
+    camera.setPosition(position);
+}
 
 unsigned int Scene::getFrameBufferId() const {
     return fbo;
 }
 
-std::vector<GameObject *> Scene::getGameObjects() {
+std::vector<GameObject *> &Scene::getGameObjects() {
     return gameObjects;
 }
 
@@ -117,4 +119,7 @@ bool *Scene::getPtrShowAxis() {
 GameObject *Scene::getPtrGameObjectByIndex(int index) const {
     return gameObjects[index];
 }
+
+
+
 

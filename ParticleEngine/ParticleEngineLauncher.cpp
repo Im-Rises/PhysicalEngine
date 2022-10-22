@@ -9,16 +9,18 @@
 #include "Scene/Scene.h"
 #include "Scene/GameObject.h"
 #include "InputManager.h"
-#include <chrono>
+#include "Utility/RollingBuffer.h"
+#include "Scene/Components/PhysicalComponent/Particle/Particle.h"
+#include "Scene/Components/Component.h"
 
 // Dear ImGui
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/implot.h"
-#include "Scene/Components/Component.h"
+#include "Utility/imGuiUtility.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 #if defined(IMGUI_IMPL_OPENGL_ES2)
 #include <GLES2/gl2.h>
@@ -82,9 +84,11 @@ ParticleEngineLauncher::ParticleEngineLauncher() {
     glfwSwapInterval(1); // Enable vsync
 
     // Initialize GLFW callbacks
-    glfwSetCursorPosCallback(window, InputManager::cursor_position_callback);
     glfwSetWindowUserPointer(window, this);
     glfwSetKeyCallback(window, InputManager::key_callback);
+    glfwSetScrollCallback(window, InputManager::scroll_callback);
+    glfwSetCursorPosCallback(window, InputManager::cursor_position_callback);
+    glfwSetMouseButtonCallback(window, InputManager::mouse_button_callback);
 
     // Center window
     GLFWmonitor *monitor = glfwGetPrimaryMonitor();
@@ -225,21 +229,12 @@ void ParticleEngineLauncher::handleGui() {
         {
             ImGui::Begin("Hierarchy");
             for (int i = 0; i < scene->getGameObjects().size(); i++) {
-//                std::string label = gameObject == scene->getPtrGameObjectByIndex(i) ? "Selected" : "Select";
-//                label += "##HierarchyGameObject" + std::to_string(i);
-//                if (ImGui::Button(label.c_str())) {
-//                    this->gameObject = scene->getPtrGameObjectByIndex(i);
-//                }
-//                ImGui::SameLine();
-//                ImGui::Text("%s", scene->getPtrGameObjectByIndex(i)->getName().c_str());
-
                 ImGui::Selectable((scene->getPtrGameObjectByIndex(i)->getName()).c_str(),
                                   gameObject == scene->getPtrGameObjectByIndex(i));
                 if (ImGui::IsItemClicked()) {
                     this->gameObject = scene->getPtrGameObjectByIndex(i);
                 }
             }
-
             ImGui::End();
         }
         {
@@ -262,11 +257,48 @@ void ParticleEngineLauncher::handleGui() {
         }
         {
             ImGui::Begin("Speed graph viewer");
-            if (!isMinimized()) {
-                if (ImPlot::BeginPlot("GameObject speed") && gameObject != nullptr) {
-//                ImPlot::PlotLine("Speed", gameObject->getSpeedHistory().data(), gameObject->getSpeedHistory().size());
+            {
+                static RollingBuffer rdata1, rdata2, rdata3;
+                static float t = 0;
+                t += ImGui::GetIO().DeltaTime;
+//                ImVec2 mouse = ImGui::GetMousePos();
+//                rdata1.AddPoint(t, mouse.x * 0.0005f);
+
+                Particle *particle = nullptr;
+                if (gameObject != nullptr) {
+                    particle = dynamic_cast<Particle *>(gameObject->getComponentByName("Particle"));
                 }
-                ImPlot::EndPlot();
+                if (particle != nullptr) {
+                    Vector3d speed = particle->getSpeed();
+                    rdata1.AddPoint(t, speed.m_x);
+                    rdata2.AddPoint(t, speed.m_y);
+                    rdata3.AddPoint(t, speed.m_z);
+                } else {
+                    rdata1.AddPoint(t, 0);
+                    rdata2.AddPoint(t, 0);
+                    rdata3.AddPoint(t, 0);
+                }
+
+                static float history = 10.0f;
+                static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
+
+                if (ImPlot::BeginPlot("GameObject Speed##Rolling", ImVec2(-1, 150))) {
+                    ImPlot::SetupAxes(NULL, NULL, flags, flags);
+                    ImPlot::SetupAxisLimits(ImAxis_X1, 0, history, ImGuiCond_Always);
+                    ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1);
+                    ImPlot::PlotLine("Speed X##ImPlotSpeedX", &rdata1.Data[0].x, &rdata1.Data[0].y, rdata1.Data.size(),
+                                     0, 0,
+                                     2 * sizeof(float));
+                    ImPlot::PlotLine("Speed Y##ImPlotSpeedY", &rdata2.Data[0].x, &rdata2.Data[0].y, rdata2.Data.size(),
+                                     0, 0,
+                                     2 * sizeof(float));
+                    ImPlot::PlotLine("Speed Z##ImPlotSpeedZ", &rdata3.Data[0].x, &rdata3.Data[0].y, rdata3.Data.size(),
+                                     0, 0,
+                                     2 * sizeof(float));
+                    ImPlot::EndPlot();
+                }
+                ImGui::SliderFloat("History", &history, 1, 30, "%.1f s");
+                rdata1.Span = history;
             }
             ImGui::End();
         }
@@ -285,6 +317,18 @@ void ParticleEngineLauncher::handleGui() {
                         component->drawGui();
                     }
                 }
+                ImGui::NewLine();
+                if (ButtonCenteredOnLine("Add component", 0.5f)) {
+                    ImGui::OpenPopup("Add component##popup");
+                }
+                if (ImGui::BeginPopup("Add component##popup")) {
+                    for (auto &componentName: Component::componentsNamesList) {
+                        if (ImGui::MenuItem(componentName)) {
+                            gameObject->addComponentByName(componentName);
+                        }
+                    }
+                    ImGui::EndPopup();
+                }
             }
             ImGui::End();
         }
@@ -295,8 +339,8 @@ void ParticleEngineLauncher::handleGui() {
         }
         {
             ImGui::Begin("Game settings");
-//            ImGui::Text("Particle speed:");
-//            ImGui::InputFloat("##PhysicalEngineParticleSpeed", game.getPtrSpeed(), 0.1f, 1.0f, "%.1f");
+            ImGui::Text("Particle speed:");
+            ImGui::InputFloat("##PhysicalEngineParticleSpeed", game.getPtrSpeed(), 0.1f, 1.0f, "%.1f");
             ImGui::End();
         }
         {
@@ -313,14 +357,12 @@ void ParticleEngineLauncher::handleGui() {
     ImGui::Render();
 }
 
-
 void ParticleEngineLauncher::updateGame(std::chrono::steady_clock::time_point &start) {
     auto deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(
             std::chrono::steady_clock::now() - start).count();
-//    if (deltaTime > 1000 / PHYSICAL_UPDATE_PER_SECOND) {
     start = std::chrono::steady_clock::now();
-    scene->updateGameObjects((float) deltaTime / 1000.0f);
-//    }
+    scene->update((float) deltaTime / 1000.0f);
+//    scene->update(1000.0f / ImGui::GetIO().Framerate);
 }
 
 void ParticleEngineLauncher::updateScreen() {
@@ -380,8 +422,13 @@ void ParticleEngineLauncher::toggleFullScreen() {
     }
 }
 
-bool ParticleEngineLauncher::isMinimized() {
+bool ParticleEngineLauncher::isMinimized() const {
     return (windowWidth == 0 && windowHeight == 0);
+}
+
+void ParticleEngineLauncher::focusCameraOnGameObject() {
+    if (gameObject != nullptr)
+        scene->setCameraPosition(gameObject->transform.getPosition());
 }
 
 #pragma endregion

@@ -1,21 +1,19 @@
-#ifndef PHYSICALENGINE_H
-#define PHYSICALENGINE_H
+#ifndef PARTICLE_ENGINE_H
+#define PARTICLE_ENGINE_H
 
 #define PROJECT_NAME "Particle Engine 3D"
 
 #define VERSION_MAJOR "0"
-#define VERSION_MINOR "2"
+#define VERSION_MINOR "3"
 #define VERSION_PATCH "0"
 
 #define PROJECT_VERSION VERSION_MAJOR "." VERSION_MINOR "." VERSION_PATCH
 
 #define PROJECT_GITHUB "https://github.com/Im-Rises/ParticleEngineLauncher"
 
-#include <memory>
 #include <chrono>
 #include "Game.h"
 
-//Shallow declarations
 class Scene;
 
 class InputManager;
@@ -31,8 +29,12 @@ class ParticleEngineLauncher {
 private:
     // Window, Scene and Game objects
     GLFWwindow *window;
-    Scene *scene;
     Game game;
+    Scene *scene;
+    //    std::unique_ptr<Scene> scene;
+
+    // Physical update
+    const int PHYSICAL_UPDATE_PER_SECOND = 50;
 
     // Window variables
     bool isFullScreen = false;
@@ -40,14 +42,10 @@ private:
     int windowWidth = 1580, windowHeight = 720;
 
     // Variables for the game loop
-    const int PHYSICAL_UPDATE_PER_SECOND = 50;
     GameObject *gameObject = nullptr;
 
     // Widgets variables
     char consoleBuffer[1024] = {};
-
-    // Graph variables
-    float graphData[100] = {};
 
 public:
     ParticleEngineLauncher();
@@ -72,8 +70,12 @@ private:
 
     void toggleFullScreen();
 
-    bool isMinimized();
+    bool isMinimized() const;
+
+private:
+    void focusCameraOnGameObject();
+
 };
 
 
-#endif //PHYSICALENGINE_H
+#endif //PARTICLE_ENGINE_H
