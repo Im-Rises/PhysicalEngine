@@ -19,6 +19,8 @@ public:
 
     void update();
 
+    void setPosition(const Vector3d &vector3D);
+
     void translate(const Vector3d &vector3D);
 
     void rotate(const Vector3d &vector3D, float angle);

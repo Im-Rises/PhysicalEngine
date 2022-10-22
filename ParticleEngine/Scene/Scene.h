@@ -51,6 +51,8 @@ public:
 
 //    void rotateCamera(Vector3d vector3D, float angle);
 
+    void setCameraPosition(const Vector3d &position);
+
 public:
     unsigned int getFrameBufferId() const;
 

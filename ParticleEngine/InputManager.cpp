@@ -64,8 +64,7 @@ void InputManager::keyPressed(GLFWwindow *window, int key, ParticleEngineLaunche
             break;
         }
         case GLFW_KEY_F: {
-//			engine->game.applyGravity();
-            //engine->game.applySpring();
+            engine->focusCameraOnGameObject();
             break;
         }
         case GLFW_KEY_F11: {

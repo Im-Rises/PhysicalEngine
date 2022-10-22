@@ -426,4 +426,9 @@ bool ParticleEngineLauncher::isMinimized() const {
     return (windowWidth == 0 && windowHeight == 0);
 }
 
+void ParticleEngineLauncher::focusCameraOnGameObject() {
+    if (gameObject != nullptr)
+        scene->setCameraPosition(gameObject->transform.getPosition());
+}
+
 #pragma endregion

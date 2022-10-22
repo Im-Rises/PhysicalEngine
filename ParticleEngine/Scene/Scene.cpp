@@ -91,6 +91,10 @@ void Scene::translateCamera(const Vector3d &vector3D) {
 //    camera.rotate(vector3D, angle);
 //}
 
+void Scene::setCameraPosition(const Vector3d &position) {
+    camera.setPosition(position);
+}
+
 unsigned int Scene::getFrameBufferId() const {
     return fbo;
 }
@@ -115,3 +119,7 @@ bool *Scene::getPtrShowAxis() {
 GameObject *Scene::getPtrGameObjectByIndex(int index) const {
     return gameObjects[index];
 }
+
+
+
+
