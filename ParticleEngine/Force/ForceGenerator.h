@@ -13,8 +13,7 @@ class Particle;
 
 class ForceGenerator {
 public:
-    static constexpr const char *forcesNamesList[] = {DRAG_FORCE, ANCHORED_SPRING_FORCE,
-                                                      BUOYANCY_FORCE};//, SPRING_FORCE
+    static const char *forcesNamesList[3];
 
 private:
     static constexpr const char *FORCE_TYPE = "ForceGenerator";

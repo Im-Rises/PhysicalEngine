@@ -12,7 +12,7 @@ class GameObject;
 
 class Component {
 public:
-    static constexpr const char *componentsNamesList[] = {RIGIDBODY_COMPONENT, PARTICLE_COMPONENT, COLLIDER_COMPONENT};
+    static const char *componentsNamesList[3];
 
 private:
     static constexpr const char *COMPONENT_TYPE = "Component";

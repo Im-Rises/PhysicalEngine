@@ -7,6 +7,9 @@
 #include "Drag.h"
 #include "Buoyancy.h"
 
+const char *ForceGenerator::forcesNamesList[] = {DRAG_FORCE, ANCHORED_SPRING_FORCE,
+                                                 BUOYANCY_FORCE};//, SPRING_FORCE
+
 void ForceGenerator::drawGui() {
     ImGui::CollapsingHeader(getName().c_str());
 }
