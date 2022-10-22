@@ -62,19 +62,6 @@ void Scene::update(float deltaTime) {
     for (GameObject *gameObject: gameObjects) {
         gameObject->update(deltaTime);
     }
-
-//    //Method 1
-//    Particle *particle = dynamic_cast<Particle *>(gameObjects[0]->getComponentByName("Particle"));
-//
-////    // Method 2
-////    Collider *particle = nullptr;
-////    gameObjects[0]->getComponentByClass<Collider>(particle);
-//
-//    std::cout << particle->getSpeed() << std::endl;
-
-    // Update the physic handler
-//    physicHandler.updateAll(deltaTime);
-//    physicHandler.update(deltaTime, gameObjects);
 }
 
 void Scene::draw(int display_w, int display_h) {

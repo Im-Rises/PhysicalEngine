@@ -122,29 +122,14 @@ TO modify the speed value, you can use the ImGui window named `Speed handler`.
 
 ### User controls
 
-| Action            | Key         |
-|-------------------|-------------|
-| Toggle fullscreen | F11         |
-| Camera zoom       | Mouse wheel |
-
-<!--
-| Description        | Keyboard | Mouse                           |
-|--------------------|----------|---------------------------------|
-| Translate left     | ←        |                                 |
-| Translate right    | →        |                                 |
-| Translate forward  | ↑        |                                 |
-| Translate rearward | ↓        |                                 |
-| Rotate camera      |          | Middle click and mouse movement |
-
-### Game controls
-
-| Action        | Key |
-|---------------|-----|
-| Move forward  | `W` |
-| Move backward | `S` |
-| Move left     | `A` |
-| Move right    | `D` |
--->
+| Action                        | Key                                   |
+|-------------------------------|---------------------------------------|
+| Toggle fullscreen             | F11                                   |
+| Camera zoom                   | Mouse wheel                           |
+| Translate camera to the left  | Right Mouse Button + Mouse ← movement |
+| Translate camera to the right | Right Mouse Button + Mouse → movement |
+| Translate camera upwards      | Right Mouse Button + Mouse ↑ movement |
+| Translate camera downwards    | Right Mouse Button + Mouse ↓ movement |
 
 ## Project Architecture
 

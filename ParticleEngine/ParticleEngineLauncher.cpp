@@ -84,10 +84,11 @@ ParticleEngineLauncher::ParticleEngineLauncher() {
     glfwSwapInterval(1); // Enable vsync
 
     // Initialize GLFW callbacks
-    glfwSetCursorPosCallback(window, InputManager::cursor_position_callback);
     glfwSetWindowUserPointer(window, this);
     glfwSetKeyCallback(window, InputManager::key_callback);
     glfwSetScrollCallback(window, InputManager::scroll_callback);
+    glfwSetCursorPosCallback(window, InputManager::cursor_position_callback);
+    glfwSetMouseButtonCallback(window, InputManager::mouse_button_callback);
 
     // Center window
     GLFWmonitor *monitor = glfwGetPrimaryMonitor();

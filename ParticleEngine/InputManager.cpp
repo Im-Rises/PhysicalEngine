@@ -7,11 +7,16 @@
 #include "Scene/Scene.h"
 #include "Utility/Vector3d.h"
 
+bool InputManager::mouseRightButtonPressed = false;
+bool InputManager::mouseLeftButtonPressed = false;
+
+float InputManager::mouseLastPosX = 0.0;
+float InputManager::mouseLastPosY = 0.0;
+
+float InputManager::movementSpeed = 0.2f;
+
 //float InputManager::translationSpeed = 0.1f;
 //float InputManager::rotationSpeed = 0.0001f;
-//
-//double InputManager::mouseLastPosX = 0.0;
-//double InputManager::mouseLastPosY = 0.0;
 
 void InputManager::key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
     auto *engine = (ParticleEngineLauncher *) glfwGetWindowUserPointer(window);
@@ -100,11 +105,19 @@ void InputManager::keyRepeated(GLFWwindow *window, int key, ParticleEngineLaunch
 
 void InputManager::scroll_callback(GLFWwindow *window, double xOffset, double yOffset) {
     auto *engine = (ParticleEngineLauncher *) glfwGetWindowUserPointer(window);
-    engine->scene->translateCamera(Vector3d(0, 0, 0.1f * (float) yOffset));
-
+    engine->scene->translateCamera(Vector3d(0, 0, movementSpeed * (float) yOffset));
 }
 
 void InputManager::cursor_position_callback(GLFWwindow *window, double xPos, double yPos) {
+    auto *engine = (ParticleEngineLauncher *) glfwGetWindowUserPointer(window);
+    if (mouseRightButtonPressed) {
+        engine->scene->translateCamera(
+                {movementSpeed * (mouseLastPosX - (float) xPos), movementSpeed * ((float) yPos - mouseLastPosY), 0});
+    }
+
+    mouseLastPosX = static_cast<float>(xPos);
+    mouseLastPosY = static_cast<float>(yPos);
+
 //    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE) == GLFW_PRESS) {
 //        auto *engine = (ParticleEngineLauncher *) glfwGetWindowUserPointer(window);
 //        engine->scene->rotateCamera(Vector3d(0, 1, 0), rotationSpeed * (xPos - mouseLastPosX));
@@ -113,4 +126,9 @@ void InputManager::cursor_position_callback(GLFWwindow *window, double xPos, dou
 //        mouseLastPosX = xPos;
 //        mouseLastPosY = yPos;
 //    }
+}
+
+void InputManager::mouse_button_callback(GLFWwindow *window, int button, int action, int mods) {
+    mouseRightButtonPressed = (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS);
+    mouseLeftButtonPressed = (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS);
 }

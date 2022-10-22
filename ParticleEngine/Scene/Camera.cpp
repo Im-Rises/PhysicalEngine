@@ -18,7 +18,7 @@ void Camera::rotate(const Vector3d &vector3D, float angle) {
     viewMatrix = glm::rotate(viewMatrix, angle, glm::vec3(vector3D.getx(), vector3D.gety(), vector3D.getz()));
 }
 
-glm::mat4 Camera::getViewMatrix() {
+glm::mat4 Camera::getViewMatrix() const {
     return viewMatrix;
 }
 

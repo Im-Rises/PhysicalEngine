@@ -109,9 +109,9 @@ float Vector3d::norm() const {
 Vector3d Vector3d::normalize() const {
     float n = this->norm();
     if (n != 0) {
-        return Vector3d(m_x / n, m_y / n, m_z / n);
+        return {m_x / n, m_y / n, m_z / n};
     } else {
-        printf("cannot normalize null vector");
+        std::cerr << "Error: cannot normalize null vector" << std::endl;
         exit(1);
     }
 }
@@ -128,7 +128,7 @@ Vector3d Vector3d::cross(const Vector3d &vec) const {
     return {a, b, c};
 }
 
-float Vector3d::distance(const Vector3d &vec) {
+float Vector3d::distance(const Vector3d &vec) const {
     return (*this - vec).norm();
 }
 

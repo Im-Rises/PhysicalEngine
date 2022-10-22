@@ -25,9 +25,9 @@ public:
 
     void setPosition(float x, float y, float z);
 
-    void setPosition(Vector3d position);
+    void setPosition(const Vector3d &position);
 
-    Vector3d getPosition();
+    Vector3d getPosition() const;
 
     std::string getName() const override;
 };

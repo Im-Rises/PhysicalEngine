@@ -23,7 +23,7 @@ public:
 
     void rotate(const Vector3d &vector3D, float angle);
 
-    glm::mat4 getViewMatrix();
+    glm::mat4 getViewMatrix() const;
 
     float getFov() const;
 };

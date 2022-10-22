@@ -74,7 +74,7 @@ public:
     Vector3d cross(const Vector3d &vec) const;
 
     ///Distance entre deux vecteurs
-    float distance(const Vector3d &vec);
+    float distance(const Vector3d &vec) const;
 
     ///Affichage du vecteur
     friend std::ostream &operator<<(std::ostream &os, Vector3d vec) {

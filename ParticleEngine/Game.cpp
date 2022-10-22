@@ -4,6 +4,7 @@
 #include "Scene/Components/Mesh/Sphere/Sphere.h"
 #include "Scene/Scene.h"
 #include "Scene/Components/PhysicalComponent/Particle/Particle.h"
+#include "Scene/Prefabs/ParticlePrefab.h"
 
 Game::Game() {
     // Generate particles here
@@ -13,10 +14,17 @@ Game::~Game() {
 }
 
 void Game::start(Scene *scene) {
-    auto *gameObject = new GameObject(Sphere(1, 20, 20));
-    scene->addGameObject(gameObject);
-    m_p = new Particle(gameObject, 1);
-    gameObject->addComponent(m_p);
+    auto *particlePrefab = new ParticlePrefab();
+    scene->addGameObject(particlePrefab);
+    particlePrefab->getComponentByClass(m_p);
+
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; ++j) {
+            auto *particlePrefabNew = new ParticlePrefab();
+            particlePrefabNew->transform.setPosition({(float) i * 2, (float) j * 2, 0});
+            scene->addGameObject(particlePrefabNew);
+        }
+    }
 }
 
 void Game::goLeft() {

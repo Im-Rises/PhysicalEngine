@@ -2,14 +2,12 @@
 
 #include "imgui/imgui.h"
 #include "../../../GameObject.h"
-#include "../../../../Force/ForceGenerator.h"
 #include "../../../../Utility/imGuiUtility.h"
-#include "../../../../Force/AnchoredSpring.h"
 
 Particle::Particle(GameObject *gameObject) : Component(gameObject) {
     speed = {0, 0, 0};
     acceleration = {0, 0, 0};
-    mass = 0;
+    mass = 1;
 }
 
 Particle::Particle(GameObject *gameObject, float m) : Component(gameObject) {

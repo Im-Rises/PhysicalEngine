@@ -3,14 +3,13 @@
 
 #include "../GameObject.h"
 
-class ParticlePrefab : GameObject {
+class ParticlePrefab : public GameObject {
 private:
 
 public:
     ParticlePrefab();
 
     ~ParticlePrefab();
-
 };
 
 

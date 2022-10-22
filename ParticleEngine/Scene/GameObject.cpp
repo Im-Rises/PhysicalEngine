@@ -7,13 +7,16 @@
 #include "Components/PhysicalComponent/Particle/Particle.h"
 #include "Components/PhysicalComponent/Particle/Particle.h"
 
-#include <utility>
 
-GameObject::GameObject(Mesh mesh) {
+GameObject::GameObject() {
     gameObjectName = "GameObject";
+}
 
-    mesh.getVerticesUseIndices();
-    this->mesh = std::move(mesh);
+
+GameObject::GameObject(Mesh *mesh) : GameObject() {
+
+    mesh->getVerticesUseIndices();
+    this->mesh = mesh;
 
     create();
 }
@@ -30,7 +33,8 @@ void GameObject::create() {
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * mesh.getVertices().size(), mesh.getVertices().data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * mesh->getVertices().size(), mesh->getVertices().data(),
+                 GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
     glEnableVertexAttribArray(0);
@@ -40,11 +44,11 @@ void GameObject::create() {
 //    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) (3 * sizeof(float)));
 //    glEnableVertexAttribArray(1);
 
-    if (mesh.getVerticesUseIndices()) {
+    if (mesh->getVerticesUseIndices()) {
         glGenBuffers(1, &EBO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mesh.getIndices().size(),
-                     mesh.getIndices().data(),
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mesh->getIndices().size(),
+                     mesh->getIndices().data(),
                      GL_STATIC_DRAW);
     }
 
@@ -52,6 +56,7 @@ void GameObject::create() {
 }
 
 GameObject::~GameObject() {
+    delete mesh;
     for (auto &component: components) {
         delete component;
     }
@@ -91,10 +96,10 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
 
     // Handle the VAO, VBO and EBO depending on the mesh type (with or without indices)
     glBindVertexArray(VAO);
-    if (mesh.getVerticesUseIndices()) {
-        glDrawElements(GL_TRIANGLES, (GLsizei) mesh.getIndices().size(), GL_UNSIGNED_INT, 0);
+    if (mesh->getVerticesUseIndices()) {
+        glDrawElements(GL_TRIANGLES, (GLsizei) mesh->getIndices().size(), GL_UNSIGNED_INT, 0);
     } else {
-        glDrawArrays(GL_TRIANGLES, 0, (GLsizei) mesh.getVertices().size());
+        glDrawArrays(GL_TRIANGLES, 0, (GLsizei) mesh->getVertices().size());
     }
 }
 
@@ -128,7 +133,7 @@ void GameObject::drawTransformGui() {
 }
 
 void GameObject::drawMeshGui() {
-    mesh.drawGui();
+    mesh->drawGui();
 }
 
 std::string GameObject::getName() const {

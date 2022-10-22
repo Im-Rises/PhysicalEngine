@@ -13,27 +13,30 @@ class Component;
 
 class GameObject {
 private:
+    // OpenGL variables
+    unsigned int VBO, VAO, EBO;
+    Shader shader;
+
+protected:
     // Object name
     std::string gameObjectName;
 
     // Optional components
     std::vector<Component *> components;
-//    std::map<std::string, Component *> components;
+    // std::map<std::string, Component *> components;
 
-    // OpenGL elements
-    unsigned int VBO, VAO, EBO;
-    Shader shader;
+public:
+    // Base components
+    Transform transform;
+    Mesh *mesh = nullptr;
 
     // Engine other elements
     // std::vector<GameObject *> children;
 
 public:
-    // Base components
-    Transform transform;
-    Mesh mesh;
-//    std::unique_ptr<Mesh> mesh;
+    GameObject();
 
-    explicit GameObject(Mesh mesh);
+    explicit GameObject(Mesh *mesh);
 
 private:
     void create();
