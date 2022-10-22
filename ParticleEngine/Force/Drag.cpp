@@ -27,7 +27,12 @@ void Drag::addForce(Particle *particle, float duration) {
 
 void Drag::drawGui() {
     if (ImGui::CollapsingHeader(DRAG_FORCE)) {
-
+        ImGui::Text("K1: ");
+        ImGui::SameLine();
+        ImGui::InputFloat("##DragK1", &m_k1);
+        ImGui::Text("K2: ");
+        ImGui::SameLine();
+        ImGui::InputFloat("##DragK2", &m_k2);
     }
 }
 

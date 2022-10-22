@@ -10,7 +10,6 @@ public:
 private:
     float m_maxDepth;
     float m_volume;
-
     float m_waterHeight;
     float m_liquidDensity;
 

@@ -1,6 +1,7 @@
 #include "Gravity.h"
 
 #include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
+#include "imgui/imgui.h"
 
 Gravity::Gravity(const Vector3d &g) {
     m_gravity = g;
@@ -17,7 +18,25 @@ void Gravity::addForce(Particle *particle, float duration) {
 }
 
 void Gravity::drawGui() {
-
+    ImGui::Text("Gravity");
+    if (ImGui::BeginTable("Gravity", 3)) {
+        ImGui::TableNextColumn();
+        ImGui::Text("X:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##GravityX", &m_gravity.m_x);
+        ImGui::SameLine();
+        ImGui::TableNextColumn();
+        ImGui::Text("Y:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##GravityY", &m_gravity.m_y);
+        ImGui::SameLine();
+        ImGui::TableNextColumn();
+        ImGui::SameLine();
+        ImGui::Text("Z:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##GravityZ", &m_gravity.m_z);
+        ImGui::EndTable();
+    }
 }
 
 std::string Gravity::getName() const {

@@ -40,6 +40,18 @@ void Buoyancy::addForce(Particle *particle, float duration) {
 
 void Buoyancy::drawGui() {
     if (ImGui::CollapsingHeader(BUOYANCY_FORCE)) {
+        ImGui::Text("Max Depth: ");
+        ImGui::SameLine();
+        ImGui::InputFloat("##BuyoncyMaxDepth", &m_maxDepth);
+        ImGui::Text("Volume: ");
+        ImGui::SameLine();
+        ImGui::InputFloat("##BuyoncyVolume", &m_volume);
+        ImGui::Text("Water height: ");
+        ImGui::SameLine();
+        ImGui::InputFloat("##BuyoncyWaterHeight", &m_waterHeight);
+        ImGui::Text("Liquid Density: ");
+        ImGui::SameLine();
+        ImGui::InputFloat("##BuyoncyLiquidDensity", &m_liquidDensity);
 
     }
 }

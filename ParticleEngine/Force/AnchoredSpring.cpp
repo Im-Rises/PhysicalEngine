@@ -41,14 +41,26 @@ std::string AnchoredSpring::getName() const {
 
 void AnchoredSpring::drawGui() {
     if (ImGui::CollapsingHeader(getName().c_str())) {
-        ImGui::Text("Anchor: ");
-//        ImGui::SameLine();
-//        ImGui::Text(m_anchor));
+        if (ImGui::BeginTable("Anchor", 3)) {
+            ImGui::TableNextColumn();
+            ImGui::Text("X:");
+            ImGui::SameLine();
+            ImGui::InputFloat("##AnchorX", &m_anchor.m_x);
+            ImGui::TableNextColumn();
+            ImGui::Text("Y:");
+            ImGui::SameLine();
+            ImGui::InputFloat("##AnchorY", &m_anchor.m_y);
+            ImGui::TableNextColumn();
+            ImGui::Text("Z:");
+            ImGui::SameLine();
+            ImGui::InputFloat("##AnchorZ", &m_anchor.m_z);
+            ImGui::EndTable();
+        }
         ImGui::Text("K: ");
         ImGui::SameLine();
-        ImGui::Text("%s", std::to_string(m_k).c_str());
+        ImGui::InputFloat("##AnchorKCoeff", &m_k);
         ImGui::Text("Rest Length: ");
         ImGui::SameLine();
-        ImGui::Text("%s", std::to_string(m_restLength).c_str());
+        ImGui::InputFloat("##AnchorRestLengtgh", &m_restLength);
     }
 }
