@@ -18,7 +18,7 @@ public:
 
     std::vector<ParticleContactGenerator *> GetParticlesContactGenerators() const;
 
-    ParticleContact *generateAllContacts(unsigned int max_size);
+    ParticleContact *generateAllContacts(unsigned int maxSize);
 
     ~ParticleContactGeneratorRegistry();
 

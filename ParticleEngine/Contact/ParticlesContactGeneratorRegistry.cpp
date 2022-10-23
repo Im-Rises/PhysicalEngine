@@ -16,10 +16,10 @@ ParticleContactGeneratorRegistry::~ParticleContactGeneratorRegistry() {
     delete m_allContact;
 }
 
-ParticleContact *ParticleContactGeneratorRegistry::generateAllContacts(unsigned int max_size) {
+ParticleContact *ParticleContactGeneratorRegistry::generateAllContacts(unsigned int maxSize) {
     unsigned int current = 0;
-    for (int i = 0; i < m_particlesContactGenerators.size() && current < max_size; i++) {
-        current = m_particlesContactGenerators[i]->addContact(m_allContact, max_size, current);
+    for (int i = 0; i < m_particlesContactGenerators.size() && current < maxSize; i++) {
+        current = m_particlesContactGenerators[i]->addContact(m_allContact, maxSize, current);
     }
     return m_allContact;
 }
