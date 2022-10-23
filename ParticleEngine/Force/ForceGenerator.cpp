@@ -7,9 +7,14 @@
 #include "Drag.h"
 #include "Buoyancy.h"
 #include "../Scene/Scene.h"
+#include "../Scene/GameObject.h"
 
 const char *ForceGenerator::forcesNamesList[] = {DRAG_FORCE, ANCHORED_SPRING_FORCE,
                                                  BUOYANCY_FORCE, SPRING_FORCE};
+
+ForceGenerator::ForceGenerator(GameObject *gameObject) {
+    m_gameObject = gameObject;
+}
 
 void ForceGenerator::drawGui(Scene *scene) {
     ImGui::CollapsingHeader(getName().c_str());
@@ -19,7 +24,7 @@ std::string ForceGenerator::getName() const {
     return FORCE_TYPE;
 }
 
-ForceGenerator *ForceGenerator::createForceGenerator(const std::string &name) {
+ForceGenerator *ForceGenerator::createForceGenerator(const std::string &name, GameObject *gameObject) {
     int index = 0;
 
     for (auto &forceName: ForceGenerator::forcesNamesList) {
@@ -32,7 +37,7 @@ ForceGenerator *ForceGenerator::createForceGenerator(const std::string &name) {
                 case 2:
                     return new Buoyancy();
                 case 3:
-                    return new Spring();
+                    return new Spring(gameObject);
                 default: {
                     std::cerr << "Component::createComponent: Unknown component name" << std::endl;
                     return nullptr;
@@ -44,3 +49,4 @@ ForceGenerator *ForceGenerator::createForceGenerator(const std::string &name) {
     std::cerr << "Component::createComponent: Unknown component name" << std::endl;
     return nullptr;
 }
+

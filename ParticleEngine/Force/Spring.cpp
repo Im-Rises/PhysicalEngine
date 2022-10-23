@@ -7,7 +7,7 @@
 #include "../Scene/Scene.h"
 
 
-Spring::Spring() {
+Spring::Spring(GameObject *gameObject) : ForceGenerator(gameObject) {
     m_k = 0;
     m_restLength = 0;
 }
@@ -28,14 +28,15 @@ Spring::~Spring() {
 }
 
 void Spring::addForce(Particle *particle) {
+    // Get particle component from other game object
     Particle *otherParticle = nullptr;
     if (m_otherGameObject == nullptr)
         return;
     m_otherGameObject->getComponentByClass(otherParticle);
-
     if (otherParticle == nullptr)
         return;
 
+    // Calculate force from this particle to other particle
     calculateForce(particle, otherParticle);
     calculateForce(otherParticle, particle);
 }
@@ -71,12 +72,14 @@ void Spring::drawGui(Scene *scene) {
         ImGui::Text("%s", m_otherGameObject != nullptr ? ("Selected: " + m_otherGameObject->getName()).c_str()
                                                        : "Selected: None");
         if (ImGui::BeginPopup("Add spring##SpringPopup")) {
-            for (auto &gameObject: scene->getGameObjects()) {
-                if (gameObject->hasComponentByName(PARTICLE_COMPONENT)) {
-                    std::string nameLabel = gameObject->getName() + "##Spring" + gameObject->getName();
-                    ImGui::Selectable(nameLabel.c_str(), m_otherGameObject == gameObject);
+            for (auto &selectableOtherGameObject: scene->getGameObjects()) {
+                if (selectableOtherGameObject->hasComponentByName(PARTICLE_COMPONENT) &&
+                    selectableOtherGameObject != m_gameObject) {
+                    std::string nameLabel =
+                            selectableOtherGameObject->getName() + "##Spring" + selectableOtherGameObject->getName();
+                    ImGui::Selectable(nameLabel.c_str(), m_otherGameObject == selectableOtherGameObject);
                     if (ImGui::IsItemClicked()) {
-                        m_otherGameObject = gameObject;
+                        m_otherGameObject = selectableOtherGameObject;
                     }
                 }
             }

@@ -16,7 +16,7 @@ private:
     GameObject *m_otherGameObject = nullptr;
 
 public:
-    Spring();
+    explicit Spring(GameObject *gameObject);
 
 //    Spring(Particle *otherParticle, float k, float restLength);
 //

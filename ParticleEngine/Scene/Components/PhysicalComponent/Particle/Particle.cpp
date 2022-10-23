@@ -133,7 +133,7 @@ void Particle::drawGui() {
     if (ImGui::BeginPopup("ParticleAddForce##popup")) {
         for (auto &forcesName: ForceGenerator::forcesNamesList) {
             if (ImGui::MenuItem(forcesName)) {
-                addForce(ForceGenerator::createForceGenerator(forcesName));
+                addForce(ForceGenerator::createForceGenerator(forcesName, m_gameObject));
             }
         }
         ImGui::EndPopup();
