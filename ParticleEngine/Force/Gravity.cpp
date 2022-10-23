@@ -12,7 +12,7 @@ Gravity::Gravity(const Gravity &grav) {
     m_gravity = grav.m_gravity;
 }
 
-void Gravity::addForce(Particle *particle, float duration) {
+void Gravity::addForce(Particle *particle) {
     Vector3d F = m_gravity * particle->getMass();
     Vector3d initialForce = particle->getNetForce();
     particle->setNetForce(initialForce + F);

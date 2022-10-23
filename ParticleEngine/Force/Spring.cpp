@@ -27,18 +27,20 @@ Spring::Spring() {
 Spring::~Spring() {
 }
 
-void Spring::addForce(Particle *particle, float duration) {
+void Spring::addForce(Particle *particle) {
     Particle *otherParticle = nullptr;
+    if (m_otherGameObject == nullptr)
+        return;
     m_otherGameObject->getComponentByClass(otherParticle);
 
     if (otherParticle == nullptr)
         return;
 
-    calculateForce(particle, otherParticle, duration);
-    calculateForce(otherParticle, particle, duration);
+    calculateForce(particle, otherParticle);
+    calculateForce(otherParticle, particle);
 }
 
-void Spring::calculateForce(Particle *particle, Particle *otherParticle, float duration) {
+void Spring::calculateForce(Particle *particle, Particle *otherParticle) {
     float delta = otherParticle->distance(*particle);
 
     Vector3d F;
@@ -64,14 +66,15 @@ void Spring::drawGui(Scene *scene) {
 
         ImGui::Text("Select Particle: ");
         if (ImGuiUtility::ButtonCenteredOnLine("Select other particle", 0.5f)) {
-            ImGui::OpenPopup("Add component##popup");
+            ImGui::OpenPopup("Add spring##SpringPopup");
         }
         ImGui::Text("%s", m_otherGameObject != nullptr ? ("Selected: " + m_otherGameObject->getName()).c_str()
                                                        : "Selected: None");
-        if (ImGui::BeginPopup("Add component##popup")) {
+        if (ImGui::BeginPopup("Add spring##SpringPopup")) {
             for (auto &gameObject: scene->getGameObjects()) {
                 if (gameObject->hasComponentByName(PARTICLE_COMPONENT)) {
-                    ImGui::Selectable(gameObject->getName().c_str(), m_otherGameObject == gameObject);
+                    std::string nameLabel = gameObject->getName() + "##Spring" + gameObject->getName();
+                    ImGui::Selectable(nameLabel.c_str(), m_otherGameObject == gameObject);
                     if (ImGui::IsItemClicked()) {
                         m_otherGameObject = gameObject;
                     }

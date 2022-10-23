@@ -21,7 +21,7 @@ private:
     static constexpr const char *FORCE_TYPE = "ForceGenerator";
 
 public:
-    virtual void addForce(Particle *particle, float duration) = 0;
+    virtual void addForce(Particle *particle) = 0;
 
     virtual void drawGui(Scene *scene) = 0;
 

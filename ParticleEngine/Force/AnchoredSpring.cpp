@@ -25,7 +25,7 @@ AnchoredSpring::AnchoredSpring(const AnchoredSpring &aSpring) {
     m_restLength = aSpring.m_restLength;
 }
 
-void AnchoredSpring::addForce(Particle *particle, float duration) {
+void AnchoredSpring::addForce(Particle *particle) {
     Vector3d pos = particle->getPosition();
     float delta = pos.distance(m_anchor);
     Vector3d F;

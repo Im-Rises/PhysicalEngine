@@ -20,7 +20,7 @@ public:
 
     Buoyancy(const Buoyancy &buoyancy);
 
-    void addForce(Particle *particle, float duration) override;
+    void addForce(Particle *particle) override;
 
     void drawGui(Scene *scene) override;
 

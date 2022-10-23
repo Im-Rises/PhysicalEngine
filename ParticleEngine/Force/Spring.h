@@ -24,9 +24,9 @@ public:
 
     ~Spring();
 
-    void addForce(Particle *particle, float duration) override;
+    void addForce(Particle *particle) override;
 
-    void calculateForce(Particle *particle, Particle *otherParticle, float duration);
+    void calculateForce(Particle *particle, Particle *otherParticle);
 
     void drawGui(Scene *scene) override;
 

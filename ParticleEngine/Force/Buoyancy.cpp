@@ -25,7 +25,7 @@ Buoyancy::Buoyancy(const Buoyancy &buoyancy) {
     m_liquidDensity = buoyancy.m_liquidDensity;
 }
 
-void Buoyancy::addForce(Particle *particle, float duration) {
+void Buoyancy::addForce(Particle *particle) {
     float d = (particle->getPosition().gety() - m_waterHeight - m_maxDepth) / 2 * m_maxDepth;
     Vector3d F(0, 1, 0);
     if (d <= 0) {

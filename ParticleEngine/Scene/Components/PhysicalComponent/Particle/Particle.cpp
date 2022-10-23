@@ -27,10 +27,10 @@ void Particle::update(float deltaTime) {
     // Update sum of forces
     netForce = Vector3d();
     if (isKinematic) {
-        gravity.addForce(this, deltaTime);
+        gravity.addForce(this);
 
         for (ForceGenerator *forceGenerator: forceGeneratorsList) {
-            forceGenerator->addForce(this, deltaTime);
+            forceGenerator->addForce(this);
         }
     }
 
