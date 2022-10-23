@@ -33,7 +33,7 @@ public:
     void setz(float zCoord);
 
     ///Addition
-    Vector3d operator+(const Vector3d &vec);
+    Vector3d operator+(const Vector3d &vec) const;
 
     Vector3d &operator+=(const Vector3d &vec);
 
