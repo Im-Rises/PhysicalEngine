@@ -11,9 +11,11 @@
 
 class Particle;
 
+class Scene;
+
 class ForceGenerator {
 public:
-    static const char *forcesNamesList[3];
+    static const char *forcesNamesList[4];
 
 private:
     static constexpr const char *FORCE_TYPE = "ForceGenerator";
@@ -21,7 +23,7 @@ private:
 public:
     virtual void addForce(Particle *particle, float duration) = 0;
 
-    virtual void drawGui() = 0;
+    virtual void drawGui(Scene *scene) = 0;
 
     virtual std::string getName() const = 0;
 

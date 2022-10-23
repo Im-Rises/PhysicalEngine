@@ -6,11 +6,12 @@
 #include "AnchoredSpring.h"
 #include "Drag.h"
 #include "Buoyancy.h"
+#include "../Scene/Scene.h"
 
 const char *ForceGenerator::forcesNamesList[] = {DRAG_FORCE, ANCHORED_SPRING_FORCE,
-                                                 BUOYANCY_FORCE};//, SPRING_FORCE
+                                                 BUOYANCY_FORCE, SPRING_FORCE};
 
-void ForceGenerator::drawGui() {
+void ForceGenerator::drawGui(Scene *scene) {
     ImGui::CollapsingHeader(getName().c_str());
 }
 
@@ -30,8 +31,8 @@ ForceGenerator *ForceGenerator::createForceGenerator(const std::string &name) {
                     return new AnchoredSpring();
                 case 2:
                     return new Buoyancy();
-//                case 3:
-//                    return new Spring();
+                case 3:
+                    return new Spring();
                 default: {
                     std::cerr << "Component::createComponent: Unknown component name" << std::endl;
                     return nullptr;

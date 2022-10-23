@@ -2,6 +2,7 @@
 
 #include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "imgui/imgui.h"
+#include "../Scene/Scene.h"
 
 Buoyancy::Buoyancy() {
     m_maxDepth = 0;
@@ -38,7 +39,7 @@ void Buoyancy::addForce(Particle *particle, float duration) {
     particle->setNetForce(initialForce + F);
 }
 
-void Buoyancy::drawGui() {
+void Buoyancy::drawGui(Scene *scene) {
     if (ImGui::CollapsingHeader(BUOYANCY_FORCE)) {
         ImGui::Text("Max Depth: ");
         ImGui::SameLine();

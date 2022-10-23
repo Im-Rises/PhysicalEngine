@@ -9,6 +9,8 @@
 #include "Components/Mesh/Mesh.h"
 #include "Components/Transform/Transform.h"
 
+class Scene;
+
 class Component;
 
 class GameObject {
@@ -20,6 +22,9 @@ private:
 protected:
     // Object name
     std::string gameObjectName;
+
+    // Scene containing the object
+    Scene *parentScene = nullptr;
 
     // Optional components
     std::vector<Component *> components;
@@ -34,9 +39,9 @@ public:
     // std::vector<GameObject *> children;
 
 public:
-    GameObject();
+    GameObject(Scene *scene);
 
-    explicit GameObject(Mesh *mesh);
+    explicit GameObject(Scene *scene, Mesh *mesh);
 
 private:
     void create();
@@ -59,6 +64,8 @@ public:
 
 public:
     std::string getName() const;
+
+    Scene *getScenePtr() const;
 
 public:
     const std::vector<Component *> &getComponents() const;

@@ -55,12 +55,12 @@ public:
 
     float distance(const Particle &p);
 
-    /// <summary>
-    /// Calcule la nouvelle position � partir de la vitesse de la particule
-    /// et du temps en argument
-    /// </summary>
-    /// <param name="time"></param>
-    void calculatePosition(float time);
+//    /// <summary>
+//    /// Calcule la nouvelle position � partir de la vitesse de la particule
+//    /// et du temps en argument
+//    /// </summary>
+//    /// <param name="time"></param>
+//    void calculatePosition(float time);
 
     /// <summary>
     /// Calcule la nouvelle vitesse � partir de l'acc�l�ration de la particule
