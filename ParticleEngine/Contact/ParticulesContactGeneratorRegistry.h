@@ -2,25 +2,26 @@
 #define PARTICULE_CONTACT_GENERATOR_REGISTRY_H
 
 #include "ContactGenerator/ParticuleContactGenerator.h"
-#include <Vector>
+#include <vector>
 
 class ParticuleContactGeneratorRegistry {
 
-	private:
-	std::vector<ParticuleContactGenerator*> m_particulesContactGenerators;
-	ParticuleContact* m_allContact;
+private:
+    std::vector<ParticuleContactGenerator *> m_particulesContactGenerators;
+    ParticuleContact *m_allContact;
 
-	public:
+public:
 
-	ParticuleContactGeneratorRegistry(float maxSize);
+    ParticuleContactGeneratorRegistry(float maxSize);
 
-	void addParticuleGenerator(ParticuleContactGenerator* particuleContactGenerator);
+    void addParticuleGenerator(ParticuleContactGenerator *particuleContactGenerator);
 
-	std::vector<ParticuleContactGenerator*> GetParticulesContactGenerators() const;
+    std::vector<ParticuleContactGenerator *> GetParticulesContactGenerators() const;
 
-	ParticuleContact* genereAllContacts(unsigned int max_size);
+    ParticuleContact *genereAllContacts(unsigned int max_size);
 
-	~ParticuleContactGeneratorRegistry();
+    ~ParticuleContactGeneratorRegistry();
 
 };
+
 #endif // !PARTICULE_CONTACT_REGISTRY_H
