@@ -1,8 +1,6 @@
 #include "TestParticule/TestParticule.h"
 
-using namespace std;
-
-int main(int argc, char *argv[]) {
+int main() {
     TestParticule t;
     return t.TestCalculePosition();
 }

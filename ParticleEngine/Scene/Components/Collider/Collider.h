@@ -5,12 +5,13 @@
 
 class Collider : public Component {
 private:
-    float mass;
-    float friction;
-    float restitution;
+    static constexpr const char *COMPONENT_TYPE = COLLIDER_COMPONENT;
+    float m_mass;
+    float m_friction;
+    float m_restitution;
 
 public:
-    Collider(GameObject *gameObject);
+    explicit Collider(GameObject *gameObject);
 
     Collider(GameObject *gameObject, float mass, float friction, float restitution);
 
@@ -29,6 +30,8 @@ public:
     void setRestitution(float restitution);
 
     void drawGui() override;
+
+    std::string getName() const override;
 };
 
 

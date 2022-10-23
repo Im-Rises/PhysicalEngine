@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "../Vector3d/Vector3d.h"
+#include "../Utility/Vector3d.h"
 #include "Camera.h"
 #include "PhysicHandler.h"
 #include "Axis.h"
@@ -23,7 +23,7 @@ private:
 
     // View settings
     bool wireFrame = false;
-    bool showAxis = true;
+    bool showAxis = false;
 
     // OpenGL framebuffer
     unsigned int fbo;
@@ -38,7 +38,7 @@ public:
     void destroy();
 
 public:
-    void updateGameObjects(float deltaTime);
+    void update(float deltaTime);
 
     void draw(int display_w, int display_h);
 
@@ -47,14 +47,16 @@ public:
 public:
     void addGameObject(GameObject *gameObject);
 
-//    void translateCamera(Vector3d vector3D);
-//
+    void translateCamera(const Vector3d &vector3D);
+
 //    void rotateCamera(Vector3d vector3D, float angle);
+
+    void setCameraPosition(const Vector3d &position);
 
 public:
     unsigned int getFrameBufferId() const;
 
-    std::vector<GameObject *> getGameObjects();
+    std::vector<GameObject *> &getGameObjects();
 
     bool *getPtrWireFrameState();
 

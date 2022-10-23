@@ -2,25 +2,37 @@
 #define COMPONENT_H
 
 #include <string>
+//#include <map>
+
+#define RIGIDBODY_COMPONENT "Rigidbody"
+#define PARTICLE_COMPONENT "Particle"
+#define COLLIDER_COMPONENT "Collider"
 
 class GameObject;
 
 class Component {
+public:
+    static const char *componentsNamesList[3];
+
 private:
-    std::string name;
+    static constexpr const char *COMPONENT_TYPE = "Component";
+
 protected:
-    GameObject *gameObject;
+    GameObject *m_gameObject;
 
 public:
-    Component(std::string name, GameObject *gameObject);
+    explicit Component(GameObject *gameObject);
 
-    ~Component();
+    virtual ~Component();
 
     virtual void update(float time) = 0;
 
     virtual void drawGui() = 0;
 
-    std::string getName() const;
+    virtual std::string getName() const = 0;
+
+    static Component *createComponent(const std::string &name, GameObject *gameObject);
+
 };
 
 

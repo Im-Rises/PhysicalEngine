@@ -2,19 +2,30 @@
 #define ANCHOREDSPRING_H
 
 #include "ForceGenerator.h"
+#include "../Utility/Vector3d.h"
 
-class AnchoredSpring : ForceGenerator {
+class AnchoredSpring : public ForceGenerator {
 private:
-	Vector3d* m_anchor;
-	float m_k;
-	float m_restLength;
+    static constexpr const char *FORCE_TYPE = ANCHORED_SPRING_FORCE;
+
+    Vector3d m_anchor;
+    float m_k;
+    float m_restLength;
 
 public:
-	AnchoredSpring();
-	~AnchoredSpring();
-	AnchoredSpring(Vector3d* anchor, float k, float restLength);
-	AnchoredSpring(const AnchoredSpring& aSpring);
-	void addForce(Particule* particule, float duration);
+    AnchoredSpring();
+
+    ~AnchoredSpring();
+
+    AnchoredSpring(const Vector3d &anchor, float k, float restLength);
+
+    AnchoredSpring(const AnchoredSpring &aSpring);
+
+    void addForce(Particle *particle, float duration) override;
+
+    void drawGui() override;
+
+    std::string getName() const override;
 };
 
 #endif /* ANCHOREDSPRING_H */

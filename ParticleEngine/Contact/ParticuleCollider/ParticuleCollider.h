@@ -1,7 +1,7 @@
 #ifndef PARTICULE_COLLIDER_H
 #define PARTICULE_COLLIDER_H
 
-#include "../../Scene/Components/Particule/Particule.h"
+#include "../../Scene/Components/PhysicalComponent/Particle/Particle.h"
 
 class ParticuleCollider {
 	
@@ -10,17 +10,17 @@ class ParticuleCollider {
 
 	private:
 	float m_radius;
-	Particule* m_particule;
+	Particle* m_particule;
 
 	public:
 	
-	ParticuleCollider(Particule* particule, float radius);
+	ParticuleCollider(Particle* particule, float radius);
 	
 	#pragma region Getter setter
 
 	float getRadius();
 
-	Particule* getParticule();
+	Particle* getParticule();
 
 	#pragma endregion
 };

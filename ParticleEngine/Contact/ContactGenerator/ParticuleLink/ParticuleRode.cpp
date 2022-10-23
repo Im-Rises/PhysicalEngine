@@ -1,6 +1,6 @@
 #include "ParticuleRode.h"
 
-ParticuleRode::ParticuleRode(Particule* particule1, Particule* particule2, float length) : ParticuleLink(particule1,particule2) {
+ParticuleRode::ParticuleRode(Particle* particule1, Particle* particule2, float length) : ParticuleLink(particule1,particule2) {
 	m_length=length;
 }
 

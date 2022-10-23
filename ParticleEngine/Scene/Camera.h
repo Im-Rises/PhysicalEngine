@@ -5,12 +5,12 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "../Vector3d/Vector3d.h"
+#include "../Utility/Vector3d.h"
 
 class Camera {
 private:
     glm::mat4 viewMatrix;
-    double fov = 90.0f;// In degrees
+    const float fov = 90.0f;// In degrees
 
 public:
     Camera();
@@ -19,13 +19,15 @@ public:
 
     void update();
 
-    void translate(Vector3d vector3D);
+    void setPosition(const Vector3d &vector3D);
 
-    void rotate(Vector3d vector3D, float angle);
+    void translate(const Vector3d &vector3D);
 
-    glm::mat4 getViewMatrix();
+    void rotate(const Vector3d &vector3D, float angle);
 
-    float getFov();
+    glm::mat4 getViewMatrix() const;
+
+    float getFov() const;
 };
 
 

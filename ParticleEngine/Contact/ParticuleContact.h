@@ -1,11 +1,11 @@
 #ifndef PARTICLE_CONTACT_H
 #define PARTICLE_CONTACT_H
 
-#include "../Scene/Components/Particule/Particule.h"
+#include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
 
 class ParticuleContact {
 private:
-	Particule* m_particules[2];
+	Particle* m_particules[2];
 
 	float m_collision_elasticity=0;
 
@@ -32,9 +32,9 @@ public:
 
 	void setContactNormal(Vector3d const contactNormal);
 
-	Particule** GetParticules();
+	Particle** GetParticules();
 
-	void SetParticules(Particule* particules[2]);
+	void SetParticules(Particle* particules[2]);
 
 	void resolve(float time);
 

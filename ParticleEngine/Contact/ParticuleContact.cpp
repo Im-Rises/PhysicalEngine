@@ -50,11 +50,11 @@ void ParticuleContact::setContactNormal(Vector3d const contactNormal) {
 	m_contactNormal = contactNormal;
 }
 
-Particule** ParticuleContact::GetParticules() {
+Particle** ParticuleContact::GetParticules() {
 	return m_particules;
 }
 
-void ParticuleContact::SetParticules(Particule* particules[2]) {
+void ParticuleContact::SetParticules(Particle* particules[2]) {
 	m_particules[0] = particules[0];
 	m_particules[1] = particules[1];
 }

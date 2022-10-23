@@ -10,7 +10,7 @@ class ParticuleRode : public ParticuleLink{
 
 	public:
 
-	ParticuleRode(Particule* particule1, Particule* particule2,float length);
+	ParticuleRode(Particle* particule1, Particle* particule2,float length);
 
 	int addContact(ParticuleContact* particuleContact,unsigned int limit,unsigned int current);
 };

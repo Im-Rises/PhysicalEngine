@@ -2,7 +2,7 @@
 
 
 
-ParticuleCollider::ParticuleCollider(Particule* particule, float radius) {
+ParticuleCollider::ParticuleCollider(Particle* particule, float radius) {
 	m_radius = radius;
 	m_particule = particule;
 }
@@ -11,6 +11,6 @@ float ParticuleCollider::getRadius() {
 	return m_radius;
 }
 
-Particule* ParticuleCollider::getParticule() {
+Particle* ParticuleCollider::getParticule() {
 	return m_particule;
 }

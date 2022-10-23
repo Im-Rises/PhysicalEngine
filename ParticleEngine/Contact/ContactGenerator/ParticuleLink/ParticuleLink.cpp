@@ -5,7 +5,7 @@ float ParticuleLink::currentLength() const {
 	
 }
 
-ParticuleLink::ParticuleLink(Particule* particule1, Particule* particule2) {
+ParticuleLink::ParticuleLink(Particle* particule1, Particle* particule2) {
 	m_particules[0] = particule1;
 	m_particules[1] = particule2;
 }

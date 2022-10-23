@@ -75,12 +75,16 @@ void Transform::setPosition(float x, float y, float z) {
     positionZ = z;
 }
 
-void Transform::setPosition(Vector3d position) {
+void Transform::setPosition(const Vector3d &position) {
     positionX = position.getx();
     positionY = position.gety();
     positionZ = position.getz();
 }
 
-Vector3d Transform::getPosition() {
-    return Vector3d(positionX, positionY, positionZ);
+Vector3d Transform::getPosition() const {
+    return {positionX, positionY, positionZ};
+}
+
+std::string Transform::getName() const {
+    return COMPONENT_TYPE;
 }

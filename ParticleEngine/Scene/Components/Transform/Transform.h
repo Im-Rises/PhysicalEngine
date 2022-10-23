@@ -2,11 +2,13 @@
 #define TRANSFORM_H
 
 #include <string>
-#include "../../../Vector3d/Vector3d.h"
+#include "../../../Utility/Vector3d.h"
+#include "../Component.h"
+#include "../DefaultComponent.h"
 
-class Transform {
+class Transform : private DefaultComponent {
 private:
-    std::string name = "Transform";
+    static constexpr const char *COMPONENT_TYPE = "Transform";
 
 public:
     float positionX, positionY, positionZ;
@@ -19,14 +21,15 @@ public:
     ~Transform();
 
 public:
-    void drawGui();
+    void drawGui() override;
 
     void setPosition(float x, float y, float z);
 
-    void setPosition(Vector3d position);
+    void setPosition(const Vector3d &position);
 
-    Vector3d getPosition();
+    Vector3d getPosition() const;
 
+    std::string getName() const override;
 };
 
 

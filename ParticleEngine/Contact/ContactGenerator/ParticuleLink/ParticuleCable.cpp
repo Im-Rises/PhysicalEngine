@@ -1,6 +1,6 @@
  #include "ParticuleCable.h"
 
-ParticuleCable::ParticuleCable(Particule* particule1, Particule* particule2, float max_length, float restitution): ParticuleLink(particule1,particule2) {
+ParticuleCable::ParticuleCable(Particle* particule1, Particle* particule2, float max_length, float restitution): ParticuleLink(particule1,particule2) {
 	m_maxLength = max_length;
 	m_restitution = restitution;
 }

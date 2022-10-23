@@ -1,17 +1,19 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef GAMETEST_H
+#define GAMETEST_H
 
-class Particule;
+#include "Force/Gravity.h"
+#include "Force/AnchoredSpring.h"
+
+class Particle;
 
 class Scene;
 
-//class PhysicHandler;
-
 class GameTest {
 private:
-	Particule* m_p;
-	Particule* m_p2;
+	Particle* m_p;
 	float m_speed = 0.5f;
+	Gravity m_G;
+	AnchoredSpring m_S = AnchoredSpring(Vector3d(5, 0, 0), 155, 1);
 
 public:
 	GameTest();
@@ -20,9 +22,16 @@ public:
 
 	void start(Scene* scene);
 
-public:
+	void goLeft();
 
+	void goRight();
+
+	void goUp();
+
+	void goDown();
+
+public:
 	float* getPtrSpeed();
 };
 
-#endif //GAME_H
+#endif //GameTest_H

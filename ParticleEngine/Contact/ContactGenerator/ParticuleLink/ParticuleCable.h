@@ -11,7 +11,7 @@ class ParticuleCable : public ParticuleLink {
 
 	public:
 
-	ParticuleCable(Particule* particule1, Particule* particule2,float max_length,float restitution);
+	ParticuleCable(Particle* particule1, Particle* particule2,float max_length,float restitution);
 
 	int addContact(ParticuleContact* particuleContact, unsigned int limit, unsigned int current) ;
 };

@@ -1,16 +1,19 @@
 #ifndef GAME_H
 #define GAME_H
 
-class Particule;
+#include "Force/Gravity.h"
+#include "Force/AnchoredSpring.h"
+
+class Particle;
 
 class Scene;
 
-//class PhysicHandler;
-
 class Game {
 private:
-    Particule *m_p;
+    Particle *m_p;
     float m_speed = 0.5f;
+    Gravity m_G;
+    AnchoredSpring m_S = AnchoredSpring(Vector3d(5, 0, 0), 155, 1);
 
 public:
     Game();
@@ -28,8 +31,6 @@ public:
     void goDown();
 
 public:
-    void setSpeed(float speed);
-
     float *getPtrSpeed();
 };
 
