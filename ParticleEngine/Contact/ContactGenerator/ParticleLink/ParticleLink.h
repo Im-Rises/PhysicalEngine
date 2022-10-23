@@ -6,14 +6,14 @@
 class ParticleLink : public ParticleContactGenerator {
 
 protected:
-    Particle *m_particules[2];
+    Particle *m_particles[2];
 
 public:
     float currentLength() const;
 
-    ParticleLink(Particle *particule1, Particle *particule2);
+    ParticleLink(Particle *particle1, Particle *particle2);
 
-//    virtual int addContact(ParticuleContact *particuleContact, unsigned int limit, unsigned int current) = 0;
+//    virtual int addContact(ParticleContact *particleContact, unsigned int limit, unsigned int current) = 0;
 
 
 };

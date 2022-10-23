@@ -1,11 +1,11 @@
 #include "ParticleLink.h"
 
 float ParticleLink::currentLength() const {
-    return m_particules[0]->getPosition().distance(m_particules[1]->getPosition());
+    return m_particles[0]->getPosition().distance(m_particles[1]->getPosition());
 
 }
 
-ParticleLink::ParticleLink(Particle *particule1, Particle *particule2) {
-    m_particules[0] = particule1;
-    m_particules[1] = particule2;
+ParticleLink::ParticleLink(Particle *particle1, Particle *particle2) {
+    m_particles[0] = particle1;
+    m_particles[1] = particle2;
 }

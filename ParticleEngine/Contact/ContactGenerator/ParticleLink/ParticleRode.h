@@ -10,9 +10,9 @@ private:
 
 public:
 
-    ParticleRode(Particle *particule1, Particle *particule2, float length);
+    ParticleRode(Particle *particle1, Particle *particle2, float length);
 
-    int addContact(ParticleContact *particuleContact, unsigned int limit, unsigned int current) override;
+    int addContact(ParticleContact *particleContact, unsigned int limit, unsigned int current) override;
 };
 
 #endif // !PARTICLELINK_H

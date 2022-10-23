@@ -12,13 +12,13 @@ private:
 
 public:
 
-    ParticleCollider(Particle *particule, float radius);
+    ParticleCollider(Particle *particle, float radius);
 
 #pragma region Getter setter
 
-    float getRadius();
+    float getRadius() const;
 
-    Particle *getParticule();
+    Particle *getParticle();
 
 #pragma endregion
 };

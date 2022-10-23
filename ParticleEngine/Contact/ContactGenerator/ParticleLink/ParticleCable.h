@@ -11,9 +11,9 @@ private:
 
 public:
 
-    ParticleCable(Particle *particule1, Particle *particule2, float max_length, float restitution);
+    ParticleCable(Particle *particle1, Particle *particle2, float max_length, float restitution);
 
-    int addContact(ParticleContact *particuleContact, unsigned int limit, unsigned int current) override;
+    int addContact(ParticleContact *particleContact, unsigned int limit, unsigned int current) override;
 };
 
 #endif // !PARTICLECABLE
