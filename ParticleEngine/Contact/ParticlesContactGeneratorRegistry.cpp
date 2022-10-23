@@ -18,8 +18,8 @@ ParticleContactGeneratorRegistry::~ParticleContactGeneratorRegistry() {
 
 ParticleContact *ParticleContactGeneratorRegistry::generateAllContacts(unsigned int maxSize) {
     unsigned int current = 0;
-    for (int i = 0; i < m_particulesContactGenerators.size() && current < maxSize; i++) {
-        current = m_particulesContactGenerators[i]->addContact(m_allContact, maxSize, current);
+    for (int i = 0; i < m_particlesContactGenerators.size() && current < maxSize; i++) {
+        current = m_particlesContactGenerators[i]->addContact(m_allContact, maxSize, current);
     }
     return m_allContact;
 }
