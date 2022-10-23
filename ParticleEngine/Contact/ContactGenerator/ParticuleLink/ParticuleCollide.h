@@ -16,7 +16,9 @@ class ParticuleCollide : public ParticuleContactGenerator {
 
 	public:
 
-		int addContact(ParticuleContact* particuleContact, unsigned int limit, unsigned int current);
+		void addCollider(ParticuleCollider particuleCollider);
+
+		int addContact(ParticuleContact* particuleContact, unsigned int limit, unsigned int current) ;
 
 
 };

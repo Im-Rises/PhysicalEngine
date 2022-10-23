@@ -5,7 +5,8 @@
 
 class ParticuleContactGenerator {
 
-	virtual int addContact(ParticuleContact* particuleContact,unsigned int limit,unsigned int current) const = 0;
+	public:
+	virtual int addContact(ParticuleContact* particuleContact,unsigned int limit,unsigned int current) = 0;
 };
 
 #endif // !PARTICULECONTACTGENERATOR

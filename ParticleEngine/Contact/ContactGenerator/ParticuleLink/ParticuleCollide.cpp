@@ -1,6 +1,7 @@
 #include "ParticuleCollide.h"
 
-int ParticuleCollide::addContact(ParticuleContact* particuleContact, unsigned int limit, unsigned int current) {
+
+int ParticuleCollide::addContact(ParticuleContact* particuleContact, unsigned int limit, unsigned int current)  {
 	for (int i = 0; i < m_colliders.size(); i++) {
 		for (int j = i + 1; j < m_colliders.size(); j++) {
 			if (current < limit) {

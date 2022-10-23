@@ -10,9 +10,7 @@ class ParticuleCollider {
 
 	private:
 	float m_radius;
-
-	public: 
-		Particule* m_particule;
+	Particule* m_particule;
 
 	public:
 	
@@ -21,6 +19,8 @@ class ParticuleCollider {
 	#pragma region Getter setter
 
 	float getRadius();
+
+	Particule* getParticule();
 
 	#pragma endregion
 };

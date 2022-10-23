@@ -5,8 +5,12 @@
 
 class ParticuleRode : public ParticuleLink{
 
-	float length;
+	private:
+	float m_length;
 
+	public:
+
+	ParticuleRode(Particule* particule1, Particule* particule2,float length);
 
 	int addContact(ParticuleContact* particuleContact,unsigned int limit,unsigned int current);
 };

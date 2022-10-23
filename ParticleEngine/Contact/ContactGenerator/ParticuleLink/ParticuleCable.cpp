@@ -1,5 +1,10 @@
  #include "ParticuleCable.h"
 
+ParticuleCable::ParticuleCable(Particule* particule1, Particule* particule2, float max_length, float restitution): ParticuleLink(particule1,particule2) {
+	m_maxLength = max_length;
+	m_restitution = restitution;
+}
+
 int ParticuleCable::addContact(ParticuleContact* particuleContact, unsigned int limit, unsigned int current) {
 	float distance = m_particules[0]->getPosition().distance(m_particules[1]->getPosition());
 	Vector3d normalParticule = m_particules[0]->getPosition() - m_particules[1]->getPosition();
