@@ -26,6 +26,8 @@ public:
 
     void addForce(Particle *particle, float duration) override;
 
+    void calculateForce(Particle *particle, Particle *otherParticle, float duration);
+
     void drawGui(Scene *scene) override;
 
 public:

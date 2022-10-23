@@ -11,9 +11,9 @@ void Camera::update() {
 }
 
 void Camera::setPosition(const Vector3d &vector3D) {
-//    viewMatrix = glm::lookAt(glm::vec3(vector3D.getx(), vector3D.gety(), vector3D.getz() - 8),
-//                             glm::vec3(0.0f, 0.0f, 0.0f),
-//                             glm::vec3(0.0f, 1.0f, 0.0f));
+    viewMatrix = glm::lookAt(glm::vec3(vector3D.getx(), vector3D.gety(), vector3D.getz() - 8),
+                             glm::vec3(0.0f, 0.0f, 0.0f),
+                             glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
 void Camera::translate(const Vector3d &vector3D) {

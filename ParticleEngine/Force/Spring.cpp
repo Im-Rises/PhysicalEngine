@@ -28,22 +28,30 @@ Spring::~Spring() {
 }
 
 void Spring::addForce(Particle *particle, float duration) {
-    Particle *pParticle = nullptr;
-    m_otherGameObject->getComponentByClass(pParticle);
+    Particle *otherParticle = nullptr;
+    m_otherGameObject->getComponentByClass(otherParticle);
 
-    if (pParticle == nullptr)
+    if (otherParticle == nullptr)
         return;
 
-    float delta = pParticle->distance(*particle);
+    calculateForce(particle, otherParticle, duration);
+    calculateForce(otherParticle, particle, duration);
+}
+
+void Spring::calculateForce(Particle *particle, Particle *otherParticle, float duration) {
+    float delta = otherParticle->distance(*particle);
+
     Vector3d F;
     if (delta > m_restLength) {
         Vector3d vec1 = particle->getPosition();
-        Vector3d vec2 = pParticle->getPosition();
+        Vector3d vec2 = otherParticle->getPosition();
         F = (vec1 - vec2).normalize() * (-m_k) * (delta - m_restLength);
     }
+
     Vector3d initialForce = particle->getNetForce();
     particle->setNetForce(initialForce + F);
 }
+
 
 void Spring::drawGui(Scene *scene) {
     if (ImGui::CollapsingHeader(SPRING_FORCE)) {
