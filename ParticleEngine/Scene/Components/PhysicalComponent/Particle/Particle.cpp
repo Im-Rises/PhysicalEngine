@@ -25,7 +25,6 @@ Particle::Particle(const Particle &particle) : Component(particle.m_gameObject) 
 
 void Particle::update(float deltaTime) {
     // Update sum of forces
-    netForce = Vector3d();
     if (isKinematic) {
         gravity.addForce(this);
 
@@ -37,7 +36,10 @@ void Particle::update(float deltaTime) {
     // Update acceleration, speed and position
     calculateAcceleration();
     calculateSpeed(deltaTime);
-//    calculatePosition(deltaTime);
+    // Calculate position here ?
+
+    // Reset the netForce for the next frame
+    netForce = Vector3d();
 }
 
 float Particle::distance(const Particle &p) {
@@ -53,7 +55,6 @@ void Particle::calculateSpeed(float time) {
 }
 
 void Particle::calculateAcceleration() {
-//    m_acceleration = m_netForce * (1 / m_mass) * time;
     acceleration = netForce / mass;
 }
 

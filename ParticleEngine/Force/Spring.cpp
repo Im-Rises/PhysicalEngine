@@ -44,6 +44,7 @@ void Spring::addForce(Particle *particle) {
 void Spring::calculateForce(Particle *particle, Particle *otherParticle) {
     float delta = otherParticle->distance(*particle);
 
+    std::cout << "---------Calculate---------" << delta << std::endl;
     Vector3d F;
     if (delta > m_restLength) {
         Vector3d vec1 = particle->getPosition();
