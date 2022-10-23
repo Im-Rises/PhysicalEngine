@@ -18,7 +18,7 @@ private:
     // Scene elements
     Axis axis;
     Camera camera;
-    PhysicHandler physicHandler;
+//    PhysicHandler physicHandler;
     std::vector<GameObject *> gameObjects;
 
     // View settings

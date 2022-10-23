@@ -11,8 +11,8 @@
 Spring::~Spring() {
 }
 
-Spring::Spring(Particle *otherParticule, float k, float restLength) {
-    m_otherParticle = otherParticule;
+Spring::Spring(Particle *otherParticle, float k, float restLength) {
+    m_otherParticle = otherParticle;
     m_k = k;
     m_restLength = restLength;
 }
@@ -23,16 +23,16 @@ Spring::Spring(const Spring &spring) {
     m_restLength = spring.m_restLength;
 }
 
-void Spring::addForce(Particle *particule, float duration) {
-    float delta = m_otherParticle->distance(*particule);
+void Spring::addForce(Particle *particle, float duration) {
+    float delta = m_otherParticle->distance(*particle);
     Vector3d F;
     if (delta > m_restLength) {
-        Vector3d vec1 = particule->getPosition();
+        Vector3d vec1 = particle->getPosition();
         Vector3d vec2 = m_otherParticle->getPosition();
         F = (vec1 - vec2).normalize() * (-m_k) * (delta - m_restLength);
     }
-    Vector3d initialForce = particule->getNetForce();
-    particule->setNetForce(initialForce + F);
+    Vector3d initialForce = particle->getNetForce();
+    particle->setNetForce(initialForce + F);
 }
 
 void Spring::drawGui() {

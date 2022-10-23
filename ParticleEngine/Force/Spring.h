@@ -16,11 +16,11 @@ public:
 //	Spring();
     ~Spring();
 
-    Spring(Particle *otherParticule, float k, float restLength);
+    Spring(Particle *otherParticle, float k, float restLength);
 
     Spring(const Spring &spring);
 
-    void addForce(Particle *particule, float duration) override;
+    void addForce(Particle *particle, float duration) override;
 
     void drawGui() override;
 
