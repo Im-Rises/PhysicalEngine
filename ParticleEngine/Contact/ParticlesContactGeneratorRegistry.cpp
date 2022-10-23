@@ -1,6 +1,6 @@
 #include "ParticlesContactGeneratorRegistry.h"
 
-ParticleContactGeneratorRegistry::ParticleContactGeneratorRegistry(float maxSize) {
+ParticleContactGeneratorRegistry::ParticleContactGeneratorRegistry(int maxSize) {
     m_allContact = new ParticleContact[maxSize];
 }
 

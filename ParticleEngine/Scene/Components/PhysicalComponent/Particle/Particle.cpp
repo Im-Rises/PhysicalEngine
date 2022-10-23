@@ -37,16 +37,16 @@ void Particle::update(float deltaTime) {
     // Update acceleration, speed and position
     calculateAcceleration();
     calculateSpeed(deltaTime);
-    calculatePosition(deltaTime);
+//    calculatePosition(deltaTime);
 }
 
 float Particle::distance(const Particle &p) {
     return (m_gameObject->transform.getPosition() - p.getPosition()).norm();
 }
 
-void Particle::calculatePosition(float time) {
-    m_gameObject->transform.setPosition(m_gameObject->transform.getPosition() + speed * time);
-}
+//void Particle::calculatePosition(float time) {
+//    m_gameObject->transform.setPosition(m_gameObject->transform.getPosition() + speed * time);
+//}
 
 void Particle::calculateSpeed(float time) {
     speed = speed + acceleration * time;

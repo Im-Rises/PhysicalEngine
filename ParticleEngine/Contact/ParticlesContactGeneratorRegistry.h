@@ -12,7 +12,7 @@ private:
 
 public:
 
-    explicit ParticleContactGeneratorRegistry(float maxSize);
+    explicit ParticleContactGeneratorRegistry(int maxSize);
 
     void addParticleGenerator(ParticleContactGenerator *particleContactGenerator);
 
@@ -24,4 +24,4 @@ public:
 
 };
 
-#endif // !PARTICLE_CONTACT_REGISTRY_H
+#endif // !PARTICLE_CONTACT_GENERATOR_REGISTRY_H

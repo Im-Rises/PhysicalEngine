@@ -58,10 +58,19 @@ void Scene::destroy() {
 }
 
 void Scene::update(float deltaTime) {
-    // Update the game objects
+    // Update the game objects (particles, ...)
     for (GameObject *gameObject: gameObjects) {
         gameObject->update(deltaTime);
     }
+
+    // Move gameObjects
+    for (GameObject *gameObject: gameObjects) {
+        physicHandler.update(gameObject, deltaTime);
+    }
+
+    // Detect collision
+
+    // Resolve collisions
 }
 
 void Scene::draw(int display_w, int display_h) {
