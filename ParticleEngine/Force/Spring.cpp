@@ -1,42 +1,77 @@
 #include "Spring.h"
 
 #include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
+#include "imgui/imgui.h"
+#include "../Utility/imGuiUtility.h"
+#include "../Scene/GameObject.h"
+#include "../Scene/Scene.h"
 
-//Spring::Spring() {
-//	m_otherParticule = new Particle(0, 0, 0, 0);
-//	m_k = 0;
-//	m_restLength = 0;
+
+Spring::Spring() {
+    m_k = 0;
+    m_restLength = 0;
+}
+
+//Spring::Spring(Particle *otherParticle, float k, float restLength) {
+//    m_otherParticle = otherParticle;
+//    m_k = k;
+//    m_restLength = restLength;
+//}
+//
+//Spring::Spring(const Spring &spring) {
+//    m_otherParticle = spring.m_otherParticle;
+//    m_k = spring.m_k;
+//    m_restLength = spring.m_restLength;
 //}
 
 Spring::~Spring() {
 }
 
-Spring::Spring(Particle *otherParticle, float k, float restLength) {
-    m_otherParticle = otherParticle;
-    m_k = k;
-    m_restLength = restLength;
-}
-
-Spring::Spring(const Spring &spring) {
-    m_otherParticle = spring.m_otherParticle;
-    m_k = spring.m_k;
-    m_restLength = spring.m_restLength;
-}
-
 void Spring::addForce(Particle *particle, float duration) {
-    float delta = m_otherParticle->distance(*particle);
+    Particle *pParticle = nullptr;
+    m_otherGameObject->getComponentByClass(pParticle);
+
+    if (pParticle == nullptr)
+        return;
+
+    float delta = pParticle->distance(*particle);
     Vector3d F;
     if (delta > m_restLength) {
         Vector3d vec1 = particle->getPosition();
-        Vector3d vec2 = m_otherParticle->getPosition();
+        Vector3d vec2 = pParticle->getPosition();
         F = (vec1 - vec2).normalize() * (-m_k) * (delta - m_restLength);
     }
     Vector3d initialForce = particle->getNetForce();
     particle->setNetForce(initialForce + F);
 }
 
-void Spring::drawGui() {
+void Spring::drawGui(Scene *scene) {
+    if (ImGui::CollapsingHeader(SPRING_FORCE)) {
+        ImGui::Text("K: ");
+        ImGui::SameLine();
+        ImGui::InputFloat("##SpringK", &m_k);
+        ImGui::Text("Rest Length: ");
+        ImGui::SameLine();
+        ImGui::InputFloat("##SpringRestLength", &m_restLength);
 
+        ImGui::Text("Select Particle: ");
+        if (ImGuiUtility::ButtonCenteredOnLine("Select other particle", 0.5f)) {
+            ImGui::OpenPopup("Add component##popup");
+        }
+        ImGui::Text("%s", m_otherGameObject != nullptr ? ("Selected: " + m_otherGameObject->getName()).c_str()
+                                                       : "Selected: None");
+        if (ImGui::BeginPopup("Add component##popup")) {
+            for (auto &gameObject: scene->getGameObjects()) {
+                if (gameObject->hasComponentByName(PARTICLE_COMPONENT)) {
+                    ImGui::Selectable(gameObject->getName().c_str(), m_otherGameObject == gameObject);
+                    if (ImGui::IsItemClicked()) {
+                        m_otherGameObject = gameObject;
+                    }
+                }
+            }
+            ImGui::EndPopup();
+        }
+    }
 }
 
 std::string Spring::getName() const {

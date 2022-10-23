@@ -318,7 +318,7 @@ void ParticleEngineLauncher::handleGui() {
                     }
                 }
                 ImGui::NewLine();
-                if (ButtonCenteredOnLine("Add component", 0.5f)) {
+                if (ImGuiUtility::ButtonCenteredOnLine("Add component", 0.5f)) {
                     ImGui::OpenPopup("Add component##popup");
                 }
                 if (ImGui::BeginPopup("Add component##popup")) {

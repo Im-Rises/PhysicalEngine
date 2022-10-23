@@ -2,6 +2,7 @@
 
 #include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "imgui/imgui.h"
+#include "../Scene/Scene.h"
 
 AnchoredSpring::AnchoredSpring() {
     m_anchor = Vector3d(0, 0, 0);
@@ -39,7 +40,7 @@ std::string AnchoredSpring::getName() const {
     return FORCE_TYPE;
 }
 
-void AnchoredSpring::drawGui() {
+void AnchoredSpring::drawGui(Scene *scene) {
     if (ImGui::CollapsingHeader(getName().c_str())) {
         if (ImGui::BeginTable("Anchor", 3)) {
             ImGui::TableNextColumn();

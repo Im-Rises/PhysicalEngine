@@ -3,26 +3,30 @@
 
 #include "ForceGenerator.h"
 
+class GameObject;
+
 class Spring : public ForceGenerator {
 private:
     static constexpr const char *FORCE_TYPE = SPRING_FORCE;
 
 private:
-    Particle *m_otherParticle;
     float m_k;
     float m_restLength;
+//    Particle *m_otherParticle = nullptr;
+    GameObject *m_otherGameObject = nullptr;
 
 public:
-//	Spring();
+    Spring();
+
+//    Spring(Particle *otherParticle, float k, float restLength);
+//
+//    Spring(const Spring &spring);
+
     ~Spring();
-
-    Spring(Particle *otherParticle, float k, float restLength);
-
-    Spring(const Spring &spring);
 
     void addForce(Particle *particle, float duration) override;
 
-    void drawGui() override;
+    void drawGui(Scene *scene) override;
 
 public:
     std::string getName() const override;

@@ -8,13 +8,13 @@
 #include "Components/PhysicalComponent/Particle/Particle.h"
 
 
-GameObject::GameObject() {
+GameObject::GameObject(Scene *scene) {
+    parentScene = scene;
     gameObjectName = "GameObject";
 }
 
 
-GameObject::GameObject(Mesh *mesh) : GameObject() {
-
+GameObject::GameObject(Scene *scene, Mesh *mesh) : GameObject(scene) {
     mesh->getVerticesUseIndices();
     this->mesh = mesh;
 
@@ -140,6 +140,9 @@ std::string GameObject::getName() const {
     return gameObjectName;
 }
 
+Scene *GameObject::getScenePtr() const {
+    return parentScene;
+}
 
 Component *GameObject::getComponentByName(const std::string &name) const {
     for (auto &component: components) {
@@ -168,6 +171,8 @@ void GameObject::deleteComponentByName(const std::string &name) {
         }
     }
 }
+
+
 
 
 

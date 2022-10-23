@@ -130,6 +130,7 @@ TO modify the speed value, you can use the ImGui window named `Speed handler`.
 | Translate camera to the right | Right Mouse Button + Mouse → movement |
 | Translate camera upwards      | Right Mouse Button + Mouse ↑ movement |
 | Translate camera downwards    | Right Mouse Button + Mouse ↓ movement |
+| Exit app                      | ESC                                   |
 
 ## Project Architecture
 

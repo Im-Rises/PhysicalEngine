@@ -22,7 +22,7 @@ public:
 
     void addForce(Particle *particle, float duration) override;
 
-    void drawGui() override;
+    void drawGui(Scene *scene) override;
 
 public:
     std::string getName() const override;

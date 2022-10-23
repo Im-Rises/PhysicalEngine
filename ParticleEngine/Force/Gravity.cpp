@@ -2,6 +2,7 @@
 
 #include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "imgui/imgui.h"
+#include "../Scene/Scene.h"
 
 Gravity::Gravity(const Vector3d &g) {
     m_gravity = g;
@@ -17,7 +18,7 @@ void Gravity::addForce(Particle *particle, float duration) {
     particle->setNetForce(initialForce + F);
 }
 
-void Gravity::drawGui() {
+void Gravity::drawGui(Scene *scene) {
     ImGui::Text("Gravity");
     if (ImGui::BeginTable("Gravity", 3)) {
         ImGui::TableNextColumn();

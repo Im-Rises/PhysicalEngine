@@ -2,6 +2,7 @@
 
 #include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "imgui/imgui.h"
+#include "../Scene/Scene.h"
 
 Drag::Drag() {
     m_k1 = 0;
@@ -25,7 +26,7 @@ void Drag::addForce(Particle *particle, float duration) {
     particle->setNetForce(initialForce + F);
 }
 
-void Drag::drawGui() {
+void Drag::drawGui(Scene *scene) {
     if (ImGui::CollapsingHeader(DRAG_FORCE)) {
         ImGui::Text("K1: ");
         ImGui::SameLine();

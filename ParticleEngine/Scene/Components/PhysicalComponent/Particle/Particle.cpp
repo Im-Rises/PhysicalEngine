@@ -67,7 +67,7 @@ void Particle::drawGui() {
     ImGui::DragFloat("##ParticleWeight", &mass, 0.1f, 0.0f, 100.0f);
 
     // Gravity
-    gravity.drawGui();
+    gravity.drawGui(m_gameObject->getScenePtr());
 
     // Speed, acceleration
     ImGui::Text("Speed");
@@ -107,7 +107,8 @@ void Particle::drawGui() {
     std::string forcesListText = "Forces list";
     std::string addForcesText = "Add forces";
     // Forces list and add force
-    AlignForWidth((CalculateTextWidth(forcesListText.c_str()) + CalculateTextWidth(addForcesText.c_str())));
+    ImGuiUtility::AlignForWidth((ImGuiUtility::CalculateTextWidth(forcesListText.c_str()) +
+                                 ImGuiUtility::CalculateTextWidth(addForcesText.c_str())));
 
     // Forces list
     if (ImGui::Button(forcesListText.c_str())) {
@@ -118,7 +119,7 @@ void Particle::drawGui() {
             ImGui::Text("Empty");
         else
             for (auto &forceGenerator: forceGeneratorsList) {
-                forceGenerator->drawGui();
+                forceGenerator->drawGui(m_gameObject->getScenePtr());
             }
         ImGui::EndPopup();
     }
