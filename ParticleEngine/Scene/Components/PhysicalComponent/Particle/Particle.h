@@ -105,20 +105,20 @@ public:
         }
     }
 
-    bool hadForce(const std::string &name) const;
+    bool hasForce(const std::string &name) const;
 
 //    void deleteComponentByName(const std::string &name);
-//
-//    template<class T>
-//    void deleteComponentByClass(T *&c) {
-//        for (auto it = components.begin(); it != components.end(); ++it) {
-//            if (dynamic_cast<T *>(*it) != nullptr) {
-//                components.erase(it);
+
+    template<class T>
+    void deleteForceByClass(T *&c) {
+        for (auto it = forceGeneratorsList.begin(); it != forceGeneratorsList.end(); ++it) {
+            if (dynamic_cast<T *>(*it) != nullptr) {
+                forceGeneratorsList.erase(it);
 //                delete *it;
-//                return;
-//            }
-//        }
-//    }
+                return;
+            }
+        }
+    }
 
 #pragma endregion
 #pragma region Getter Setter
