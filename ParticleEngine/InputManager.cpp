@@ -82,24 +82,28 @@ void InputManager::keyReleased(GLFWwindow *window, int key, ParticleEngineLaunch
 }
 
 void InputManager::keyRepeated(GLFWwindow *window, int key, ParticleEngineLauncher *engine) {
-    //switch (key) {
-    //    case GLFW_KEY_UP: {
-    //        engine->scene->translateCamera(Vector3d(0, 0, translationSpeed));
-    //        break;
-    //    }
-    //    case GLFW_KEY_DOWN: {
-    //        engine->scene->translateCamera(Vector3d(0, 0, -translationSpeed));
-    //        break;
-    //    }
-    //    case GLFW_KEY_LEFT: {
-    //        engine->scene->translateCamera(Vector3d(+translationSpeed, 0, 0));
-    //        break;
-    //    }
-    //    case GLFW_KEY_RIGHT: {
-    //        engine->scene->translateCamera(Vector3d(-translationSpeed, 0, 0));
-    //        break;
-    //    }
-    //}
+    Camera *camera = engine->scene->getCameraPtr();
+    switch (key) {
+        case GLFW_KEY_UP: {
+            camera->moveForward(movementSpeed);
+            break;
+        }
+        case GLFW_KEY_DOWN: {
+            camera->moveBackward(movementSpeed);
+            break;
+        }
+        case GLFW_KEY_LEFT: {
+            camera->moveLeft(movementSpeed);
+            break;
+        }
+        case GLFW_KEY_RIGHT : {
+            camera->moveRight(movementSpeed);
+            break;
+        }
+        default: {
+            break;
+        }
+    }
 }
 
 void InputManager::scroll_callback(GLFWwindow *window, double xOffset, double yOffset) {
@@ -108,23 +112,15 @@ void InputManager::scroll_callback(GLFWwindow *window, double xOffset, double yO
 }
 
 void InputManager::cursor_position_callback(GLFWwindow *window, double xPos, double yPos) {
-    auto *engine = (ParticleEngineLauncher *) glfwGetWindowUserPointer(window);
     if (mouseRightButtonPressed) {
-        engine->scene->translateCamera(
-                {movementSpeed * (mouseLastPosX - (float) xPos), movementSpeed * ((float) yPos - mouseLastPosY), 0});
+        auto *engine = (ParticleEngineLauncher *) glfwGetWindowUserPointer(window);
+        Camera *camera = engine->scene->getCameraPtr();
+        float xOffset = static_cast<float>(xPos) - mouseLastPosX;
+        float yOffset = mouseLastPosY - static_cast<float>(yPos);
+        camera->processMouseMovement(xOffset, yOffset);
     }
-
     mouseLastPosX = static_cast<float>(xPos);
     mouseLastPosY = static_cast<float>(yPos);
-
-//    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE) == GLFW_PRESS) {
-//        auto *engine = (ParticleEngineLauncher *) glfwGetWindowUserPointer(window);
-//        engine->scene->rotateCamera(Vector3d(0, 1, 0), rotationSpeed * (xPos - mouseLastPosX));
-//        engine->scene->rotateCamera(Vector3d(1, 0, 0), rotationSpeed * (yPos - mouseLastPosY));
-//    } else {
-//        mouseLastPosX = xPos;
-//        mouseLastPosY = yPos;
-//    }
 }
 
 void InputManager::mouse_button_callback(GLFWwindow *window, int button, int action, int mods) {
