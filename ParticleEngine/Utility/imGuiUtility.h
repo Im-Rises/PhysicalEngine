@@ -3,10 +3,14 @@
 
 // https://github.com/ocornut/imgui/discussions/3862
 
-bool ButtonCenteredOnLine(const char *label, float alignment);
+namespace ImGuiUtility {
 
-void AlignForWidth(float width, float alignment = 0.5f);
+    bool ButtonCenteredOnLine(const char *label, float alignment);
 
-float CalculateTextWidth(const char *text);
+    void AlignForWidth(float width, float alignment = 0.5f);
+
+    float CalculateTextWidth(const char *text);
+
+}
 
 #endif //IMGUIUTILITY_H

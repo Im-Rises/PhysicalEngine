@@ -18,9 +18,9 @@ public:
 
     Drag(const Drag &drag);
 
-    void addForce(Particle *particle, float duration) override;
+    void addForce(Particle *particle) override;
 
-    void drawGui() override;
+    void drawGui(Scene *scene) override;
 
 public:
     std::string getName() const override;

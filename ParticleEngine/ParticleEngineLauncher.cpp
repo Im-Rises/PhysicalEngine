@@ -318,10 +318,10 @@ void ParticleEngineLauncher::handleGui() {
                     }
                 }
                 ImGui::NewLine();
-                if (ButtonCenteredOnLine("Add component", 0.5f)) {
-                    ImGui::OpenPopup("Add component##popup");
+                if (ImGuiUtility::ButtonCenteredOnLine("Add component", 0.5f)) {
+                    ImGui::OpenPopup("Add component##ComponentPopup");
                 }
-                if (ImGui::BeginPopup("Add component##popup")) {
+                if (ImGui::BeginPopup("Add component##ComponentPopup")) {
                     for (auto &componentName: Component::componentsNamesList) {
                         if (ImGui::MenuItem(componentName)) {
                             gameObject->addComponentByName(componentName);

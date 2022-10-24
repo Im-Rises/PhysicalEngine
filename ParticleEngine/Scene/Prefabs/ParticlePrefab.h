@@ -3,11 +3,13 @@
 
 #include "../GameObject.h"
 
+class Scene;
+
 class ParticlePrefab : public GameObject {
 private:
 
 public:
-    ParticlePrefab();
+    explicit ParticlePrefab(Scene *scene);
 
     ~ParticlePrefab();
 };

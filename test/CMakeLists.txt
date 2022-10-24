@@ -1,9 +1,8 @@
 include_directories("${CMAKE_SOURCE_DIR}/dependencies")
-set(SRCS_TEST "vector3dTest.cpp")
-#"particleTest.cpp" "physicHandlerTest.cpp"
+set(SRCS_TEST "vector3dTest.cpp" "particleTest.cpp" "physicHandlerTest.cpp")
 
-set(HEADERS "../ParticleEngine/Utility/Vector3d.h" "../ParticleEngine/Scene/PhysicHandler.h")
-set(SRCS "../ParticleEngine/Utility/Vector3d.cpp" "../ParticleEngine/Scene/PhysicHandler.cpp")
+#set(HEADERS "../ParticleEngine/Utility/Vector3d.h" "../ParticleEngine/Scene/PhysicHandler.h")
+#set(SRCS "../ParticleEngine/Utility/Vector3d.cpp" "../ParticleEngine/Scene/PhysicHandler.cpp")
 
 enable_testing()
 

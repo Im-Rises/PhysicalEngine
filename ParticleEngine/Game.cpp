@@ -14,17 +14,19 @@ Game::~Game() {
 }
 
 void Game::start(Scene *scene) {
-    auto *particlePrefab = new ParticlePrefab();
+    auto *particlePrefab = new ParticlePrefab(scene);
     scene->addGameObject(particlePrefab);
     particlePrefab->getComponentByClass(m_p);
+    auto *particlePrefabNew = new ParticlePrefab(scene);
+    scene->addGameObject(particlePrefabNew);
 
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; ++j) {
-            auto *particlePrefabNew = new ParticlePrefab();
-            particlePrefabNew->transform.setPosition({(float) i * 2, (float) j * 2, 0});
-            scene->addGameObject(particlePrefabNew);
-        }
-    }
+//    for (int i = 0; i < 10; i++) {
+//        for (int j = 0; j < 10; ++j) {
+//            auto *particlePrefabNew = new ParticlePrefab(scene);
+//            particlePrefabNew->transform.setPosition({(float) i * 2, (float) j * 2, 0});
+//            scene->addGameObject(particlePrefabNew);
+//        }
+//    }
 }
 
 void Game::goLeft() {

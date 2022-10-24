@@ -9,7 +9,7 @@
 
 #define PROJECT_VERSION VERSION_MAJOR "." VERSION_MINOR "." VERSION_PATCH
 
-#define PROJECT_GITHUB "https://github.com/Im-Rises/ParticleEngineLauncher"
+#define PROJECT_GITHUB "https://github.com/Im-Rises/ParticleEngine"
 
 #include <chrono>
 #include "Game.h"
