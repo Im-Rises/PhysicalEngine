@@ -1,4 +1,4 @@
-#include "../ParticleEngine/Scene/PhysicHandler.h"
+//#include "../ParticleEngine/Scene/PhysicHandler.h"
 
 int main() {
 //    PhysicHandler physicalHandler;

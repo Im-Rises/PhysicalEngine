@@ -1,42 +1,91 @@
 #include "Spring.h"
 
 #include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
+#include "imgui/imgui.h"
+#include "../Utility/imGuiUtility.h"
+#include "../Scene/GameObject.h"
+#include "../Scene/Scene.h"
 
-//Spring::Spring() {
-//	m_otherParticule = new Particle(0, 0, 0, 0);
-//	m_k = 0;
-//	m_restLength = 0;
+
+Spring::Spring(GameObject *gameObject) : ForceGenerator(gameObject) {
+    m_k = 0;
+    m_restLength = 0;
+}
+
+//Spring::Spring(Particle *otherParticle, float k, float restLength) {
+//    m_otherParticle = otherParticle;
+//    m_k = k;
+//    m_restLength = restLength;
+//}
+//
+//Spring::Spring(const Spring &spring) {
+//    m_otherParticle = spring.m_otherParticle;
+//    m_k = spring.m_k;
+//    m_restLength = spring.m_restLength;
 //}
 
 Spring::~Spring() {
 }
 
-Spring::Spring(Particle *otherParticule, float k, float restLength) {
-    m_otherParticle = otherParticule;
-    m_k = k;
-    m_restLength = restLength;
+void Spring::addForce(Particle *particle) {
+    // Get particle component from other game object
+    Particle *otherParticle = nullptr;
+    if (m_otherGameObject == nullptr)
+        return;
+    m_otherGameObject->getComponentByClass(otherParticle);
+    if (otherParticle == nullptr)
+        return;
+
+    // Calculate force from this particle to other particle
+    calculateForce(particle, otherParticle);
+    calculateForce(otherParticle, particle);
 }
 
-Spring::Spring(const Spring &spring) {
-    m_otherParticle = spring.m_otherParticle;
-    m_k = spring.m_k;
-    m_restLength = spring.m_restLength;
-}
+void Spring::calculateForce(Particle *particle, Particle *otherParticle) {
+    float delta = otherParticle->distance(*particle);
 
-void Spring::addForce(Particle *particule, float duration) {
-    float delta = m_otherParticle->distance(*particule);
     Vector3d F;
     if (delta > m_restLength) {
-        Vector3d vec1 = particule->getPosition();
-        Vector3d vec2 = m_otherParticle->getPosition();
+        Vector3d vec1 = particle->getPosition();
+        Vector3d vec2 = otherParticle->getPosition();
         F = (vec1 - vec2).normalize() * (-m_k) * (delta - m_restLength);
     }
-    Vector3d initialForce = particule->getNetForce();
-    particule->setNetForce(initialForce + F);
+
+    Vector3d initialForce = particle->getNetForce();
+    particle->setNetForce(initialForce + F);
 }
 
-void Spring::drawGui() {
 
+void Spring::drawGui(Scene *scene) {
+    if (ImGui::CollapsingHeader(SPRING_FORCE)) {
+        ImGui::Text("K: ");
+        ImGui::SameLine();
+        ImGui::InputFloat("##SpringK", &m_k);
+        ImGui::Text("Rest Length: ");
+        ImGui::SameLine();
+        ImGui::InputFloat("##SpringRestLength", &m_restLength);
+
+        ImGui::Text("Select Particle: ");
+        if (ImGuiUtility::ButtonCenteredOnLine("Select other particle", 0.5f)) {
+            ImGui::OpenPopup("Add spring##SpringPopup");
+        }
+        ImGui::Text("%s", m_otherGameObject != nullptr ? ("Selected: " + m_otherGameObject->getName()).c_str()
+                                                       : "Selected: None");
+        if (ImGui::BeginPopup("Add spring##SpringPopup")) {
+            for (auto &selectableOtherGameObject: scene->getGameObjects()) {
+                if (selectableOtherGameObject->hasComponentByName(PARTICLE_COMPONENT) &&
+                    selectableOtherGameObject != parentGameObject) {
+                    std::string nameLabel =
+                            selectableOtherGameObject->getName() + "##Spring" + selectableOtherGameObject->getName();
+                    ImGui::Selectable(nameLabel.c_str(), m_otherGameObject == selectableOtherGameObject);
+                    if (ImGui::IsItemClicked()) {
+                        m_otherGameObject = selectableOtherGameObject;
+                    }
+                }
+            }
+            ImGui::EndPopup();
+        }
+    }
 }
 
 std::string Spring::getName() const {

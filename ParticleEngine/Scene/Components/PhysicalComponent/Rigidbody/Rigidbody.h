@@ -5,7 +5,7 @@
 #include "../../Component.h"
 #include "../PhysicalComponent.h"
 
-class Rigidbody : public Component {
+class Rigidbody : public PhysicalComponent {
 private:
     static constexpr const char *COMPONENT_TYPE = RIGIDBODY_COMPONENT;
 

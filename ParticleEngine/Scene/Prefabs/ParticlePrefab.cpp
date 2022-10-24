@@ -1,8 +1,9 @@
 #include "ParticlePrefab.h"
 #include "../Components/Mesh/Sphere/Sphere.h"
 #include "../Components/PhysicalComponent/Particle/Particle.h"
+#include "../Scene.h"
 
-ParticlePrefab::ParticlePrefab() : GameObject(new Sphere(1, 20, 20)) {
+ParticlePrefab::ParticlePrefab(Scene *scene) : GameObject(scene, new Sphere(1, 20, 20)) {
     gameObjectName = "Particle";
     auto *particle = new Particle(this);
     addComponentByClass(particle);

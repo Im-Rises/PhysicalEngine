@@ -25,35 +25,36 @@ Particle::Particle(const Particle &particle) : Component(particle.m_gameObject) 
 
 void Particle::update(float deltaTime) {
     // Update sum of forces
-    netForce = Vector3d();
     if (isKinematic) {
-        gravity.addForce(this, deltaTime);
+        gravity.addForce(this);
 
         for (ForceGenerator *forceGenerator: forceGeneratorsList) {
-            forceGenerator->addForce(this, deltaTime);
+            forceGenerator->addForce(this);
         }
     }
 
     // Update acceleration, speed and position
     calculateAcceleration();
     calculateSpeed(deltaTime);
-    calculatePosition(deltaTime);
+    // Calculate position here ?
+
+    // Reset the netForce for the next frame
+    netForce = Vector3d();
 }
 
 float Particle::distance(const Particle &p) {
     return (m_gameObject->transform.getPosition() - p.getPosition()).norm();
 }
 
-void Particle::calculatePosition(float time) {
-    m_gameObject->transform.setPosition(m_gameObject->transform.getPosition() + speed * time);
-}
+//void Particle::calculatePosition(float time) {
+//    m_gameObject->transform.setPosition(m_gameObject->transform.getPosition() + speed * time);
+//}
 
 void Particle::calculateSpeed(float time) {
     speed = speed + acceleration * time;
 }
 
 void Particle::calculateAcceleration() {
-//    m_acceleration = m_netForce * (1 / m_mass) * time;
     acceleration = netForce / mass;
 }
 
@@ -67,7 +68,7 @@ void Particle::drawGui() {
     ImGui::DragFloat("##ParticleWeight", &mass, 0.1f, 0.0f, 100.0f);
 
     // Gravity
-    gravity.drawGui();
+    gravity.drawGui(m_gameObject->getScenePtr());
 
     // Speed, acceleration
     ImGui::Text("Speed");
@@ -107,7 +108,8 @@ void Particle::drawGui() {
     std::string forcesListText = "Forces list";
     std::string addForcesText = "Add forces";
     // Forces list and add force
-    AlignForWidth((CalculateTextWidth(forcesListText.c_str()) + CalculateTextWidth(addForcesText.c_str())));
+    ImGuiUtility::AlignForWidth((ImGuiUtility::CalculateTextWidth(forcesListText.c_str()) +
+                                 ImGuiUtility::CalculateTextWidth(addForcesText.c_str())));
 
     // Forces list
     if (ImGui::Button(forcesListText.c_str())) {
@@ -118,7 +120,7 @@ void Particle::drawGui() {
             ImGui::Text("Empty");
         else
             for (auto &forceGenerator: forceGeneratorsList) {
-                forceGenerator->drawGui();
+                forceGenerator->drawGui(m_gameObject->getScenePtr());
             }
         ImGui::EndPopup();
     }
@@ -132,7 +134,7 @@ void Particle::drawGui() {
     if (ImGui::BeginPopup("ParticleAddForce##popup")) {
         for (auto &forcesName: ForceGenerator::forcesNamesList) {
             if (ImGui::MenuItem(forcesName)) {
-                addForce(ForceGenerator::createForceGenerator(forcesName));
+                addForce(ForceGenerator::createForceGenerator(forcesName, m_gameObject));
             }
         }
         ImGui::EndPopup();

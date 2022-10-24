@@ -12,19 +12,17 @@ class GameObject;
 class PhysicHandler {
 
 private:
-    std::list<Particle *> particlesList;
-    const int fixedUpdatePerSecond = 50;
-    float fixedDeltaTime = 1.0f / fixedUpdatePerSecond;
-    float timeToAdjustFrameRate = 0;
+//    const int fixedUpdatePerSecond = 50;
+//    float fixedDeltaTime = 1.0f / fixedUpdatePerSecond;
+//    float timeToAdjustFrameRate = 0;
 
 public:
     PhysicHandler();
 
-//    void updateAll(float time);
+    void update(GameObject *gameObject, float deltaTime);
 
-    void update(float time);
-
-    void addRigidbody(Rigidbody *rigidbody);
+private:
+    void move(GameObject *gameObject, Particle *particle, float deltaTime);
 
 };
 
