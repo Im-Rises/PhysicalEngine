@@ -22,17 +22,15 @@ public:
 
     ~Camera();
 
+    void moveForward(float speed);
+
+    void moveBackward(float speed);
+
+    void moveLeft(float speed);
+
+    void moveRight(float speed);
+
     glm::mat4 getViewMatrix() const;
-
-//    void update();
-
-//    void setPosition(const Vector3d &vector3D);
-//
-//    void translate(const Vector3d &vector3D);
-//
-//    void rotate(const Vector3d &vector3D, float angle);
-//
-//    glm::mat4 getViewMatrix() const;
 
     float getFov() const;
 };

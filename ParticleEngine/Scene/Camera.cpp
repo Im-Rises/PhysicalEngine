@@ -38,3 +38,22 @@ glm::mat4 Camera::getViewMatrix() const {
     return glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 }
 
+void Camera::moveForward(float speed) {
+    cameraPos += cameraSpeed * cameraFront;
+}
+
+void Camera::moveBackward(float speed) {
+
+    cameraPos -= cameraSpeed * cameraFront;
+}
+
+void Camera::moveLeft(float speed) {
+
+    cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+}
+
+void Camera::moveRight(float speed) {
+
+    cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+}
+

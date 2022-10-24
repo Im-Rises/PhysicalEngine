@@ -111,8 +111,9 @@ Vector3d Vector3d::normalize() const {
     if (n != 0) {
         return {m_x / n, m_y / n, m_z / n};
     } else {
-        std::cerr << "Error: cannot normalize null vector" << std::endl;
-        exit(1);
+//        std::cerr << "Error: cannot normalize null vector" << std::endl;
+//        exit(1);
+        return {0, 0, 0};
     }
 }
 
