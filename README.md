@@ -111,7 +111,7 @@ Then you can start by double-clicking the executable of typing the following com
 
 ### Game controls
 
-TO modify the speed value, you can use the ImGui window named `Speed handler`.
+To modify the speed value, you can use the ImGui window named `Speed handler`.
 
 | Action                 | Key |
 |------------------------|-----|
