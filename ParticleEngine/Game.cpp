@@ -13,8 +13,8 @@ Game::Game() {
 Game::~Game() {
 }
 
-void Game::start(Scene *scene) {
-    this->scene = scene;
+void Game::start(Scene *s) {
+    this->scene = s;
 
 //    auto *particlePrefab = new ParticlePrefab(scene);
 //    scene->addGameObject(particlePrefab);
@@ -37,7 +37,11 @@ void Game::goLeft() {
     for (auto &gameObject: scene->getGameObjects()) {
         auto *particle = dynamic_cast<Particle *>(gameObject->getComponentByName(PARTICLE_COMPONENT));
         if (particle != nullptr) {
-            particle->setSpeed(-m_speed, 0, 0);
+            AnchoredSpring *anchoredSpring;
+            particle->getForceByClass(anchoredSpring);
+            if (anchoredSpring != nullptr) {
+                anchoredSpring->translate({-m_speed, 0, 0});
+            }
         }
     }
 }
@@ -48,7 +52,11 @@ void Game::goRight() {
     for (auto &gameObject: scene->getGameObjects()) {
         auto *particle = dynamic_cast<Particle *>(gameObject->getComponentByName(PARTICLE_COMPONENT));
         if (particle != nullptr) {
-            particle->setSpeed(m_speed, 0, 0);
+            AnchoredSpring *anchoredSpring;
+            particle->getForceByClass(anchoredSpring);
+            if (anchoredSpring != nullptr) {
+                anchoredSpring->translate({m_speed, 0, 0});
+            }
         }
     }
 }
@@ -59,7 +67,11 @@ void Game::goUp() {
     for (auto &gameObject: scene->getGameObjects()) {
         auto *particle = dynamic_cast<Particle *>(gameObject->getComponentByName(PARTICLE_COMPONENT));
         if (particle != nullptr) {
-            particle->setSpeed(0, m_speed, 0);
+            AnchoredSpring *anchoredSpring;
+            particle->getForceByClass(anchoredSpring);
+            if (anchoredSpring != nullptr) {
+                anchoredSpring->translate({0, m_speed, 0});
+            }
         }
     }
 }
@@ -70,7 +82,11 @@ void Game::goDown() {
     for (auto &gameObject: scene->getGameObjects()) {
         auto *particle = dynamic_cast<Particle *>(gameObject->getComponentByName(PARTICLE_COMPONENT));
         if (particle != nullptr) {
-            particle->setSpeed(0, -m_speed, 0);
+            AnchoredSpring *anchoredSpring;
+            particle->getForceByClass(anchoredSpring);
+            if (anchoredSpring != nullptr) {
+                anchoredSpring->translate({0, -m_speed, 0});
+            }
         }
     }
 }

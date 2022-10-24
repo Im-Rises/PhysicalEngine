@@ -25,6 +25,8 @@ public:
 
     void drawGui(Scene *scene) override;
 
+    void translate(const Vector3d &translation);
+
     std::string getName() const override;
 };
 

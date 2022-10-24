@@ -65,3 +65,7 @@ void AnchoredSpring::drawGui(Scene *scene) {
         ImGui::InputFloat("##AnchorRestLengtgh", &m_restLength);
     }
 }
+
+void AnchoredSpring::translate(const Vector3d &translation) {
+    m_anchor = m_anchor + translation;
+}

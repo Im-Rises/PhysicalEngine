@@ -3,6 +3,7 @@
 #include "imgui/imgui.h"
 #include "../../../GameObject.h"
 #include "../../../../Utility/imGuiUtility.h"
+#include <algorithm>
 
 Particle::Particle(GameObject *gameObject) : Component(gameObject) {
     speed = {0, 0, 0};
@@ -23,6 +24,12 @@ Particle::Particle(const Particle &particle) : Component(particle.m_gameObject) 
     mass = particle.mass;
 }
 
+Particle::~Particle() {
+    for (auto &force: forceGeneratorsList) {
+        delete force;
+    }
+}
+
 void Particle::update(float deltaTime) {
     // Update sum of forces
     if (isKinematic) {
@@ -36,7 +43,6 @@ void Particle::update(float deltaTime) {
     // Update acceleration, speed and position
     calculateAcceleration();
     calculateSpeed(deltaTime);
-    // Calculate position here ?
 
     // Reset the netForce for the next frame
     netForce = Vector3d();
@@ -145,6 +151,25 @@ void Particle::addForce(ForceGenerator *forceGenerator) {
     forceGeneratorsList.push_back(forceGenerator);
 }
 
+void Particle::addForceByName(const std::string &forceName) {
+    addForce(ForceGenerator::createForceGenerator(forceName, m_gameObject));
+}
+
+ForceGenerator *Particle::getForceByName(const std::string &name) const {
+    for (auto &force: forceGeneratorsList) {
+        if (force->getName() == name)
+            return static_cast<ForceGenerator *>(force);
+    }
+    return nullptr;
+}
+
+bool Particle::hadForce(const std::string &name) const {
+    std::any_of(forceGeneratorsList.begin(), forceGeneratorsList.end(), [&name](ForceGenerator *forceGenerator) {
+        return forceGenerator->getName() == name;
+    });
+    return false;
+}
+
 std::string Particle::getName() const {
     return COMPONENT_TYPE;
 }
@@ -189,7 +214,10 @@ float Particle::getMass() const { return mass; }
 
 const Vector3d &Particle::getNetForce() const { return netForce; }
 
-
 void Particle::setNetForce(const Vector3d &force) { netForce = force; }
+
+
+
+
 
 

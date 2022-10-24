@@ -12,6 +12,14 @@
 const char *ForceGenerator::forcesNamesList[] = {DRAG_FORCE, ANCHORED_SPRING_FORCE,
                                                  BUOYANCY_FORCE, SPRING_FORCE};
 
+//ForceGenerator::ForceGenerator() {
+//
+//}
+
+ForceGenerator::~ForceGenerator() {
+
+}
+
 ForceGenerator::ForceGenerator(GameObject *gameObject) {
     parentGameObject = gameObject;
 }
@@ -49,4 +57,5 @@ ForceGenerator *ForceGenerator::createForceGenerator(const std::string &name, Ga
     std::cerr << "Component::createComponent: Unknown component name" << std::endl;
     return nullptr;
 }
+
 

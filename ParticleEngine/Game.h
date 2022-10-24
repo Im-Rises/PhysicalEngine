@@ -12,7 +12,7 @@ class Game {
 private:
 //    Particle *m_p;
     Scene *scene = nullptr;
-    float m_speed = 0.5f;
+    float m_speed = 5.0f;
 //    Gravity m_G;
 //    AnchoredSpring m_S = AnchoredSpring(Vector3d(5, 0, 0), 155, 1);
 

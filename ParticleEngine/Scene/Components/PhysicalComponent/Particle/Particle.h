@@ -16,7 +16,7 @@ private:
 private:
     // State
     float mass;
-    bool isKinematic = false;
+    bool isKinematic = true;
 //    float m_friction;
 
     // Resulting force
@@ -47,6 +47,8 @@ public:
     /// </summary>
     /// <param name="particle"></param>
     Particle(const Particle &particle);
+
+    ~Particle() override;
 
 #pragma endregion
 #pragma region Methode
@@ -82,26 +84,29 @@ public:
 
     void addForce(ForceGenerator *forceGenerator);
 
-//
-//    template<typename T>
-//    void addComponentByClass(T *&c) {
-//        c = new T(this);
-//        if (c != nullptr) {
-//            components.push_back(c);
-//        }
-//    }
-//
-//    Component *getComponentByName(const std::string &name) const;
-//
-//    template<class T>
-//    void getComponentByClass(T *&c) {
-//        for (auto &component: components) {
-//            if (dynamic_cast<T *>(component) != nullptr) {
-//                c = dynamic_cast<T *>(component);
-//            }
-//        }
-//    }
-//
+    void addForceByName(const std::string &forceName);
+
+    template<typename T>
+    void addForceByClass(T *&c) {
+        c = new T(this);
+        if (c != nullptr) {
+            forceGeneratorsList.push_back(c);
+        }
+    }
+
+    ForceGenerator *getForceByName(const std::string &name) const;
+
+    template<class T>
+    void getForceByClass(T *&c) {
+        for (auto &force: forceGeneratorsList) {
+            if (dynamic_cast<T *>(force) != nullptr) {
+                c = dynamic_cast<T *>(force);
+            }
+        }
+    }
+
+    bool hadForce(const std::string &name) const;
+
 //    void deleteComponentByName(const std::string &name);
 //
 //    template<class T>

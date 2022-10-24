@@ -74,13 +74,13 @@ public:
 
     void addComponentByName(const std::string &name);
 
-    template<typename T>
-    void addComponentByClass(T *&c) {
-        c = new T(this);
-        if (c != nullptr) {
-            components.push_back(c);
-        }
-    }
+//    template<typename T>
+//    void addComponentByClass(T *&c) {
+//        c = new T(this);
+//        if (c != nullptr) {
+//            components.push_back(c);
+//        }
+//    }
 
     Component *getComponentByName(const std::string &name) const;
 

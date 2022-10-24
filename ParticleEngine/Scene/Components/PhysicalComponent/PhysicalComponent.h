@@ -6,7 +6,7 @@
 class PhysicalComponent : public virtual Component {
 protected:
     PhysicalComponent() = default;
-    
+
 private:
     static constexpr const char *COMPONENT_TYPE = "PhysicalComponent";
 
