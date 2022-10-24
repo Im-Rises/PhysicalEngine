@@ -3,6 +3,7 @@
 #include "imgui/imgui.h"
 #include "../../../GameObject.h"
 #include "../../../../Utility/imGuiUtility.h"
+#include <algorithm>
 
 Particle::Particle(GameObject *gameObject) : Component(gameObject) {
     speed = {0, 0, 0};
@@ -23,6 +24,12 @@ Particle::Particle(const Particle &particle) : Component(particle.m_gameObject) 
     mass = particle.mass;
 }
 
+Particle::~Particle() {
+    for (auto &force: forceGeneratorsList) {
+        delete force;
+    }
+}
+
 void Particle::update(float deltaTime) {
     // Update sum of forces
     if (isKinematic) {
@@ -36,7 +43,6 @@ void Particle::update(float deltaTime) {
     // Update acceleration, speed and position
     calculateAcceleration();
     calculateSpeed(deltaTime);
-    // Calculate position here ?
 
     // Reset the netForce for the next frame
     netForce = Vector3d();
@@ -107,9 +113,11 @@ void Particle::drawGui() {
 
     std::string forcesListText = "Forces list";
     std::string addForcesText = "Add forces";
+    std::string deleteForcesText = "Delete forces";
     // Forces list and add force
     ImGuiUtility::AlignForWidth((ImGuiUtility::CalculateTextWidth(forcesListText.c_str()) +
-                                 ImGuiUtility::CalculateTextWidth(addForcesText.c_str())));
+                                 ImGuiUtility::CalculateTextWidth(addForcesText.c_str()) +
+                                 ImGuiUtility::CalculateTextWidth(deleteForcesText.c_str())));
 
     // Forces list
     if (ImGui::Button(forcesListText.c_str())) {
@@ -139,10 +147,44 @@ void Particle::drawGui() {
         }
         ImGui::EndPopup();
     }
+
+    ImGui::SameLine();
+
+    // Delete force
+    if (ImGui::Button(deleteForcesText.c_str())) {
+        ImGui::OpenPopup("ParticleDeleteForce##ParticleDeleteForcePopup");
+    }
+    if (ImGui::BeginPopup("ParticleDeleteForce##ParticleDeleteForcePopup")) {
+        for (auto &forceGenerator: forceGeneratorsList) {
+            if (ImGui::MenuItem(forceGenerator->getName().c_str())) {
+                deleteForceByClass(forceGenerator);
+            }
+        }
+        ImGui::EndPopup();
+    }
 }
 
 void Particle::addForce(ForceGenerator *forceGenerator) {
     forceGeneratorsList.push_back(forceGenerator);
+}
+
+void Particle::addForceByName(const std::string &forceName) {
+    addForce(ForceGenerator::createForceGenerator(forceName, m_gameObject));
+}
+
+ForceGenerator *Particle::getForceByName(const std::string &name) const {
+    for (auto &force: forceGeneratorsList) {
+        if (force->getName() == name)
+            return static_cast<ForceGenerator *>(force);
+    }
+    return nullptr;
+}
+
+bool Particle::hasForce(const std::string &name) const {
+    std::any_of(forceGeneratorsList.begin(), forceGeneratorsList.end(), [&name](ForceGenerator *forceGenerator) {
+        return forceGenerator->getName() == name;
+    });
+    return false;
 }
 
 std::string Particle::getName() const {
@@ -173,8 +215,8 @@ void Particle::setSpeed(float x, float y, float z) {
     speed = Vector3d(x, y, z);
 }
 
-void Particle::setSpeed(const Vector3d &speed) {
-    this->speed = speed;
+void Particle::setSpeed(const Vector3d &s) {
+    this->speed = s;
 }
 
 void Particle::setAcceleration(float x, float y, float z) {
@@ -189,7 +231,4 @@ float Particle::getMass() const { return mass; }
 
 const Vector3d &Particle::getNetForce() const { return netForce; }
 
-
 void Particle::setNetForce(const Vector3d &force) { netForce = force; }
-
-

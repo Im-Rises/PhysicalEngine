@@ -26,6 +26,10 @@ protected:
     GameObject *parentGameObject = nullptr;
 
 public:
+//    ForceGenerator();
+
+    virtual ~ForceGenerator();
+
     explicit ForceGenerator(GameObject *gameObject = nullptr);
 
     virtual void addForce(Particle *particle) = 0;

@@ -1,7 +1,11 @@
 #include "ParticleCollide.h"
 
-void ParticleCollide::addCollider(ParticleCollider particleCollider) {
+ParticleCollide::ParticleCollide(float elast) {
+    elasticity=elast;
+}
 
+void ParticleCollide::addCollider(ParticleCollider particleCollider) {
+	m_colliders.push_back(particleCollider);
 }
 
 int ParticleCollide::addContact(ParticleContact *particleContact, unsigned int limit, unsigned int current) {
@@ -13,6 +17,7 @@ int ParticleCollide::addContact(ParticleContact *particleContact, unsigned int l
                 float distance = particle0->getPosition().distance(particle1->getPosition());
                 float sumRadius = m_colliders[i].getRadius() + m_colliders[j].getRadius();
                 if (distance < sumRadius) {
+					particleContact[current].SetParticles(particle0, particle1);
                     particleContact[current].setPenetration(sumRadius - distance);
                     particleContact[current].setElasticity(elasticity);
                     Vector3d normalParticle = particle0->getPosition() - particle1->getPosition();

@@ -8,6 +8,7 @@ class ParticleContactResolver {
 private:
     unsigned int m_maxIterations;
 
+
 public:
 
     explicit ParticleContactResolver(unsigned int maxIterations);

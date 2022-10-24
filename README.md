@@ -18,9 +18,9 @@ It is implemented using Fixed Framerate and Component Oriented Programming.
 
 ## Images
 
-| User Interface view                                                                                                         |
-|-----------------------------------------------------------------------------------------------------------------------------|
-| ![previw_screenshot](https://user-images.githubusercontent.com/59691442/196303021-781cf236-4bab-4523-9f08-2a85c7dd491c.png) |
+| User Interface view                                                                                                          |
+|------------------------------------------------------------------------------------------------------------------------------|
+| ![preview_screenshot](https://user-images.githubusercontent.com/59691442/196303021-781cf236-4bab-4523-9f08-2a85c7dd491c.png) |
 
 [//]: # (|                                                    Mesh view                                                     |                                                  Wireframe view                                                  |)
 
@@ -36,7 +36,7 @@ PLACEHOLDER
 
 ## Report
 
-You can find a journal log [here](report/development_log_MOREL_REBOUL_CLAVEL.pdf).  
+You can find a journal log [here](report/development_log_phase1_REBOUL_CLAVEL_MOREL.pdf).  
 It is also located in the `report` folder.
 
 ## Quickstart
@@ -111,7 +111,7 @@ Then you can start by double-clicking the executable of typing the following com
 
 ### Game controls
 
-TO modify the speed value, you can use the ImGui window named `Speed handler`.
+To modify the speed value, you can use the ImGui window named `Speed handler`.
 
 | Action                 | Key |
 |------------------------|-----|
@@ -169,12 +169,12 @@ ParticleEngine
 |  ├── ParticleEngine.cpp
 |  ├── ParticleEngine.h
 ├── test
-|  ├── TestParticule
+|  ├── TestParticle
 │  │   |── *
 |  ├── CMakeLists.txt
 |  ├── integratorTest.cpp
 |  ├── physicHandlerTest.cpp
-|  ├── particuleTest.cpp
+|  ├── particleTest.cpp
 ├── .clang-format
 ├── .editorconfig
 ├── .gitattributes
