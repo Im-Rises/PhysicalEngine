@@ -10,7 +10,7 @@
 #include "Components/PhysicalComponent/Particle/Particle.h"
 #include "Components/Collider/Collider.h"
 
-Scene::Scene(int windowWidth, int windowHeight):  particleCollide(0) {
+Scene::Scene(int windowWidth, int windowHeight):  particleCollide(1) {
     this->windowWidth = windowWidth;
     this->windowHeight = windowHeight;
 //    gameObjects.push_back(new GameObject(Cube(1)));
