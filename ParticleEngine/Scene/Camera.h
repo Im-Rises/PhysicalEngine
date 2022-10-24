@@ -15,7 +15,7 @@ public:
     glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
     glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
-    float cameraMoveSpeed = 0.05f;
+    float cameraMoveSpeed = 0.4f;
     float cameraSensitivity = 0.1f;
 
     float yaw = -90.0f;
