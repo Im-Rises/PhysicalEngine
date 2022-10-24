@@ -23,10 +23,10 @@ private:
     static constexpr const char *FORCE_TYPE = "ForceGenerator";
 
 protected:
-    GameObject *m_gameObject = nullptr;
+    GameObject *parentGameObject = nullptr;
 
 public:
-    ForceGenerator(GameObject *gameObject = nullptr);
+    explicit ForceGenerator(GameObject *gameObject = nullptr);
 
     virtual void addForce(Particle *particle) = 0;
 

@@ -44,7 +44,6 @@ void Spring::addForce(Particle *particle) {
 void Spring::calculateForce(Particle *particle, Particle *otherParticle) {
     float delta = otherParticle->distance(*particle);
 
-    std::cout << "---------Calculate---------" << delta << std::endl;
     Vector3d F;
     if (delta > m_restLength) {
         Vector3d vec1 = particle->getPosition();
@@ -75,7 +74,7 @@ void Spring::drawGui(Scene *scene) {
         if (ImGui::BeginPopup("Add spring##SpringPopup")) {
             for (auto &selectableOtherGameObject: scene->getGameObjects()) {
                 if (selectableOtherGameObject->hasComponentByName(PARTICLE_COMPONENT) &&
-                    selectableOtherGameObject != m_gameObject) {
+                    selectableOtherGameObject != parentGameObject) {
                     std::string nameLabel =
                             selectableOtherGameObject->getName() + "##Spring" + selectableOtherGameObject->getName();
                     ImGui::Selectable(nameLabel.c_str(), m_otherGameObject == selectableOtherGameObject);

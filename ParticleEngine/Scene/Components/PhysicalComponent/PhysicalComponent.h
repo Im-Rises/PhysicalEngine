@@ -3,20 +3,20 @@
 
 #include "../Component.h"
 
-class PhysicalComponent : public Component {
+class PhysicalComponent : public virtual Component {
+protected:
+    PhysicalComponent() = default;
+    
 private:
-//    static constexpr const char *COMPONENT_TYPE = "PhysicalComponent";
+    static constexpr const char *COMPONENT_TYPE = "PhysicalComponent";
 
-public:
-//    PhysicalComponent();
-//
-//    ~PhysicalComponent();
-//
-//    void update(float time) override;
-//
-//    void drawGui() override;
-//
-//    std::string getName() const override;
+    void update(float time) override = 0;
+
+    void drawGui() override = 0;
+
+    std::string getName() const override = 0;
+
+
 };
 
 

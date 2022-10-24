@@ -13,7 +13,7 @@ const char *ForceGenerator::forcesNamesList[] = {DRAG_FORCE, ANCHORED_SPRING_FOR
                                                  BUOYANCY_FORCE, SPRING_FORCE};
 
 ForceGenerator::ForceGenerator(GameObject *gameObject) {
-    m_gameObject = gameObject;
+    parentGameObject = gameObject;
 }
 
 void ForceGenerator::drawGui(Scene *scene) {

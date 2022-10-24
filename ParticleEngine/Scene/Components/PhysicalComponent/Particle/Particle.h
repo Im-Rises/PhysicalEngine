@@ -9,7 +9,7 @@
 
 class ForceGenerator;
 
-class Particle : public Component {
+class Particle : public PhysicalComponent {
 private:
     static constexpr const char *COMPONENT_TYPE = PARTICLE_COMPONENT;
 
