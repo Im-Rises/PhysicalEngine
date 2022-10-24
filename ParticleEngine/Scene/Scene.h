@@ -9,7 +9,7 @@
 #include "Axis.h"
 #include "../Contact/ParticlesContactGeneratorRegistry.h"
 #include "../Contact/ParticleContactResolver.h"
-#include "../Contact/ContactGenerator/ParticleCollide.h"   
+#include "../Contact/ContactGenerator/ParticleCollide.h"
 
 class GameObject;
 
@@ -23,9 +23,9 @@ private:
     Camera camera;
     PhysicHandler physicHandler;
     std::vector<GameObject *> gameObjects;
-	ParticleContactGeneratorRegistry particleContactGeneratorRegistry= ParticleContactGeneratorRegistry(1000000);
-	ParticleContactResolver particleContactResolver=ParticleContactResolver(2000000);
-	ParticleCollide particleCollide;
+    ParticleContactGeneratorRegistry particleContactGeneratorRegistry = ParticleContactGeneratorRegistry(1000000);
+    ParticleContactResolver particleContactResolver = ParticleContactResolver(2000000);
+    ParticleCollide particleCollide;
 
     // View settings
     bool wireFrame = false;
@@ -33,7 +33,6 @@ private:
 
     // OpenGL framebuffer
     unsigned int fbo;
-
 
 
 public:
@@ -62,7 +61,7 @@ public:
     void setCameraPosition(const Vector3d &position);
 
 public:
-	ParticleContactGeneratorRegistry getParticleContactGeneratorRegistry();
+    ParticleContactGeneratorRegistry getParticleContactGeneratorRegistry();
 
     void addParticleCollider(ParticleCollider particleCollider);
 
@@ -75,6 +74,8 @@ public:
     bool *getPtrShowAxis();
 
     GameObject *getPtrGameObjectByIndex(int index) const;
+
+    Camera *getCameraPtr();
 };
 
 #endif //SCENE_H

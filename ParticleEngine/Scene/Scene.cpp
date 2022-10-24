@@ -10,13 +10,13 @@
 #include "Components/PhysicalComponent/Particle/Particle.h"
 #include "Components/Collider/Collider.h"
 
-Scene::Scene(int windowWidth, int windowHeight):  particleCollide(1) {
+Scene::Scene(int windowWidth, int windowHeight) : particleCollide(1) {
     this->windowWidth = windowWidth;
     this->windowHeight = windowHeight;
 //    gameObjects.push_back(new GameObject(Cube(1)));
 //    gameObjects.push_back(new GameObject(Sphere(1, 20, 20)));
 //    gameObjects.push_back(new GameObject(MyCube(1)));
-	particleContactGeneratorRegistry.addParticleGenerator(&particleCollide);
+    particleContactGeneratorRegistry.addParticleGenerator(&particleCollide);
     create();
 }
 
@@ -70,10 +70,10 @@ void Scene::update(float deltaTime) {
 
 
     // Detect collision
-	ParticleContact* particleContacts = particleContactGeneratorRegistry.generateAllContacts();
+    ParticleContact *particleContacts = particleContactGeneratorRegistry.generateAllContacts();
 
     // Resolve collisions
-	ParticleContact test = particleContacts[0];
+    ParticleContact test = particleContacts[0];
     particleContactResolver.resolveContact(particleContacts, particleContactGeneratorRegistry.getSize(), deltaTime);
 }
 
@@ -97,7 +97,7 @@ void Scene::addGameObject(GameObject *gameObject) {
 }
 
 void Scene::translateCamera(const Vector3d &vector3D) {
-    camera.translate(vector3D);
+//    camera.translate(vector3D);
 }
 
 //void Scene::rotateCamera(Vector3d vector3D, float angle) {
@@ -105,11 +105,11 @@ void Scene::translateCamera(const Vector3d &vector3D) {
 //}
 
 void Scene::setCameraPosition(const Vector3d &position) {
-    camera.setPosition(position);
+//    camera.setPosition(position);
 }
 
 ParticleContactGeneratorRegistry Scene::getParticleContactGeneratorRegistry() {
-	return particleContactGeneratorRegistry;
+    return particleContactGeneratorRegistry;
 }
 
 unsigned int Scene::getFrameBufferId() const {
@@ -117,7 +117,7 @@ unsigned int Scene::getFrameBufferId() const {
 }
 
 void Scene::addParticleCollider(ParticleCollider particleCollider) {
-	particleCollide.addCollider(particleCollider);
+    particleCollide.addCollider(particleCollider);
 }
 
 
@@ -140,6 +140,10 @@ bool *Scene::getPtrShowAxis() {
 
 GameObject *Scene::getPtrGameObjectByIndex(int index) const {
     return gameObjects[index];
+}
+
+Camera *Scene::getCameraPtr() {
+    return &camera;
 }
 
 

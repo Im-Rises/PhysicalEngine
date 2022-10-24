@@ -16,7 +16,7 @@ private:
 private:
     // State
     float mass;
-    bool isKinematic = true;
+    bool isKinematic = false;
 //    float m_friction;
 
     // Resulting force

@@ -82,6 +82,31 @@ void InputManager::keyReleased(GLFWwindow *window, int key, ParticleEngineLaunch
 }
 
 void InputManager::keyRepeated(GLFWwindow *window, int key, ParticleEngineLauncher *engine) {
+    Camera *camera = engine->scene->getCameraPtr();
+    switch (key) {
+        case GLFW_KEY_UP: {
+            camera->cameraPos += camera->cameraSpeed * camera->cameraFront;
+            break;
+        }
+        case GLFW_KEY_DOWN: {
+            camera->cameraPos -= camera->cameraSpeed * camera->cameraFront;
+            break;
+        }
+        case GLFW_KEY_LEFT: {
+            camera->cameraPos -=
+                    glm::normalize(glm::cross(camera->cameraFront, camera->cameraUp)) * camera->cameraSpeed;
+            break;
+        }
+        case GLFW_KEY_RIGHT : {
+            camera->cameraPos +=
+                    glm::normalize(glm::cross(camera->cameraFront, camera->cameraUp)) * camera->cameraSpeed;
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+
     //switch (key) {
     //    case GLFW_KEY_UP: {
     //        engine->scene->translateCamera(Vector3d(0, 0, translationSpeed));
