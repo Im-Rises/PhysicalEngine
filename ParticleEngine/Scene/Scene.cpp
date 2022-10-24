@@ -6,17 +6,17 @@
 #include "Components/Mesh/Cuboid/Cube.h"
 #include "Components/Mesh/Cuboid/CuboidRectangle.h"
 #include "Components/Mesh/Sphere/Sphere.h"
-
 #include "glad/glad.h"
 #include "Components/PhysicalComponent/Particle/Particle.h"
 #include "Components/Collider/Collider.h"
 
-Scene::Scene(int windowWidth, int windowHeight) {
+Scene::Scene(int windowWidth, int windowHeight):  particleCollide(1) {
     this->windowWidth = windowWidth;
     this->windowHeight = windowHeight;
 //    gameObjects.push_back(new GameObject(Cube(1)));
 //    gameObjects.push_back(new GameObject(Sphere(1, 20, 20)));
 //    gameObjects.push_back(new GameObject(MyCube(1)));
+	particleContactGeneratorRegistry.addParticleGenerator(&particleCollide);
     create();
 }
 
@@ -68,9 +68,13 @@ void Scene::update(float deltaTime) {
         physicHandler.update(gameObject, deltaTime);
     }
 
+
     // Detect collision
+	ParticleContact* particleContacts = particleContactGeneratorRegistry.generateAllContacts();
 
     // Resolve collisions
+	ParticleContact test = particleContacts[0];
+    particleContactResolver.resolveContact(particleContacts, particleContactGeneratorRegistry.getSize(), deltaTime,particleContactGeneratorRegistry);
 }
 
 void Scene::draw(int display_w, int display_h) {
@@ -104,9 +108,18 @@ void Scene::setCameraPosition(const Vector3d &position) {
     camera.setPosition(position);
 }
 
+ParticleContactGeneratorRegistry Scene::getParticleContactGeneratorRegistry() {
+	return particleContactGeneratorRegistry;
+}
+
 unsigned int Scene::getFrameBufferId() const {
     return fbo;
 }
+
+void Scene::addParticleCollider(ParticleCollider particleCollider) {
+	particleCollide.addCollider(particleCollider);
+}
+
 
 std::vector<GameObject *> &Scene::getGameObjects() {
     return gameObjects;
