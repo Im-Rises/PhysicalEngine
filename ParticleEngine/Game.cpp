@@ -18,7 +18,7 @@ void Game::start(Scene *scene) {
     scene->addGameObject(particlePrefab);
     particlePrefab->getComponentByClass(m_p);
     auto *particlePrefabNew = new ParticlePrefab(scene);
-	particlePrefabNew->transform.setPosition(0, 1.5, 0);
+	particlePrefabNew->transform.setPosition(0, 2.5, 0);
     scene->addGameObject(particlePrefabNew);
 
 //    for (int i = 0; i < 10; i++) {

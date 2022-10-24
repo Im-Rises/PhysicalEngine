@@ -14,8 +14,8 @@ void ParticleContact::resolveSpeed() {
     m2 = m_particules[1]->getMass();
     vrel = m_particules[0]->getSpeed() - m_particules[1]->getSpeed();
     k = (m_collision_elasticity + 1) * (vrel.dot(m_contactNormal)) / ((1 / m1) + (1 / m2));
-    m_particules[0]->setSpeed(m_particules[0]->getSpeed() + m_contactNormal * (k / m1));
-    m_particules[1]->setSpeed(m_particules[1]->getSpeed() - m_contactNormal * (k / m2));
+    m_particules[0]->setSpeed(m_particules[0]->getSpeed() - m_contactNormal * (k / m1));
+    m_particules[1]->setSpeed(m_particules[1]->getSpeed() + m_contactNormal * (k / m2));
 
 
 }
@@ -68,7 +68,7 @@ void ParticleContact::SetParticles(Particle* particle1, Particle* particle2) {
 
 void ParticleContact::resolve(float time) {
     resolveInterpenetration();
-    //resolveSpeed();
+    resolveSpeed();
 }
 
 float ParticleContact::CalculateSeparatingVelocity() {

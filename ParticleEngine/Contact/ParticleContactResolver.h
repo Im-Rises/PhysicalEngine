@@ -2,7 +2,6 @@
 #define PARTICULE_CONTACT_RESOLVER_H
 
 #include "ParticleContact.h"
-#include "ParticlesContactGeneratorRegistry.h"
 
 class ParticleContactResolver {
 
@@ -15,7 +14,7 @@ public:
     explicit ParticleContactResolver(unsigned int maxIterations);
 
 
-    void resolveContact(ParticleContact *particlesContacts, int size, float time,ParticleContactGeneratorRegistry registry);
+    void resolveContact(ParticleContact *particlesContacts, int size, float time);
 };
 
 #endif // !PARTICULE_CONTACT_RESOLVER_H

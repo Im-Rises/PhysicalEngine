@@ -10,7 +10,7 @@
 #include "Components/PhysicalComponent/Particle/Particle.h"
 #include "Components/Collider/Collider.h"
 
-Scene::Scene(int windowWidth, int windowHeight):  particleCollide(1) {
+Scene::Scene(int windowWidth, int windowHeight):  particleCollide(0) {
     this->windowWidth = windowWidth;
     this->windowHeight = windowHeight;
 //    gameObjects.push_back(new GameObject(Cube(1)));
@@ -74,7 +74,7 @@ void Scene::update(float deltaTime) {
 
     // Resolve collisions
 	ParticleContact test = particleContacts[0];
-    particleContactResolver.resolveContact(particleContacts, particleContactGeneratorRegistry.getSize(), deltaTime,particleContactGeneratorRegistry);
+    particleContactResolver.resolveContact(particleContacts, particleContactGeneratorRegistry.getSize(), deltaTime);
 }
 
 void Scene::draw(int display_w, int display_h) {
