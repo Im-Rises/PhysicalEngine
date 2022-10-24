@@ -90,7 +90,7 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
     //Shader use
     shader.use();
     shader.setMat4("model",
-                   glm::translate(model, glm::vec3(-transform.positionX, -transform.positionY, -transform.positionZ)));
+                   glm::translate(model, glm::vec3(transform.positionX, transform.positionY, transform.positionZ)));
     shader.setMat4("view", view);
     shader.setMat4("projection", projection);
 
