@@ -123,7 +123,6 @@ ParticleEngineLauncher::ParticleEngineLauncher() {
     backgroundColor[3] = 1.00f;
 
     // Setup scene
-//    scene = new Scene(windowWidth, windowHeight);
     scene = std::make_unique<Scene>(windowWidth, windowHeight);
 
     // Bind default frame buffer
@@ -131,8 +130,6 @@ ParticleEngineLauncher::ParticleEngineLauncher() {
 }
 
 ParticleEngineLauncher::~ParticleEngineLauncher() {
-//    delete scene;
-
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
@@ -150,6 +147,7 @@ ParticleEngineLauncher::~ParticleEngineLauncher() {
 void ParticleEngineLauncher::start() {
     auto start = std::chrono::steady_clock::now();
 
+    // Create game (generate game objects into the scene)
     game.start(scene.get());
 
     //Game loop

@@ -11,11 +11,13 @@
 
 #define PROJECT_GITHUB "https://github.com/Im-Rises/ParticleEngine"
 
+
+//// Physical update
+//const int PHYSICAL_UPDATE_PER_SECOND = 50;
+
 #include <chrono>
 #include "Game.h"
 #include "Scene/Scene.h"
-
-//class Scene;
 
 class InputManager;
 
@@ -23,30 +25,24 @@ class GameObject;
 
 struct GLFWwindow;
 
-//Class declaration
 class ParticleEngineLauncher {
     friend class InputManager;
 
 private:
     // Window, Scene and Game objects
     GLFWwindow *window = nullptr;
-    Game game;
-//    Scene *scene = nullptr;
-//    Scene scene;
     std::unique_ptr<Scene> scene;
-
-    // Physical update
-    const int PHYSICAL_UPDATE_PER_SECOND = 50;
+    Game game;
 
     // Window variables
     bool isFullScreen = false;
     float backgroundColor[4] = {};
     int windowWidth = 1580, windowHeight = 720;
 
-    // Variables for the game loop
+    // Selected GameObject in the scene
     GameObject *gameObject = nullptr;
 
-    // Widgets variables
+    // Widgets terminal variables
     char consoleBuffer[1024] = {};
 
 public:
