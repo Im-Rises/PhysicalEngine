@@ -4,8 +4,6 @@
 
 #include "Components/Component.h"
 #include "Components/PhysicalComponent/Particle/Particle.h"
-#include "Components/PhysicalComponent/Particle/Particle.h"
-#include "Components/PhysicalComponent/Particle/Particle.h"
 
 
 GameObject::GameObject(Scene *scene) {

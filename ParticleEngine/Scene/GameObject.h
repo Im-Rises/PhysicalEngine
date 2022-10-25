@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <map>
+#include <algorithm>
 #include "../Shader/Shader.h"
 #include "../Utility/Vector3d.h"
 
@@ -39,7 +40,7 @@ public:
     // std::vector<GameObject *> children;
 
 public:
-    GameObject(Scene *scene);
+    explicit GameObject(Scene *scene);
 
     explicit GameObject(Scene *scene, Mesh *mesh);
 
@@ -74,13 +75,13 @@ public:
 
     void addComponentByName(const std::string &name);
 
-//    template<typename T>
-//    void addComponentByClass(T *&c) {
-//        c = new T(this);
-//        if (c != nullptr) {
-//            components.push_back(c);
-//        }
-//    }
+    template<typename T>
+    void addComponentByClass(T *&c) {
+        c = new T(this);
+        if (c != nullptr) {
+            components.push_back(c);
+        }
+    }
 
     Component *getComponentByName(const std::string &name) const;
 
@@ -97,12 +98,19 @@ public:
 
     template<class T>
     bool hasComponentByClass(T *&c) {
-        for (auto &component: components) {
+        std::any_of(components.begin(), components.end(), [&](Component *component) {
             if (dynamic_cast<T *>(component) != nullptr) {
+                c = dynamic_cast<T *>(component);
                 return true;
             }
-        }
-        return false;
+            return false;
+        });
+//        for (auto &component: components) {
+//            if (dynamic_cast<T *>(component) != nullptr) {
+//                return true;
+//            }
+//        }
+//        return false;
     }
 
     void deleteComponentByName(const std::string &name);

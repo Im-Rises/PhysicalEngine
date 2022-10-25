@@ -22,8 +22,8 @@ void Game::start(Scene *s) {
 //    auto *particlePrefabNew = new ParticlePrefab(scene);
 //    scene->addGameObject(particlePrefabNew);
 
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 5; ++j) {
+    for (int i = 0; i < 20; i++) {
+        for (int j = 0; j < 25; ++j) {
             auto *particlePrefabNew = new ParticlePrefab(scene);
             particlePrefabNew->transform.setPosition({(float) i * 2, (float) j * 2, 0});
             scene->addGameObject(particlePrefabNew);
