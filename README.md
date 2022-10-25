@@ -188,13 +188,14 @@ ParticleEngine
 
 ## Dependencies
 
-- C++14
+- C++ 14
 - CMake
 - C++ compiler (MSVC, Mingw, ...)
 - Glad
-- GLFW
-- OpenGl 3.3
-- Dear ImGui
+- GLFW (3.3.8)
+- OpenGl (3.3)
+- Dear ImGui (1.88)
+- glm (0.9.8.5)
 
 ## Compilation
 
