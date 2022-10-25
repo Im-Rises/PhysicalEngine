@@ -2,7 +2,7 @@
 
 ParticleContactGeneratorRegistry::ParticleContactGeneratorRegistry(unsigned int maxSize) {
     m_allContact = new ParticleContact[maxSize];
-	m_maxSize = maxSize;
+    m_maxSize = maxSize;
 }
 
 void ParticleContactGeneratorRegistry::addParticleGenerator(ParticleContactGenerator *particleContactGenerator) {
@@ -14,11 +14,15 @@ std::vector<ParticleContactGenerator *> ParticleContactGeneratorRegistry::GetPar
 }
 
 unsigned int ParticleContactGeneratorRegistry::getSize() {
-	return m_size;
+    return m_size;
 }
 
 ParticleContactGeneratorRegistry::~ParticleContactGeneratorRegistry() {
-    delete m_allContact;
+    delete[] m_allContact;
+
+    // for (auto& particleContactGenerator : m_particlesContactGenerators) {
+    //     delete particleContactGenerator;
+    // }
 }
 
 ParticleContact *ParticleContactGeneratorRegistry::generateAllContacts() {
@@ -26,6 +30,6 @@ ParticleContact *ParticleContactGeneratorRegistry::generateAllContacts() {
     for (int i = 0; i < m_particlesContactGenerators.size() && current < m_maxSize; i++) {
         current = m_particlesContactGenerators[i]->addContact(m_allContact, m_maxSize, current);
     }
-	m_size = current;
+    m_size = current;
     return m_allContact;
 }

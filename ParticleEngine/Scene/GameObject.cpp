@@ -152,11 +152,9 @@ Component *GameObject::getComponentByName(const std::string &name) const {
 }
 
 bool GameObject::hasComponentByName(const std::string &name) const {
-    for (auto &component: components) {
-        if (component->getName() == name) {
-            return true;
-        }
-    }
+    std::any_of(components.begin(), components.end(), [&name](Component *component) {
+        return component->getName() == name;
+    });
     return false;
 }
 

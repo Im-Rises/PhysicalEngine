@@ -130,6 +130,8 @@ ParticleEngineLauncher::ParticleEngineLauncher() {
 }
 
 ParticleEngineLauncher::~ParticleEngineLauncher() {
+	delete scene;
+
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();

@@ -19,6 +19,9 @@ private:
     // OpenGL variables
     unsigned int VBO, VAO, EBO;
     Shader shader;
+//    static unsigned int shaderCount;
+    // static Shader defaultShader;
+
 
 protected:
     // Object name
@@ -103,14 +106,8 @@ public:
                 c = dynamic_cast<T *>(component);
                 return true;
             }
-            return false;
-        });
-//        for (auto &component: components) {
-//            if (dynamic_cast<T *>(component) != nullptr) {
-//                return true;
-//            }
-//        }
-//        return false;
+		});
+		return false;
     }
 
     void deleteComponentByName(const std::string &name);

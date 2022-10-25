@@ -1,7 +1,6 @@
 #include "Game.h"
 
 #include "Scene/GameObject.h"
-#include "Scene/Components/Mesh/Sphere/Sphere.h"
 #include "Scene/Scene.h"
 #include "Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "Scene/Prefabs/ParticlePrefab.h"
