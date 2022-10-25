@@ -5,7 +5,7 @@
 
 #define VERSION_MAJOR "0"
 #define VERSION_MINOR "4"
-#define VERSION_PATCH "0"
+#define VERSION_PATCH "1"
 
 #define PROJECT_VERSION VERSION_MAJOR "." VERSION_MINOR "." VERSION_PATCH
 
@@ -13,8 +13,9 @@
 
 #include <chrono>
 #include "Game.h"
+#include "Scene/Scene.h"
 
-class Scene;
+//class Scene;
 
 class InputManager;
 
@@ -28,10 +29,11 @@ class ParticleEngineLauncher {
 
 private:
     // Window, Scene and Game objects
-    GLFWwindow *window;
+    GLFWwindow *window = nullptr;
     Game game;
-    Scene *scene;
-    //    std::unique_ptr<Scene> scene;
+//    Scene *scene = nullptr;
+//    Scene scene;
+    std::unique_ptr<Scene> scene;
 
     // Physical update
     const int PHYSICAL_UPDATE_PER_SECOND = 50;

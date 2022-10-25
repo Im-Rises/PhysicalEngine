@@ -181,10 +181,9 @@ ForceGenerator *Particle::getForceByName(const std::string &name) const {
 }
 
 bool Particle::hasForce(const std::string &name) const {
-    std::any_of(forceGeneratorsList.begin(), forceGeneratorsList.end(), [&name](ForceGenerator *forceGenerator) {
+    return std::any_of(forceGeneratorsList.begin(), forceGeneratorsList.end(), [&name](ForceGenerator *forceGenerator) {
         return forceGenerator->getName() == name;
     });
-    return false;
 }
 
 std::string Particle::getName() const {

@@ -1,6 +1,6 @@
-//#include "TestParticule/TestParticule.h"
+//#include "TestParticle/TestParticle.h"
 
 int main() {
-//    TestParticule t;
-//    return t.TestCalculePosition();
+//    TestParticle t;
+//    return t.TestCalculatePosition();
 }

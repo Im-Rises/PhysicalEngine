@@ -5,12 +5,9 @@
 #include "Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "Scene/Prefabs/ParticlePrefab.h"
 
-Game::Game() {
-    // Generate particles here
-}
+Game::Game() = default;
 
-Game::~Game() {
-}
+Game::~Game() = default;
 
 void Game::start(Scene *s) {
     this->scene = s;

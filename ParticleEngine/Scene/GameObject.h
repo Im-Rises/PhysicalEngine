@@ -16,6 +16,9 @@ class Component;
 
 class GameObject {
 private:
+    static unsigned int idCounter;
+
+private:
     // OpenGL variables
     unsigned int VBO, VAO, EBO;
     Shader shader;
@@ -24,6 +27,9 @@ private:
 
 
 protected:
+    // Id
+    unsigned int id;
+
     // Object name
     std::string gameObjectName;
 
@@ -101,13 +107,12 @@ public:
 
     template<class T>
     bool hasComponentByClass(T *&c) {
-        std::any_of(components.begin(), components.end(), [&](Component *component) {
+        return std::any_of(components.begin(), components.end(), [&](Component *component) {
             if (dynamic_cast<T *>(component) != nullptr) {
                 c = dynamic_cast<T *>(component);
                 return true;
             }
-		});
-		return false;
+        });
     }
 
     void deleteComponentByName(const std::string &name);

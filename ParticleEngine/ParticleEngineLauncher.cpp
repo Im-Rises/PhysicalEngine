@@ -75,10 +75,10 @@ ParticleEngineLauncher::ParticleEngineLauncher() {
 #endif
 
     // Create window with graphics context
-    window = glfwCreateWindow(windowWidth, windowHeight, PROJECT_NAME, NULL, NULL);
+    window = glfwCreateWindow(windowWidth, windowHeight, PROJECT_NAME, nullptr, nullptr);
 
     // Check if window was created
-    if (window == NULL)
+    if (window == nullptr)
         exit(1);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // Enable vsync
@@ -123,14 +123,15 @@ ParticleEngineLauncher::ParticleEngineLauncher() {
     backgroundColor[3] = 1.00f;
 
     // Setup scene
-    scene = new Scene(windowWidth, windowHeight);
+//    scene = new Scene(windowWidth, windowHeight);
+    scene = std::make_unique<Scene>(windowWidth, windowHeight);
 
     // Bind default frame buffer
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 ParticleEngineLauncher::~ParticleEngineLauncher() {
-	delete scene;
+//    delete scene;
 
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
@@ -149,7 +150,7 @@ ParticleEngineLauncher::~ParticleEngineLauncher() {
 void ParticleEngineLauncher::start() {
     auto start = std::chrono::steady_clock::now();
 
-    game.start(scene);
+    game.start(scene.get());
 
     //Game loop
     while (!glfwWindowShouldClose(window)) {
@@ -285,7 +286,7 @@ void ParticleEngineLauncher::handleGui() {
                 static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
 
                 if (ImPlot::BeginPlot("GameObject Speed##Rolling", ImVec2(-1, 150))) {
-                    ImPlot::SetupAxes(NULL, NULL, flags, flags);
+                    ImPlot::SetupAxes(nullptr, nullptr, flags, flags);
                     ImPlot::SetupAxisLimits(ImAxis_X1, 0, history, ImGuiCond_Always);
                     ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1);
                     ImPlot::PlotLine("Speed X##ImPlotSpeedX", &rdata1.Data[0].x, &rdata1.Data[0].y, rdata1.Data.size(),
@@ -416,7 +417,7 @@ void ParticleEngineLauncher::toggleFullScreen() {
     if (isFullScreen) {
         auto xPos = mode->width / 2 - windowWidth / 2;
         auto yPos = mode->height / 2 - windowHeight / 2;
-        glfwSetWindowMonitor(window, NULL, xPos, yPos, windowWidth, windowHeight, 0);
+        glfwSetWindowMonitor(window, nullptr, xPos, yPos, windowWidth, windowHeight, 0);
         isFullScreen = false;
     } else {
         glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);

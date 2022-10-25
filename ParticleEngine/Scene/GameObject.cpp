@@ -5,8 +5,10 @@
 #include "Components/Component.h"
 #include "Components/PhysicalComponent/Particle/Particle.h"
 
+unsigned int GameObject::idCounter = 0;
 
 GameObject::GameObject(Scene *scene) {
+    id = idCounter++;
     parentScene = scene;
     gameObjectName = "GameObject";
 }
@@ -135,7 +137,7 @@ void GameObject::drawMeshGui() {
 }
 
 std::string GameObject::getName() const {
-    return gameObjectName;
+    return gameObjectName + " " + std::to_string(id);
 }
 
 Scene *GameObject::getScenePtr() const {
@@ -152,10 +154,9 @@ Component *GameObject::getComponentByName(const std::string &name) const {
 }
 
 bool GameObject::hasComponentByName(const std::string &name) const {
-    std::any_of(components.begin(), components.end(), [&name](Component *component) {
+    return std::any_of(components.begin(), components.end(), [&name](Component *component) {
         return component->getName() == name;
     });
-    return false;
 }
 
 void GameObject::deleteComponentByName(const std::string &name) {
@@ -167,6 +168,8 @@ void GameObject::deleteComponentByName(const std::string &name) {
         }
     }
 }
+
+
 
 
 

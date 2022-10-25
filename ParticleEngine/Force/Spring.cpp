@@ -73,8 +73,8 @@ void Spring::drawGui(Scene *scene) {
                                                        : "Selected: None");
         if (ImGui::BeginPopup("Add spring##SpringPopup")) {
             for (auto &selectableOtherGameObject: scene->getGameObjects()) {
-                if (selectableOtherGameObject->hasComponentByName(PARTICLE_COMPONENT) &&
-                    selectableOtherGameObject != parentGameObject) {
+                bool hasParticle = selectableOtherGameObject->hasComponentByName(PARTICLE_COMPONENT);
+                if (hasParticle && selectableOtherGameObject != parentGameObject) {
                     std::string nameLabel =
                             selectableOtherGameObject->getName() + "##Spring" + selectableOtherGameObject->getName();
                     ImGui::Selectable(nameLabel.c_str(), m_otherGameObject == selectableOtherGameObject);
