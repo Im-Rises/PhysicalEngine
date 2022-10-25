@@ -16,8 +16,7 @@ private:
     float elasticity;
 
 public:
-
-    ParticleCollide(float elast);
+    explicit ParticleCollide(float elast);
 
     void addCollider(ParticleCollider particleCollider);
 
