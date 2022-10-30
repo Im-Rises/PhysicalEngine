@@ -8,20 +8,27 @@ void ParticleContact::updateAttributes() {
 }
 
 void ParticleContact::resolveSpeed() {
-    Vector3d vrel;
-    float k, m1, m2;
-    m1 = m_particules[0]->getMass();
-    m2 = m_particules[1]->getMass();
-    vrel = m_particules[0]->getSpeed() - m_particules[1]->getSpeed();
-    k = (m_collision_elasticity + 1) * (vrel.dot(m_contactNormal)) / ((1 / m1) + (1 / m2));
-    m_particules[0]->setSpeed(m_particules[0]->getSpeed() - m_contactNormal * (k / m1));
-    m_particules[1]->setSpeed(m_particules[1]->getSpeed() + m_contactNormal * (k / m2));
-
+	if (m_particules[1] != nullptr) {
+		Vector3d vrel;
+		float k, m1, m2;
+		m1 = m_particules[0]->getMass();
+		m2 = m_particules[1]->getMass();
+		vrel = m_particules[0]->getSpeed() - m_particules[1]->getSpeed();
+		k = (m_collision_elasticity + 1) * (vrel.dot(m_contactNormal)) / ((1 / m1) + (1 / m2));
+		m_particules[0]->setSpeed(m_particules[0]->getSpeed() - m_contactNormal * (k / m1));
+		m_particules[1]->setSpeed(m_particules[1]->getSpeed() + m_contactNormal * (k / m2));
+	}
+	else {
+		Vector3d v1 = m_particules[0]->getSpeed();
+		float km1 = (m_collision_elasticity + 1) * v1.dot(m_contactNormal);
+		m_particules[0]->setSpeed(m_particules[0]->getSpeed() - m_contactNormal * km1);
+	
+    }
 
 }
 
 void ParticleContact::resolveInterpenetration() {
-    if (m_penetration > 0) {
+    if (m_penetration > 0 && m_particules[1]!=nullptr) {
         float dp1, dp2, w1, w2;
         w1 = m_particules[0]->getMass();
         w2 = m_particules[1]->getMass();
@@ -33,6 +40,11 @@ void ParticleContact::resolveInterpenetration() {
 		m_particules[0]->setPosition(p1Pos);
 		m_particules[1]->setPosition(p2Pos);
 
+    }
+    if (m_penetration > 0 && m_particules[1] == nullptr) {
+		Vector3d p1Pos;
+		p1Pos = m_particules[0]->getPosition() + m_contactNormal * m_penetration;
+		m_particules[0]->setPosition(p1Pos);
     }
 }
 
