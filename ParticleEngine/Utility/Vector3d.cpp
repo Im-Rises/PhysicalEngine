@@ -5,133 +5,143 @@
 using namespace std;
 
 Vector3d::Vector3d(float xCoord, float yCoord, float zCoord) {
-    m_x = xCoord;
-    m_y = yCoord;
-    m_z = zCoord;
+    x = xCoord;
+    y = yCoord;
+    z = zCoord;
 }
 
-Vector3d::Vector3d(const Vector3d &vec) {
-    m_x = vec.m_x;
-    m_y = vec.m_y;
-    m_z = vec.m_z;
+Vector3d::Vector3d(const Vector3d& vec) {
+    x = vec.x;
+    y = vec.y;
+    z = vec.z;
+}
+
+Vector3d::Vector3d(Vector3d&& vec) noexcept {
+    x = vec.x;
+    y = vec.y;
+    z = vec.z;
 }
 
 Vector3d::~Vector3d() {
 }
 
 void Vector3d::setx(float xCoord) {
-    m_x = xCoord;
+    x = xCoord;
 }
 
 void Vector3d::sety(float yCoord) {
-    m_y = yCoord;
+    y = yCoord;
 }
 
 void Vector3d::setz(float zCoord) {
-    m_z = zCoord;
+    z = zCoord;
 }
 
 float Vector3d::getx() const {
-    return m_x;
+    return x;
 }
 
 float Vector3d::gety() const {
-    return m_y;
+    return y;
 }
 
 float Vector3d::getz() const {
-    return m_z;
+    return z;
 }
 
-Vector3d Vector3d::operator+(const Vector3d &vec) const {
-    return Vector3d(m_x + vec.m_x, m_y + vec.m_y, m_z + vec.m_z);
+Vector3d Vector3d::operator+(const Vector3d& vec) const {
+    return Vector3d(x + vec.x, y + vec.y, z + vec.z);
 }
 
-Vector3d &Vector3d::operator+=(const Vector3d &vec) {
-    m_x += vec.m_x;
-    m_y += vec.m_y;
-    m_z += vec.m_z;
+Vector3d& Vector3d::operator+=(const Vector3d& vec) {
+    x += vec.x;
+    y += vec.y;
+    z += vec.z;
     return *this;
 }
 
-Vector3d Vector3d::operator-(const Vector3d &vec) const {
-    return Vector3d(m_x - vec.m_x, m_y - vec.m_y, m_z - vec.m_z);
+Vector3d Vector3d::operator-(const Vector3d& vec) const {
+    return Vector3d(x - vec.x, y - vec.y, z - vec.z);
 }
 
-Vector3d &Vector3d::operator-=(const Vector3d &vec) {
-    m_x -= vec.m_x;
-    m_y -= vec.m_y;
-    m_z -= vec.m_z;
+Vector3d& Vector3d::operator-=(const Vector3d& vec) {
+    x -= vec.x;
+    y -= vec.y;
+    z -= vec.z;
     return *this;
 }
 
-Vector3d Vector3d::operator*(float s) const {
-    return {m_x * s, m_y * s, m_z * s};
+Vector3d Vector3d::operator*(float scalar) const {
+    return { x * scalar, y * scalar, z * scalar };
 }
 
-Vector3d &Vector3d::operator*=(float s) {
-    m_x = m_x * s;
-    m_y = m_y * s;
-    m_z = m_z * s;
+Vector3d& Vector3d::operator*=(float scalar) {
+    x = x * scalar;
+    y = y * scalar;
+    z = z * scalar;
     return *this;
 }
 
-Vector3d Vector3d::operator/(float s) {
-    return {m_x / s, m_y / s, m_z / s};
+Vector3d Vector3d::operator/(float scalar) {
+    return { x / scalar, y / scalar, z / scalar };
 }
 
-Vector3d &Vector3d::operator/=(float s) {
-    m_x = m_x / s;
-    m_y = m_y / s;
-    m_z = m_z / s;
+Vector3d& Vector3d::operator/=(float scalar) {
+    x = x / scalar;
+    y = y / scalar;
+    z = z / scalar;
     return *this;
 }
 
-Vector3d &Vector3d::operator=(const Vector3d &vec) {
-    m_x = vec.m_x;
-    m_y = vec.m_y;
-    m_z = vec.m_z;
+Vector3d& Vector3d::operator=(const Vector3d& vec) {
+    x = vec.x;
+    y = vec.y;
+    z = vec.z;
     return *this;
 }
 
-bool Vector3d::operator==(const Vector3d &vec) const {
-    return (m_x == vec.m_x && m_y == vec.m_y && m_z == vec.m_z);
+Vector3d& Vector3d::operator=(Vector3d&& vec) noexcept {
+    return *this;
 }
 
-bool Vector3d::operator!=(const Vector3d &vec) const {
+bool Vector3d::operator==(const Vector3d& vec) const {
+    return (x == vec.x && y == vec.y && z == vec.z);
+}
+
+bool Vector3d::operator!=(const Vector3d& vec) const {
     return !(*this == vec);
 }
 
 float Vector3d::norm() const {
-    return sqrt(m_x * m_x + m_y * m_y + m_z * m_z);
+    return sqrt(x * x + y * y + z * z);
 }
 
 Vector3d Vector3d::normalize() const {
     float n = this->norm();
-    if (n != 0) {
-        return {m_x / n, m_y / n, m_z / n};
-    } else {
-//        std::cerr << "Error: cannot normalize null vector" << std::endl;
-//        exit(1);
-        return {0, 0, 0};
+    if (n != 0)
+    {
+        return { x / n, y / n, z / n };
+    }
+    else
+    {
+        //        std::cerr << "Error: cannot normalize null vector" << std::endl;
+        //        exit(1);
+        return { 0, 0, 0 };
     }
 }
 
-float Vector3d::dot(const Vector3d &vec) const {
-    return m_x * vec.m_x + m_y * vec.m_y + m_z * vec.m_z;
+float Vector3d::dot(const Vector3d& vec) const {
+    return x * vec.x + y * vec.y + z * vec.z;
 }
 
-Vector3d Vector3d::cross(const Vector3d &vec) const {
+Vector3d Vector3d::cross(const Vector3d& vec) const {
     float a, b, c;
-    a = m_y * vec.m_z - m_z * vec.m_y;
-    b = m_z * vec.m_x - m_x * vec.m_z;
-    c = m_x * vec.m_y - m_y * vec.m_x;
-    return {a, b, c};
+    a = y * vec.z - z * vec.y;
+    b = z * vec.x - x * vec.z;
+    c = x * vec.y - y * vec.x;
+    return { a, b, c };
 }
 
-float Vector3d::distance(const Vector3d &vec) const {
+float Vector3d::distance(const Vector3d& vec) const {
     return (*this - vec).norm();
 }
-
-
-

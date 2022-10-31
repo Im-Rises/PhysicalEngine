@@ -11,10 +11,12 @@
 
 #define PROJECT_GITHUB "https://github.com/Im-Rises/ParticleEngine"
 
+#define WINDOW_WIDTH 1580
+#define WINDOW_HEIGHT 720
 
-//// Physical update
-//const int PHYSICAL_UPDATE_PER_SECOND = 50;
+#define CONSOLE_BUFFER_SIZE 1024
 
+#include <array>
 #include <chrono>
 #include "Game.h"
 #include "Scene/Scene.h"
@@ -30,20 +32,20 @@ class ParticleEngineLauncher {
 
 private:
     // Window, Scene and Game objects
-    GLFWwindow *window = nullptr;
-    std::unique_ptr<Scene> scene;
+    GLFWwindow* window = nullptr;
+    Scene* scene;
     Game game;
 
     // Window variables
     bool isFullScreen = false;
-    float backgroundColor[4] = {};
-    int windowWidth = 1580, windowHeight = 720;
+    std::array<float, 4> backgroundColor = {};
+    int windowWidth = WINDOW_WIDTH, windowHeight = WINDOW_HEIGHT;
 
     // Selected GameObject in the scene
-    GameObject *gameObject = nullptr;
+    GameObject* gameObject = nullptr;
 
     // Widgets terminal variables
-    char consoleBuffer[1024] = {};
+    std::array<char, CONSOLE_BUFFER_SIZE> consoleBuffer = {};
 
 public:
     ParticleEngineLauncher();
@@ -57,7 +59,7 @@ private:
 
     void handleGui();
 
-    void updateGame(std::chrono::steady_clock::time_point &start);
+    void updateGame(std::chrono::steady_clock::time_point& start);
 
     void updateScreen();
 
@@ -72,8 +74,7 @@ private:
 
 private:
     void focusCameraOnGameObject();
-
 };
 
 
-#endif //PARTICLE_ENGINE_H
+#endif // PARTICLE_ENGINE_H
