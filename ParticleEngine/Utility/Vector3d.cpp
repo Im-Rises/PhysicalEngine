@@ -16,14 +16,13 @@ Vector3d::Vector3d(const Vector3d& vec) {
     z = vec.z;
 }
 
-Vector3d::Vector3d(Vector3d&& vec) noexcept {
-    x = vec.x;
-    y = vec.y;
-    z = vec.z;
-}
+// Vector3d::Vector3d(Vector3d&& vec) noexcept {
+//     x = vec.x;
+//     y = vec.y;
+//     z = vec.z;
+// }
 
-Vector3d::~Vector3d() {
-}
+Vector3d::~Vector3d() = default;
 
 void Vector3d::setx(float xCoord) {
     x = xCoord;
@@ -50,7 +49,7 @@ float Vector3d::getz() const {
 }
 
 Vector3d Vector3d::operator+(const Vector3d& vec) const {
-    return Vector3d(x + vec.x, y + vec.y, z + vec.z);
+    return { x + vec.x, y + vec.y, z + vec.z };
 }
 
 Vector3d& Vector3d::operator+=(const Vector3d& vec) {
@@ -61,7 +60,7 @@ Vector3d& Vector3d::operator+=(const Vector3d& vec) {
 }
 
 Vector3d Vector3d::operator-(const Vector3d& vec) const {
-    return Vector3d(x - vec.x, y - vec.y, z - vec.z);
+    return { x - vec.x, y - vec.y, z - vec.z };
 }
 
 Vector3d& Vector3d::operator-=(const Vector3d& vec) {
@@ -82,7 +81,7 @@ Vector3d& Vector3d::operator*=(float scalar) {
     return *this;
 }
 
-Vector3d Vector3d::operator/(float scalar) {
+Vector3d Vector3d::operator/(float scalar) const {
     return { x / scalar, y / scalar, z / scalar };
 }
 
@@ -100,9 +99,9 @@ Vector3d& Vector3d::operator=(const Vector3d& vec) {
     return *this;
 }
 
-Vector3d& Vector3d::operator=(Vector3d&& vec) noexcept {
-    return *this;
-}
+// Vector3d& Vector3d::operator=(Vector3d&& vec) noexcept {
+//     return *this;
+// }
 
 bool Vector3d::operator==(const Vector3d& vec) const {
     return (x == vec.x && y == vec.y && z == vec.z);

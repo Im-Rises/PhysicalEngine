@@ -2,7 +2,6 @@
 
 #include "GameObject.h"
 #include "Components/Mesh/Mesh.h"
-#include "Components/Mesh/Cuboid/MyCube.h"
 #include "Components/Mesh/Cuboid/Cube.h"
 #include "Components/Mesh/Cuboid/CuboidRectangle.h"
 #include "Components/Mesh/Sphere/Sphere.h"
@@ -59,7 +58,7 @@ void Scene::destroy() {
 }
 
 void Scene::update(float deltaTime) {
-    physicalUpdateTimer += deltaTime;
+    //    physicalUpdateTimer += deltaTime;
 
     // Update the game objects (particles, ...)
     for (GameObject* gameObject : gameObjects)
@@ -69,7 +68,7 @@ void Scene::update(float deltaTime) {
 
     //    if (physicalUpdateTimer >= 1.0f / PHYSIC_UPDATE_PER_SECOND)
     //    {
-    physicalUpdateTimer = 0;
+    //    physicalUpdateTimer = 0;
 
 
     // Move gameObjects

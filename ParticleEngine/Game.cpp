@@ -12,20 +12,22 @@ Game::~Game() = default;
 void Game::start(Scene* s) {
     this->scene = s;
 
-    auto* particlePrefab = new ParticlePrefab(scene);
-    scene->addGameObject(particlePrefab);
-    Particle* particle;
-    particlePrefab->getComponentByClass(particle);
-    auto* particlePrefabNew = new ParticlePrefab(scene);
-    scene->addGameObject(particlePrefabNew);
+    //    auto* particlePrefab = new ParticlePrefab(scene);
+    //    scene->addGameObject(particlePrefab);
+    //    Particle* particle;
+    //    particlePrefab->getComponentByClass(particle);
+    //    auto* particlePrefabNew = new ParticlePrefab(scene);
+    //    scene->addGameObject(particlePrefabNew);
 
-    //    for (int i = 0; i < 20; i++) {
-    //        for (int j = 0; j < 25; ++j) {
-    //            auto *particlePrefabNew = new ParticlePrefab(scene);
-    //            particlePrefabNew->transform.setPosition({(float) i * 2, (float) j * 2, 0});
-    //            scene->addGameObject(particlePrefabNew);
-    //        }
-    //    }
+    for (int i = 0; i < 20; i++)
+    {
+        for (int j = 0; j < 25; ++j)
+        {
+            auto* particlePrefabNew = new ParticlePrefab(scene);
+            particlePrefabNew->transform.setPosition({ (float)i * 2, (float)j * 2, 0 });
+            scene->addGameObject(particlePrefabNew);
+        }
+    }
 }
 
 void Game::goLeft() {

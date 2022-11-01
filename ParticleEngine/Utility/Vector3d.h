@@ -14,7 +14,7 @@ public:
     /// Constructeur de copie
     Vector3d(const Vector3d& vec);
 
-    Vector3d(Vector3d&& vec) noexcept;
+    //    Vector3d(Vector3d&& vec) noexcept;
 
     /// Destructeur
     ~Vector3d();
@@ -49,13 +49,13 @@ public:
     Vector3d& operator*=(float scalar);
 
     /// Division par un scalaire
-    Vector3d operator/(float scalar);
+    Vector3d operator/(float scalar) const;
 
     Vector3d& operator/=(float scalar);
 
     /// Prend la valeur du vecteur
     Vector3d& operator=(const Vector3d& vec);
-    Vector3d& operator=(Vector3d&& vec) noexcept;
+    //    Vector3d& operator=(Vector3d&& vec) noexcept;
 
     /// Test d'�galit�
     bool operator==(const Vector3d& vec) const;
