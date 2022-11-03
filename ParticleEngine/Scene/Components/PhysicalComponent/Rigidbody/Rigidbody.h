@@ -11,7 +11,7 @@ private:
 
 protected:
     float m_mass;
-    float m_anguelarDamping;
+    float m_angularDamping;
     Vector3d m_forceAccum;
     Vector3d m_torqueAccum;
 //    float m_damping;

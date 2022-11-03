@@ -7,6 +7,9 @@
 
 Rigidbody::Rigidbody(GameObject *gameObject) : Component(gameObject) {
     m_mass = 0;
+    m_angularDamping =0;
+    m_forceAccum = Vector3d(0,0,0);
+    m_torqueAccum = Vector3d(0,0,0);
 }
 
 void Rigidbody::AddForce(const Vector3d & force)
