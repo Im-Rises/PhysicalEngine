@@ -11,6 +11,9 @@ private:
 
 protected:
     float m_mass;
+    float m_anguelarDamping;
+    Vector3d m_forceAccum;
+    Vector3d m_torqueAccum;
 //    float m_damping;
 //    float m_inverseMass;
 //    float m_inverseInertiaTensor;
@@ -21,6 +24,14 @@ protected:
 
 public:
     explicit Rigidbody(GameObject *gameObject);
+
+    void AddForce(const Vector3d& force);
+
+    void AddForceAtPoint(const Vector3d& force, const Vector3d worldPoint);
+
+    void AddForceAtBodyPoint(const Vector3d& force, const Vector3d& LocalPoint);
+
+    void ClearAccumulator();
 
     void update(float time) override;
 
