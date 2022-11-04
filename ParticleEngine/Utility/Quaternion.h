@@ -12,7 +12,11 @@ public:
 
 	Quaternion normalize();
 
+	Quaternion(float x,float y , float z, float t);
+
 	Quaternion operator*(const Quaternion &quaternion);
+
+	float operator[](int i) const;
 
 	void RotateByVector(const Vector3d& vector);
 
