@@ -13,24 +13,23 @@ AnchoredSpring::AnchoredSpring() {
 AnchoredSpring::~AnchoredSpring() {
 }
 
-AnchoredSpring::AnchoredSpring(const Vector3d& anchor, float k, float restLength) {
+AnchoredSpring::AnchoredSpring(const Vector3d &anchor, float k, float restLength) {
     m_anchor = anchor;
     m_k = k;
     m_restLength = restLength;
 }
 
-AnchoredSpring::AnchoredSpring(const AnchoredSpring& aSpring) {
+AnchoredSpring::AnchoredSpring(const AnchoredSpring &aSpring) {
     m_anchor = aSpring.m_anchor;
     m_k = aSpring.m_k;
     m_restLength = aSpring.m_restLength;
 }
 
-void AnchoredSpring::addForce(Particle* particle) {
+void AnchoredSpring::addForce(Particle *particle) {
     Vector3d pos = particle->getPosition();
     float delta = pos.distance(m_anchor);
     Vector3d F;
-    if (delta > m_restLength)
-    {
+    if (delta > m_restLength) {
         F = (pos - m_anchor).normalize() * (-m_k) * (delta - m_restLength);
     }
     Vector3d initialForce = particle->getNetForce();
@@ -41,23 +40,21 @@ std::string AnchoredSpring::getName() const {
     return FORCE_TYPE;
 }
 
-void AnchoredSpring::drawGui(Scene* scene) {
-    if (ImGui::CollapsingHeader(getName().c_str()))
-    {
-        if (ImGui::BeginTable("Anchor", 3))
-        {
+void AnchoredSpring::drawGui(Scene *scene) {
+    if (ImGui::CollapsingHeader(getName().c_str())) {
+        if (ImGui::BeginTable("Anchor", 3)) {
             ImGui::TableNextColumn();
             ImGui::Text("X:");
             ImGui::SameLine();
-            ImGui::InputFloat("##AnchorX", &m_anchor.x);
+            ImGui::InputFloat("##AnchorX", &m_anchor.m_x);
             ImGui::TableNextColumn();
             ImGui::Text("Y:");
             ImGui::SameLine();
-            ImGui::InputFloat("##AnchorY", &m_anchor.y);
+            ImGui::InputFloat("##AnchorY", &m_anchor.m_y);
             ImGui::TableNextColumn();
             ImGui::Text("Z:");
             ImGui::SameLine();
-            ImGui::InputFloat("##AnchorZ", &m_anchor.z);
+            ImGui::InputFloat("##AnchorZ", &m_anchor.m_z);
             ImGui::EndTable();
         }
         ImGui::Text("K: ");
@@ -69,6 +66,6 @@ void AnchoredSpring::drawGui(Scene* scene) {
     }
 }
 
-void AnchoredSpring::translate(const Vector3d& translation) {
+void AnchoredSpring::translate(const Vector3d &translation) {
     m_anchor = m_anchor + translation;
 }
