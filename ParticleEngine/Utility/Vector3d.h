@@ -5,80 +5,82 @@
 
 class Vector3d {
 public:
-    float m_x, m_y, m_z;
+    float x, y, z;
 
-public:
     /// Constructeur
     /// Vecteur (x,y,z)
     Vector3d(float xCoord = 0, float yCoord = 0, float zCoord = 0);
 
-    ///Constructeur de copie
-    Vector3d(const Vector3d &v);
+    /// Constructeur de copie
+    Vector3d(const Vector3d& vec);
 
-    ///Destructeur
+    //    Vector3d(Vector3d&& vec) noexcept;
+
+    /// Destructeur
     ~Vector3d();
 
-    //getters
+    // getters
     float getx() const;
 
     float gety() const;
 
     float getz() const;
 
-    ///setters
+    /// setters
     void setx(float xCoord);
 
     void sety(float yCoord);
 
     void setz(float zCoord);
 
-    ///Addition
-    Vector3d operator+(const Vector3d &vec) const;
+    /// Addition
+    Vector3d operator+(const Vector3d& vec) const;
 
-    Vector3d &operator+=(const Vector3d &vec);
+    Vector3d& operator+=(const Vector3d& vec);
 
-    ///Soustraction
-    Vector3d operator-(const Vector3d &vec) const;
+    /// Soustraction
+    Vector3d operator-(const Vector3d& vec) const;
 
-    Vector3d &operator-=(const Vector3d &vec);
+    Vector3d& operator-=(const Vector3d& vec);
 
-    ///Multiplication par un scalaire
-    Vector3d operator*(float s) const;
+    /// Multiplication par un scalaire
+    Vector3d operator*(float scalar) const;
 
-    Vector3d &operator*=(float s);
+    Vector3d& operator*=(float scalar);
 
-    ///Division par un scalaire
-    Vector3d operator/(float s);
+    /// Division par un scalaire
+    Vector3d operator/(float scalar) const;
 
-    Vector3d &operator/=(float s);
+    Vector3d& operator/=(float scalar);
 
-    ///Prend la valeur du vecteur
-    Vector3d &operator=(const Vector3d &vec);
+    /// Prend la valeur du vecteur
+    Vector3d& operator=(const Vector3d& vec);
+    //    Vector3d& operator=(Vector3d&& vec) noexcept;
 
-    ///Test d'�galit�
-    bool operator==(const Vector3d &vec) const;
+    /// Test d'�galit�
+    bool operator==(const Vector3d& vec) const;
 
-///Test de diff�rence
-    bool operator!=(const Vector3d &vec) const;
+    /// Test de diff�rence
+    bool operator!=(const Vector3d& vec) const;
 
-    ///Calcul de la norme
+    /// Calcul de la norme
     float norm() const;
 
-    ///Normalisation
+    /// Normalisation
     Vector3d normalize() const;
 
-    ///Produit Scalaire
-    float dot(const Vector3d &vec) const;
+    /// Produit Scalaire
+    float dot(const Vector3d& vec) const;
 
-    ///Produit Vectoriel
-    Vector3d cross(const Vector3d &vec) const;
+    /// Produit Vectoriel
+    Vector3d cross(const Vector3d& vec) const;
 
-    ///Distance entre deux vecteurs
-    float distance(const Vector3d &vec) const;
+    /// Distance entre deux vecteurs
+    float distance(const Vector3d& vec) const;
 
-    ///Affichage du vecteur
-    friend std::ostream &operator<<(std::ostream &os, Vector3d vec) {
-        return os << "(" << vec.getx() << "," << vec.gety() << "," << vec.getz() << ")";
+    /// Affichage du vecteur
+    friend std::ostream& operator<<(std::ostream& stream, const Vector3d& vec) {
+        return stream << "(" << vec.getx() << "," << vec.gety() << "," << vec.getz() << ")";
     }
 };
 

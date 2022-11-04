@@ -1,6 +1,6 @@
 #include "ParticleEngineLauncher.h"
 
-int main(int, char **) {
+int main() {
     ParticleEngineLauncher physicalEngine;
     physicalEngine.start();
     return 0;
