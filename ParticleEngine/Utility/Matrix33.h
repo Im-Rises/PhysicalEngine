@@ -10,7 +10,7 @@ private:
 	float m_value[9];
 
 public:
-	
+	Matrix33(float values[9]);
 
 	Matrix33 operator*(const Matrix33& other);
 

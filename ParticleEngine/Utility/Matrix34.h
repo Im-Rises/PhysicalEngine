@@ -12,6 +12,7 @@ private:
 
 public:
 
+	Matrix34(float values[12]);
 
 	Matrix34 operator*(const Matrix34& other) const;
 
