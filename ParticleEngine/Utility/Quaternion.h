@@ -8,15 +8,30 @@ class Quaternion {
 private:
 	float m_value[4];
 public:
+
 	Quaternion();
 
-	Quaternion normalize();
+	Quaternion(const Quaternion& quaternion);
 
-	Quaternion(float x,float y , float z, float t);
+	Quaternion(const Vector3d& vec);
 
-	Quaternion operator*(const Quaternion &quaternion);
+	float norm();
+
+	void normalize();
+
+	Quaternion(float w,float x,float y , float z);
+
+	Quaternion operator*=(const Quaternion& quaternion);
+
+	Quaternion &operator*(const Quaternion &quaternion);
+
+	Quaternion& operator*(float n);
+
+	Quaternion& operator+(const Quaternion& quaternion);
 
 	float operator[](int i) const;
+
+	void set(int i);
 
 	void RotateByVector(const Vector3d& vector);
 
