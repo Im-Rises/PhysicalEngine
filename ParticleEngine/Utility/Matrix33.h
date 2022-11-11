@@ -66,7 +66,7 @@ public:
 	/// <param name="quaternion"></param>
 	void setOrientation(const Quaternion& quaternion);
 
-
+	~Matrix33();
 };
 
 #endif // !MATRIX33_H

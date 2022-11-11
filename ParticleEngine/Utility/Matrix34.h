@@ -4,7 +4,8 @@
 
 #include "Vector3d.h"
 #include "Quaternion.h"
-
+#include "Matrix34.h"
+#include "Matrix44.h"
 
 class Matrix34 {
 
@@ -12,6 +13,11 @@ private:
 	float m_value[12];
 
 public:
+
+	/// <summary>
+	/// Constructeur avec que de 0 dans la matrice
+	/// </summary>
+	Matrix34();
 	/// <summary>
 	/// Constructeur de Matrix Ligne par ligne (0-3) ligne 1 ,(4-7) ligne 2 ...) 
 	/// </summary>
@@ -53,7 +59,18 @@ public:
 	/// Transpose la matrice
 	/// </summary>
 	void transposeMat();
+	/// <summary>
+	/// Transforme une matrice 44 de transformation affine en matrix 3 4 (const)
+	/// </summary>
+	/// <param name="mat44"></param>
+	/// <returns></returns>
+	Matrix34& transformationAffineMatrixToMatrix34(Matrix44 & const mat44) const;
 
+	/// <summary>
+	/// Genere la matrix 44 de transformation affine à partir de *this
+	/// </summary>
+	/// <returns></returns>
+	Matrix44& transformationAffineMatrix() const;
 	/// <summary>
 	/// Génère la matrice de transformation avec une orientation et une position
 	/// </summary>
@@ -75,8 +92,8 @@ public:
 	/// <returns></returns>
 	Vector3d TransformDirection(const Vector3d vec);
 
-
-
+	
+	~Matrix34();
 };
 
 

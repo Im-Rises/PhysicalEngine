@@ -108,3 +108,8 @@ void Matrix33::setOrientation(const Quaternion& quaternion)
 	m_value[7] = 2*y*z+2*x*w;
 	m_value[8] = 1-(2*x*x+2*y*y);
 }
+
+Matrix33::~Matrix33()
+{
+	delete[] m_value;
+}
