@@ -10,6 +10,7 @@ Rigidbody::Rigidbody(GameObject *gameObject) : Component(gameObject) {
     m_acceleration = { 0, 0, 0 };
     m_mass = 1;
     m_rotation = { 0, 0, 0 };
+    m_inertiaTensor = Matrix33();
     m_transformMatrix = Matrix34();
     m_orientation = Quaternion();
     m_angularSpeed = Vector3d(0, 0, 0);
@@ -24,6 +25,7 @@ Rigidbody::Rigidbody(GameObject* gameObject, float m) : Component(gameObject)
     m_acceleration = { 0, 0, 0 };
     m_mass = m;
     m_rotation = { 0, 0, 0 };
+    m_inertiaTensor = Matrix33();
     m_transformMatrix = Matrix34();
     m_orientation = Quaternion();
     m_angularSpeed = Vector3d(0, 0, 0);
@@ -39,6 +41,7 @@ Rigidbody::Rigidbody(const Rigidbody& rigidbody) : Component(rigidbody.m_gameObj
     m_gameObject->transform.setPosition(rigidbody.m_gameObject->transform.getPosition());
     m_mass = rigidbody.m_mass;
     m_rotation = Vector3d(rigidbody.m_rotation);
+    m_inertiaTensor = Matrix33(rigidbody.m_inertiaTensor);
     m_transformMatrix = Matrix34(rigidbody.m_transformMatrix);
     m_orientation = Quaternion(Quaternion(rigidbody.m_orientation));
     m_angularSpeed = Vector3d(rigidbody.m_angularSpeed);
@@ -51,8 +54,18 @@ Rigidbody::~Rigidbody()
 {
 }
 
-void Rigidbody::update(float time) {
+void Rigidbody::update(float time) 
+{
+    // Update sum of forces
 
+
+    // Update acceleration (angular and linear), speed and position
+    calculateAcceleration();
+    calculateAngularAcceleration();
+    calculateSpeed(time); //pas sûre pour le time
+
+    // Reset the forceAccum and torqueAccum for the next frame
+    ClearAccumulator();
 }
 
 void Rigidbody::calculateSpeed(float time)
@@ -72,29 +85,34 @@ void Rigidbody::calculateAngularSpeed(float time)
 }
 
 void Rigidbody::calculateAngularAcceleration() {
-    //m_angularAcceleration = m_torqueAccum * m_transformMatrix.inverse();
+    m_angularAcceleration = m_inertiaTensor.inverse()*m_torqueAccum;
 }
 
 void Rigidbody::calculateOrientation(float deltaTime)
 {
-    //m_orientation = m_orientation + (deltaTime / 2) * Quaternion(0, m_angularSpeed.getx(), m_angularSpeed.gety(), m_angularSpeed.getz()) * m_orientation;
+    m_orientation = m_orientation + Quaternion(0, m_angularSpeed.getx(), m_angularSpeed.gety(), m_angularSpeed.getz())*(deltaTime / 2) * m_orientation;
 }
 
 void Rigidbody::calculateDerivedData()
 {
+    m_transformMatrix.setOrientationAndPosition(m_orientation, getPosition());
+
+    //set inertia -> m_inertiaTensor = dépend de Sphère/cube/cylindre
 }
 
 void Rigidbody::addForce(const Vector3d & force)
 {
-
+    // add force sur le centre de masse
 }
 
 void Rigidbody::addForceAtPoint(const Vector3d & force, const Vector3d worldPoint)
 {
+    // add force sur un point en coordonées mondes
 }
 
 void Rigidbody::addForceAtBodyPoint(const Vector3d & force, const Vector3d & LocalPoint)
 {
+    // add force sur un point en coordonées locales à l'objet
 }
 
 bool Rigidbody::hasForce(const std::string& name) const

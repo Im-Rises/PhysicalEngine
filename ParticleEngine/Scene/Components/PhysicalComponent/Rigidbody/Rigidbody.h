@@ -17,19 +17,13 @@ protected:
     Vector3d m_speed;
     Vector3d m_acceleration;
     Vector3d m_rotation;
+    Matrix33 m_inertiaTensor;
     Matrix34 m_transformMatrix;
     Quaternion m_orientation;    
     Vector3d m_angularSpeed;
     Vector3d m_angularAcceleration;
     Vector3d m_forceAccum;
     Vector3d m_torqueAccum;
-//    float m_damping;
-//    float m_inverseMass;
-//    float m_inverseInertiaTensor;
-//    float m_gravity;
-//    float m_friction;
-//    float m_restitution;
-//    bool isKinematic = false;
 
 public:
     explicit Rigidbody(GameObject *gameObject);
