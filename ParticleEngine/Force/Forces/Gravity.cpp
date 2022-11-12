@@ -1,27 +1,26 @@
 #include "Gravity.h"
 
-#include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
+#include "../../Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "imgui/imgui.h"
-#include "../Scene/Scene.h"
+#include "../../Scene/Scene.h"
 
-Gravity::Gravity(const Vector3d& g) {
+Gravity::Gravity(const Vector3d &g) {
     m_gravity = g;
 }
 
-Gravity::Gravity(const Gravity& grav) {
+Gravity::Gravity(const Gravity &grav) {
     m_gravity = grav.m_gravity;
 }
 
-void Gravity::addForce(Particle* particle) {
+void Gravity::addForce(Particle *particle) {
     Vector3d F = m_gravity * particle->getMass();
     Vector3d initialForce = particle->getNetForce();
     particle->setNetForce(initialForce + F);
 }
 
-void Gravity::drawGui(Scene* scene) {
+void Gravity::drawGui(Scene *scene) {
     ImGui::Text("Gravity");
-    if (ImGui::BeginTable("Gravity", 3))
-    {
+    if (ImGui::BeginTable("Gravity", 3)) {
         ImGui::TableNextColumn();
         ImGui::Text("X:");
         ImGui::SameLine();
@@ -45,6 +44,6 @@ std::string Gravity::getName() const {
     return FORCE_TYPE;
 }
 
-Vector3d& Gravity::getGravityRef() {
+Vector3d &Gravity::getGravityRef() {
     return m_gravity;
 }

@@ -1,8 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Force/Gravity.h"
-#include "Force/AnchoredSpring.h"
+#include "Force/Forces/Gravity.h"
+#include "Force/Forces/AnchoredSpring.h"
 
 class Particle;
 
@@ -10,7 +10,7 @@ class Scene;
 
 class Game {
 private:
-    Scene* scene = nullptr;
+    Scene *scene = nullptr;
     float m_speed = 5.0f;
 
 public:
@@ -18,7 +18,7 @@ public:
 
     ~Game();
 
-    void start(Scene* scene);
+    void start(Scene *scene);
 
     void goLeft();
 
@@ -29,7 +29,7 @@ public:
     void goDown();
 
 public:
-    float* getPtrSpeed();
+    float *getPtrSpeed();
 };
 
 #endif // GAME_H

@@ -1,9 +1,9 @@
 #ifndef DRAG_H
 #define DRAG_H
 
-#include "ForceGenerator.h"
+#include "../ParticleForceGenerator.h"
 
-class Drag : public ForceGenerator {
+class Drag : public ParticleForceGenerator {
 public:
     static constexpr const char *FORCE_TYPE = DRAG_FORCE;
 

@@ -1,41 +1,41 @@
-#include "ForceGenerator.h"
+#include "../ParticleForceGenerator.h"
 
-#include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
+#include "../../Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "imgui/imgui.h"
 #include "Spring.h"
 #include "AnchoredSpring.h"
 #include "Drag.h"
 #include "Buoyancy.h"
-#include "../Scene/Scene.h"
-#include "../Scene/GameObject.h"
+#include "../../Scene/Scene.h"
+#include "../../Scene/GameObject.h"
 
-const char *ForceGenerator::forcesNamesList[] = {DRAG_FORCE, ANCHORED_SPRING_FORCE,
-                                                 BUOYANCY_FORCE, SPRING_FORCE};
+const char *ParticleForceGenerator::forcesNamesList[] = {DRAG_FORCE, ANCHORED_SPRING_FORCE,
+                                                         BUOYANCY_FORCE, SPRING_FORCE};
 
 //ForceGenerator::ForceGenerator() {
 //
 //}
 
-ForceGenerator::~ForceGenerator() {
-
-}
-
-ForceGenerator::ForceGenerator(GameObject *gameObject) {
+ParticleForceGenerator::ParticleForceGenerator(GameObject *gameObject) {
     parentGameObject = gameObject;
 }
 
-void ForceGenerator::drawGui(Scene *scene) {
+ParticleForceGenerator::~ParticleForceGenerator() {
+
+}
+
+void ParticleForceGenerator::drawGui(Scene *scene) {
     ImGui::CollapsingHeader(getName().c_str());
 }
 
-std::string ForceGenerator::getName() const {
+std::string ParticleForceGenerator::getName() const {
     return FORCE_TYPE;
 }
 
-ForceGenerator *ForceGenerator::createForceGenerator(const std::string &name, GameObject *gameObject) {
+ParticleForceGenerator *ParticleForceGenerator::createForceGenerator(const std::string &name, GameObject *gameObject) {
     int index = 0;
 
-    for (auto &forceName: ForceGenerator::forcesNamesList) {
+    for (auto &forceName: ParticleForceGenerator::forcesNamesList) {
         if (forceName == name) {
             switch (index) {
                 case 0:

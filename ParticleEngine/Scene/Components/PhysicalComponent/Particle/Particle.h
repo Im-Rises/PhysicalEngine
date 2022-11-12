@@ -5,13 +5,13 @@
 
 #include "../../../../Utility/Vector3d.h"
 #include "../PhysicalComponent.h"
-#include "../../../../Force/Gravity.h"
+#include "../../../../Force/Forces/Gravity.h"
 
-class ForceGenerator;
+class ParticleForceGenerator;
 
 class Particle : public PhysicalComponent {
 private:
-    static constexpr const char* COMPONENT_TYPE = PARTICLE_COMPONENT;
+    static constexpr const char *COMPONENT_TYPE = PARTICLE_COMPONENT;
 
 private:
     // State
@@ -28,25 +28,25 @@ private:
 
     // Forces
     Gravity gravity;
-    std::vector<ForceGenerator*> forceGeneratorsList;
+    std::vector<ParticleForceGenerator *> forceGeneratorsList;
 
 public:
 #pragma region Constructeur
 
-    explicit Particle(GameObject* gameObject);
+    explicit Particle(GameObject *gameObject);
 
     /// <summary>
     /// Constructeur de particule
     ///  vitesse et acceleration � 0 par default
     /// </summary>
     /// <param name="pos">: la Position</param>
-    Particle(GameObject* gameObject, float m);
+    Particle(GameObject *gameObject, float m);
 
     /// <summary>
     /// Constructeur de copie de Particle
     /// </summary>
     /// <param name="particle"></param>
-    Particle(const Particle& particle);
+    Particle(const Particle &particle);
 
     ~Particle() override;
 
@@ -55,7 +55,7 @@ public:
 
     void update(float deltaTime) override;
 
-    float distance(const Particle& p);
+    float distance(const Particle &p);
 
     /// <summary>
     /// Calcule la nouvelle vitesse � partir de l'acc�l�ration de la particule
@@ -75,42 +75,37 @@ public:
 #pragma endregion
 #pragma region Add Delete Get Force
 
-    void addForce(ForceGenerator* forceGenerator);
+    void addForce(ParticleForceGenerator *forceGenerator);
 
-    void addForceByName(const std::string& forceName);
+    void addForceByName(const std::string &forceName);
 
-    template <typename T>
-    void addForceByClass(T*& comp) {
+    template<typename T>
+    void addForceByClass(T *&comp) {
         comp = new T(this);
-        if (comp != nullptr)
-        {
+        if (comp != nullptr) {
             forceGeneratorsList.push_back(comp);
         }
     }
 
-    ForceGenerator* getForceByName(const std::string& name) const;
+    ParticleForceGenerator *getForceByName(const std::string &name) const;
 
-    template <class T>
-    void getForceByClass(T*& c) {
-        for (auto& force : forceGeneratorsList)
-        {
-            if (dynamic_cast<T*>(force) != nullptr)
-            {
-                c = dynamic_cast<T*>(force);
+    template<class T>
+    void getForceByClass(T *&c) {
+        for (auto &force: forceGeneratorsList) {
+            if (dynamic_cast<T *>(force) != nullptr) {
+                c = dynamic_cast<T *>(force);
             }
         }
     }
 
-    bool hasForce(const std::string& name) const;
+    bool hasForce(const std::string &name) const;
 
     //    void deleteComponentByName(const std::string &name);
 
-    template <class T>
-    void deleteForceByClass(T*& comp) {
-        for (auto it = forceGeneratorsList.begin(); it != forceGeneratorsList.end(); ++it)
-        {
-            if (dynamic_cast<T*>(*it) != nullptr)
-            {
+    template<class T>
+    void deleteForceByClass(T *&comp) {
+        for (auto it = forceGeneratorsList.begin(); it != forceGeneratorsList.end(); ++it) {
+            if (dynamic_cast<T *>(*it) != nullptr) {
                 forceGeneratorsList.erase(it);
                 // delete *it;
                 return;
@@ -125,27 +120,27 @@ public:
 
     Vector3d getPosition() const;
 
-    const Vector3d& getSpeed() const;
+    const Vector3d &getSpeed() const;
 
-    const Vector3d& getAcceleration() const;
+    const Vector3d &getAcceleration() const;
 
     void setPosition(float x, float y, float z);
 
-    void setPosition(const Vector3d& position);
+    void setPosition(const Vector3d &position);
 
     void setSpeed(float x, float y, float z);
 
-    void setSpeed(const Vector3d& speed);
+    void setSpeed(const Vector3d &speed);
 
     void setAcceleration(float x, float y, float z);
 
-    void setAcceleration(const Vector3d& acceleration);
+    void setAcceleration(const Vector3d &acceleration);
 
     float getMass() const;
 
-    const Vector3d& getNetForce() const;
+    const Vector3d &getNetForce() const;
 
-    void setNetForce(const Vector3d& force);
+    void setNetForce(const Vector3d &force);
 
 #pragma endregion
 };

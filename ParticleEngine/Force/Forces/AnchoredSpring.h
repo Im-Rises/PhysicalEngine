@@ -1,10 +1,10 @@
 #ifndef ANCHOREDSPRING_H
 #define ANCHOREDSPRING_H
 
-#include "ForceGenerator.h"
-#include "../Utility/Vector3d.h"
+#include "../ParticleForceGenerator.h"
+#include "../../Utility/Vector3d.h"
 
-class AnchoredSpring : public ForceGenerator {
+class AnchoredSpring : public ParticleForceGenerator {
 private:
     static constexpr const char *FORCE_TYPE = ANCHORED_SPRING_FORCE;
 

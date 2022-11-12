@@ -1,8 +1,8 @@
 #include "Drag.h"
 
-#include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
+#include "../../Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "imgui/imgui.h"
-#include "../Scene/Scene.h"
+#include "../../Scene/Scene.h"
 
 Drag::Drag() {
     m_k1 = 0;

@@ -11,15 +11,13 @@
 class Rigidbody : public PhysicalComponent {
 private:
     static constexpr const char *COMPONENT_TYPE = RIGIDBODY_COMPONENT;
-
-protected:
     float m_mass;
     Vector3d m_speed;
     Vector3d m_acceleration;
     Vector3d m_rotation;
     Matrix33 m_inertiaTensor;
     Matrix34 m_transformMatrix;
-    Quaternion m_orientation;    
+    Quaternion m_orientation;
     Vector3d m_angularSpeed;
     Vector3d m_angularAcceleration;
     Vector3d m_forceAccum;
@@ -28,9 +26,9 @@ protected:
 public:
     explicit Rigidbody(GameObject *gameObject);
 
-    Rigidbody(GameObject* gameObject, float m);
+    Rigidbody(GameObject *gameObject, float m);
 
-    Rigidbody(const Rigidbody& rigidbody);
+    Rigidbody(const Rigidbody &rigidbody);
 
     ~Rigidbody() override;
 
@@ -61,39 +59,39 @@ public:
 
     void calculateDerivedData();
 
-    void addForce(const Vector3d& force);
+    void addForce(const Vector3d &force);
 
-    void addForceAtPoint(const Vector3d& force, const Vector3d worldPoint);
+    void addForceAtPoint(const Vector3d &force, const Vector3d worldPoint);
 
-    void addForceAtBodyPoint(const Vector3d& force, const Vector3d& LocalPoint);
+    void addForceAtBodyPoint(const Vector3d &force, const Vector3d &LocalPoint);
 
-    bool hasForce(const std::string& name) const;
+    bool hasForce(const std::string &name) const;
 
     void ClearAccumulator();
 
     Vector3d getPosition() const;
 
-    const Vector3d& getSpeed() const;
+    const Vector3d &getSpeed() const;
 
-    const Vector3d& getAcceleration() const;
+    const Vector3d &getAcceleration() const;
 
     void setPosition(float x, float y, float z);
 
-    void setPosition(const Vector3d& position);
+    void setPosition(const Vector3d &position);
 
     void setSpeed(float x, float y, float z);
 
-    void setSpeed(const Vector3d& s);
+    void setSpeed(const Vector3d &s);
 
     void setAcceleration(float x, float y, float z);
 
-    void setAcceleration(const Vector3d& acceleration);
+    void setAcceleration(const Vector3d &acceleration);
 
     float getMass() const;
 
-    const Vector3d& getForceAcc() const;
+    const Vector3d &getForceAcc() const;
 
-    void setForceAcc(const Vector3d& force);
+    void setForceAcc(const Vector3d &force);
 
 };
 

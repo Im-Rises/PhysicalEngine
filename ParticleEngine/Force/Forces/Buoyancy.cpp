@@ -1,8 +1,8 @@
 #include "Buoyancy.h"
 
-#include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
+#include "../../Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "imgui/imgui.h"
-#include "../Scene/Scene.h"
+#include "../../Scene/Scene.h"
 
 Buoyancy::Buoyancy() {
     m_maxDepth = 0;

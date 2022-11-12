@@ -1,9 +1,9 @@
 #ifndef BUOYANCY_H
 #define BUOYANCY_H
 
-#include "ForceGenerator.h"
+#include "../ParticleForceGenerator.h"
 
-class Buoyancy : public ForceGenerator {
+class Buoyancy : public ParticleForceGenerator {
 public:
     static constexpr const char *FORCE_TYPE = BUOYANCY_FORCE;
 

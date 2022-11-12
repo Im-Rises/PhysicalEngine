@@ -15,7 +15,7 @@ class Scene;
 
 class GameObject;
 
-class ForceGenerator {
+class ParticleForceGenerator {
 public:
     static const char *forcesNamesList[4];
 
@@ -28,9 +28,9 @@ protected:
 public:
 //    ForceGenerator();
 
-    virtual ~ForceGenerator();
+    explicit ParticleForceGenerator(GameObject *gameObject = nullptr);
 
-    explicit ForceGenerator(GameObject *gameObject = nullptr);
+    virtual ~ParticleForceGenerator();
 
     virtual void addForce(Particle *particle) = 0;
 
@@ -39,7 +39,7 @@ public:
     virtual std::string getName() const = 0;
 
 public:
-    static ForceGenerator *createForceGenerator(const std::string &name, GameObject *gameObject);
+    static ParticleForceGenerator *createForceGenerator(const std::string &name, GameObject *gameObject);
 
 };
 

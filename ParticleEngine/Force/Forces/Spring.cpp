@@ -1,13 +1,13 @@
 #include "Spring.h"
 
-#include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
+#include "../../Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "imgui/imgui.h"
-#include "../Utility/imGuiUtility.h"
-#include "../Scene/GameObject.h"
-#include "../Scene/Scene.h"
+#include "../../Utility/imGuiUtility.h"
+#include "../../Scene/GameObject.h"
+#include "../../Scene/Scene.h"
 
 
-Spring::Spring(GameObject *gameObject) : ForceGenerator(gameObject) {
+Spring::Spring(GameObject *gameObject) : ParticleForceGenerator(gameObject) {
     m_k = 0;
     m_restLength = 0;
 }

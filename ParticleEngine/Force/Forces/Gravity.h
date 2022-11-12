@@ -1,10 +1,10 @@
 #ifndef GRAVITY_H
 #define GRAVITY_H
 
-#include "ForceGenerator.h"
-#include "../Utility/Vector3d.h"
+#include "../ParticleForceGenerator.h"
+#include "../../Utility/Vector3d.h"
 
-class Gravity : public ForceGenerator {
+class Gravity : public ParticleForceGenerator {
 public:
     static constexpr const char *FORCE_TYPE = GRAVITY_FORCE;
 

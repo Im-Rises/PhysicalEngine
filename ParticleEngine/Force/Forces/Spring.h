@@ -1,11 +1,11 @@
 #ifndef SPRING_H
 #define SPRING_H
 
-#include "ForceGenerator.h"
+#include "../ParticleForceGenerator.h"
 
 class GameObject;
 
-class Spring : public ForceGenerator {
+class Spring : public ParticleForceGenerator {
 private:
     static constexpr const char *FORCE_TYPE = SPRING_FORCE;
 
