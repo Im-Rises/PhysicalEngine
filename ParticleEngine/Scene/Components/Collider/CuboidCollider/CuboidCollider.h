@@ -5,13 +5,13 @@
 
 class CuboidCollider : Collider {
 private:
-    static constexpr const char* COMPONENT_TYPE = CUBOID_COLLIDER_COMPONENT;
+    static constexpr const char *COMPONENT_TYPE = "CUBOID_COLLIDER_COMPONENT";
     float m_width;
     float m_height;
     float m_depth;
 
 public:
-    explicit CuboidCollider(GameObject* gameObject, float width = 1.0F, float height = 1.0F, float depth = 1.0F);
+    explicit CuboidCollider(GameObject *gameObject, float width = 1.0F, float height = 1.0F, float depth = 1.0F);
 
     void update(float time) override;
 
@@ -31,7 +31,6 @@ public:
 
     void setDepth(float depth);
 };
-
 
 
 #endif // CUBOIDCOLLIDER_H

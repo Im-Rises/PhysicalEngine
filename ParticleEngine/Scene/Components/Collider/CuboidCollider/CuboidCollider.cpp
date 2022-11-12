@@ -1,6 +1,6 @@
 #include "CuboidCollider.h"
 
-CuboidCollider::CuboidCollider(GameObject* gameObject, float width, float height, float depth) : Collider(gameObject) {
+CuboidCollider::CuboidCollider(GameObject *gameObject, float width, float height, float depth) : Collider(gameObject) {
     m_width = width;
     m_height = height;
     m_depth = depth;
@@ -9,6 +9,7 @@ CuboidCollider::CuboidCollider(GameObject* gameObject, float width, float height
 
 void CuboidCollider::update(float time) {
 }
+
 void CuboidCollider::drawGui() {
 }
 
