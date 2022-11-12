@@ -36,6 +36,10 @@ public:
 
     void update(float deltaTime) override;
 
+    void drawGui() override;
+
+    std::string getName() const override;
+
     /// <summary>
     /// Calcule la nouvelle vitesse � partir de l'acc�l�ration de la particule
     /// et du temps en arguement
