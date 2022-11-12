@@ -15,11 +15,11 @@ public:
 
     //    Collider(GameObject* gameObject, float mass, float friction, float restitution);
 
-    void update(float time) override;
+    //    void update(float time) override;
 
-    void drawGui() override;
+    //    void drawGui() override;
 
-    std::string getName() const override;
+    //    std::string getName() const override;
 
     //    float getMass() const;
     //

@@ -5,12 +5,19 @@
 
 class CuboidCollider : Collider {
 private:
+    static constexpr const char* COMPONENT_TYPE = CUBOID_COLLIDER_COMPONENT;
     float m_width;
     float m_height;
     float m_depth;
 
 public:
-    CuboidCollider(GameObject* gameObject, float width=1.0f, float height=1.0f, float depth=1.0f);
+    explicit CuboidCollider(GameObject* gameObject, float width = 1.0F, float height = 1.0F, float depth = 1.0F);
+
+    void update(float time) override;
+
+    void drawGui() override;
+
+    std::string getName() const override;
 
     float getWidth() const;
 

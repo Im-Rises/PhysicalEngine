@@ -13,7 +13,7 @@ AllowShortFunctionsOnASingleLine: All
 BasedOnStyle: LLVM
 BraceWrapping:
   AfterClass: false    # TODO: verify
-  AfterControlStatement: Always    # TODO: verify
+  AfterControlStatement: Never    # TODO: verify
   AfterEnum: false    # TODO: verify
   AfterFunction: false    # TODO: verify
   AfterNamespace: false    # TODO: verify
@@ -44,4 +44,4 @@ SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
 TabWidth: 4
-UseTab: Never
+UseTab: Always
