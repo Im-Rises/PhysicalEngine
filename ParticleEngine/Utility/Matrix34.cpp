@@ -12,7 +12,7 @@ Matrix34::Matrix34(float values[12]) {
     }
 }
 
-Matrix33 &Matrix34::extractMatrix33() const {
+Matrix33 Matrix34::extractMatrix33() const {
     float valueRes[9];
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
@@ -33,7 +33,7 @@ void Matrix34::setFromRotationTranslation(const Matrix33 &rotationMatrix, const 
     m_value[11] = translation.z;
 }
 
-Matrix34 &Matrix34::matrix34FromRotationTranslation(const Matrix33 &rotationMatrix, const Vector3d &translation) const {
+Matrix34 Matrix34::matrix34FromRotationTranslation(const Matrix33 &rotationMatrix, const Vector3d &translation) const {
     Matrix34 res;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
@@ -85,7 +85,7 @@ Matrix34::~Matrix34() {
 //    delete[] m_value;
 }
 
-Matrix34 &Matrix34::transformationAffineMatrixToMatrix34(const Matrix44 &mat44) const {
+Matrix34 Matrix34::transformationAffineMatrixToMatrix34(const Matrix44 &mat44) const {
     Matrix34 res;
     for (int k = 0; k < 12; k++) {
         res.m_value[k] = mat44[k];
@@ -93,7 +93,7 @@ Matrix34 &Matrix34::transformationAffineMatrixToMatrix34(const Matrix44 &mat44) 
     return res;
 }
 
-Matrix44 &Matrix34::transformationAffineMatrix() const {
+Matrix44 Matrix34::transformationAffineMatrix() const {
     float values[16];
     for (int k = 0; k < 12; k++) {
         values[k] = m_value[k];
@@ -110,4 +110,11 @@ void Matrix34::setOrientationAndPosition(const Quaternion &quaternion, const Vec
     rotationMatrix.setOrientation(quaternion);
     setFromRotationTranslation(rotationMatrix, translation);
 
+}
+
+Matrix34 &Matrix34::operator=(const Matrix34 &other) {
+    for (int k = 0; k < 12; k++) {
+        m_value[k] = other.m_value[k];
+    }
+    return *this;
 }
