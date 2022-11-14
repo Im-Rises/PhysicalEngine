@@ -29,7 +29,7 @@ public:
     /// Extrait la matrice 33 en haut à gauche de la matrice de transformation affine soit la matrice de rotation
     /// </summary>
     /// <returns></returns>
-    Matrix33 &extractMatrix33() const;
+    Matrix33 extractMatrix33() const;
 
     /// <summary>
     /// génère la matrice 34 à partir de sa matrice de rotation et son vecteur de translation
@@ -44,7 +44,7 @@ public:
     /// <param name="rotationMatrix"></param>
     /// <param name="translation"></param>
     /// <returns></returns>
-    Matrix34 &matrix34FromRotationTranslation(const Matrix33 &rotationMatrix, const Vector3d &translation) const;
+    Matrix34 matrix34FromRotationTranslation(const Matrix33 &rotationMatrix, const Vector3d &translation) const;
 
     /// <summary>
     /// Produit Matriciel
@@ -52,6 +52,8 @@ public:
     /// <param name="other"></param>
     /// <returns></returns>
     Matrix34 operator*(const Matrix34 &other) const;
+
+    Matrix34 &operator=(const Matrix34 &other);
 
     /// <summary>
     /// inverse de la Matrice const
@@ -69,13 +71,13 @@ public:
     /// </summary>
     /// <param name="mat44"></param>
     /// <returns></returns>
-    Matrix34 &transformationAffineMatrixToMatrix34(const Matrix44 &mat44) const;
+    Matrix34 transformationAffineMatrixToMatrix34(const Matrix44 &mat44) const;
 
     /// <summary>
     /// Genere la matrix 44 de transformation affine à partir de *this
     /// </summary>
     /// <returns></returns>
-    Matrix44 &transformationAffineMatrix() const;
+    Matrix44 transformationAffineMatrix() const;
 
     /// <summary>
     /// Génère la matrice de transformation avec une orientation et une position

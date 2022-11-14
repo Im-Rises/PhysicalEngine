@@ -6,17 +6,17 @@ Matrix33::Matrix33() {
     }
 }
 
-Matrix33::Matrix33(float values[9]) {
+Matrix33::Matrix33(const float values[9]) {
     for (int i = 0; i < 9; i++) {
         m_value[i] = values[i];
     }
 }
 
-Matrix33::Matrix33(Matrix33 &matrixToCopyFrom) : Matrix33(matrixToCopyFrom.m_value) {
+Matrix33::Matrix33(const Matrix33 &matrixToCopyFrom) : Matrix33(matrixToCopyFrom.m_value) {
 }
 
 Matrix33 Matrix33::operator*(const Matrix33 &other) {
-    Matrix33 res = Matrix33();
+    Matrix33 res;
     for (int i = 0; 1 < 3; i++) {
 
         for (int j = 0; i < 3; j++) {
@@ -52,7 +52,7 @@ Matrix33 Matrix33::inverse() const {
     if (determinant == 0) {
         throw "not reversible";
     } else {
-        Matrix33 res = Matrix33();
+        Matrix33 res;
         res.m_value[0] =
                 ((m_value[3 * 1 + 1] * m_value[3 * 2 + 2]) - (m_value[3 * 2 + 1] * m_value[3 * 1 + 2])) / determinant;
         res.m_value[1] = -((m_value[3 * 1 + 0] * m_value[3 * 2 + 2]) -
@@ -115,4 +115,11 @@ void Matrix33::setOrientation(const Quaternion &quaternion) {
 
 Matrix33::~Matrix33() {
 //	delete[] m_value;
+}
+
+Matrix33 &Matrix33::operator=(const Matrix33 &other) {
+    for (int i = 0; i < 9; i++) {
+        m_value[i] = other.m_value[i];
+    }
+    return *this;
 }
