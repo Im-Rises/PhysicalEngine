@@ -37,7 +37,7 @@ public:
     /// </summary>
     /// <param name="matrix"></param>
     /// <returns></returns>
-    Matrix44 &operator*(const Matrix44 &matrix);
+    Matrix44 operator*(const Matrix44 &matrix);
 
 
     ~Matrix44();
