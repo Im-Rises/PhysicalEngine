@@ -1,7 +1,7 @@
 include_directories("${CMAKE_SOURCE_DIR}/dependencies")
 set(SRCS_TEST "vector3dTest.cpp" "matrix33Test.cpp" "quaternionTest.cpp")
 
-set(SRCS "../ParticleEngine/Utility/Vector3d.cpp")
+set(SRCS "../ParticleEngine/Utility/Vector3d.cpp" "../ParticleEngine/Utility/Matrix33.cpp" "../ParticleEngine/Utility/Quaternion.cpp")
 
 enable_testing()
 

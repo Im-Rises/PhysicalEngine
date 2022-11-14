@@ -2,7 +2,7 @@
 
 Matrix33::Matrix33() {
     for (int i = 0; i < 9; i++) {
-        m_value[i] = 0;
+        m_value[i] = 0.0f;
     }
 }
 
@@ -122,4 +122,15 @@ Matrix33 &Matrix33::operator=(const Matrix33 &other) {
         m_value[i] = other.m_value[i];
     }
     return *this;
+}
+
+std::ostream &operator<<(std::ostream &os, const Matrix33 &matrix33) {
+    os << "Matrix33: " << std::endl;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            os << matrix33.m_value[3 * i + j] << " ";
+        }
+        os << std::endl;
+    }
+    return os;
 }

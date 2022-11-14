@@ -80,6 +80,10 @@ public:
     /// <param name="quaternion"></param>
     void setOrientation(const Quaternion &quaternion);
 
+//    float operator[](int i) const;
+
+    friend std::ostream &operator<<(std::ostream &os, const Matrix33 &matrix33);
+
     ~Matrix33();
 };
 
