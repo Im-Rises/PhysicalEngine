@@ -42,6 +42,11 @@ Vector3d Matrix33::operator*(const Vector3d& other)
 
 }
 
+float Matrix33::operator()(int i, int j) const
+{
+	return m_value[3*i+j];
+}
+
 Matrix33 Matrix33::inverse() const
 {
 	float determinant;

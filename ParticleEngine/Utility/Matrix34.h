@@ -4,7 +4,7 @@
 
 #include "Vector3d.h"
 #include "Quaternion.h"
-#include "Matrix34.h"
+#include "Matrix33.h"
 #include "Matrix44.h"
 
 class Matrix34 {
@@ -24,6 +24,25 @@ public:
 	/// <param name="values"></param>
 	Matrix34(float values[12]);
 
+	/// <summary>
+	/// Extrait la matrice 33 en haut à gauche de la matrice de transformation affine soit la matrice de rotation
+	/// </summary>
+	/// <returns></returns>
+	Matrix33& extractMatrix33() const;
+
+	/// <summary>
+	/// génère la matrice 34 à partir de sa matrice de rotation et son vecteur de translation
+	/// </summary>
+	/// <param name="rotationMatrix"></param>
+	/// <param name="translation"></param>
+	void setFromRotationTranslation(Matrix33& const rotationMatrix, Vector3d& const translation);
+	/// <summary>
+	/// énère la matrice 34 à partir de sa matrice de rotation et son vecteur de translation
+	/// </summary>
+	/// <param name="rotationMatrix"></param>
+	/// <param name="translation"></param>
+	/// <returns></returns>
+	Matrix34& matrix34FromRotationTranslation(Matrix33& const rotationMatrix, Vector3d& const translation) const;
 
 	/// <summary>
 	/// Produit Matriciel
@@ -31,12 +50,6 @@ public:
 	/// <param name="other"></param>
 	/// <returns></returns>
 	Matrix34 operator*(const Matrix34& other) const;
-	/// <summary>
-	/// Produit Matriciel
-	/// </summary>
-	/// <param name="other"></param>
-	/// <returns></returns>
-	Vector3d operator*(const Vector3d& other) const;
 
 	/// <summary>
 	/// inverse de la Matrice const 
@@ -45,20 +58,9 @@ public:
 	Matrix34 inverse() const;
 
 	/// <summary>
-	/// Transposition de la Matrice
-	/// </summary>
-	/// <returns></returns>
-	Matrix34 transpose() const ;
-
-	/// <summary>
 	/// inverse la matrice
 	/// </summary>
 	void inverseMat();
-
-	/// <summary>
-	/// Transpose la matrice
-	/// </summary>
-	void transposeMat();
 	/// <summary>
 	/// Transforme une matrice 44 de transformation affine en matrix 3 4 (const)
 	/// </summary>
@@ -76,7 +78,7 @@ public:
 	/// </summary>
 	/// <param name="quaternion"></param>
 	/// <param name="vec"></param>
-	void setOrientationAndPosition(const Quaternion& quaternion,const Vector3d & vec);
+	void setOrientationAndPosition(Quaternion& const quaternion,Vector3d & const translation);
 
 
 	/// <summary>
@@ -84,13 +86,13 @@ public:
 	/// </summary>
 	/// <param name="vec"></param>
 	/// <returns></returns>
-	Vector3d TransformPosition(const Vector3d vec);
+	Vector3d TransformPosition(const Vector3d vec) const;
 	/// <summary>
 	/// Effectue un changement de base d'un vecteur suivant la matrice de Transformation this en ignorant la translation
 	/// </summary>
 	/// <param name="vec"></param>
 	/// <returns></returns>
-	Vector3d TransformDirection(const Vector3d vec);
+	Vector3d TransformDirection(const Vector3d vec) const;
 
 	
 	~Matrix34();

@@ -43,6 +43,13 @@ public:
 	Vector3d operator*(const Vector3d& other);
 
 	/// <summary>
+	/// élément ligne i colonne j const 
+	/// </summary>
+	/// <param name="i"></param>
+	/// <param name="j"></param>
+	/// <returns></returns>
+	float operator()(int i, int j) const;
+	/// <summary>
 	/// Renvoie l'inverse de la matrice const
 	/// </summary>
 	/// <returns></returns>

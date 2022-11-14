@@ -1,5 +1,12 @@
 #include "Matrix44.h"
 
+Matrix44::Matrix44()
+{
+	for (int k = 0; k < 16; k++) {
+		m_value[k] = 0;
+	}
+}
+
 Matrix44::Matrix44(float values[16])
 {
 	for (int i= 0; i< 16; i++) {
