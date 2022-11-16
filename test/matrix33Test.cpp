@@ -32,6 +32,72 @@ int testConstructor() {
     return 0;
 }
 
+int testMatrixAddition() {
+    float values1[9] = {1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f};
+    float values2[9] = {1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f};
+    Matrix33 m1(values1);
+    Matrix33 m2(values2);
+    Matrix33 m3 = m1 + m2;
+
+    if (!(m3(0, 0) == 2.0f && m3(0, 1) == 4.0f && m3(0, 2) == 6.0f &&
+          m3(1, 0) == 8.0f && m3(1, 1) == 10.0f && m3(1, 2) == 12.0f &&
+          m3(2, 0) == 14.0f && m3(2, 1) == 16.0f && m3(2, 2) == 18.0f)) {
+        std::cout << "- Matrix Addition fail!\n";
+        return 2;
+    }
+
+    return 0;
+}
+
+int testMatrixSubtraction() {
+    float values1[9] = {1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f};
+    float values2[9] = {1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f};
+    Matrix33 m1(values1);
+    Matrix33 m2(values2);
+    Matrix33 m3 = m1 - m2;
+
+    if (!(m3(0, 0) == 0.0f && m3(0, 1) == 0.0f && m3(0, 2) == 0.0f &&
+          m3(1, 0) == 0.0f && m3(1, 1) == 0.0f && m3(1, 2) == 0.0f &&
+          m3(2, 0) == 0.0f && m3(2, 1) == 0.0f && m3(2, 2) == 0.0f)) {
+        std::cout << "- Matrix Subtraction fail!\n";
+        return 3;
+    }
+
+    return 0;
+}
+
+int testMatrixMultiplication() {
+    float values1[9] = {1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f};
+    float values2[9] = {1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f};
+    Matrix33 m1(values1);
+    Matrix33 m2(values2);
+    Matrix33 m3 = m1 * m2;
+
+    if (!(m3(0, 0) == 30.0f && m3(0, 1) == 36.0f && m3(0, 2) == 42.0f &&
+          m3(1, 0) == 66.0f && m3(1, 1) == 81.0f && m3(1, 2) == 96.0f &&
+          m3(2, 0) == 102.0f && m3(2, 1) == 126.0f && m3(2, 2) == 150.0f)) {
+        std::cout << "- Matrix Multiplication fail!\n";
+        return 4;
+    }
+
+    return 0;
+}
+
+int testMatrixScalarMultiplication() {
+    float values1[9] = {1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f, 9.0f};
+    Matrix33 m1(values1);
+    Matrix33 m2 = m1 * 2.0f;
+
+    if (!(m2(0, 0) == 2.0f && m2(0, 1) == 4.0f && m2(0, 2) == 6.0f &&
+          m2(1, 0) == 8.0f && m2(1, 1) == 10.0f && m2(1, 2) == 12.0f &&
+          m2(2, 0) == 14.0f && m2(2, 1) == 16.0f && m2(2, 2) == 18.0f)) {
+        std::cout << "- Matrix Scalar Multiplication fail!\n";
+        return 5;
+    }
+
+    return 0;
+}
+
 
 int main() {
     std::cout << "Matrix33 Test\n";
