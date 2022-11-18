@@ -17,9 +17,9 @@ Matrix33::Matrix33(const Matrix33 &matrixToCopyFrom) : Matrix33(matrixToCopyFrom
 
 Matrix33 Matrix33::operator*(const Matrix33 &other) {
     Matrix33 res;
-    for (int i = 0; 1 < 3; i++) {
+    for (int i = 0; i < 3; i++) {
 
-        for (int j = 0; i < 3; j++) {
+        for (int j = 0; j < 3; j++) {
             for (int k = 0; k < 3; k++) {
                 res.m_value[i * 3 + j] += m_value[i * 3 + k] * other.m_value[k * 3 + j];
             }
@@ -32,7 +32,7 @@ Vector3d Matrix33::operator*(const Vector3d &other) {
     Vector3d res(0, 0, 0);
     res.x = m_value[0] * other.x + m_value[1] * other.y + m_value[2] * other.z;
     res.y = m_value[3] * other.x + m_value[4] * other.y + m_value[5] * other.z;
-    res.z = m_value[6] * other.x + m_value[7] * other.y + m_value[7] * other.z;
+    res.z = m_value[6] * other.x + m_value[7] * other.y + m_value[8] * other.z;
     return res;
 
 }
@@ -56,21 +56,21 @@ Matrix33 Matrix33::inverse() const {
         res.m_value[0] =
                 ((m_value[3 * 1 + 1] * m_value[3 * 2 + 2]) - (m_value[3 * 2 + 1] * m_value[3 * 1 + 2])) / determinant;
         res.m_value[1] = -((m_value[3 * 1 + 0] * m_value[3 * 2 + 2]) -
-                           (m_value[3 * 2 + 0] * m_value[3 * 1 + 2]) / determinant);
+                           (m_value[3 * 2 + 0] * m_value[3 * 1 + 2])) / determinant;
         res.m_value[2] = +((m_value[3 * 1 + 0] * m_value[3 * 2 + 1]) -
-                           (m_value[3 * 2 + 0] * m_value[3 * 1 + 1]) / determinant);
+                           (m_value[3 * 2 + 0] * m_value[3 * 1 + 1])) / determinant;
         res.m_value[3] = -((m_value[3 * 0 + 1] * m_value[3 * 2 + 2]) -
-                           (m_value[3 * 2 + 1] * m_value[3 * 0 + 2]) / determinant);
+                           (m_value[3 * 2 + 1] * m_value[3 * 0 + 2])) / determinant;
         res.m_value[4] = +((m_value[3 * 0 + 0] * m_value[3 * 2 + 2]) -
-                           (m_value[3 * 2 + 0] * m_value[3 * 0 + 2]) / determinant);
+                           (m_value[3 * 2 + 0] * m_value[3 * 0 + 2])) / determinant;
         res.m_value[5] = -((m_value[3 * 0 + 0] * m_value[3 * 2 + 1]) -
-                           (m_value[3 * 2 + 0] * m_value[3 * 0 + 1]) / determinant);
+                           (m_value[3 * 2 + 0] * m_value[3 * 0 + 1])) / determinant;
         res.m_value[6] = +((m_value[3 * 0 + 1] * m_value[3 * 1 + 2]) -
-                           (m_value[3 * 1 + 1] * m_value[3 * 0 + 2]) / determinant);
+                           (m_value[3 * 1 + 1] * m_value[3 * 0 + 2])) / determinant;
         res.m_value[7] = -((m_value[3 * 0 + 0] * m_value[3 * 1 + 2]) -
-                           (m_value[3 * 1 + 0] * m_value[3 * 0 + 2]) / determinant);
+                           (m_value[3 * 1 + 0] * m_value[3 * 0 + 2])) / determinant;
         res.m_value[8] = +((m_value[3 * 0 + 0] * m_value[3 * 1 + 1]) -
-                           (m_value[3 * 1 + 0] * m_value[3 * 0 + 1]) / determinant);
+                           (m_value[3 * 1 + 0] * m_value[3 * 0 + 1])) / determinant;
         return res;
 
     }
@@ -102,13 +102,13 @@ void Matrix33::transposeMat() {
 
 void Matrix33::setOrientation(const Quaternion &quaternion) {
     float w = quaternion[0], x = quaternion[1], y = quaternion[2], z = quaternion[3];
-    m_value[0] = 1 - (2 * y * y * +2 * z * z);
-    m_value[1] = 2 * x * y + 2 * z * w;
-    m_value[2] = 2 * x * z - 2 * y * w;
-    m_value[3] = 2 * x * y - 2 * z * w;
+    m_value[0] = 1 - (2 * y * y +2 * z * z);
+    m_value[1] = 2 * x * y - 2 * z * w;
+    m_value[2] = 2 * x * z + 2 * y * w;
+    m_value[3] = 2 * x * y + 2 * z * w;
     m_value[4] = 1 - (2 * x * x + 2 * z * z);
-    m_value[5] = 2 * y * z + 2 * x * w;
-    m_value[6] = 2 * x * z + 2 * y * w;
+    m_value[5] = 2 * y * z - 2 * x * w;
+    m_value[6] = 2 * x * z - 2 * y * w;
     m_value[7] = 2 * y * z + 2 * x * w;
     m_value[8] = 1 - (2 * x * x + 2 * y * y);
 }

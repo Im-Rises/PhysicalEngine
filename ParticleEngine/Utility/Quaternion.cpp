@@ -72,7 +72,7 @@ Quaternion::Quaternion(float w,float x, float y, float z)
 /// Multiplication de quaternion selon le produit hamiltonien
 /// <param name="quaternion"></param>
 /// <returns></returns>
-Quaternion Quaternion::operator*=(const Quaternion& quaternion)
+Quaternion&  Quaternion::operator*=(const Quaternion& quaternion)
 {
 	float w, x, y, z;
 	float w1 = m_value[0], x1 = m_value[1], y1 = m_value[2], z1 = m_value[3];
@@ -94,7 +94,7 @@ Quaternion Quaternion::operator*=(const Quaternion& quaternion)
 /// </summary>
 /// <param name="quaternion"></param>
 /// <returns></returns>
-Quaternion & Quaternion::operator*(const Quaternion& quaternion)
+Quaternion Quaternion::operator*(const Quaternion& quaternion)
 {
 	Quaternion res(*this);
 	res *= quaternion;
@@ -105,7 +105,7 @@ Quaternion & Quaternion::operator*(const Quaternion& quaternion)
 /// </summary>
 /// <param name="n"></param>
 /// <returns></returns>
-Quaternion& Quaternion::operator*(float n)
+Quaternion Quaternion::operator*(float n)
 {
 	return Quaternion(n * m_value[0], n * m_value[1], n * m_value[2], n * m_value[3]);
 }
@@ -115,7 +115,7 @@ Quaternion& Quaternion::operator*(float n)
 /// </summary>
 /// <param name="quaternion"></param>
 /// <returns></returns>
-Quaternion& Quaternion::operator+(const Quaternion& quaternion)
+Quaternion Quaternion::operator+(const Quaternion& quaternion)
 {
 	return Quaternion(m_value[0] + quaternion.m_value[0], m_value[1] + quaternion.m_value[1],
 		m_value[2] + quaternion.m_value[2], m_value[3] + quaternion.m_value[3]);
@@ -168,5 +168,5 @@ void Quaternion::UpdateByAngularSpeed(const Vector3d& vector, float time)
 /// </summary>
 Quaternion::~Quaternion()
 {
-	delete[] m_value;
+	//hdelete[] m_value;
 }

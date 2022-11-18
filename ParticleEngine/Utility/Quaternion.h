@@ -21,13 +21,13 @@ public:
 
 	Quaternion(float w,float x,float y , float z);
 
-	Quaternion operator*=(const Quaternion& quaternion);
+	Quaternion & operator*=(const Quaternion& quaternion);
 
-	Quaternion &operator*(const Quaternion &quaternion);
+	Quaternion operator*(const Quaternion &quaternion);
 
-	Quaternion& operator*(float n);
+	Quaternion operator*(float n);
 
-	Quaternion& operator+(const Quaternion& quaternion);
+	Quaternion operator+(const Quaternion& quaternion);
 
 	float operator[](int i) const;
 

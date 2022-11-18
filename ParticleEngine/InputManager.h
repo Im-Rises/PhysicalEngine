@@ -13,7 +13,6 @@ private:
 
     static float mouseLastPosX;
     static float mouseLastPosY;
-
     static float movementSpeed;
 
 public:
