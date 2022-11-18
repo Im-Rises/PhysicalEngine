@@ -36,11 +36,15 @@ protected:
 public:
     explicit Rigidbody(GameObject *gameObject);
 
-    void AddForce(const Vector3d &force);
+    void addForce(const Vector3d &force);
 
-    void AddForceAtPoint(const Vector3d &force, const Vector3d worldPoint);
+    void addForceAtPoint(const Vector3d &force, Vector3d worldPoint);
 
-    void AddForceAtBodyPoint(const Vector3d &force, const Vector3d &LocalPoint);
+    void addForceAtBodyPoint(const Vector3d &force, const Vector3d &LocalPoint);
+
+    void calculateAcceleration();
+
+    void calculateSpeed(float time);
 
     void clearAccumulator();
 

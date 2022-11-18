@@ -6,6 +6,7 @@
 #include "../../../GameObject.h"
 
 #include "../../../../Force/ForceGenerator.h"
+#include "../../../../Utility/imGuiUtility.h"
 
 Rigidbody::Rigidbody(GameObject *gameObject) : Component(gameObject) {
     m_mass = 0;
@@ -14,17 +15,17 @@ Rigidbody::Rigidbody(GameObject *gameObject) : Component(gameObject) {
     m_torqueAccum = Vector3d(0, 0, 0);
 }
 
-void Rigidbody::AddForce(const Vector3d &force) {
+void Rigidbody::addForce(const Vector3d &force) {
     m_forceAccum += force;
 }
 
-void Rigidbody::AddForceAtPoint(const Vector3d &force, const Vector3d worldPoint) {
+void Rigidbody::addForceAtPoint(const Vector3d &force, const Vector3d worldPoint) {
     Vector3d point = worldPoint - m_gameObject->transform.getPosition();
     m_forceAccum += force;
     m_torqueAccum += point.cross(force);
 }
 
-void Rigidbody::AddForceAtBodyPoint(const Vector3d &force, const Vector3d &LocalPoint) {
+void Rigidbody::addForceAtBodyPoint(const Vector3d &force, const Vector3d &LocalPoint) {
     m_forceAccum += force;
     m_gameObject->transform.getRotation().RotateByVector(LocalPoint);
     m_torqueAccum += m_gameObject->transform.getPosition().cross(force);
@@ -36,10 +37,18 @@ void Rigidbody::clearAccumulator() {
 }
 
 void Rigidbody::update(float time) {
+    // Update sum of forces
     if (isKinematic) {
-        m_gameObject->transform.setPosition(m_gameObject->transform.getPosition() + m_forceAccum * time);
-        m_gameObject->transform.setRotation(m_gameObject->transform.getRotation() + m_torqueAccum * time);
+//        gravity.addForce(this);
+
+        for (ForceGenerator *forceGenerator: forceGeneratorsList) {
+//            forceGenerator->addForce(this);
+        }
     }
+
+    // Update acceleration, speed and position
+    calculateAcceleration();
+    calculateSpeed(time);
 
     // Clear accumulators
     clearAccumulator();
@@ -65,10 +74,75 @@ void Rigidbody::drawGui() {
     ImGui::Text("Torque Accumulator");
     ImGui::DragFloat3("##ParticleTorqueAccumulator", &m_torqueAccum.x, 0.1f, 0.0f, 100.0f);
 
+    // Gravity
+    ImGui::Text("Gravity");
+    ImGui::DragFloat3("##ParticleGravity", &gravity.getGravityRef().x, 0.1f, 0.0f, 100.0f);
 
+    // Handle forces
+    std::string forcesListText = "Forces list";
+    std::string addForcesText = "Add forces";
+    std::string deleteForcesText = "Delete forces";
+    // Forces list and add force
+    ImGuiUtility::AlignForWidth((ImGuiUtility::CalculateTextWidth(forcesListText.c_str()) +
+                                 ImGuiUtility::CalculateTextWidth(addForcesText.c_str()) +
+                                 ImGuiUtility::CalculateTextWidth(deleteForcesText.c_str())));
+
+    // Forces list
+    if (ImGui::Button(forcesListText.c_str())) {
+        ImGui::OpenPopup("ParticleForcesList##popup");
+    }
+    if (ImGui::BeginPopup("ParticleForcesList##popup")) {
+        if (forceGeneratorsList.empty())
+            ImGui::Text("Empty");
+        else
+            for (auto &forceGenerator: forceGeneratorsList) {
+                forceGenerator->drawGui(m_gameObject->getScenePtr());
+            }
+        ImGui::EndPopup();
+    }
+
+    ImGui::SameLine();
+
+    // Add force
+    if (ImGui::Button(addForcesText.c_str())) {
+        ImGui::OpenPopup("ParticleAddForce##popup");
+    }
+    if (ImGui::BeginPopup("ParticleAddForce##popup")) {
+        for (auto &forcesName: ForceGenerator::forcesNamesList) {
+            if (ImGui::MenuItem(forcesName)) {
+//                addForce(ForceGenerator::createForceGenerator(forcesName, m_gameObject));
+            }
+        }
+        ImGui::EndPopup();
+    }
+
+    ImGui::SameLine();
+
+    // Delete force
+    if (ImGui::Button(deleteForcesText.c_str())) {
+        ImGui::OpenPopup("ParticleDeleteForce##ParticleDeleteForcePopup");
+    }
+    if (ImGui::BeginPopup("ParticleDeleteForce##ParticleDeleteForcePopup")) {
+        for (auto &forceGenerator: forceGeneratorsList) {
+            if (ImGui::MenuItem(forceGenerator->getName().c_str())) {
+//                deleteForceByClass(forceGenerator);
+            }
+        }
+        ImGui::EndPopup();
+    }
 }
 
 std::string Rigidbody::getName() const {
     return COMPONENT_TYPE;
+}
+
+void Rigidbody::calculateAcceleration() {
+    linearAcceleration = m_forceAccum / m_mass;
+    angularAcceleration = m_torqueAccum / m_mass;
+}
+
+void Rigidbody::calculateSpeed(float time) {
+    linearSpeed = linearSpeed + linearAcceleration * time;
+    angularSpeed = angularSpeed + angularAcceleration * time;
 }
 
