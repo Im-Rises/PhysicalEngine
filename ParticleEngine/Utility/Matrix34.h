@@ -47,7 +47,7 @@ public:
     Matrix34 matrix34FromRotationTranslation(const Matrix33 &rotationMatrix, const Vector3d &translation) const;
 
     /// <summary>
-    /// Produit Matriciel
+    /// Produit Matriciel avec la matrice de transposition affine (Mat34-> Mat44 affine)*(Mat34->Mat44 affine)  -> Mat34
     /// </summary>
     /// <param name="other"></param>
     /// <returns></returns>
@@ -55,6 +55,13 @@ public:
 
     Matrix34 &operator=(const Matrix34 &other);
 
+    /// <summary>
+    /// renvoie l'élément ligne i colonne j
+    /// </summary>
+    /// <param name="i"></param>
+    /// <param name="j"></param>
+    /// <returns></returns>
+    float operator()(int i, int j);
     /// <summary>
     /// inverse de la Matrice const
     /// </summary>

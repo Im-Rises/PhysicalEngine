@@ -25,7 +25,7 @@ Matrix44 Matrix44::operator*(const Matrix44 &matrix) {
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             for (int k = 0; k < 4; k++) {
-                res.m_value[4 * i + j] = m_value[4 * i + k] * matrix.m_value[4 * k + j];
+                res.m_value[4 * i + j] += m_value[4 * i + k] * matrix.m_value[4 * k + j];
             }
         }
     }

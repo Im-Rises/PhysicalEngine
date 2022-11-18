@@ -53,12 +53,17 @@ Matrix34 Matrix34::operator*(const Matrix34 &other) const {
     return res;
 }
 
+float Matrix34::operator()(int i, int j) {
+    return m_value[4*i+j];
+}
+
 Matrix34 Matrix34::inverse() const {
     Matrix33 M33Inv = extractMatrix33().inverse();
-    Vector3d vecInv;
-    vecInv.x = -m_value[3];
-    vecInv.y = -m_value[7];
-    vecInv.z = -m_value[11];
+    Vector3d vecMinus;
+    vecMinus.x = -m_value[3];
+    vecMinus.y = -m_value[7];
+    vecMinus.z = -m_value[11];
+    Vector3d vecInv = M33Inv * vecMinus;
     return matrix34FromRotationTranslation(M33Inv, vecInv);
 }
 
@@ -74,7 +79,7 @@ Vector3d Matrix34::TransformPosition(const Vector3d vec) const {
     res.x += m_value[3];
     res.y += m_value[7];
     res.z += m_value[11];
-    return Vector3d();
+    return res;
 }
 
 Vector3d Matrix34::TransformDirection(const Vector3d vec) const {
