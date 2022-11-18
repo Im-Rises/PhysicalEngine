@@ -49,6 +49,9 @@ void Rigidbody::drawGui() {
     ImGui::Text("Force Accumulator");
     ImGui::DragFloat3("##ParticleForceAccumulator", &m_forceAccum.x, 0.1f, 0.0f, 100.0f);
 
+    // Torque Accumulator
+    ImGui::Text("Torque Accumulator");
+    ImGui::DragFloat3("##ParticleTorqueAccumulator", &m_torqueAccum.x, 0.1f, 0.0f, 100.0f);
 }
 
 std::string Rigidbody::getName() const {
