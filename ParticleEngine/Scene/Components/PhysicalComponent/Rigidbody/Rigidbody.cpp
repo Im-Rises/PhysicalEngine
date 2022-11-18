@@ -5,6 +5,8 @@
 #include "imgui/imgui.h"
 #include "../../../GameObject.h"
 
+#include "../../../../Force/ForceGenerator.h"
+
 Rigidbody::Rigidbody(GameObject *gameObject) : Component(gameObject) {
     m_mass = 0;
     m_angularDamping = 0;
@@ -34,13 +36,10 @@ void Rigidbody::clearAccumulator() {
 }
 
 void Rigidbody::update(float time) {
-    // Calculate linear acceleration and velocity and update position
-    Vector3d resultingAcc = m_forceAccum * m_mass;
-    m_gameObject->transform.setPosition(m_gameObject->transform.getPosition() + resultingAcc * time);
-
-    // Calculate angular acceleration, velocity and update rotation
-    Vector3d angularAcc = m_torqueAccum * m_mass;
-    m_gameObject->transform.rotation += angularAcc * time;
+    if (isKinematic) {
+        m_gameObject->transform.setPosition(m_gameObject->transform.getPosition() + m_forceAccum * time);
+        m_gameObject->transform.setRotation(m_gameObject->transform.getRotation() + m_torqueAccum * time);
+    }
 
     // Clear accumulators
     clearAccumulator();
@@ -65,6 +64,8 @@ void Rigidbody::drawGui() {
     // Torque Accumulator
     ImGui::Text("Torque Accumulator");
     ImGui::DragFloat3("##ParticleTorqueAccumulator", &m_torqueAccum.x, 0.1f, 0.0f, 100.0f);
+
+
 }
 
 std::string Rigidbody::getName() const {

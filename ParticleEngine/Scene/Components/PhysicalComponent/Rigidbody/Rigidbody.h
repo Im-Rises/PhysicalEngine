@@ -1,9 +1,14 @@
 #ifndef INTEGRABLE_H
 #define INTEGRABLE_H
 
+#include <vector>
 #include "../../../../Utility/Vector3d.h"
 #include "../../Component.h"
 #include "../PhysicalComponent.h"
+#include "../../../../Force/Gravity.h"
+
+class ForceGenerator;
+
 
 class Rigidbody : public PhysicalComponent {
 private:
@@ -12,16 +17,21 @@ private:
 protected:
     bool isKinematic = true;
     float m_mass;
+
     float m_angularDamping;
     Vector3d m_forceAccum;
     Vector3d m_torqueAccum;
-//    float m_damping;
-//    float m_inverseMass;
-//    float m_inverseInertiaTensor;
-//    float m_gravity;
-//    float m_friction;
-//    float m_restitution;
-//    bool isKinematic = false;
+
+    // Velocity and acceleration
+    Vector3d linearSpeed;
+    Vector3d linearAcceleration;
+    Vector3d angularSpeed;
+    Vector3d angularAcceleration;
+
+    // Forces
+    Gravity gravity;
+    std::vector<ForceGenerator *> forceGeneratorsList;
+
 
 public:
     explicit Rigidbody(GameObject *gameObject);
