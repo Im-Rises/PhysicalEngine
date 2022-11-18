@@ -10,6 +10,7 @@ private:
     static constexpr const char *COMPONENT_TYPE = RIGIDBODY_COMPONENT;
 
 protected:
+    bool isKinematic = true;
     float m_mass;
     float m_angularDamping;
     Vector3d m_forceAccum;
@@ -25,11 +26,11 @@ protected:
 public:
     explicit Rigidbody(GameObject *gameObject);
 
-    void AddForce(const Vector3d& force);
+    void AddForce(const Vector3d &force);
 
-    void AddForceAtPoint(const Vector3d& force, const Vector3d worldPoint);
+    void AddForceAtPoint(const Vector3d &force, const Vector3d worldPoint);
 
-    void AddForceAtBodyPoint(const Vector3d& force, const Vector3d& LocalPoint);
+    void AddForceAtBodyPoint(const Vector3d &force, const Vector3d &LocalPoint);
 
     void ClearAccumulator();
 
