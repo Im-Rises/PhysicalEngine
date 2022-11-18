@@ -32,7 +32,7 @@ public:
 
     void AddForceAtBodyPoint(const Vector3d &force, const Vector3d &LocalPoint);
 
-    void ClearAccumulator();
+    void clearAccumulator();
 
     void update(float time) override;
 

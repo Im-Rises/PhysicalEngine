@@ -24,46 +24,29 @@ void Rigidbody::AddForceAtPoint(const Vector3d &force, const Vector3d worldPoint
 
 void Rigidbody::AddForceAtBodyPoint(const Vector3d &force, const Vector3d &LocalPoint) {
     m_forceAccum += force;
-//    Vector3d point = m_gameObject->transform.getRotation().getMatrix() * LocalPoint;
     m_gameObject->transform.getRotation().RotateByVector(LocalPoint);
-    m_torqueAccum += m_gameObject->transform.getRotation()..cross(force);
+    m_torqueAccum += m_gameObject->transform.getPosition().cross(force);
 }
 
-void Rigidbody::ClearAccumulator() {
+void Rigidbody::clearAccumulator() {
     m_forceAccum = Vector3d(0, 0, 0);
     m_torqueAccum = Vector3d(0, 0, 0);
 }
 
 void Rigidbody::update(float time) {
-    // Update linear position
-    Vector3d position = m_gameObject->transform.getPosition();
-    position += m_velocity * time;
-    m_gameObject->transform.setPosition(position);
-
-    // Update angular position
-    Quaternion rotation = m_gameObject->transform.getRotation();
-    rotation += m_gameObject->transform.rotation * time;
-    m_gameObject->transform.setRotation(rotation);
-
-    // Calculate linear velocity
+    // Calculate linear acceleration and velocity and update position
     Vector3d resultingAcc = m_forceAccum * m_mass;
-//    m_velocity += resultingAcc * time;
+    m_gameObject->transform.setPosition(m_gameObject->transform.getPosition() + resultingAcc * time);
 
-    // Calculate angular velocity
+    // Calculate angular acceleration, velocity and update rotation
     Vector3d angularAcc = m_torqueAccum * m_mass;
-//    m_rotation += angularAcc * time;
-
-    // Impose drag
-//    m_velocity *= pow(m_linearDamping, time);
-//    m_rotation *= pow(m_angularDamping, time);
+    m_gameObject->transform.rotation += angularAcc * time;
 
     // Clear accumulators
-    ClearAccumulator();
+    clearAccumulator();
 }
 
 void Rigidbody::drawGui() {
-    ImGui::Text("Rigidbody");
-
     ImGui::Text("Is kinematic");
     ImGui::Checkbox("##ParticleKinematic", &isKinematic);
 
