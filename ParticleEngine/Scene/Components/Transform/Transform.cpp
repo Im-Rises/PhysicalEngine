@@ -6,9 +6,9 @@ Transform::Transform() {
     positionX = 0;
     positionY = 0;
     positionZ = 0;
-    rotationX = 0;
-    rotationY = 0;
-    rotationZ = 0;
+//    rotationX = 0;
+//    rotationY = 0;
+//    rotationZ = 0;
     scaleX = 1;
     scaleY = 1;
     scaleZ = 1;
@@ -37,18 +37,18 @@ void Transform::drawGui() {
     }
     ImGui::Text("Rotation");
     if (ImGui::BeginTable("TransformRotation", 3)) {
-        ImGui::TableNextColumn();
-        ImGui::Text("X:");
-        ImGui::SameLine();
-        ImGui::InputFloat("##TransformRotationX", &rotationX);
-        ImGui::TableNextColumn();
-        ImGui::Text("Y:");
-        ImGui::SameLine();
-        ImGui::InputFloat("##TransformRotationY", &rotationY);
-        ImGui::TableNextColumn();
-        ImGui::Text("Z:");
-        ImGui::SameLine();
-        ImGui::InputFloat("##TransformRotationZ", &rotationZ);
+//        ImGui::TableNextColumn();
+//        ImGui::Text("X:");
+//        ImGui::SameLine();
+//        ImGui::InputFloat("##TransformRotationX", &rotationX);
+//        ImGui::TableNextColumn();
+//        ImGui::Text("Y:");
+//        ImGui::SameLine();
+//        ImGui::InputFloat("##TransformRotationY", &rotationY);
+//        ImGui::TableNextColumn();
+//        ImGui::Text("Z:");
+//        ImGui::SameLine();
+//        ImGui::InputFloat("##TransformRotationZ", &rotationZ);
         ImGui::EndTable();
     }
     ImGui::Text("Scale");
@@ -85,6 +85,18 @@ Vector3d Transform::getPosition() const {
     return {positionX, positionY, positionZ};
 }
 
+void Transform::setRotation(const Quaternion &rotation) {
+    this->rotation = rotation;
+}
+
+Quaternion Transform::getRotation() const {
+    return rotation;
+}
+
 std::string Transform::getName() const {
     return COMPONENT_TYPE;
 }
+
+
+
+

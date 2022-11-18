@@ -13,13 +13,20 @@ Rigidbody::Rigidbody(GameObject *gameObject) : Component(gameObject) {
 }
 
 void Rigidbody::AddForce(const Vector3d &force) {
-
+    m_forceAccum += force;
 }
 
 void Rigidbody::AddForceAtPoint(const Vector3d &force, const Vector3d worldPoint) {
+    Vector3d point = worldPoint - m_gameObject->transform.getPosition();
+    m_forceAccum += force;
+    m_torqueAccum += point.cross(force);
 }
 
 void Rigidbody::AddForceAtBodyPoint(const Vector3d &force, const Vector3d &LocalPoint) {
+    m_forceAccum += force;
+//    Vector3d point = m_gameObject->transform.getRotation().getMatrix() * LocalPoint;
+    m_gameObject->transform.getRotation().RotateByVector(LocalPoint);
+    m_torqueAccum += m_gameObject->transform.getRotation()..cross(force);
 }
 
 void Rigidbody::ClearAccumulator() {
@@ -28,7 +35,30 @@ void Rigidbody::ClearAccumulator() {
 }
 
 void Rigidbody::update(float time) {
+    // Update linear position
+    Vector3d position = m_gameObject->transform.getPosition();
+    position += m_velocity * time;
+    m_gameObject->transform.setPosition(position);
 
+    // Update angular position
+    Quaternion rotation = m_gameObject->transform.getRotation();
+    rotation += m_gameObject->transform.rotation * time;
+    m_gameObject->transform.setRotation(rotation);
+
+    // Calculate linear velocity
+    Vector3d resultingAcc = m_forceAccum * m_mass;
+//    m_velocity += resultingAcc * time;
+
+    // Calculate angular velocity
+    Vector3d angularAcc = m_torqueAccum * m_mass;
+//    m_rotation += angularAcc * time;
+
+    // Impose drag
+//    m_velocity *= pow(m_linearDamping, time);
+//    m_rotation *= pow(m_angularDamping, time);
+
+    // Clear accumulators
+    ClearAccumulator();
 }
 
 void Rigidbody::drawGui() {
@@ -57,9 +87,4 @@ void Rigidbody::drawGui() {
 std::string Rigidbody::getName() const {
     return COMPONENT_TYPE;
 }
-
-//const Vector3d &Rigidbody::getPosition() const {
-//    return m_position;
-//}
-
 
