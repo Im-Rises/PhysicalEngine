@@ -62,46 +62,46 @@ bool PhysicalComponent::hasForce(const std::string &name) const {
 void PhysicalComponent::drawGui() {
     // Is kinematic
     ImGui::Text("Is kinematic");
-    ImGui::Checkbox("##ParticleKinematic", &isKinematic);
+    ImGui::Checkbox("##PhysicalComponentKinematic", &isKinematic);
 
     // Weight
     ImGui::Text("Weight");
-    ImGui::DragFloat("##ParticleWeight", &m_mass, 0.1f, 0.0f, 100.0f);
+    ImGui::DragFloat("##PhysicalComponentWeight", &m_mass, 0.1f, 0.0f, 100.0f);
 
     // Gravity
     gravity.drawGui(m_gameObject->getScenePtr());
 
     // linearSpeed, acceleration
     ImGui::Text("linearSpeed");
-    if (ImGui::BeginTable("ParticlelinearSpeed", 3)) {
+    if (ImGui::BeginTable("PhysicalComponentlinearSpeed", 3)) {
         ImGui::TableNextColumn();
         ImGui::Text("X:");
         ImGui::SameLine();
-        ImGui::InputFloat("##ParticlelinearSpeedX", &linearSpeed.x);
+        ImGui::InputFloat("##PhysicalComponentlinearSpeedX", &linearSpeed.x);
         ImGui::TableNextColumn();
         ImGui::Text("Y:");
         ImGui::SameLine();
-        ImGui::InputFloat("##ParticlelinearSpeedY", &linearSpeed.y);
+        ImGui::InputFloat("##PhysicalComponentlinearSpeedY", &linearSpeed.y);
         ImGui::TableNextColumn();
         ImGui::Text("Z:");
         ImGui::SameLine();
-        ImGui::InputFloat("##ParticlelinearSpeedZ", &linearSpeed.z);
+        ImGui::InputFloat("##PhysicalComponentlinearSpeedZ", &linearSpeed.z);
         ImGui::EndTable();
     }
     ImGui::Text("Acceleration");
-    if (ImGui::BeginTable("ParticleAcceleration", 3)) {
+    if (ImGui::BeginTable("PhysicalComponentAcceleration", 3)) {
         ImGui::TableNextColumn();
         ImGui::Text("X:");
         ImGui::SameLine();
-        ImGui::InputFloat("##ParticleAccelerationX", &linearAcceleration.x);
+        ImGui::InputFloat("##PhysicalComponentAccelerationX", &linearAcceleration.x);
         ImGui::TableNextColumn();
         ImGui::Text("Y:");
         ImGui::SameLine();
-        ImGui::InputFloat("##ParticleAccelerationY", &linearAcceleration.y);
+        ImGui::InputFloat("##PhysicalComponentAccelerationY", &linearAcceleration.y);
         ImGui::TableNextColumn();
         ImGui::Text("Z:");
         ImGui::SameLine();
-        ImGui::InputFloat("##ParticleAccelerationZ", &linearAcceleration.z);
+        ImGui::InputFloat("##PhysicalComponentAccelerationZ", &linearAcceleration.z);
         ImGui::EndTable();
     }
     ImGui::NewLine();
@@ -118,9 +118,9 @@ void PhysicalComponent::drawGuiForceGenerators() {
 
     // Forces list
     if (ImGui::Button(forcesListText.c_str())) {
-        ImGui::OpenPopup("ParticleForcesList##popup");
+        ImGui::OpenPopup("PhysicalComponentForcesList##popup");
     }
-    if (ImGui::BeginPopup("ParticleForcesList##popup")) {
+    if (ImGui::BeginPopup("PhysicalComponentForcesList##popup")) {
         if (forceGeneratorsList.empty())
             ImGui::Text("Empty");
         else
@@ -134,9 +134,9 @@ void PhysicalComponent::drawGuiForceGenerators() {
 
     // Add force
     if (ImGui::Button(addForcesText.c_str())) {
-        ImGui::OpenPopup("ParticleAddForce##popup");
+        ImGui::OpenPopup("PhysicalComponentAddForce##popup");
     }
-    if (ImGui::BeginPopup("ParticleAddForce##popup")) {
+    if (ImGui::BeginPopup("PhysicalComponentAddForce##popup")) {
         for (auto &forcesName: ForceGenerator::forcesNamesList) {
             if (ImGui::MenuItem(forcesName)) {
                 addForce(ForceGenerator::createForceGenerator(forcesName, m_gameObject));
@@ -149,9 +149,9 @@ void PhysicalComponent::drawGuiForceGenerators() {
 
     // Delete force
     if (ImGui::Button(deleteForcesText.c_str())) {
-        ImGui::OpenPopup("ParticleDeleteForce##ParticleDeleteForcePopup");
+        ImGui::OpenPopup("PhysicalComponentDeleteForce##PhysicalComponentDeleteForcePopup");
     }
-    if (ImGui::BeginPopup("ParticleDeleteForce##ParticleDeleteForcePopup")) {
+    if (ImGui::BeginPopup("PhysicalComponentDeleteForce##PhysicalComponentDeleteForcePopup")) {
         for (auto &forceGenerator: forceGeneratorsList) {
             if (ImGui::MenuItem(forceGenerator->getName().c_str())) {
                 deleteForceByClass(forceGenerator);
