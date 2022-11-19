@@ -39,10 +39,10 @@ void Rigidbody::clearAccumulator() {
 void Rigidbody::update(float time) {
     // Update sum of forces
     if (isKinematic) {
-//        gravity.addForce(this);
+        gravity.addForce(this);
 
         for (ForceGenerator *forceGenerator: forceGeneratorsList) {
-//            forceGenerator->addForce(this);
+            forceGenerator->addForce(this);
         }
     }
 

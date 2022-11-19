@@ -16,7 +16,7 @@ void PhysicHandler::update(GameObject *gameObject, float deltaTime) {
 }
 
 void PhysicHandler::move(GameObject *gameObject, Particle *particle, float deltaTime) {
-    gameObject->transform.setPosition(gameObject->transform.getPosition() + particle->getSpeed() * deltaTime);
+    gameObject->transform.setPosition(gameObject->transform.getPosition() + particle->getLinearSpeed() * deltaTime);
 }
 
 

@@ -9,7 +9,11 @@
 
 #include <string>
 
-class Particle;
+//class Particle;
+//
+//class Rigidbody;
+
+class PhysicalComponent;
 
 class Scene;
 
@@ -32,7 +36,7 @@ public:
 
     explicit ForceGenerator(GameObject *gameObject = nullptr);
 
-    virtual void addForce(Particle *particle) = 0;
+    virtual void addForce(PhysicalComponent *physicalComponent) = 0;
 
     virtual void drawGui(Scene *scene) = 0;
 

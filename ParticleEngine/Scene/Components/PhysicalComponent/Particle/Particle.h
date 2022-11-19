@@ -15,15 +15,10 @@ private:
 
 private:
     // State
-    float mass;
     bool isKinematic = true;
 
     // Resulting force
-    Vector3d netForce;
-
-    // Velocity and acceleration
-    Vector3d speed;
-    Vector3d acceleration;
+//    Vector3d netForce;
 
     // Forces
     Gravity gravity;
@@ -54,7 +49,6 @@ public:
 
     void update(float deltaTime) override;
 
-    float distance(const Particle &p);
 
     /// <summary>
     /// Calcule la nouvelle vitesse � partir de l'acc�l�ration de la particule
@@ -117,29 +111,25 @@ public:
 
     std::string getName() const override;
 
-    Vector3d getPosition() const;
+//    Vector3d getPosition() const;
+//
+//    const Vector3d &getSpeed() const;
+//
+//    const Vector3d &getAcceleration() const;
+//
+//    void setPosition(float x, float y, float z);
+//
+//    void setPosition(const Vector3d &position);
 
-    const Vector3d &getSpeed() const;
+//    void setSpeed(float x, float y, float z);
+//
+//    void setSpeed(const Vector3d &speed);
+//
+//    void setAcceleration(float x, float y, float z);
+//
+//    void setAcceleration(const Vector3d &acceleration);
 
-    const Vector3d &getAcceleration() const;
-
-    void setPosition(float x, float y, float z);
-
-    void setPosition(const Vector3d &position);
-
-    void setSpeed(float x, float y, float z);
-
-    void setSpeed(const Vector3d &speed);
-
-    void setAcceleration(float x, float y, float z);
-
-    void setAcceleration(const Vector3d &acceleration);
-
-    float getMass() const;
-
-    const Vector3d &getNetForce() const;
-
-    void setNetForce(const Vector3d &force);
+//    float getMass() const;
 
 #pragma endregion
 };

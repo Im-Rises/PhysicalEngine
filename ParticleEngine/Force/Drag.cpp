@@ -19,11 +19,11 @@ Drag::Drag(const Drag &drag) {
     m_k2 = drag.m_k2;
 }
 
-void Drag::addForce(Particle *particle) {
-    Vector3d vit = particle->getSpeed();
+void Drag::addForce(PhysicalComponent *physicalComponent) {
+    Vector3d vit = physicalComponent->getLinearSpeed();
     Vector3d F = vit.normalize() * (-1) * (m_k1 * vit.norm() + m_k2 * vit.norm() * vit.norm());
-    Vector3d initialForce = particle->getNetForce();
-    particle->setNetForce(initialForce + F);
+    Vector3d initialForce = physicalComponent->getNetForce();
+    physicalComponent->setNetForce(initialForce + F);
 }
 
 void Drag::drawGui(Scene *scene) {

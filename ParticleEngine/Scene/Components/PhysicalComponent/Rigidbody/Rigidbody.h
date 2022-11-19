@@ -16,15 +16,12 @@ private:
 
 protected:
     bool isKinematic = true;
-    float m_mass;
 
     float m_angularDamping;
-    Vector3d m_forceAccum;
+//    Vector3d m_forceAccum;
     Vector3d m_torqueAccum;
 
     // Velocity and acceleration
-    Vector3d linearSpeed;
-    Vector3d linearAcceleration;
     Vector3d angularSpeed;
     Vector3d angularAcceleration;
 
@@ -36,6 +33,7 @@ protected:
 public:
     explicit Rigidbody(GameObject *gameObject);
 
+private:
     void addForce(const Vector3d &force);
 
     void addForceAtPoint(const Vector3d &force, Vector3d worldPoint);
@@ -48,6 +46,7 @@ public:
 
     void clearAccumulator();
 
+public:
     void update(float time) override;
 
     void drawGui() override;

@@ -27,32 +27,32 @@ Spring::Spring(GameObject *gameObject) : ForceGenerator(gameObject) {
 Spring::~Spring() {
 }
 
-void Spring::addForce(Particle *particle) {
+void Spring::addForce(PhysicalComponent *physicalComponent) {
     // Get particle component from other game object
-    Particle *otherParticle = nullptr;
+    PhysicalComponent *otherPhysicalComponent = nullptr;
     if (m_otherGameObject == nullptr)
         return;
-    m_otherGameObject->getComponentByClass(otherParticle);
-    if (otherParticle == nullptr)
+    m_otherGameObject->getComponentByClass(otherPhysicalComponent);
+    if (otherPhysicalComponent == nullptr)
         return;
 
     // Calculate force from this particle to other particle
-    calculateForce(particle, otherParticle);
-    calculateForce(otherParticle, particle);
+    calculateForce(physicalComponent, otherPhysicalComponent);
+    calculateForce(otherPhysicalComponent, physicalComponent);
 }
 
-void Spring::calculateForce(Particle *particle, Particle *otherParticle) {
-    float delta = otherParticle->distance(*particle);
+void Spring::calculateForce(PhysicalComponent *physicalComponent, PhysicalComponent *otherPhysicalComponent) {
+    float delta = otherPhysicalComponent->distance(*physicalComponent);
 
     Vector3d F;
     if (delta > m_restLength) {
-        Vector3d vec1 = particle->getPosition();
-        Vector3d vec2 = otherParticle->getPosition();
+        Vector3d vec1 = physicalComponent->getPosition();
+        Vector3d vec2 = otherPhysicalComponent->getPosition();
         F = (vec1 - vec2).normalize() * (-m_k) * (delta - m_restLength);
     }
 
-    Vector3d initialForce = particle->getNetForce();
-    particle->setNetForce(initialForce + F);
+    Vector3d initialForce = physicalComponent->getNetForce();
+    physicalComponent->setNetForce(initialForce + F);
 }
 
 
