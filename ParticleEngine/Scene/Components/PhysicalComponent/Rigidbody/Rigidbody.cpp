@@ -9,7 +9,7 @@
 #include "../../../../Utility/imGuiUtility.h"
 
 Rigidbody::Rigidbody(GameObject *gameObject) : Component(gameObject) {
-    m_mass = 0;
+    m_mass = 1;
     m_angularDamping = 0;
     m_forceAccum = Vector3d(0, 0, 0);
     m_torqueAccum = Vector3d(0, 0, 0);
@@ -55,81 +55,24 @@ void Rigidbody::update(float time) {
 }
 
 void Rigidbody::drawGui() {
-    ImGui::Text("Is kinematic");
-    ImGui::Checkbox("##ParticleKinematic", &isKinematic);
-
-    // Weight
-    ImGui::Text("Weight");
-    ImGui::DragFloat("##ParticleWeight", &m_mass, 0.1f, 0.0f, 100.0f);
-
+    PhysicalComponent::drawGui();
     // Angular Damping
     ImGui::Text("Angular Damping");
     ImGui::DragFloat("##ParticleAngularDamping", &m_angularDamping, 0.1f, 0.0f, 100.0f);
-
-    // Force Accumulator
-    ImGui::Text("Force Accumulator");
-    ImGui::DragFloat3("##ParticleForceAccumulator", &m_forceAccum.x, 0.1f, 0.0f, 100.0f);
 
     // Torque Accumulator
     ImGui::Text("Torque Accumulator");
     ImGui::DragFloat3("##ParticleTorqueAccumulator", &m_torqueAccum.x, 0.1f, 0.0f, 100.0f);
 
-    // Gravity
-    ImGui::Text("Gravity");
-    ImGui::DragFloat3("##ParticleGravity", &gravity.getGravityRef().x, 0.1f, 0.0f, 100.0f);
+    // Angular Speed
+    ImGui::Text("Angular Speed");
+    ImGui::DragFloat3("##ParticleAngularSpeed", &angularSpeed.x, 0.1f, 0.0f, 100.0f);
 
-    // Handle forces
-    std::string forcesListText = "Forces list";
-    std::string addForcesText = "Add forces";
-    std::string deleteForcesText = "Delete forces";
-    // Forces list and add force
-    ImGuiUtility::AlignForWidth((ImGuiUtility::CalculateTextWidth(forcesListText.c_str()) +
-                                 ImGuiUtility::CalculateTextWidth(addForcesText.c_str()) +
-                                 ImGuiUtility::CalculateTextWidth(deleteForcesText.c_str())));
+    // Angular Acceleration
+    ImGui::Text("Angular Acceleration");
+    ImGui::DragFloat3("##ParticleAngularAcceleration", &angularAcceleration.x, 0.1f, 0.0f, 100.0f);
 
-    // Forces list
-    if (ImGui::Button(forcesListText.c_str())) {
-        ImGui::OpenPopup("ParticleForcesList##popup");
-    }
-    if (ImGui::BeginPopup("ParticleForcesList##popup")) {
-        if (forceGeneratorsList.empty())
-            ImGui::Text("Empty");
-        else
-            for (auto &forceGenerator: forceGeneratorsList) {
-                forceGenerator->drawGui(m_gameObject->getScenePtr());
-            }
-        ImGui::EndPopup();
-    }
-
-    ImGui::SameLine();
-
-    // Add force
-    if (ImGui::Button(addForcesText.c_str())) {
-        ImGui::OpenPopup("ParticleAddForce##popup");
-    }
-    if (ImGui::BeginPopup("ParticleAddForce##popup")) {
-        for (auto &forcesName: ForceGenerator::forcesNamesList) {
-            if (ImGui::MenuItem(forcesName)) {
-//                addForce(ForceGenerator::createForceGenerator(forcesName, m_gameObject));
-            }
-        }
-        ImGui::EndPopup();
-    }
-
-    ImGui::SameLine();
-
-    // Delete force
-    if (ImGui::Button(deleteForcesText.c_str())) {
-        ImGui::OpenPopup("ParticleDeleteForce##ParticleDeleteForcePopup");
-    }
-    if (ImGui::BeginPopup("ParticleDeleteForce##ParticleDeleteForcePopup")) {
-        for (auto &forceGenerator: forceGeneratorsList) {
-            if (ImGui::MenuItem(forceGenerator->getName().c_str())) {
-//                deleteForceByClass(forceGenerator);
-            }
-        }
-        ImGui::EndPopup();
-    }
+    PhysicalComponent::drawGuiForceGenerators();
 }
 
 std::string Rigidbody::getName() const {

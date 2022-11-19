@@ -15,19 +15,11 @@ private:
     static constexpr const char *COMPONENT_TYPE = RIGIDBODY_COMPONENT;
 
 protected:
-    bool isKinematic = true;
-
     float m_angularDamping;
-//    Vector3d m_forceAccum;
     Vector3d m_torqueAccum;
 
-    // Velocity and acceleration
     Vector3d angularSpeed;
     Vector3d angularAcceleration;
-
-    // Forces
-    Gravity gravity;
-    std::vector<ForceGenerator *> forceGeneratorsList;
 
 
 public:

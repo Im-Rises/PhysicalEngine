@@ -3,9 +3,11 @@
 
 #include <list>
 
-class Particle;
+class PhysicalComponent;
 
-class Rigidbody;
+//class Particle;
+//
+//class Rigidbody;
 
 class GameObject;
 
@@ -22,7 +24,7 @@ public:
     void update(GameObject *gameObject, float deltaTime);
 
 private:
-    void move(GameObject *gameObject, Particle *particle, float deltaTime);
+    void move(GameObject *gameObject, PhysicalComponent *physicalComponent, float deltaTime);
 
 };
 
