@@ -13,17 +13,20 @@ Rigidbody::Rigidbody(GameObject *gameObject) : Component(gameObject) {
     m_angularDamping = 0;
     m_forceAccum = Vector3d(0, 0, 0);
     m_torqueAccum = Vector3d(0, 0, 0);
+
+    pointForceGeneratorsList.emplace_back(ForceGenerator::createForceGenerator(DRAG_FORCE, gameObject),
+                                          Vector3d(5, 0, 0));
 }
 
 void Rigidbody::addForce(const Vector3d &force) {
     m_forceAccum += force;
 }
 
-void Rigidbody::addForceAtPoint(const Vector3d &force, const Vector3d worldPoint) {
-    Vector3d point = worldPoint - m_gameObject->transform.getPosition();
-    m_forceAccum += force;
-    m_torqueAccum += point.cross(force);
-}
+//void Rigidbody::addForceAtPoint(const Vector3d &force, const Vector3d worldPoint) {
+//    Vector3d point = worldPoint - m_gameObject->transform.getPosition();
+//    m_forceAccum += force;
+//    m_torqueAccum += point.cross(force);
+//}
 
 void Rigidbody::addForceAtBodyPoint(const Vector3d &force, const Vector3d &LocalPoint) {
     m_forceAccum += force;
@@ -44,6 +47,12 @@ void Rigidbody::update(float time) {
         for (ForceGenerator *forceGenerator: forceGeneratorsList) {
             forceGenerator->addForce(this);
         }
+
+        for (ForcePoint &forcePoint: pointForceGeneratorsList) {
+            forcePoint.force->addForce(this, forcePoint.point);
+//            addForceAtBodyPoint(forcePoint.force->, forcePoint.point);
+        }
+
     }
 
     // Update acceleration, speed and position
@@ -71,6 +80,8 @@ void Rigidbody::drawGui() {
     // Angular Acceleration
     ImGui::Text("Angular Acceleration");
     ImGui::DragFloat3("##ParticleAngularAcceleration", &angularAcceleration.x, 0.1f, 0.0f, 100.0f);
+
+    ImGui::NewLine();
 
     PhysicalComponent::drawGuiForceGenerators();
 }

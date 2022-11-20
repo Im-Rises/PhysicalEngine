@@ -8,6 +8,7 @@
 #define BUOYANCY_FORCE "Buoyancy"
 
 #include <string>
+#include "../Utility/Vector3d.h"
 
 //class Particle;
 //

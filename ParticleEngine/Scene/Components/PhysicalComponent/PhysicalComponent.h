@@ -11,6 +11,8 @@ class PhysicalComponent : public virtual Component {
 protected:
     PhysicalComponent() = default;
 
+    ~PhysicalComponent();
+
     bool isKinematic = true;
 
     Vector3d m_forceAccum;

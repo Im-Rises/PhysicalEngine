@@ -9,6 +9,10 @@
 
 class ForceGenerator;
 
+struct ForcePoint {
+    ForceGenerator *force;
+    Vector3d point;
+};
 
 class Rigidbody : public PhysicalComponent {
 private:
@@ -21,6 +25,7 @@ protected:
     Vector3d angularSpeed;
     Vector3d angularAcceleration;
 
+    std::vector<ForcePoint> pointForceGeneratorsList;
 
 public:
     explicit Rigidbody(GameObject *gameObject);
@@ -28,7 +33,7 @@ public:
 private:
     void addForce(const Vector3d &force);
 
-    void addForceAtPoint(const Vector3d &force, Vector3d worldPoint);
+//    void addForceAtPoint(const Vector3d &force, Vector3d worldPoint);
 
     void addForceAtBodyPoint(const Vector3d &force, const Vector3d &LocalPoint);
 

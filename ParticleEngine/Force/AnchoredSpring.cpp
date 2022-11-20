@@ -34,7 +34,13 @@ void AnchoredSpring::addForce(PhysicalComponent *physicalComponent) {
     }
     Vector3d initialForce = physicalComponent->getNetForce();
     physicalComponent->setNetForce(initialForce + F);
+
+
+//    m_forceAccum += force;
+//    m_gameObject->transform.getRotation().RotateByVector(LocalPoint);
+//    m_torqueAccum += m_gameObject->transform.getPosition().cross(force);
 }
+
 
 std::string AnchoredSpring::getName() const {
     return FORCE_TYPE;

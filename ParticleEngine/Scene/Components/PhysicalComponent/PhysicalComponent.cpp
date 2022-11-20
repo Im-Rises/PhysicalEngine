@@ -4,6 +4,12 @@
 #include <imgui/imgui.h>
 #include "../../../Utility/imGuiUtility.h"
 
+PhysicalComponent::~PhysicalComponent() {
+    for (auto &forceGenerator: forceGeneratorsList) {
+        delete forceGenerator;
+    }
+}
+
 float PhysicalComponent::distance(const PhysicalComponent &p) {
     return (m_gameObject->transform.getPosition() - p.m_gameObject->transform.getPosition()).norm();
 }
@@ -160,3 +166,5 @@ void PhysicalComponent::drawGuiForceGenerators() {
         ImGui::EndPopup();
     }
 }
+
+
