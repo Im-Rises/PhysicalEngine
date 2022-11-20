@@ -6,6 +6,7 @@
 #include "../../../GameObject.h"
 
 #include "../../../../Force/ForceGenerator.h"
+#include "../../../../Force/AnchoredSpring.h"
 #include "../../../../Utility/imGuiUtility.h"
 
 Rigidbody::Rigidbody(GameObject *gameObject) : Component(gameObject) {
@@ -14,8 +15,7 @@ Rigidbody::Rigidbody(GameObject *gameObject) : Component(gameObject) {
     m_forceAccum = Vector3d(0, 0, 0);
     m_torqueAccum = Vector3d(0, 0, 0);
 
-    pointForceGeneratorsList.emplace_back(ForceGenerator::createForceGenerator(DRAG_FORCE, gameObject),
-                                          Vector3d(5, 0, 0));
+    pointForceGeneratorsList.emplace_back(ForcePoint{new AnchoredSpring(), Vector3d(5, 0, 0)});
 }
 
 void Rigidbody::addForce(const Vector3d &force) {
@@ -32,6 +32,7 @@ void Rigidbody::addForceAtBodyPoint(const Vector3d &force, const Vector3d &Local
     m_forceAccum += force;
     m_gameObject->transform.getRotation().RotateByVector(LocalPoint);
     m_torqueAccum += m_gameObject->transform.getPosition().cross(force);
+    m_torqueAccum = Vector3d(10, 0, 0);
 }
 
 void Rigidbody::clearAccumulator() {
@@ -49,10 +50,11 @@ void Rigidbody::update(float time) {
         }
 
         for (ForcePoint &forcePoint: pointForceGeneratorsList) {
-            forcePoint.force->addForce(this, forcePoint.point);
-//            addForceAtBodyPoint(forcePoint.force->, forcePoint.point);
+            Vector3d before = m_forceAccum;
+            forcePoint.force->addForce(this);
+            Vector3d forceValue = m_forceAccum - before;
+            addForceAtBodyPoint(forceValue, forcePoint.point);
         }
-
     }
 
     // Update acceleration, speed and position
@@ -69,9 +71,9 @@ void Rigidbody::drawGui() {
     ImGui::Text("Angular Damping");
     ImGui::DragFloat("##ParticleAngularDamping", &m_angularDamping, 0.1f, 0.0f, 100.0f);
 
-    // Torque Accumulator
-    ImGui::Text("Torque Accumulator");
-    ImGui::DragFloat3("##ParticleTorqueAccumulator", &m_torqueAccum.x, 0.1f, 0.0f, 100.0f);
+//    // Torque Accumulator
+//    ImGui::Text("Torque Accumulator");
+//    ImGui::DragFloat3("##ParticleTorqueAccumulator", &m_torqueAccum.x, 0.1f, 0.0f, 100.0f);
 
     // Angular Speed
     ImGui::Text("Angular Speed");
@@ -98,5 +100,9 @@ void Rigidbody::calculateAcceleration() {
 void Rigidbody::calculateSpeed(float time) {
     linearSpeed = linearSpeed + linearAcceleration * time;
     angularSpeed = angularSpeed + angularAcceleration * time;
+}
+
+Vector3d Rigidbody::getAngularSpeed() const {
+    return angularSpeed;
 }
 

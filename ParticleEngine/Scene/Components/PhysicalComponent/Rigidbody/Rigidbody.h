@@ -50,6 +50,8 @@ public:
 
     std::string getName() const override;
 
+    Vector3d getAngularSpeed() const;
+
 };
 
 #endif // !INTEGRABLE_H

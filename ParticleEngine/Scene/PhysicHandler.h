@@ -2,6 +2,7 @@
 #define INTEGRATOR_H
 
 #include <list>
+#include "Components/PhysicalComponent/Rigidbody/Rigidbody.h"
 
 class PhysicalComponent;
 
@@ -25,6 +26,8 @@ public:
 
 private:
     void move(GameObject *gameObject, PhysicalComponent *physicalComponent, float deltaTime);
+
+    void angularMove(GameObject *gameObject, Rigidbody *rigidbody, float deltaTime);
 
 };
 

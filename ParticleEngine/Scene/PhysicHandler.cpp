@@ -13,12 +13,23 @@ void PhysicHandler::update(GameObject *gameObject, float deltaTime) {
     gameObject->getComponentByClass(physicalComponent);
     if (physicalComponent != nullptr) {
         move(gameObject, physicalComponent, deltaTime);
+
+        Rigidbody *rigidbody;
+        if (gameObject->hasComponentByClass(rigidbody)) {
+            angularMove(gameObject, rigidbody, deltaTime);
+        }
     }
 }
 
 void PhysicHandler::move(GameObject *gameObject, PhysicalComponent *physicalComponent, float deltaTime) {
     gameObject->transform.setPosition(
             gameObject->transform.getPosition() + physicalComponent->getLinearSpeed() * deltaTime);
+}
+
+void PhysicHandler::angularMove(GameObject *gameObject, Rigidbody *rigidbody, float deltaTime) {
+    gameObject->transform.setRotation(
+            gameObject->transform.getRotation() + rigidbody->getAngularSpeed() * deltaTime);
+//    std::cout << "angularMove" << gameObject->transform.getRotation() << std::endl;
 }
 
 

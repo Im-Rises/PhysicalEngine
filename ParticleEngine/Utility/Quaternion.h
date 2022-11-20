@@ -103,6 +103,13 @@ public:
     /// <param name="time"></param>
     void UpdateByAngularSpeed(const Vector3d &vector, float time);
 
+    friend std::ostream &operator<<(std::ostream &stream, const Quaternion &quaternion) {
+        stream << "Quaternion : " << quaternion.m_value[0] << " " << quaternion.m_value[1] << " "
+               << quaternion.m_value[2] << " " << quaternion.m_value[3]
+               << std::endl;
+        return stream;
+    }
+
 
     ~Quaternion();
 };
