@@ -1,14 +1,12 @@
 #include "Transform.h"
 
 #include "imgui/imgui.h"
+#include "../../../Utility/Vector3d.h"
 
 Transform::Transform() {
     positionX = 0;
     positionY = 0;
     positionZ = 0;
-//    rotationX = 0;
-//    rotationY = 0;
-//    rotationZ = 0;
     scaleX = 1;
     scaleY = 1;
     scaleZ = 1;
@@ -97,6 +95,8 @@ std::string Transform::getName() const {
     return COMPONENT_TYPE;
 }
 
-
-
-
+Matrix34 Transform::getMatrix() const {
+    Matrix34 matrix;
+    matrix.setOrientationAndPosition(rotation, Vector3d(positionX, positionY, positionZ));
+    return matrix;
+}

@@ -4,14 +4,14 @@
 
 #include "Components/Component.h"
 #include "Components/PhysicalComponent/Particle/Particle.h"
+#include "../Utility/Matrix34.h"
 
 unsigned int GameObject::idCounter = 0;
 
-Shader* GameObject::defaultShader = nullptr;
+Shader *GameObject::defaultShader = nullptr;
 
-GameObject::GameObject(Scene* scene) {
-    if (defaultShader == nullptr)
-    {
+GameObject::GameObject(Scene *scene) {
+    if (defaultShader == nullptr) {
         defaultShader = new Shader();
     }
     // defaultShader = new Shader();
@@ -22,7 +22,7 @@ GameObject::GameObject(Scene* scene) {
 }
 
 
-GameObject::GameObject(Scene* scene, Mesh* mesh) : GameObject(scene) {
+GameObject::GameObject(Scene *scene, Mesh *mesh) : GameObject(scene) {
     mesh->getVerticesUseIndices();
     this->mesh = mesh;
 
@@ -42,9 +42,9 @@ void GameObject::create() {
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * mesh->getVertices().size(), mesh->getVertices().data(),
-        GL_STATIC_DRAW);
+                 GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
     glEnableVertexAttribArray(0);
 
     //    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) 0);
@@ -52,27 +52,24 @@ void GameObject::create() {
     //    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) (3 * sizeof(float)));
     //    glEnableVertexAttribArray(1);
 
-    if (mesh->getVerticesUseIndices())
-    {
+    if (mesh->getVerticesUseIndices()) {
         glGenBuffers(1, &EBO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mesh->getIndices().size(),
-            mesh->getIndices().data(),
-            GL_STATIC_DRAW);
+                     mesh->getIndices().data(),
+                     GL_STATIC_DRAW);
     }
 
     defaultShader->use();
 }
 
 GameObject::~GameObject() {
-    if (defaultShader != nullptr)
-    {
+    if (defaultShader != nullptr) {
         delete defaultShader;
         defaultShader = nullptr;
     }
     delete mesh;
-    for (auto& component : components)
-    {
+    for (auto &component: components) {
         delete component;
     }
     destroy();
@@ -90,58 +87,58 @@ void GameObject::destroy() {
 
 
 void GameObject::update(float deltaTime) {
-    for (auto& component : components)
-    {
+    for (auto &component: components) {
         component->update(deltaTime);
     }
 }
 
 void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
     // Matrix calculations
-    glm::mat4 model = glm::mat4(1.0f);
+    auto matrix = transform.getMatrix();
+    glm::mat4 model = convertToGlmMat4(matrix);
+    std::cout << "model: " << std::endl;
+    std::cout << model[0][0] << " " << model[0][1] << " " << model[0][2] << " " << model[0][3] << std::endl;
+    std::cout << model[1][0] << " " << model[1][1] << " " << model[1][2] << " " << model[1][3] << std::endl;
+    std::cout << model[2][0] << " " << model[2][1] << " " << model[2][2] << " " << model[2][3] << std::endl;
+    std::cout << model[3][0] << " " << model[3][1] << " " << model[3][2] << " " << model[3][3] << std::endl;
+
+
     glm::mat4 projection = glm::mat4(1.0f);
     projection = glm::perspective(glm::radians(fov / 2), static_cast<float>(display_w) / static_cast<float>(display_h),
-        0.1f, 100.0f);
+                                  0.1f, 100.0f);
 
     // Shader use
     defaultShader->use();
-    defaultShader->setMat4("model",
-        glm::translate(model, glm::vec3(transform.positionX, transform.positionY, transform.positionZ)));
+//    defaultShader->setMat4("model",
+//        glm::translate(model, glm::vec3(transform.positionX, transform.positionY, transform.positionZ)));
+    defaultShader->setMat4("model", model);
     defaultShader->setMat4("view", view);
     defaultShader->setMat4("projection", projection);
 
     // Handle the VAO, VBO and EBO depending on the mesh type (with or without indices)
     glBindVertexArray(VAO);
-    if (mesh->getVerticesUseIndices())
-    {
-        glDrawElements(GL_TRIANGLES, (GLsizei)mesh->getIndices().size(), GL_UNSIGNED_INT, 0);
-    }
-    else
-    {
-        glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh->getVertices().size());
+    if (mesh->getVerticesUseIndices()) {
+        glDrawElements(GL_TRIANGLES, (GLsizei) mesh->getIndices().size(), GL_UNSIGNED_INT, 0);
+    } else {
+        glDrawArrays(GL_TRIANGLES, 0, (GLsizei) mesh->getVertices().size());
     }
 }
 
-const std::vector<Component*>& GameObject::getComponents() const {
+const std::vector<Component *> &GameObject::getComponents() const {
     return components;
 }
 
-void GameObject::addComponent(Component* component) {
+void GameObject::addComponent(Component *component) {
     components.push_back(component);
 }
 
-void GameObject::addComponentByName(const std::string& name) {
-    for (auto& componentName : Component::componentsNamesList)
-    {
-        if (componentName == name)
-        {
-            Component* component = Component::createComponent(name, this);
-            if (component != nullptr && getComponentByName(name) == nullptr)
-            {
+void GameObject::addComponentByName(const std::string &name) {
+    for (auto &componentName: Component::componentsNamesList) {
+        if (componentName == name) {
+            Component *component = Component::createComponent(name, this);
+            if (component != nullptr && getComponentByName(name) == nullptr) {
                 components.push_back(component);
-            }
-            else if (component != nullptr)
-            {
+            } else if (component != nullptr) {
                 delete component;
             }
         }
@@ -164,35 +161,40 @@ std::string GameObject::getName() const {
     return gameObjectName + " " + std::to_string(id);
 }
 
-Scene* GameObject::getScenePtr() const {
+Scene *GameObject::getScenePtr() const {
     return parentScene;
 }
 
-Component* GameObject::getComponentByName(const std::string& name) const {
-    for (auto& component : components)
-    {
-        if (component->getName() == name)
-        {
+glm::mat4 GameObject::convertToGlmMat4(Matrix34 &matrix) const {
+    return glm::mat4(matrix(0, 0), matrix(0, 1), matrix(0, 2), matrix(0, 3),
+                     matrix(1, 0), matrix(1, 1), matrix(1, 2), matrix(1, 3),
+                     matrix(2, 0), matrix(2, 1), matrix(2, 2), matrix(2, 3),
+                     0, 0, 0, 1);
+}
+
+
+Component *GameObject::getComponentByName(const std::string &name) const {
+    for (auto &component: components) {
+        if (component->getName() == name) {
             return component;
         }
     }
     return nullptr;
 }
 
-bool GameObject::hasComponentByName(const std::string& name) const {
-    return std::any_of(components.begin(), components.end(), [&name](Component* component) {
+bool GameObject::hasComponentByName(const std::string &name) const {
+    return std::any_of(components.begin(), components.end(), [&name](Component *component) {
         return component->getName() == name;
     });
 }
 
-void GameObject::deleteComponentByName(const std::string& name) {
-    for (auto it = components.begin(); it != components.end(); ++it)
-    {
-        if ((*it)->getName() == name)
-        {
+void GameObject::deleteComponentByName(const std::string &name) {
+    for (auto it = components.begin(); it != components.end(); ++it) {
+        if ((*it)->getName() == name) {
             components.erase(it);
             delete *it;
             return;
         }
     }
 }
+
