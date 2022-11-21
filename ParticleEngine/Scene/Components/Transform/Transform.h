@@ -5,6 +5,9 @@
 #include "../../../Utility/Vector3d.h"
 #include "../Component.h"
 #include "../DefaultComponent.h"
+#include "../../../Utility/Quaternion.h"
+#include "../../../Utility/Matrix44.h"
+#include "../../../Utility/Matrix34.h"
 
 class Transform : private DefaultComponent {
 private:
@@ -12,8 +15,8 @@ private:
 
 public:
     float positionX, positionY, positionZ;
-    float rotationX, rotationY, rotationZ;
     float scaleX, scaleY, scaleZ;
+    Quaternion rotation;
 
 public:
     Transform();
@@ -27,7 +30,13 @@ public:
 
     void setPosition(const Vector3d &position);
 
+    void setRotation(const Quaternion &rotation);
+
+    Quaternion getRotation() const;
+
     Vector3d getPosition() const;
+
+    Matrix34 getMatrix() const;
 
     std::string getName() const override;
 };

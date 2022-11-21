@@ -8,22 +8,35 @@
 #include "../Utility/Vector3d.h"
 
 class Camera {
-private:
-    glm::mat4 viewMatrix;
+public:
     const float fov = 90.0f;// In degrees
+
+    glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 50.0f);
+    glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+    glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
+    float cameraMoveSpeed = 0.4f;
+    float cameraSensitivity = 0.1f;
+
+    float yaw = -90.0f;
+    float pitch = 0.0f;
+
+    bool constrainPitch = true;
 
 public:
     Camera();
 
     ~Camera();
 
-    void update();
+    void moveForward(float speed);
 
-    void setPosition(const Vector3d &vector3D);
+    void moveBackward(float speed);
 
-    void translate(const Vector3d &vector3D);
+    void moveLeft(float speed);
 
-    void rotate(const Vector3d &vector3D, float angle);
+    void moveRight(float speed);
+
+    void processMouseMovement(float xOffset, float yOffset);
 
     glm::mat4 getViewMatrix() const;
 

@@ -1,34 +1,54 @@
 #include "Camera.h"
 
 Camera::Camera() {
-    viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 30.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f));
 }
 
 Camera::~Camera() = default;
 
-void Camera::update() {
-
+void Camera::moveForward(float speed) {
+    cameraPos += cameraMoveSpeed * cameraFront;
 }
 
-void Camera::setPosition(const Vector3d &vector3D) {
-    viewMatrix = glm::lookAt(glm::vec3(vector3D.getx(), vector3D.gety(), vector3D.getz()),
-                             glm::vec3(0.0f, 0.0f, 0.0f),
-                             glm::vec3(0.0f, 1.0f, 0.0f));
+void Camera::moveBackward(float speed) {
+
+    cameraPos -= cameraMoveSpeed * cameraFront;
 }
 
-void Camera::translate(const Vector3d &vector3D) {
-    viewMatrix = glm::translate(viewMatrix, glm::vec3(vector3D.getx(), vector3D.gety(), vector3D.getz()));
+void Camera::moveLeft(float speed) {
+
+    cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraMoveSpeed;
 }
 
-void Camera::rotate(const Vector3d &vector3D, float angle) {
-    viewMatrix = glm::rotate(viewMatrix, angle, glm::vec3(vector3D.getx(), vector3D.gety(), vector3D.getz()));
+void Camera::moveRight(float speed) {
+
+    cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraMoveSpeed;
 }
 
-glm::mat4 Camera::getViewMatrix() const {
-    return viewMatrix;
+void Camera::processMouseMovement(float xOffset, float yOffset) {
+    xOffset *= cameraSensitivity;
+    yOffset *= cameraSensitivity;
+
+    yaw += xOffset;
+    pitch += yOffset;
+
+    if (constrainPitch) {
+        if (pitch > 89.0f)
+            pitch = 89.0f;
+        if (pitch < -89.0f)
+            pitch = -89.0f;
+    }
+
+    glm::vec3 front;
+    front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    front.y = sin(glm::radians(pitch));
+    front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    cameraFront = glm::normalize(front);
 }
 
 float Camera::getFov() const {
     return fov;
 }
 
+glm::mat4 Camera::getViewMatrix() const {
+    return glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+}

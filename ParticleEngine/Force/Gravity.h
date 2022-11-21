@@ -16,7 +16,7 @@ public:
 
     Gravity(const Gravity &grav);
 
-    void addForce(Particle *particle) override;
+    void addForce(PhysicalComponent *physicalComponent) override;
 
     void drawGui(Scene *scene) override;
 

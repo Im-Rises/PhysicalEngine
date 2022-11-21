@@ -21,7 +21,9 @@ public:
 
     AnchoredSpring(const AnchoredSpring &aSpring);
 
-    void addForce(Particle *particle) override;
+    void addForce(PhysicalComponent *physicalComponent) override;
+
+    Vector3d getForceValue(PhysicalComponent *physicalComponent) override;
 
     void drawGui(Scene *scene) override;
 

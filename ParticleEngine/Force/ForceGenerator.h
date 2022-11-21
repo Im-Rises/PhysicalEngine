@@ -8,8 +8,13 @@
 #define BUOYANCY_FORCE "Buoyancy"
 
 #include <string>
+#include "../Utility/Vector3d.h"
 
-class Particle;
+//class Particle;
+//
+//class Rigidbody;
+
+class PhysicalComponent;
 
 class Scene;
 
@@ -32,7 +37,12 @@ public:
 
     explicit ForceGenerator(GameObject *gameObject = nullptr);
 
-    virtual void addForce(Particle *particle) = 0;
+    virtual void addForce(PhysicalComponent *physicalComponent) = 0;
+
+    virtual Vector3d getForceValue(PhysicalComponent *physicalComponent)
+    {
+        return {0, 0, 0};
+    }
 
     virtual void drawGui(Scene *scene) = 0;
 

@@ -34,7 +34,7 @@ public:
 
     void SetParticles(Particle *particles[2]);
 
-    void SetParticles(Particle* particle1, Particle* particle2);
+    void SetParticles(Particle *particle1, Particle *particle2);
 
     void resolve(float time);
 

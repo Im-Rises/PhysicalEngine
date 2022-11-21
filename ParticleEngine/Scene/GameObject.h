@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <map>
+#include <algorithm>
 #include "../Shader/Shader.h"
 #include "../Utility/Vector3d.h"
 
@@ -15,11 +16,20 @@ class Component;
 
 class GameObject {
 private:
+    static unsigned int idCounter;
+
+private:
     // OpenGL variables
     unsigned int VBO, VAO, EBO;
-    Shader shader;
+    //    Shader shader;
+    //    static unsigned int shaderCount;
+    static Shader *defaultShader;
+
 
 protected:
+    // Id
+    unsigned int id;
+
     // Object name
     std::string gameObjectName;
 
@@ -28,7 +38,7 @@ protected:
 
     // Optional components
     std::vector<Component *> components;
-    // std::map<std::string, Component *> components;
+    std::map<std::string, Component *> componentsMap;
 
 public:
     // Base components
@@ -39,7 +49,7 @@ public:
     // std::vector<GameObject *> children;
 
 public:
-    GameObject(Scene *scene);
+    explicit GameObject(Scene *scene);
 
     explicit GameObject(Scene *scene, Mesh *mesh);
 
@@ -67,6 +77,8 @@ public:
 
     Scene *getScenePtr() const;
 
+    glm::mat4 convertToGlmMat4(Matrix34 &matrix) const;
+
 public:
     const std::vector<Component *> &getComponents() const;
 
@@ -74,21 +86,21 @@ public:
 
     void addComponentByName(const std::string &name);
 
-//    template<typename T>
-//    void addComponentByClass(T *&c) {
-//        c = new T(this);
-//        if (c != nullptr) {
-//            components.push_back(c);
-//        }
-//    }
+    template<typename T>
+    void addComponentByClass(T *&comp) {
+        comp = new T(this);
+        if (comp != nullptr) {
+            components.push_back(comp);
+        }
+    }
 
     Component *getComponentByName(const std::string &name) const;
 
     template<class T>
-    void getComponentByClass(T *&c) {
+    void getComponentByClass(T *&comp) {
         for (auto &component: components) {
             if (dynamic_cast<T *>(component) != nullptr) {
-                c = dynamic_cast<T *>(component);
+                comp = dynamic_cast<T *>(component);
             }
         }
     }
@@ -96,19 +108,19 @@ public:
     bool hasComponentByName(const std::string &name) const;
 
     template<class T>
-    bool hasComponentByClass(T *&c) {
-        for (auto &component: components) {
+    bool hasComponentByClass(T *&comp) {
+        return std::any_of(components.begin(), components.end(), [&](Component *component) {
             if (dynamic_cast<T *>(component) != nullptr) {
+                comp = dynamic_cast<T *>(component);
                 return true;
             }
-        }
-        return false;
+        });
     }
 
     void deleteComponentByName(const std::string &name);
 
     template<class T>
-    void deleteComponentByClass(T *&c) {
+    void deleteComponentByClass(T *&comp) {
         for (auto it = components.begin(); it != components.end(); ++it) {
             if (dynamic_cast<T *>(*it) != nullptr) {
                 components.erase(it);
@@ -120,4 +132,4 @@ public:
 };
 
 
-#endif //GAMEOBJECT_H
+#endif // GAMEOBJECT_H

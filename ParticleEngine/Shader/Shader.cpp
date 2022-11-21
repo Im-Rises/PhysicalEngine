@@ -92,7 +92,7 @@ void Shader::create(const char *vShaderCode, const char *fShaderCode) {
 }
 
 
-void Shader::checkCompileErrors(unsigned int shader, std::string type) {
+void Shader::checkCompileErrors(unsigned int shader, const std::string &type) {
     int success;
     char infoLog[1024];
     if (type != "PROGRAM") {

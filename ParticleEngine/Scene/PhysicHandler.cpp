@@ -1,35 +1,33 @@
 #include "PhysicHandler.h"
 #include <iostream>
-#include "Components/PhysicalComponent/Particle/Particle.h"
+//#include "Components/PhysicalComponent/Particle/Particle.h"
 #include "GameObject.h"
+#include "Components/PhysicalComponent/PhysicalComponent.h"
 
 PhysicHandler::PhysicHandler() {
 
 }
 
 void PhysicHandler::update(GameObject *gameObject, float deltaTime) {
-    Particle *particleComponent = nullptr;
-    gameObject->getComponentByClass(particleComponent);
-    if (particleComponent != nullptr) {
-        move(gameObject, particleComponent, deltaTime);
+    PhysicalComponent *physicalComponent = nullptr;
+    gameObject->getComponentByClass(physicalComponent);
+    if (physicalComponent != nullptr) {
+        move(gameObject, physicalComponent, deltaTime);
+
+        Rigidbody *rigidbody;
+        if (gameObject->hasComponentByClass(rigidbody)) {
+            angularMove(gameObject, rigidbody, deltaTime);
+        }
     }
 }
 
-void PhysicHandler::move(GameObject *gameObject, Particle *particle, float deltaTime) {
-    gameObject->transform.setPosition(gameObject->transform.getPosition() + particle->getSpeed() * deltaTime);
+void PhysicHandler::move(GameObject *gameObject, PhysicalComponent *physicalComponent, float deltaTime) {
+    gameObject->transform.setPosition(
+            gameObject->transform.getPosition() + physicalComponent->getLinearSpeed() * deltaTime);
 }
 
-
-//void PhysicHandler::update(float time) {
-////    fixedDeltaTime += static_cast<float>(time);
-////    timeToAdjustFrameRate += static_cast<float>(time);
-////    if (timeToAdjustFrameRate > 1.0f / fixedUpdatePerSecond) {
-//////        m_gameObject->->recalculateAll(fixedDeltaTime);
-////        timeToAdjustFrameRate -= 1.0f / fixedUpdatePerSecond;
-////        if (timeToAdjustFrameRate > 1) {
-////            timeToAdjustFrameRate -= 1;
-////        }
-////        fixedDeltaTime = 0;
-////    }
-//
-//}
+void PhysicHandler::angularMove(GameObject *gameObject, Rigidbody *rigidbody, float deltaTime) {
+    Quaternion rotation = gameObject->transform.getRotation();
+    rotation.updateByAngularSpeed(rigidbody->getAngularSpeed(), deltaTime);
+    gameObject->transform.setRotation(rotation);
+}

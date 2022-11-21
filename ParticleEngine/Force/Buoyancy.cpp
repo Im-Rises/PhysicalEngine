@@ -25,8 +25,8 @@ Buoyancy::Buoyancy(const Buoyancy &buoyancy) {
     m_liquidDensity = buoyancy.m_liquidDensity;
 }
 
-void Buoyancy::addForce(Particle *particle) {
-    float d = (particle->getPosition().gety() - m_waterHeight - m_maxDepth) / 2 * m_maxDepth;
+void Buoyancy::addForce(PhysicalComponent *physicalComponent) {
+    float d = (physicalComponent->getPosition().gety() - m_waterHeight - m_maxDepth) / 2 * m_maxDepth;
     Vector3d F(0, 1, 0);
     if (d <= 0) {
         F * 0;
@@ -35,8 +35,8 @@ void Buoyancy::addForce(Particle *particle) {
     } else {
         F * d * m_volume * m_liquidDensity;
     }
-    Vector3d initialForce = particle->getNetForce();
-    particle->setNetForce(initialForce + F);
+    Vector3d initialForce = physicalComponent->getNetForce();
+    physicalComponent->setNetForce(initialForce + F);
 }
 
 void Buoyancy::drawGui(Scene *scene) {

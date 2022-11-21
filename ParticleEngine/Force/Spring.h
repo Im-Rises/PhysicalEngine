@@ -7,28 +7,32 @@ class GameObject;
 
 class Spring : public ForceGenerator {
 private:
-    static constexpr const char *FORCE_TYPE = SPRING_FORCE;
+    static constexpr const char* FORCE_TYPE = SPRING_FORCE;
 
 private:
     float m_k;
     float m_restLength;
-//    Particle *m_otherParticle = nullptr;
-    GameObject *m_otherGameObject = nullptr;
+    //    Particle *m_otherParticle = nullptr;
+    GameObject* m_otherGameObject = nullptr;
 
 public:
-    explicit Spring(GameObject *gameObject);
+    explicit Spring(GameObject* gameObject);
 
-//    Spring(Particle *otherParticle, float k, float restLength);
-//
-//    Spring(const Spring &spring);
+    Spring(GameObject* gameObject, float k, float restLength);
+
+    //    Spring(const Spring &spring);
 
     ~Spring();
 
-    void addForce(Particle *particle) override;
+    Vector3d getForceValue(PhysicalComponent *physicalComponent) override;
 
-    void calculateForce(Particle *particle, Particle *otherParticle);
+    void addForce(PhysicalComponent* physicalComponent) override;
 
-    void drawGui(Scene *scene) override;
+    void calculateForce(PhysicalComponent* physicalComponent, PhysicalComponent* otherPhysicalComponent);
+
+    void drawGui(Scene* scene) override;
+
+    void setOtherGameObject(GameObject* otherGameObject);
 
 public:
     std::string getName() const override;
