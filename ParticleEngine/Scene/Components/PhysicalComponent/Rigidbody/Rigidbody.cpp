@@ -15,7 +15,7 @@ Rigidbody::Rigidbody(GameObject *gameObject) : Component(gameObject) {
     m_forceAccum = Vector3d(0, 0, 0);
     m_torqueAccum = Vector3d(0, 0, 0);
 
-    pointForceGeneratorsList.emplace_back(ForcePoint{new AnchoredSpring(), Vector3d(5, 0, 0)});
+    pointForceGeneratorsList.emplace_back(ForcePoint{new AnchoredSpring(), Vector3d(20, 0, 0)});
 }
 
 Rigidbody::~Rigidbody() {
@@ -37,7 +37,6 @@ void Rigidbody::addForceAtBodyPoint(const Vector3d &force, const Vector3d &Local
     m_forceAccum += force;
     m_gameObject->transform.getRotation().rotateByVector(LocalPoint);
     m_torqueAccum += m_gameObject->transform.getPosition().cross(force);
-//    m_torqueAccum = Vector3d(10, 0, 0);
 }
 
 void Rigidbody::clearAccumulator() {
@@ -72,6 +71,10 @@ void Rigidbody::update(float time) {
 
 void Rigidbody::drawGui() {
     PhysicalComponent::drawGui();
+
+    ImGui::Text("Force Generators");
+    PhysicalComponent::drawGuiForceGenerators();
+
     // Angular Damping
     ImGui::Text("Angular Damping");
     ImGui::DragFloat("##ParticleAngularDamping", &m_angularDamping, 0.1f, 0.0f, 100.0f);
@@ -83,10 +86,6 @@ void Rigidbody::drawGui() {
     // Angular Acceleration
     ImGui::Text("Angular Acceleration");
     ImGui::DragFloat3("##ParticleAngularAcceleration", &angularAcceleration.x, 0.1f, 0.0f, 100.0f);
-
-    ImGui::NewLine();
-    ImGui::Text("Force Generators");
-    PhysicalComponent::drawGuiForceGenerators();
 
     ImGui::NewLine();
     ImGui::Text("Force Generators at Point");

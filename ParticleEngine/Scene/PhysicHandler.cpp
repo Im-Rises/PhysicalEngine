@@ -30,8 +30,4 @@ void PhysicHandler::angularMove(GameObject *gameObject, Rigidbody *rigidbody, fl
     Quaternion rotation = gameObject->transform.getRotation();
     rotation.updateByAngularSpeed(rigidbody->getAngularSpeed(), deltaTime);
     gameObject->transform.setRotation(rotation);
-
 }
-//    gameObject->transform.setRotation(
-//            gameObject->transform.getRotation() + rigidbody->getAngularSpeed() * deltaTime);
-//    std::cout << "angularMove" << gameObject->transform.getRotation() << std::endl;
