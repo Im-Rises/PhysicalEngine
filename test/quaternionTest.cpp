@@ -4,7 +4,7 @@
 
 int constructorTest() {
     Quaternion q0;
-    if (!(q0[0] == 0.0f && q0[1] == 0.0f && q0[2] == 0.0f && q0[3] == 0.0f)) {
+    if (!(q0[0] == 1.0f && q0[1] == 0.0f && q0[2] == 0.0f && q0[3] == 0.0f)) {
         std::cout << "- default Constructor fail Quaternion !\n";
         return 1;
     }
@@ -113,8 +113,12 @@ int rotateByVectorTest() {
 
 int updateByAngularSpeedTest() {
     Quaternion q0 = Quaternion(1, 2, 3, 4);
+    Quaternion q1 = Quaternion(0.0f,2.5f,1.0f,5.5f);
     q0.updateByAngularSpeed(Vector3d(1, 0, 0), 1);
-    if (!(q0[0] == 0.0f && q0[1] == 2.5f && q0[2] == 1.0f && q0[3] == 5.5f)) {
+    
+    q1.normalize();
+    if (!(q0[0] == q1[0] && q0[1] == q1[1] && q0[2] == q1[2] && q0[3] == q1[3]))
+    {
         std::cout << "- rotatebyangularspeed fail 1 2 3 4 rotation speed: 1 0 0 pendant une seconde !\n";
         return 32;
     }
