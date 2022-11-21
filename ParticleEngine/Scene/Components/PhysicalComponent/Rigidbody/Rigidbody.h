@@ -30,9 +30,9 @@ protected:
 public:
     explicit Rigidbody(GameObject *gameObject);
 
-private:
-    void addForce(const Vector3d &force);
+    ~Rigidbody() override;
 
+private:
 //    void addForceAtPoint(const Vector3d &force, Vector3d worldPoint);
 
     void addForceAtBodyPoint(const Vector3d &force, const Vector3d &LocalPoint);
@@ -42,6 +42,8 @@ private:
     void calculateSpeed(float time);
 
     void clearAccumulator();
+
+//    void addForceAtPointToList(ForceGenerator *forceGenerator, const Vector3d &point);
 
 public:
     void update(float time) override;
@@ -53,6 +55,16 @@ public:
     std::string getName() const override;
 
     Vector3d getAngularSpeed() const;
+
+    template<class T>
+    void deleteForceAtPointByClass(T *&comp) {
+        for (auto it = pointForceGeneratorsList.begin(); it != pointForceGeneratorsList.end(); ++it) {
+            if (dynamic_cast<T *>(*it->force) != nullptr) {
+                pointForceGeneratorsList.erase(it);
+                return;
+            }
+        }
+    }
 
 };
 

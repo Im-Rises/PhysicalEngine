@@ -18,8 +18,13 @@ Rigidbody::Rigidbody(GameObject *gameObject) : Component(gameObject) {
     pointForceGeneratorsList.emplace_back(ForcePoint{new AnchoredSpring(), Vector3d(5, 0, 0)});
 }
 
-void Rigidbody::addForce(const Vector3d &force) {
-    m_forceAccum += force;
+Rigidbody::~Rigidbody() {
+    for (ForceGenerator *forceGenerator: forceGeneratorsList) {
+        delete forceGenerator;
+    }
+    for (ForcePoint &forcePoint: pointForceGeneratorsList) {
+        delete forcePoint.force;
+    }
 }
 
 //void Rigidbody::addForceAtPoint(const Vector3d &force, const Vector3d worldPoint) {
@@ -89,9 +94,9 @@ void Rigidbody::drawGui() {
 }
 
 void Rigidbody::drawGuiForceGeneratorsAtPoint() {
-    std::string forcesListText = "Forces list";
-    std::string addForcesText = "Add forces";
-    std::string deleteForcesText = "Delete forces";
+    std::string forcesListText = "Forces list##RigidbodyForcesListButton";
+    std::string addForcesText = "Add forces##RigidbodyAddForceButton";
+    std::string deleteForcesText = "Delete forces##RigidbodyDeleteForceButton";
 
     // Forces list and add force
     ImGuiUtility::AlignForWidth((ImGuiUtility::CalculateTextWidth(forcesListText.c_str()) +
@@ -100,15 +105,17 @@ void Rigidbody::drawGuiForceGeneratorsAtPoint() {
 
     // Forces list
     if (ImGui::Button(forcesListText.c_str())) {
-        ImGui::OpenPopup("RigidbodyForcesList##popup");
+        ImGui::OpenPopup("##RigidbodyForcesListPopup");
     }
-    if (ImGui::BeginPopup("RigidbodyForcesList##popup")) {
+    if (ImGui::BeginPopup("##RigidbodyForcesListPopup")) {
         if (pointForceGeneratorsList.empty())
             ImGui::Text("Empty");
         else
             for (auto &forceGenerator: pointForceGeneratorsList) {
                 forceGenerator.force->drawGui(m_gameObject->getScenePtr());
-                ImGui::DragFloat3("Point", &forceGenerator.point.x);
+                ImGui::Text("Point: ");
+                ImGui::SameLine();
+                ImGui::DragFloat3("##RigidbodyAddForcePoint", &forceGenerator.point.x);
             }
         ImGui::EndPopup();
     }
@@ -117,12 +124,14 @@ void Rigidbody::drawGuiForceGeneratorsAtPoint() {
 
     // Add force
     if (ImGui::Button(addForcesText.c_str())) {
-        ImGui::OpenPopup("RigidbodyForcesAddForce##popup");
+        ImGui::OpenPopup("##RigidbodyAddForcesPopup");
     }
-    if (ImGui::BeginPopup("RigidbodyForcesAddForce##popup")) {
+    if (ImGui::BeginPopup("##RigidbodyAddForcesPopup")) {
         for (auto &forcesName: ForceGenerator::forcesNamesList) {
             if (ImGui::MenuItem(forcesName)) {
-//                addForceAtBodyPoint(ForceGenerator::createForceGenerator(forcesName, m_gameObject), Vector3d(0, 0, 0));
+                pointForceGeneratorsList.emplace_back(
+                        ForcePoint{ForceGenerator::createForceGenerator(forcesName, m_gameObject),
+                                   Vector3d(0, 0, 0)});
             }
         }
         ImGui::EndPopup();
@@ -132,13 +141,14 @@ void Rigidbody::drawGuiForceGeneratorsAtPoint() {
 
     // Delete force
     if (ImGui::Button(deleteForcesText.c_str())) {
-        ImGui::OpenPopup("RigidbodyForcesDeleteForce##RigidbodyForcesDeleteForcePopup");
+        ImGui::OpenPopup("##RigidbodyDeleteForcesPopup");
     }
-    if (ImGui::BeginPopup("RigidbodyForcesDeleteForce##RigidbodyForcesDeleteForcePopup")) {
+    if (ImGui::BeginPopup("##RigidbodyDeleteForcesPopup")) {
         for (auto &forceGenerator: pointForceGeneratorsList) {
-//            if (ImGui::MenuItem(forceGenerator->getName().c_str())) {
+            if (ImGui::MenuItem(forceGenerator.force->getName().c_str())) {
 //                deleteForceByClass(forceGenerator);
-//            }
+//                deleteForceAtPointByClass(forceGenerator.force);
+            }
         }
         ImGui::EndPopup();
     }
@@ -161,4 +171,10 @@ void Rigidbody::calculateSpeed(float time) {
 Vector3d Rigidbody::getAngularSpeed() const {
     return angularSpeed;
 }
+
+
+
+//void Rigidbody::addForceAtPointToList(ForceGenerator *forceGenerator, const Vector3d &point) {
+//    pointForceGeneratorsList.emplace_back(forceGenerator, point);
+//}
 

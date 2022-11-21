@@ -55,7 +55,7 @@ public:
     std::string getName() const override = 0;
 
 
-    void addForce(ForceGenerator *forceGenerator);
+    void addForceToList(ForceGenerator *forceGenerator);
 
     void addForceByName(const std::string &forceName);
 
