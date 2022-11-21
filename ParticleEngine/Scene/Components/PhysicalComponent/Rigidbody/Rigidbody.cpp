@@ -10,8 +10,15 @@
 #include "../../../../Utility/imGuiUtility.h"
 
 Rigidbody::Rigidbody(GameObject* gameObject) : Component(gameObject) {
+    m_speed = { 0, 0, 0 };
+    m_acceleration = { 0, 0, 0 };
     m_mass = 1;
-    m_angularDamping = 0;
+    m_rotation = { 0, 0, 0 };
+    m_inertiaTensor = Matrix33();
+    m_transformMatrix = Matrix34();
+    m_orientation = Quaternion();
+    m_angularSpeed = Vector3d(0, 0, 0);
+    m_angularAcceleration = Vector3d(0, 0, 0);
     m_forceAccum = Vector3d(0, 0, 0);
     m_torqueAccum = Vector3d(0, 0, 0);
 }
@@ -36,7 +43,6 @@ void Rigidbody::addForceAtPoint(const Vector3d& force, const Vector3d worldPoint
 void Rigidbody::addForceAtBodyPoint(const Vector3d& force, const Vector3d& LocalPoint) {
     m_forceAccum += force;
     Vector3d point = m_gameObject->transform.getMatrix().TransformPosition(LocalPoint);
-    //    Vector3d point = LocalPoint;
     m_torqueAccum += point.cross(force);
 }
 
@@ -51,17 +57,22 @@ void Rigidbody::update(float time) {
     {
         gravity.addForce(this);
 
+        // Linear forces
         for (ForceGenerator* forceGenerator : forceGeneratorsList)
         {
             forceGenerator->addForce(this);
         }
 
+        // Angular forces
         for (ForcePoint& forcePoint : pointForceGeneratorsList)
         {
             Vector3d forceValue = forcePoint.force->getForceValue(this);
             addForceAtBodyPoint(forceValue, forcePoint.point);
         }
     }
+
+    // Calculate derivatives
+    calculateDerivedData();
 
     // Update acceleration, speed and position
     calculateAcceleration();
@@ -71,29 +82,57 @@ void Rigidbody::update(float time) {
     clearAccumulator();
 }
 
-void Rigidbody::drawGui() {
-    PhysicalComponent::drawGui();
-
-    ImGui::Text("Force Generators");
-    PhysicalComponent::drawGuiForceGenerators();
-
-    // Angular Damping
-    ImGui::Text("Angular Damping");
-    ImGui::DragFloat("##ParticleAngularDamping", &m_angularDamping, 0.1f, 0.0f, 100.0f);
-
-    // Angular Speed
-    ImGui::Text("Angular Speed");
-    ImGui::DragFloat3("##ParticleAngularSpeed", &angularSpeed.x, 0.1f, 0.0f, 100.0f);
-
-    // Angular Acceleration
-    ImGui::Text("Angular Acceleration");
-    ImGui::DragFloat3("##ParticleAngularAcceleration", &angularAcceleration.x, 0.1f, 0.0f, 100.0f);
-
-    ImGui::NewLine();
-    ImGui::Text("Force Generators at Point");
-    drawGuiForceGeneratorsAtPoint();
+void Rigidbody::calculateAcceleration() {
+    linearAcceleration = m_forceAccum / m_mass;
+    m_angularAcceleration = m_inertiaTensor.inverse() * m_torqueAccum;
 }
 
+void Rigidbody::calculateDerivedData() {
+    m_transformMatrix.setOrientationAndPosition(m_orientation, getPosition());
+
+    // set inertia -> m_inertiaTensor = dépend de Sphère/cube/cylindre
+
+    // Cube:
+    float values[9] = { (1.0f / 12) * m_mass * (12 * 12 + 4 * 4), 0.0f, 0.0f,
+        0.0f, (1.0f / 12) * m_mass * (12 * 12 + 4 * 4), 0.0f,
+        0.0f, 0.0f, (1.0f / 12) * m_mass * (12 * 12 + 4 * 4) };
+    Matrix33 matrix(values);
+    m_inertiaTensor = matrix;
+
+    // Cylindre:
+
+    // Sphère:
+}
+
+void Rigidbody::calculateSpeed(float time) {
+    linearSpeed = linearSpeed + linearAcceleration * time;
+    m_angularSpeed = m_angularSpeed + m_angularAcceleration * time;
+}
+
+Vector3d Rigidbody::getAngularSpeed() const {
+    return m_angularSpeed;
+}
+
+void Rigidbody::deleteForceAtPoint(ForceGenerator* forceGenerator) {
+    for (auto it = pointForceGeneratorsList.begin(); it != pointForceGeneratorsList.end(); ++it)
+    {
+        if (it->force == forceGenerator)
+        {
+            pointForceGeneratorsList.erase(it);
+            break;
+        }
+    }
+}
+
+void Rigidbody::addForceToPointList(ForceGenerator* forceGenerator, const Vector3d& point) {
+    pointForceGeneratorsList.emplace_back(ForcePoint{ forceGenerator, point });
+}
+
+void Rigidbody::calculateOrientation(float deltaTime) {
+    m_orientation = m_orientation + Quaternion(0, m_angularSpeed.getx(), m_angularSpeed.gety(), m_angularSpeed.getz()) * (deltaTime / 2) * m_orientation;
+}
+
+//     pointForceGeneratorsList.emplace_back(forceGenerator, point);
 void Rigidbody::drawGuiForceGeneratorsAtPoint() {
     std::string forcesListText = "Forces list##RigidbodyForcesListButton";
     std::string addForcesText = "Add forces##RigidbodyAddForceButton";
@@ -166,40 +205,33 @@ void Rigidbody::drawGuiForceGeneratorsAtPoint() {
     }
 }
 
+
+// void Rigidbody::addForceAtPointToList(ForceGenerator *forceGenerator, const Vector3d &point) {
+void Rigidbody::drawGui() {
+    PhysicalComponent::drawGui();
+
+    ImGui::Text("Force Generators");
+    PhysicalComponent::drawGuiForceGenerators();
+
+    //    // Angular Damping
+    //    ImGui::Text("Angular Damping");
+    //    ImGui::DragFloat("##ParticleAngularDamping", &m_angularDamping, 0.1f, 0.0f, 100.0f);
+    //
+    //    // Angular Speed
+    //    ImGui::Text("Angular Speed");
+    //    ImGui::DragFloat3("##ParticleAngularSpeed", &angularSpeed.x, 0.1f, 0.0f, 100.0f);
+    //
+    //    // Angular Acceleration
+    //    ImGui::Text("Angular Acceleration");
+    //    ImGui::DragFloat3("##ParticleAngularAcceleration", &angularAcceleration.x, 0.1f, 0.0f, 100.0f);
+
+    ImGui::NewLine();
+    ImGui::Text("Force Generators at Point");
+    drawGuiForceGeneratorsAtPoint();
+}
+
+
+
 std::string Rigidbody::getName() const {
     return COMPONENT_TYPE;
 }
-
-void Rigidbody::calculateAcceleration() {
-    linearAcceleration = m_forceAccum / m_mass;
-    angularAcceleration = m_torqueAccum / m_mass;
-}
-
-void Rigidbody::calculateSpeed(float time) {
-    linearSpeed = linearSpeed + linearAcceleration * time;
-    angularSpeed = angularSpeed + angularAcceleration * time;
-}
-
-Vector3d Rigidbody::getAngularSpeed() const {
-    return angularSpeed;
-}
-
-void Rigidbody::deleteForceAtPoint(ForceGenerator* forceGenerator) {
-    for (auto it = pointForceGeneratorsList.begin(); it != pointForceGeneratorsList.end(); ++it)
-    {
-        if (it->force == forceGenerator)
-        {
-            pointForceGeneratorsList.erase(it);
-            break;
-        }
-    }
-}
-void Rigidbody::addForceToPointList(ForceGenerator* forceGenerator, const Vector3d& point) {
-    pointForceGeneratorsList.emplace_back(ForcePoint{ forceGenerator, point });
-}
-
-
-
-// void Rigidbody::addForceAtPointToList(ForceGenerator *forceGenerator, const Vector3d &point) {
-//     pointForceGeneratorsList.emplace_back(forceGenerator, point);
-// }
