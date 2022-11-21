@@ -146,8 +146,7 @@ void Rigidbody::drawGuiForceGeneratorsAtPoint() {
     if (ImGui::BeginPopup("##RigidbodyDeleteForcesPopup")) {
         for (auto &forceGenerator: pointForceGeneratorsList) {
             if (ImGui::MenuItem(forceGenerator.force->getName().c_str())) {
-//                deleteForceByClass(forceGenerator);
-//                deleteForceAtPointByClass(forceGenerator.force);
+                deleteForceAtPoint(forceGenerator.force);
             }
         }
         ImGui::EndPopup();
@@ -170,6 +169,15 @@ void Rigidbody::calculateSpeed(float time) {
 
 Vector3d Rigidbody::getAngularSpeed() const {
     return angularSpeed;
+}
+
+void Rigidbody::deleteForceAtPoint(ForceGenerator *forceGenerator) {
+    for (auto it = pointForceGeneratorsList.begin(); it != pointForceGeneratorsList.end(); ++it) {
+        if (it->force == forceGenerator) {
+            pointForceGeneratorsList.erase(it);
+            break;
+        }
+    }
 }
 
 

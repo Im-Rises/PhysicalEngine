@@ -56,15 +56,18 @@ public:
 
     Vector3d getAngularSpeed() const;
 
-    template<class T>
-    void deleteForceAtPointByClass(T *&comp) {
-        for (auto it = pointForceGeneratorsList.begin(); it != pointForceGeneratorsList.end(); ++it) {
-            if (dynamic_cast<T *>(*it->force) != nullptr) {
-                pointForceGeneratorsList.erase(it);
-                return;
-            }
-        }
-    }
+    void deleteForceAtPoint(ForceGenerator *forceGenerator);
+
+//    template<class T>
+//    void deleteForceAtPointByClass(T *&comp) {
+//        for (auto it = pointForceGeneratorsList.begin(); it != pointForceGeneratorsList.end(); ++it) {
+//            if (dynamic_cast<T *>(*it->force) != nullptr) {
+//                delete it->force;
+//                pointForceGeneratorsList.erase(it);
+//                return;
+//            }
+//        }
+//    }
 
 };
 
