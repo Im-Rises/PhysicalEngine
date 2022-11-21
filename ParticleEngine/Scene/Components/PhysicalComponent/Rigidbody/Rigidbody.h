@@ -2,6 +2,8 @@
 #define INTEGRABLE_H
 
 #include "../../../../Force/Gravity.h"
+#include "../../../../Utility/Matrix34.h"
+#include "../../../../Utility/Quaternion.h"
 #include "../../../../Utility/Vector3d.h"
 #include "../../Component.h"
 #include "../PhysicalComponent.h"
@@ -19,11 +21,20 @@ private:
     static constexpr const char* COMPONENT_TYPE = RIGIDBODY_COMPONENT;
 
 protected:
-    float m_angularDamping;
-    Vector3d m_torqueAccum;
+    float m_mass;
+    Vector3d m_speed;
+    Vector3d m_acceleration;
+    Vector3d m_rotation;
 
-    Vector3d angularSpeed;
-    Vector3d angularAcceleration;
+    Matrix33 m_inertiaTensor;
+    Matrix34 m_transformMatrix;
+
+    Quaternion m_orientation;
+
+    Vector3d m_angularSpeed;
+    Vector3d m_angularAcceleration;
+    Vector3d m_forceAccum;
+    Vector3d m_torqueAccum;
 
     std::vector<ForcePoint> pointForceGeneratorsList;
 
@@ -40,7 +51,7 @@ private:
     void addForceAtBodyPoint(const Vector3d& force, const Vector3d& LocalPoint);
 
     void calculateAcceleration();
-
+    void calculateOrientation(float deltaTime);
     void calculateSpeed(float time);
 
     void clearAccumulator();
@@ -49,6 +60,8 @@ private:
 
 public:
     void update(float time) override;
+
+    void calculateDerivedData();
 
     void drawGui() override;
 
