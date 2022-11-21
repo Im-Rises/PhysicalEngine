@@ -35,10 +35,11 @@ Rigidbody::~Rigidbody() {
 
 void Rigidbody::addForceAtBodyPoint(const Vector3d &force, const Vector3d &LocalPoint) {
     m_forceAccum += force;
-    auto rotation = m_gameObject->transform.getRotation();
-    rotation.rotateByVector(LocalPoint);
-    m_gameObject->transform.setRotation(rotation);
-    m_torqueAccum += m_gameObject->transform.getPosition().cross(force);
+    //auto rotation = m_gameObject->transform.getRotation();
+    //rotation.rotateByVector(LocalPoint);
+    //m_gameObject->transform.setRotation(rotation);
+    Vector3d point = m_gameObject->transform.getMatrix().TransformPosition(LocalPoint);
+    m_torqueAccum += point.cross(force);
 }
 
 void Rigidbody::clearAccumulator() {
@@ -57,7 +58,6 @@ void Rigidbody::update(float time) {
 
         for (ForcePoint &forcePoint: pointForceGeneratorsList) {
             Vector3d forceValue = forcePoint.force->getForceValue(this);
-            m_forceAccum += forceValue;
             addForceAtBodyPoint(forceValue, forcePoint.point);
         }
     }
