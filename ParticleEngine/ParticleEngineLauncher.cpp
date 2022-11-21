@@ -253,25 +253,25 @@ void ParticleEngineLauncher::handleGui() {
             ImGui::End();
         }
         {
-            ImGui::Begin("Console");
-            ImGuiInputTextFlags inputTextFlags =
-                    ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_CtrlEnterForNewLine;
-            ImGui::Text("Input:");
-            if (ImGui::InputTextMultiline("##console", consoleBuffer.data(), consoleBuffer.size(),
-                                          ImVec2(-1.0f, ImGui::GetTextLineHeight() * 11),
-                                          inputTextFlags)) {
-                system(consoleBuffer.data());
-                consoleBuffer.fill('\0');
-            }
-            if (ImGui::Button("Enter")) {
-                system(consoleBuffer.data());
-                consoleBuffer.fill('\0');
-            }
-            ImGui::SameLine();
-            if (ImGui::Button("Clear")) {
-                consoleBuffer.fill('\0');
-            }
-            ImGui::End();
+//            ImGui::Begin("Console");
+//            ImGuiInputTextFlags inputTextFlags =
+//                    ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_CtrlEnterForNewLine;
+//            ImGui::Text("Input:");
+//            if (ImGui::InputTextMultiline("##console", consoleBuffer.data(), consoleBuffer.size(),
+//                                          ImVec2(-1.0f, ImGui::GetTextLineHeight() * 11),
+//                                          inputTextFlags)) {
+//                system(consoleBuffer.data());
+//                consoleBuffer.fill('\0');
+//            }
+//            if (ImGui::Button("Enter")) {
+//                system(consoleBuffer.data());
+//                consoleBuffer.fill('\0');
+//            }
+//            ImGui::SameLine();
+//            if (ImGui::Button("Clear")) {
+//                consoleBuffer.fill('\0');
+//            }
+//            ImGui::End();
         }
         {
             ImGui::Begin("Speed graph viewer");
@@ -349,15 +349,15 @@ void ParticleEngineLauncher::handleGui() {
             ImGui::End();
         }
         {
-            ImGui::Begin("Project files");
-
-            ImGui::End();
+//            ImGui::Begin("Project files");
+//
+//            ImGui::End();
         }
         {
-            ImGui::Begin("Game settings");
-            ImGui::Text("Particle speed:");
-            ImGui::InputFloat("##PhysicalEngineParticleSpeed", game.getPtrSpeed(), 0.1f, 1.0f, "%.1f");
-            ImGui::End();
+//            ImGui::Begin("Game settings");
+//            ImGui::Text("Particle speed:");
+//            ImGui::InputFloat("##PhysicalEngineParticleSpeed", game.getPtrSpeed(), 0.1f, 1.0f, "%.1f");
+//            ImGui::End();
         }
         {
             ImGui::Begin("Scene View", nullptr, ImGuiWindowFlags_NoCollapse);
