@@ -2,11 +2,13 @@
 #define QUATERNION_H
 
 #include "Vector3d.h"
+#include <cmath>
 
 class Quaternion {
 
 private:
     float m_value[4];
+
 public:
     /// <summary>
     /// Constructeur avec uniquement des 0
@@ -17,13 +19,13 @@ public:
     /// Constructeur de copy
     /// </summary>
     /// <param name="quaternion"></param>
-    Quaternion(const Quaternion &quaternion);
+    Quaternion(const Quaternion& quaternion);
 
     /// <summary>
     /// Constructeur avec une vecteur : {0,Vector3d}
     /// </summary>
     /// <param name="vec"></param>
-    Quaternion(const Vector3d &vec);
+    Quaternion(const Vector3d& vec);
 
     /// <summary>
     /// norm d'un quaternion
@@ -45,20 +47,20 @@ public:
     /// <param name="z"></param>
     Quaternion(float w, float x, float y, float z);
 
-    Quaternion &operator=(const Quaternion &quaternion);
+    Quaternion& operator=(const Quaternion& quaternion);
 
     /// <summary>
     /// Multiplication de quaternion selon le produit hamiltonien
     /// <param name="quaternion"></param>
     /// <returns></returns>
-    Quaternion &operator*=(const Quaternion &quaternion);
+    Quaternion& operator*=(const Quaternion& quaternion);
 
     /// <summary>
     /// Multiplication de quaternion selon le produit hamiltonien methode constante
     /// </summary>
     /// <param name="quaternion"></param>
     /// <returns></returns>
-    Quaternion operator*(const Quaternion &quaternion);
+    Quaternion operator*(const Quaternion& quaternion);
 
     /// <summary>
     /// mutliplication par un float
@@ -72,9 +74,9 @@ public:
     /// </summary>
     /// <param name="quaternion"></param>
     /// <returns></returns>
-    Quaternion operator+(const Quaternion &quaternion);
+    Quaternion operator+(const Quaternion& quaternion);
 
-    Quaternion operator+=(const Quaternion &quaternion);
+    Quaternion operator+=(const Quaternion& quaternion);
 
     /// <summary>
     /// Geteur des composantes de quaternion
@@ -93,7 +95,7 @@ public:
     /// Effectue la rotation d'un quaternion en suivant un vecteur de rotation
     /// </summary>
     /// <param name="vector"></param>
-    void rotateByVector(const Vector3d &vector);
+    void rotateByVector(const Vector3d& vector);
 
     /// <summary>
     /// Effectue la rotation du quaternion selon les vitesse angulaire correspondant au 3 degrés de liberté définit dans le Vectord3D
@@ -101,9 +103,9 @@ public:
     /// </summary>
     /// <param name="vector"></param>
     /// <param name="time"></param>
-    void updateByAngularSpeed(const Vector3d &vector, float time);
+    void updateByAngularSpeed(const Vector3d& vector, float time);
 
-    friend std::ostream &operator<<(std::ostream &stream, const Quaternion &quaternion) {
+    friend std::ostream& operator<<(std::ostream& stream, const Quaternion& quaternion) {
         stream << "Quaternion : " << quaternion.m_value[0] << " " << quaternion.m_value[1] << " "
                << quaternion.m_value[2] << " " << quaternion.m_value[3]
                << std::endl;
@@ -113,7 +115,7 @@ public:
 
     ~Quaternion();
 
-    float *getValues();
+    float* getValues();
 };
 
 #endif // !QUATERNION_H
