@@ -1,5 +1,6 @@
 #include "Game.h"
 
+#include "Force/Spring.h"
 #include "Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "Scene/GameObject.h"
 #include "Scene/Prefabs/ParticlePrefab.h"
@@ -13,13 +14,7 @@ Game::~Game() = default;
 void Game::start(Scene* s) {
     this->scene = s;
 
-    //    auto* particlePrefab = new ParticlePrefab(scene);
-    //    scene->addGameObject(particlePrefab);
-    //    Particle* particle;
-    //    particlePrefab->getComponentByClass(particle);
-    //    auto* particlePrefabNew = new ParticlePrefab(scene);
-    //    scene->addGameObject(particlePrefabNew);
-
+    /* Particles generation */
     //    for (int i = 0; i < 20; i++) {
     //        for (int j = 0; j < 25; ++j) {
     //            auto *particlePrefabNew = new ParticlePrefab(scene);
@@ -28,15 +23,21 @@ void Game::start(Scene* s) {
     //        }
     //    }
 
+    /* Rigidbody generation*/
     auto* rigidbodyPrefab = new RigidbodyPrefab(scene);
     scene->addGameObject(rigidbodyPrefab);
     Rigidbody* rigidbody;
     rigidbodyPrefab->getComponentByClass(rigidbody);
     rigidbody->addForceToPointList(new AnchoredSpring(Vector3d(0, 12, 0), 3, 3), Vector3d(5, 0, 0));
 
-//    auto* rigidbodyPrefab2 = new RigidbodyPrefab(scene);
-//    scene->addGameObject(rigidbodyPrefab2);
-//    pointForceGeneratorsList.emplace_back(ForcePoint{ new AnchoredSpring(Vector3d(0, 12, 0), 3, 3), Vector3d(5, 0, 0) });
+    auto* rigidbodyPrefab2 = new RigidbodyPrefab(scene);
+    rigidbodyPrefab2->transform.positionX = -20;
+    scene->addGameObject(rigidbodyPrefab2);
+    Rigidbody* rigidbody2;
+    rigidbodyPrefab2->getComponentByClass(rigidbody2);
+    auto* spring = new Spring(nullptr, 3, 3);
+    rigidbody2->addForceToPointList(spring, Vector3d(5, 0, 0));
+    spring->setOtherGameObject(rigidbody->getGameObject());
 }
 
 void Game::goLeft() {

@@ -35,7 +35,7 @@ public:
     void addForceToPointList(ForceGenerator* forceGenerator, const Vector3d& point);
 
 private:
-    //    void addForceAtPoint(const Vector3d &force, Vector3d worldPoint);
+    void addForceAtPoint(const Vector3d& force, Vector3d worldPoint);
 
     void addForceAtBodyPoint(const Vector3d& force, const Vector3d& LocalPoint);
 

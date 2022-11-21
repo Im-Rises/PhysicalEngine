@@ -2,14 +2,14 @@
 
 #include <utility>
 
-#include "imgui/imgui.h"
 #include "../../../GameObject.h"
+#include "imgui/imgui.h"
 
-#include "../../../../Force/ForceGenerator.h"
 #include "../../../../Force/AnchoredSpring.h"
+#include "../../../../Force/ForceGenerator.h"
 #include "../../../../Utility/imGuiUtility.h"
 
-Rigidbody::Rigidbody(GameObject *gameObject) : Component(gameObject) {
+Rigidbody::Rigidbody(GameObject* gameObject) : Component(gameObject) {
     m_mass = 1;
     m_angularDamping = 0;
     m_forceAccum = Vector3d(0, 0, 0);
@@ -17,26 +17,26 @@ Rigidbody::Rigidbody(GameObject *gameObject) : Component(gameObject) {
 }
 
 Rigidbody::~Rigidbody() {
-    for (ForceGenerator *forceGenerator: forceGeneratorsList) {
+    for (ForceGenerator* forceGenerator : forceGeneratorsList)
+    {
         delete forceGenerator;
     }
-    for (ForcePoint &forcePoint: pointForceGeneratorsList) {
+    for (ForcePoint& forcePoint : pointForceGeneratorsList)
+    {
         delete forcePoint.force;
     }
 }
 
-//void Rigidbody::addForceAtPoint(const Vector3d &force, const Vector3d worldPoint) {
-//    Vector3d point = worldPoint - m_gameObject->transform.getPosition();
-//    m_forceAccum += force;
-//    m_torqueAccum += point.cross(force);
-//}
-
-void Rigidbody::addForceAtBodyPoint(const Vector3d &force, const Vector3d &LocalPoint) {
+void Rigidbody::addForceAtPoint(const Vector3d& force, const Vector3d worldPoint) {
     m_forceAccum += force;
-    //auto rotation = m_gameObject->transform.getRotation();
-    //rotation.rotateByVector(LocalPoint);
-    //m_gameObject->transform.setRotation(rotation);
+    Vector3d point = m_gameObject->transform.getMatrix().inverse().TransformPosition(worldPoint);
+    m_torqueAccum += point.cross(force);
+}
+
+void Rigidbody::addForceAtBodyPoint(const Vector3d& force, const Vector3d& LocalPoint) {
+    m_forceAccum += force;
     Vector3d point = m_gameObject->transform.getMatrix().TransformPosition(LocalPoint);
+    //    Vector3d point = LocalPoint;
     m_torqueAccum += point.cross(force);
 }
 
@@ -47,14 +47,17 @@ void Rigidbody::clearAccumulator() {
 
 void Rigidbody::update(float time) {
     // Update sum of forces
-    if (isKinematic) {
+    if (isKinematic)
+    {
         gravity.addForce(this);
 
-        for (ForceGenerator *forceGenerator: forceGeneratorsList) {
+        for (ForceGenerator* forceGenerator : forceGeneratorsList)
+        {
             forceGenerator->addForce(this);
         }
 
-        for (ForcePoint &forcePoint: pointForceGeneratorsList) {
+        for (ForcePoint& forcePoint : pointForceGeneratorsList)
+        {
             Vector3d forceValue = forcePoint.force->getForceValue(this);
             addForceAtBodyPoint(forceValue, forcePoint.point);
         }
@@ -102,14 +105,17 @@ void Rigidbody::drawGuiForceGeneratorsAtPoint() {
                                  ImGuiUtility::CalculateTextWidth(deleteForcesText.c_str())));
 
     // Forces list
-    if (ImGui::Button(forcesListText.c_str())) {
+    if (ImGui::Button(forcesListText.c_str()))
+    {
         ImGui::OpenPopup("##RigidbodyForcesListPopup");
     }
-    if (ImGui::BeginPopup("##RigidbodyForcesListPopup")) {
+    if (ImGui::BeginPopup("##RigidbodyForcesListPopup"))
+    {
         if (pointForceGeneratorsList.empty())
             ImGui::Text("Empty");
         else
-            for (auto &forceGenerator: pointForceGeneratorsList) {
+            for (auto& forceGenerator : pointForceGeneratorsList)
+            {
                 forceGenerator.force->drawGui(m_gameObject->getScenePtr());
                 ImGui::Text("Point: ");
                 ImGui::SameLine();
@@ -122,15 +128,19 @@ void Rigidbody::drawGuiForceGeneratorsAtPoint() {
     ImGui::SameLine();
 
     // Add force
-    if (ImGui::Button(addForcesText.c_str())) {
+    if (ImGui::Button(addForcesText.c_str()))
+    {
         ImGui::OpenPopup("##RigidbodyAddForcesPopup");
     }
-    if (ImGui::BeginPopup("##RigidbodyAddForcesPopup")) {
-        for (auto &forcesName: ForceGenerator::forcesNamesList) {
-            if (ImGui::MenuItem(forcesName)) {
+    if (ImGui::BeginPopup("##RigidbodyAddForcesPopup"))
+    {
+        for (auto& forcesName : ForceGenerator::forcesNamesList)
+        {
+            if (ImGui::MenuItem(forcesName))
+            {
                 pointForceGeneratorsList.emplace_back(
-                        ForcePoint{ForceGenerator::createForceGenerator(forcesName, m_gameObject),
-                                   Vector3d(0, 0, 0)});
+                    ForcePoint{ ForceGenerator::createForceGenerator(forcesName, m_gameObject),
+                        Vector3d(0, 0, 0) });
             }
         }
         ImGui::EndPopup();
@@ -139,12 +149,16 @@ void Rigidbody::drawGuiForceGeneratorsAtPoint() {
     ImGui::SameLine();
 
     // Delete force
-    if (ImGui::Button(deleteForcesText.c_str())) {
+    if (ImGui::Button(deleteForcesText.c_str()))
+    {
         ImGui::OpenPopup("##RigidbodyDeleteForcesPopup");
     }
-    if (ImGui::BeginPopup("##RigidbodyDeleteForcesPopup")) {
-        for (auto &forceGenerator: pointForceGeneratorsList) {
-            if (ImGui::MenuItem(forceGenerator.force->getName().c_str())) {
+    if (ImGui::BeginPopup("##RigidbodyDeleteForcesPopup"))
+    {
+        for (auto& forceGenerator : pointForceGeneratorsList)
+        {
+            if (ImGui::MenuItem(forceGenerator.force->getName().c_str()))
+            {
                 deleteForceAtPoint(forceGenerator.force);
             }
         }
@@ -170,21 +184,22 @@ Vector3d Rigidbody::getAngularSpeed() const {
     return angularSpeed;
 }
 
-void Rigidbody::deleteForceAtPoint(ForceGenerator *forceGenerator) {
-    for (auto it = pointForceGeneratorsList.begin(); it != pointForceGeneratorsList.end(); ++it) {
-        if (it->force == forceGenerator) {
+void Rigidbody::deleteForceAtPoint(ForceGenerator* forceGenerator) {
+    for (auto it = pointForceGeneratorsList.begin(); it != pointForceGeneratorsList.end(); ++it)
+    {
+        if (it->force == forceGenerator)
+        {
             pointForceGeneratorsList.erase(it);
             break;
         }
     }
 }
 void Rigidbody::addForceToPointList(ForceGenerator* forceGenerator, const Vector3d& point) {
-    pointForceGeneratorsList.emplace_back(ForcePoint{forceGenerator, point});
+    pointForceGeneratorsList.emplace_back(ForcePoint{ forceGenerator, point });
 }
 
 
 
-//void Rigidbody::addForceAtPointToList(ForceGenerator *forceGenerator, const Vector3d &point) {
-//    pointForceGeneratorsList.emplace_back(forceGenerator, point);
-//}
-
+// void Rigidbody::addForceAtPointToList(ForceGenerator *forceGenerator, const Vector3d &point) {
+//     pointForceGeneratorsList.emplace_back(forceGenerator, point);
+// }

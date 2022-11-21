@@ -31,6 +31,8 @@ public:
 
     virtual std::string getName() const = 0;
 
+    GameObject* getGameObject();
+
     static Component *createComponent(const std::string &name, GameObject *gameObject);
 
 };
