@@ -104,7 +104,7 @@ void Quaternion::set(int i) {
 
 void Quaternion::rotateByVector(const Vector3d &vector) {
     *this *= Quaternion(vector);
-//    normalize();
+    normalize();
 }
 
 
