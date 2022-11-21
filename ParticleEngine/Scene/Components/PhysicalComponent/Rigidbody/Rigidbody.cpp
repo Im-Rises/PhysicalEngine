@@ -30,7 +30,7 @@ void Rigidbody::addForce(const Vector3d &force) {
 
 void Rigidbody::addForceAtBodyPoint(const Vector3d &force, const Vector3d &LocalPoint) {
     m_forceAccum += force;
-    m_gameObject->transform.getRotation().RotateByVector(LocalPoint);
+    m_gameObject->transform.getRotation().rotateByVector(LocalPoint);
     m_torqueAccum += m_gameObject->transform.getPosition().cross(force);
     m_torqueAccum = Vector3d(10, 0, 0);
 }

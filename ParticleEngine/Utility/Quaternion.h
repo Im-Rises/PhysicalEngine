@@ -93,7 +93,7 @@ public:
     /// Effectue la rotation d'un quaternion en suivant un vecteur de rotation
     /// </summary>
     /// <param name="vector"></param>
-    void RotateByVector(const Vector3d &vector);
+    void rotateByVector(const Vector3d &vector);
 
     /// <summary>
     /// Effectue la rotation du quaternion selon les vitesse angulaire correspondant au 3 degrés de liberté définit dans le Vectord3D
@@ -101,7 +101,7 @@ public:
     /// </summary>
     /// <param name="vector"></param>
     /// <param name="time"></param>
-    void UpdateByAngularSpeed(const Vector3d &vector, float time);
+    void updateByAngularSpeed(const Vector3d &vector, float time);
 
     friend std::ostream &operator<<(std::ostream &stream, const Quaternion &quaternion) {
         stream << "Quaternion : " << quaternion.m_value[0] << " " << quaternion.m_value[1] << " "

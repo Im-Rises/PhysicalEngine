@@ -102,17 +102,18 @@ void Quaternion::set(int i) {
 }
 
 
-void Quaternion::RotateByVector(const Vector3d &vector) {
+void Quaternion::rotateByVector(const Vector3d &vector) {
     *this *= Quaternion(vector);
+    normalize();
 }
 
 
-void Quaternion::UpdateByAngularSpeed(const Vector3d &vector, float time) {
+void Quaternion::updateByAngularSpeed(const Vector3d &vector, float time) {
     Quaternion updateQuaternion = *this + Quaternion(vector) * *this * (time / 2);
     for (int i = 0; i < 4; i++) {
         m_value[i] = updateQuaternion[i];
     }
-
+    normalize();
 }
 
 /// <summary>

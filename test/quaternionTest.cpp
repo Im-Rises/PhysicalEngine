@@ -91,9 +91,9 @@ int rotateByVectorTest() {
     qt2.normalize();
     qt3.normalize();
     qt4.normalize();
-    qt2.RotateByVector(Vector3d(1, 0, 0));
-    qt3.RotateByVector(Vector3d(0, 1, 0));
-    qt4.RotateByVector(Vector3d(0, 0, 1));
+    qt2.rotateByVector(Vector3d(1, 0, 0));
+    qt3.rotateByVector(Vector3d(0, 1, 0));
+    qt4.rotateByVector(Vector3d(0, 0, 1));
     if (!(qt2[0] == -0.5f && qt2[1] == 0.5f && qt2[2] == 0.5f && qt2[3] == -0.5f)) {
         std::cout << "- rotation fail 1 1 1 1 * 1 0 0 !\n";
         return 16;
@@ -113,7 +113,7 @@ int rotateByVectorTest() {
 
 int UpdateByAngularSpeedTest() {
     Quaternion q0 = Quaternion(1, 2, 3, 4);
-    q0.UpdateByAngularSpeed(Vector3d(1, 0, 0), 1);
+    q0.updateByAngularSpeed(Vector3d(1, 0, 0), 1);
     if (!(q0[0] == 0.0f && q0[1] == 2.5f && q0[2] == 1.0f && q0[3] == 5.5f)) {
         std::cout << "- rotatebyangularspeed fail 1 2 3 4 rotation speed: 1 0 0 pendant une seconde !\n";
         return 32;

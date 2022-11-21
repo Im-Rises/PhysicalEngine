@@ -94,24 +94,26 @@ void GameObject::update(float deltaTime) {
 
 void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
     // Matrix calculations
-    auto matrix = transform.getMatrix();
-    glm::mat4 model = convertToGlmMat4(matrix);
-    std::cout << "model: " << std::endl;
-    std::cout << model[0][0] << " " << model[0][1] << " " << model[0][2] << " " << model[0][3] << std::endl;
-    std::cout << model[1][0] << " " << model[1][1] << " " << model[1][2] << " " << model[1][3] << std::endl;
-    std::cout << model[2][0] << " " << model[2][1] << " " << model[2][2] << " " << model[2][3] << std::endl;
-    std::cout << model[3][0] << " " << model[3][1] << " " << model[3][2] << " " << model[3][3] << std::endl;
+//    auto matrix = transform.getMatrix();
+//    glm::mat4 model = convertToGlmMat4(matrix);
+//    std::cout << "model: " << std::endl;
+//    std::cout << model[0][0] << " " << model[0][1] << " " << model[0][2] << " " << model[0][3] << std::endl;
+//    std::cout << model[1][0] << " " << model[1][1] << " " << model[1][2] << " " << model[1][3] << std::endl;
+//    std::cout << model[2][0] << " " << model[2][1] << " " << model[2][2] << " " << model[2][3] << std::endl;
+//    std::cout << model[3][0] << " " << model[3][1] << " " << model[3][2] << " " << model[3][3] << std::endl;
+//    std::cout << transform.getRotation() << std::endl;
 
-
+    glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
     projection = glm::perspective(glm::radians(fov / 2), static_cast<float>(display_w) / static_cast<float>(display_h),
                                   0.1f, 100.0f);
 
     // Shader use
     defaultShader->use();
-//    defaultShader->setMat4("model",
-//        glm::translate(model, glm::vec3(transform.positionX, transform.positionY, transform.positionZ)));
-    defaultShader->setMat4("model", model);
+    defaultShader->setMat4("model",
+                           glm::translate(model,
+                                          glm::vec3(transform.positionX, transform.positionY, transform.positionZ)));
+//    defaultShader->setMat4("model", model);
     defaultShader->setMat4("view", view);
     defaultShader->setMat4("projection", projection);
 

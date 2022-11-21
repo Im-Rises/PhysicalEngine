@@ -27,22 +27,11 @@ void PhysicHandler::move(GameObject *gameObject, PhysicalComponent *physicalComp
 }
 
 void PhysicHandler::angularMove(GameObject *gameObject, Rigidbody *rigidbody, float deltaTime) {
-    gameObject->transform.setRotation(
-            gameObject->transform.getRotation() + rigidbody->getAngularSpeed() * deltaTime);
-//    std::cout << "angularMove" << gameObject->transform.getRotation() << std::endl;
+    Quaternion rotation = gameObject->transform.getRotation();
+    rotation.updateByAngularSpeed(rigidbody->getAngularSpeed(), deltaTime);
+    gameObject->transform.setRotation(rotation);
+
 }
-
-
-//void PhysicHandler::update(float time) {
-////    fixedDeltaTime += static_cast<float>(time);
-////    timeToAdjustFrameRate += static_cast<float>(time);
-////    if (timeToAdjustFrameRate > 1.0f / fixedUpdatePerSecond) {
-//////        m_gameObject->->recalculateAll(fixedDeltaTime);
-////        timeToAdjustFrameRate -= 1.0f / fixedUpdatePerSecond;
-////        if (timeToAdjustFrameRate > 1) {
-////            timeToAdjustFrameRate -= 1;
-////        }
-////        fixedDeltaTime = 0;
-////    }
-//
-//}
+//    gameObject->transform.setRotation(
+//            gameObject->transform.getRotation() + rigidbody->getAngularSpeed() * deltaTime);
+//    std::cout << "angularMove" << gameObject->transform.getRotation() << std::endl;
