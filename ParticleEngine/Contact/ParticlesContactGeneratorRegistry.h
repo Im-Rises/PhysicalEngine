@@ -9,16 +9,20 @@ class ParticleContactGeneratorRegistry {
 private:
     std::vector<ParticleContactGenerator *> m_particlesContactGenerators;
     ParticleContact *m_allContact;
+    unsigned int m_maxSize;
+    unsigned int m_size = 0;
 
 public:
 
-    explicit ParticleContactGeneratorRegistry(int maxSize);
+    explicit ParticleContactGeneratorRegistry(unsigned int maxSize);
 
     void addParticleGenerator(ParticleContactGenerator *particleContactGenerator);
 
     std::vector<ParticleContactGenerator *> GetParticlesContactGenerators() const;
 
-    ParticleContact *generateAllContacts(unsigned int maxSize);
+    unsigned int getSize();
+
+    ParticleContact *generateAllContacts();
 
     ~ParticleContactGeneratorRegistry();
 

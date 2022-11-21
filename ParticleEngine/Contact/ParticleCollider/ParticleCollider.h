@@ -8,17 +8,16 @@ class ParticleCollider {
 
 private:
     float m_radius;
-    Particle *m_particule;
+    Particle* m_particle;
 
 public:
-
-    ParticleCollider(Particle *particle, float radius);
+    ParticleCollider(Particle* particle, float radius);
 
 #pragma region Getter setter
 
     float getRadius() const;
 
-    Particle *getParticle();
+    Particle* getParticle();
 
 #pragma endregion
 };

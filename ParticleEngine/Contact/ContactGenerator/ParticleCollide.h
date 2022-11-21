@@ -1,9 +1,9 @@
 #ifndef PARTICLECOLLIDE_H
 #define PARTICLECOLLIDE_H
 
-#include "../ParticleContactGenerator.h"
+#include "ParticleContactGenerator.h"
 
-#include "../../ParticleCollider/ParticleCollider.h"
+#include "../ParticleCollider/ParticleCollider.h"
 
 #include <vector>
 
@@ -16,6 +16,7 @@ private:
     float elasticity;
 
 public:
+    explicit ParticleCollide(float elast);
 
     void addCollider(ParticleCollider particleCollider);
 

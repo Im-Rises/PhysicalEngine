@@ -12,10 +12,10 @@ Gravity::Gravity(const Gravity &grav) {
     m_gravity = grav.m_gravity;
 }
 
-void Gravity::addForce(Particle *particle) {
-    Vector3d F = m_gravity * particle->getMass();
-    Vector3d initialForce = particle->getNetForce();
-    particle->setNetForce(initialForce + F);
+void Gravity::addForce(PhysicalComponent *physicalComponent) {
+    Vector3d F = m_gravity * physicalComponent->getMass();
+    Vector3d initialForce = physicalComponent->getNetForce();
+    physicalComponent->setNetForce(initialForce + F);
 }
 
 void Gravity::drawGui(Scene *scene) {
@@ -24,18 +24,18 @@ void Gravity::drawGui(Scene *scene) {
         ImGui::TableNextColumn();
         ImGui::Text("X:");
         ImGui::SameLine();
-        ImGui::InputFloat("##GravityX", &m_gravity.m_x);
+        ImGui::InputFloat("##GravityX", &m_gravity.x);
         ImGui::SameLine();
         ImGui::TableNextColumn();
         ImGui::Text("Y:");
         ImGui::SameLine();
-        ImGui::InputFloat("##GravityY", &m_gravity.m_y);
+        ImGui::InputFloat("##GravityY", &m_gravity.y);
         ImGui::SameLine();
         ImGui::TableNextColumn();
         ImGui::SameLine();
         ImGui::Text("Z:");
         ImGui::SameLine();
-        ImGui::InputFloat("##GravityZ", &m_gravity.m_z);
+        ImGui::InputFloat("##GravityZ", &m_gravity.z);
         ImGui::EndTable();
     }
 }

@@ -2,10 +2,13 @@
 #define INTEGRATOR_H
 
 #include <list>
+#include "Components/PhysicalComponent/Rigidbody/Rigidbody.h"
 
-class Particle;
+class PhysicalComponent;
 
-class Rigidbody;
+//class Particle;
+//
+//class Rigidbody;
 
 class GameObject;
 
@@ -22,7 +25,9 @@ public:
     void update(GameObject *gameObject, float deltaTime);
 
 private:
-    void move(GameObject *gameObject, Particle *particle, float deltaTime);
+    void move(GameObject *gameObject, PhysicalComponent *physicalComponent, float deltaTime);
+
+    void angularMove(GameObject *gameObject, Rigidbody *rigidbody, float deltaTime);
 
 };
 

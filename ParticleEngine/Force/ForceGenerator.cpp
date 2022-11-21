@@ -1,6 +1,6 @@
 #include "ForceGenerator.h"
 
-#include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
+//#include "../Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "imgui/imgui.h"
 #include "Spring.h"
 #include "AnchoredSpring.h"

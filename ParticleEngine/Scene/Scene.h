@@ -7,6 +7,11 @@
 #include "Camera.h"
 #include "PhysicHandler.h"
 #include "Axis.h"
+#include "../Contact/ParticlesContactGeneratorRegistry.h"
+#include "../Contact/ParticleContactResolver.h"
+#include "../Contact/ContactGenerator/ParticleCollide.h"
+
+#define PHYSIC_UPDATE_PER_SECOND 50
 
 class GameObject;
 
@@ -19,7 +24,10 @@ private:
     Axis axis;
     Camera camera;
     PhysicHandler physicHandler;
-    std::vector<GameObject *> gameObjects;
+    std::vector<GameObject*> gameObjects;
+    ParticleContactGeneratorRegistry particleContactGeneratorRegistry = ParticleContactGeneratorRegistry(1000000);
+    ParticleContactResolver particleContactResolver = ParticleContactResolver(2000000);
+    ParticleCollide particleCollide;
 
     // View settings
     bool wireFrame = false;
@@ -27,6 +35,8 @@ private:
 
     // OpenGL framebuffer
     unsigned int fbo;
+
+    float physicalUpdateTimer = 0;
 
 public:
     Scene(int windowWidth, int windowHeight);
@@ -45,24 +55,30 @@ public:
     void updateViewport(int width, int height);
 
 public:
-    void addGameObject(GameObject *gameObject);
+    void addGameObject(GameObject* gameObject);
 
-    void translateCamera(const Vector3d &vector3D);
+    void translateCamera(const Vector3d& vector3D);
 
-//    void rotateCamera(Vector3d vector3D, float angle);
+    //    void rotateCamera(Vector3d vector3D, float angle);
 
-    void setCameraPosition(const Vector3d &position);
+    void setCameraPosition(const Vector3d& position);
 
 public:
+    ParticleContactGeneratorRegistry getParticleContactGeneratorRegistry();
+
+    void addParticleCollider(ParticleCollider particleCollider);
+
     unsigned int getFrameBufferId() const;
 
-    std::vector<GameObject *> &getGameObjects();
+    std::vector<GameObject*>& getGameObjects();
 
-    bool *getPtrWireFrameState();
+    bool* getPtrWireFrameState();
 
-    bool *getPtrShowAxis();
+    bool* getPtrShowAxis();
 
-    GameObject *getPtrGameObjectByIndex(int index) const;
+    GameObject* getPtrGameObjectByIndex(int index) const;
+
+    Camera* getCameraPtr();
 };
 
-#endif //SCENE_H
+#endif // SCENE_H

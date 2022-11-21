@@ -18,9 +18,9 @@ It is implemented using Fixed Framerate and Component Oriented Programming.
 
 ## Images
 
-| User Interface view                                                                                                         |
-|-----------------------------------------------------------------------------------------------------------------------------|
-| ![previw_screenshot](https://user-images.githubusercontent.com/59691442/196303021-781cf236-4bab-4523-9f08-2a85c7dd491c.png) |
+| User Interface view                                                                                                          |
+|------------------------------------------------------------------------------------------------------------------------------|
+| ![preview_screenshot](https://user-images.githubusercontent.com/59691442/196303021-781cf236-4bab-4523-9f08-2a85c7dd491c.png) |
 
 [//]: # (|                                                    Mesh view                                                     |                                                  Wireframe view                                                  |)
 
@@ -36,7 +36,7 @@ PLACEHOLDER
 
 ## Report
 
-You can find a journal log [here](report/development_log_MOREL_REBOUL_CLAVEL.pdf).  
+You can find a journal log [here](report/development_log_phase1_REBOUL_CLAVEL_MOREL.pdf).  
 It is also located in the `report` folder.
 
 ## Quickstart
@@ -169,12 +169,12 @@ ParticleEngine
 |  ├── ParticleEngine.cpp
 |  ├── ParticleEngine.h
 ├── test
-|  ├── TestParticule
+|  ├── TestParticle
 │  │   |── *
 |  ├── CMakeLists.txt
 |  ├── integratorTest.cpp
 |  ├── physicHandlerTest.cpp
-|  ├── particuleTest.cpp
+|  ├── particleTest.cpp
 ├── .clang-format
 ├── .editorconfig
 ├── .gitattributes
@@ -188,13 +188,14 @@ ParticleEngine
 
 ## Dependencies
 
-- C++14
+- C++ 14
 - CMake
 - C++ compiler (MSVC, Mingw, ...)
 - Glad
-- GLFW
-- OpenGl 3.3
-- Dear ImGui
+- GLFW (3.3.8)
+- OpenGl (3.3)
+- Dear ImGui (1.88)
+- glm (0.9.8.5)
 
 ## Compilation
 

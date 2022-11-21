@@ -8,12 +8,12 @@
 
 AccessModifierOffset: -4
 AlignAfterOpenBracket: DontAlign
-AllowShortBlocksOnASingleLine: true
+AllowShortBlocksOnASingleLine: Always
 AllowShortFunctionsOnASingleLine: All
 BasedOnStyle: LLVM
 BraceWrapping:
   AfterClass: false    # TODO: verify
-  AfterControlStatement: false    # TODO: verify
+  AfterControlStatement: Always    # TODO: verify
   AfterEnum: false    # TODO: verify
   AfterFunction: false    # TODO: verify
   AfterNamespace: false    # TODO: verify
@@ -34,7 +34,7 @@ IndentWidth: 4
 MaxEmptyLinesToKeep: 10
 NamespaceIndentation: All
 PointerAlignment: Left
-SortIncludes: false
+#SortIncludes: Never
 SortUsingDeclarations: false
 SpaceAfterCStyleCast: false
 SpaceBeforeAssignmentOperators: true
@@ -44,4 +44,4 @@ SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
 TabWidth: 4
-UseTab: true
+UseTab: Never
