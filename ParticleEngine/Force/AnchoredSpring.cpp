@@ -42,6 +42,16 @@ void AnchoredSpring::addForce(PhysicalComponent *physicalComponent) {
 }
 
 
+Vector3d AnchoredSpring::getForceValue(PhysicalComponent* physicalComponent) {
+    Vector3d pos = physicalComponent->getPosition();
+    float delta = pos.distance(m_anchor);
+    Vector3d F;
+    if (delta > m_restLength) {
+        F = (pos - m_anchor).normalize() * (-m_k) * (delta - m_restLength);
+    }
+    return F;
+}
+
 std::string AnchoredSpring::getName() const {
     return FORCE_TYPE;
 }
@@ -71,7 +81,6 @@ void AnchoredSpring::drawGui(Scene *scene) {
         ImGui::InputFloat("##AnchorRestLengtgh", &m_restLength);
     }
 }
-
 void AnchoredSpring::translate(const Vector3d &translation) {
     m_anchor = m_anchor + translation;
 }

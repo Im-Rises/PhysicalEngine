@@ -39,6 +39,11 @@ public:
 
     virtual void addForce(PhysicalComponent *physicalComponent) = 0;
 
+    virtual Vector3d getForceValue(PhysicalComponent *physicalComponent)
+    {
+        return {0, 0, 0};
+    }
+
     virtual void drawGui(Scene *scene) = 0;
 
     virtual std::string getName() const = 0;

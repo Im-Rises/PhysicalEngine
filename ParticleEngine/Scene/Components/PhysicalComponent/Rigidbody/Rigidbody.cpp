@@ -34,17 +34,11 @@ Rigidbody::~Rigidbody() {
 //}
 
 void Rigidbody::addForceAtBodyPoint(const Vector3d &force, const Vector3d &LocalPoint) {
-    std::cout << "HERE" << std::endl;
-    std::cout << m_gameObject->transform.getRotation() << std::endl;
     m_forceAccum += force;
-
-    std::cout << LocalPoint << std::endl;
-//    m_gameObject->transform.getRotation().rotateByVector(LocalPoint);
-    auto merde = m_gameObject->transform.getRotation();
-    merde.rotateByVector(LocalPoint);
-    m_gameObject->transform.setRotation(merde);
+    auto rotation = m_gameObject->transform.getRotation();
+    rotation.rotateByVector(LocalPoint);
+    m_gameObject->transform.setRotation(rotation);
     m_torqueAccum += m_gameObject->transform.getPosition().cross(force);
-    std::cout << m_gameObject->transform.getRotation() << std::endl;
 }
 
 void Rigidbody::clearAccumulator() {
@@ -62,11 +56,9 @@ void Rigidbody::update(float time) {
         }
 
         for (ForcePoint &forcePoint: pointForceGeneratorsList) {
-//            Vector3d before = m_torqueAccum;
-//            forcePoint.force->addForce(this);
-//            Vector3d forceValue = m_torqueAccum - before;
-//            std::cout << "Force: " << forceValue << std::endl;
-//            addForceAtBodyPoint(forceValue, forcePoint.point);
+            Vector3d forceValue = forcePoint.force->getForceValue(this);
+            m_forceAccum += forceValue;
+            addForceAtBodyPoint(forceValue, forcePoint.point);
         }
     }
 

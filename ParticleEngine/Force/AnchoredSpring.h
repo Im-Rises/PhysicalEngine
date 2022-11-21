@@ -23,6 +23,8 @@ public:
 
     void addForce(PhysicalComponent *physicalComponent) override;
 
+    Vector3d getForceValue(PhysicalComponent *physicalComponent) override;
+
     void drawGui(Scene *scene) override;
 
     void translate(const Vector3d &translation);
