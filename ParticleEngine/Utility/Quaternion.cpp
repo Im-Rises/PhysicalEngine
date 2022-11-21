@@ -1,7 +1,7 @@
 #include "Quaternion.h"
 
 Quaternion::Quaternion() {
-    m_value[0] = 0;
+    m_value[0] = 1;
     m_value[1] = 0;
     m_value[2] = 0;
     m_value[3] = 0;
@@ -104,7 +104,7 @@ void Quaternion::set(int i) {
 
 void Quaternion::rotateByVector(const Vector3d &vector) {
     *this *= Quaternion(vector);
-    normalize();
+//    normalize();
 }
 
 

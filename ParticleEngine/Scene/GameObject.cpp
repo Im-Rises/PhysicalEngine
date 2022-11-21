@@ -93,6 +93,7 @@ void GameObject::update(float deltaTime) {
 }
 
 void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
+
     // Matrix calculations
     auto matrix = transform.getMatrix();
     glm::mat4 model = convertToGlmMat4(matrix);
@@ -101,7 +102,7 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
 //    std::cout << model[1][0] << " " << model[1][1] << " " << model[1][2] << " " << model[1][3] << std::endl;
 //    std::cout << model[2][0] << " " << model[2][1] << " " << model[2][2] << " " << model[2][3] << std::endl;
 //    std::cout << model[3][0] << " " << model[3][1] << " " << model[3][2] << " " << model[3][3] << std::endl;
-//    std::cout << transform.getRotation() << std::endl;
+    std::cout << transform.getRotation() << std::endl;
 
 //    glm::mat4 model = glm::translate(glm::mat4(1.0F),
 //                                     glm::vec3(transform.positionX, transform.positionY, transform.positionZ));
@@ -113,11 +114,11 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
     defaultShader->use();
     defaultShader->setMat4("model", model);
 
-    std::cout << "model: " << std::endl;
-    std::cout << model[0][0] << " " << model[0][1] << " " << model[0][2] << " " << model[0][3] << std::endl;
-    std::cout << model[1][0] << " " << model[1][1] << " " << model[1][2] << " " << model[1][3] << std::endl;
-    std::cout << model[2][0] << " " << model[2][1] << " " << model[2][2] << " " << model[2][3] << std::endl;
-    std::cout << model[3][0] << " " << model[3][1] << " " << model[3][2] << " " << model[3][3] << std::endl;
+//    std::cout << "model: " << std::endl;
+//    std::cout << model[0][0] << " " << model[0][1] << " " << model[0][2] << " " << model[0][3] << std::endl;
+//    std::cout << model[1][0] << " " << model[1][1] << " " << model[1][2] << " " << model[1][3] << std::endl;
+//    std::cout << model[2][0] << " " << model[2][1] << " " << model[2][2] << " " << model[2][3] << std::endl;
+//    std::cout << model[3][0] << " " << model[3][1] << " " << model[3][2] << " " << model[3][3] << std::endl;
 
 //    defaultShader->setMat4("model", model);
     defaultShader->setMat4("view", view);
