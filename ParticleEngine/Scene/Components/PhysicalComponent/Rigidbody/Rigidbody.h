@@ -48,6 +48,8 @@ public:
 
     void drawGui() override;
 
+    void drawGuiForceGeneratorsAtPoint();
+
     std::string getName() const override;
 
     Vector3d getAngularSpeed() const;

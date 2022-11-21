@@ -80,8 +80,68 @@ void Rigidbody::drawGui() {
     ImGui::DragFloat3("##ParticleAngularAcceleration", &angularAcceleration.x, 0.1f, 0.0f, 100.0f);
 
     ImGui::NewLine();
-
+    ImGui::Text("Force Generators");
     PhysicalComponent::drawGuiForceGenerators();
+
+    ImGui::NewLine();
+    ImGui::Text("Force Generators at Point");
+    drawGuiForceGeneratorsAtPoint();
+}
+
+void Rigidbody::drawGuiForceGeneratorsAtPoint() {
+    std::string forcesListText = "Forces list";
+    std::string addForcesText = "Add forces";
+    std::string deleteForcesText = "Delete forces";
+
+    // Forces list and add force
+    ImGuiUtility::AlignForWidth((ImGuiUtility::CalculateTextWidth(forcesListText.c_str()) +
+                                 ImGuiUtility::CalculateTextWidth(addForcesText.c_str()) +
+                                 ImGuiUtility::CalculateTextWidth(deleteForcesText.c_str())));
+
+    // Forces list
+    if (ImGui::Button(forcesListText.c_str())) {
+        ImGui::OpenPopup("RigidbodyForcesList##popup");
+    }
+    if (ImGui::BeginPopup("RigidbodyForcesList##popup")) {
+        if (pointForceGeneratorsList.empty())
+            ImGui::Text("Empty");
+        else
+            for (auto &forceGenerator: pointForceGeneratorsList) {
+                forceGenerator.force->drawGui(m_gameObject->getScenePtr());
+                ImGui::DragFloat3("Point", &forceGenerator.point.x);
+            }
+        ImGui::EndPopup();
+    }
+
+    ImGui::SameLine();
+
+    // Add force
+    if (ImGui::Button(addForcesText.c_str())) {
+        ImGui::OpenPopup("RigidbodyForcesAddForce##popup");
+    }
+    if (ImGui::BeginPopup("RigidbodyForcesAddForce##popup")) {
+        for (auto &forcesName: ForceGenerator::forcesNamesList) {
+            if (ImGui::MenuItem(forcesName)) {
+//                addForceAtBodyPoint(ForceGenerator::createForceGenerator(forcesName, m_gameObject), Vector3d(0, 0, 0));
+            }
+        }
+        ImGui::EndPopup();
+    }
+
+    ImGui::SameLine();
+
+    // Delete force
+    if (ImGui::Button(deleteForcesText.c_str())) {
+        ImGui::OpenPopup("RigidbodyForcesDeleteForce##RigidbodyForcesDeleteForcePopup");
+    }
+    if (ImGui::BeginPopup("RigidbodyForcesDeleteForce##RigidbodyForcesDeleteForcePopup")) {
+        for (auto &forceGenerator: pointForceGeneratorsList) {
+//            if (ImGui::MenuItem(forceGenerator->getName().c_str())) {
+//                deleteForceByClass(forceGenerator);
+//            }
+        }
+        ImGui::EndPopup();
+    }
 }
 
 std::string Rigidbody::getName() const {
