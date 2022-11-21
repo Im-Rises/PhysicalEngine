@@ -32,7 +32,7 @@ void Rigidbody::addForceAtBodyPoint(const Vector3d &force, const Vector3d &Local
     m_forceAccum += force;
     m_gameObject->transform.getRotation().rotateByVector(LocalPoint);
     m_torqueAccum += m_gameObject->transform.getPosition().cross(force);
-    m_torqueAccum = Vector3d(10, 0, 0);
+//    m_torqueAccum = Vector3d(10, 0, 0);
 }
 
 void Rigidbody::clearAccumulator() {
@@ -70,10 +70,6 @@ void Rigidbody::drawGui() {
     // Angular Damping
     ImGui::Text("Angular Damping");
     ImGui::DragFloat("##ParticleAngularDamping", &m_angularDamping, 0.1f, 0.0f, 100.0f);
-
-//    // Torque Accumulator
-//    ImGui::Text("Torque Accumulator");
-//    ImGui::DragFloat3("##ParticleTorqueAccumulator", &m_torqueAccum.x, 0.1f, 0.0f, 100.0f);
 
     // Angular Speed
     ImGui::Text("Angular Speed");

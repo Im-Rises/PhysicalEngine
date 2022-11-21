@@ -123,5 +123,9 @@ Quaternion::~Quaternion() {
     //hdelete[] m_value;
 }
 
+float *Quaternion::getValues() {
+    return m_value;
+}
+
 
 

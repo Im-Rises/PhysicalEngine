@@ -111,7 +111,7 @@ int rotateByVectorTest() {
 }
 
 
-int UpdateByAngularSpeedTest() {
+int updateByAngularSpeedTest() {
     Quaternion q0 = Quaternion(1, 2, 3, 4);
     q0.updateByAngularSpeed(Vector3d(1, 0, 0), 1);
     if (!(q0[0] == 0.0f && q0[1] == 2.5f && q0[2] == 1.0f && q0[3] == 5.5f)) {
@@ -131,7 +131,7 @@ int main() {
     result += normalizeTest();
     result += multTest();
     result += rotateByVectorTest();
-    result += UpdateByAngularSpeedTest();
+    result += updateByAngularSpeedTest();
     if (result == 0)
         std::cout << "All tests passed!\n";
     else

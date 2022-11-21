@@ -34,19 +34,24 @@ void Transform::drawGui() {
         ImGui::EndTable();
     }
     ImGui::Text("Rotation");
-    if (ImGui::BeginTable("TransformRotation", 3)) {
-//        ImGui::TableNextColumn();
-//        ImGui::Text("X:");
-//        ImGui::SameLine();
-//        ImGui::InputFloat("##TransformRotationX", &rotationX);
-//        ImGui::TableNextColumn();
-//        ImGui::Text("Y:");
-//        ImGui::SameLine();
-//        ImGui::InputFloat("##TransformRotationY", &rotationY);
-//        ImGui::TableNextColumn();
-//        ImGui::Text("Z:");
-//        ImGui::SameLine();
-//        ImGui::InputFloat("##TransformRotationZ", &rotationZ);
+    if (ImGui::BeginTable("TransformRotation", 4)) {
+        float *values = rotation.getValues();
+        ImGui::TableNextColumn();
+        ImGui::Text("W:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##TransformRotationA", &values[0]);
+        ImGui::TableNextColumn();
+        ImGui::Text("X:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##TransformRotationB", &values[1]);
+        ImGui::TableNextColumn();
+        ImGui::Text("Y:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##TransformRotationC", &values[2]);
+        ImGui::TableNextColumn();
+        ImGui::Text("Z:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##TransformRotationD", &values[3]);
         ImGui::EndTable();
     }
     ImGui::Text("Scale");

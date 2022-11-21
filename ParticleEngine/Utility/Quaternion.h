@@ -112,6 +112,8 @@ public:
 
 
     ~Quaternion();
+
+    float *getValues();
 };
 
 #endif // !QUATERNION_H
