@@ -280,12 +280,12 @@ void ParticleEngineLauncher::handleGui() {
                 static float t = 0;
                 t += ImGui::GetIO().DeltaTime;
 
-                Particle *particle = nullptr;
+                PhysicalComponent *pPhysicalComponent = nullptr;
                 if (gameObject != nullptr) {
-                    particle = dynamic_cast<Particle *>(gameObject->getComponentByName("Particle"));
+                    gameObject->getComponentByClass(pPhysicalComponent);
                 }
-                if (particle != nullptr) {
-                    Vector3d speed = particle->getLinearSpeed();
+                if (pPhysicalComponent != nullptr) {
+                    Vector3d speed = pPhysicalComponent->getLinearSpeed();
                     rdata1.AddPoint(t, speed.x);
                     rdata2.AddPoint(t, speed.y);
                     rdata3.AddPoint(t, speed.z);

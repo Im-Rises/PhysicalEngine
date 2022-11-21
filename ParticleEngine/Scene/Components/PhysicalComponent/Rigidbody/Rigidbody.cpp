@@ -15,7 +15,7 @@ Rigidbody::Rigidbody(GameObject *gameObject) : Component(gameObject) {
     m_forceAccum = Vector3d(0, 0, 0);
     m_torqueAccum = Vector3d(0, 0, 0);
 
-    pointForceGeneratorsList.emplace_back(ForcePoint{new AnchoredSpring(), Vector3d(20, 0, 0)});
+    pointForceGeneratorsList.emplace_back(ForcePoint{new AnchoredSpring(), Vector3d(5, 0, 0)});
 }
 
 Rigidbody::~Rigidbody() {
@@ -35,6 +35,7 @@ Rigidbody::~Rigidbody() {
 
 void Rigidbody::addForceAtBodyPoint(const Vector3d &force, const Vector3d &LocalPoint) {
     m_forceAccum += force;
+    std::cout << m_gameObject->transform.getRotation() << std::endl;
     m_gameObject->transform.getRotation().rotateByVector(LocalPoint);
     m_torqueAccum += m_gameObject->transform.getPosition().cross(force);
 }
@@ -57,6 +58,7 @@ void Rigidbody::update(float time) {
             Vector3d before = m_forceAccum;
             forcePoint.force->addForce(this);
             Vector3d forceValue = m_forceAccum - before;
+            std::cout << "Force: " << forceValue << std::endl;
             addForceAtBodyPoint(forceValue, forcePoint.point);
         }
     }
@@ -114,7 +116,8 @@ void Rigidbody::drawGuiForceGeneratorsAtPoint() {
                 forceGenerator.force->drawGui(m_gameObject->getScenePtr());
                 ImGui::Text("Point: ");
                 ImGui::SameLine();
-                ImGui::DragFloat3("##RigidbodyAddForcePoint", &forceGenerator.point.x);
+                std::string pointText = "##RigidbodyAddForcePoint" + forceGenerator.force->getName();
+                ImGui::DragFloat3(pointText.c_str(), &forceGenerator.point.x);
             }
         ImGui::EndPopup();
     }
