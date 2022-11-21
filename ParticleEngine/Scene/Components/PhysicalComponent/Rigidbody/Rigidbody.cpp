@@ -14,8 +14,6 @@ Rigidbody::Rigidbody(GameObject *gameObject) : Component(gameObject) {
     m_angularDamping = 0;
     m_forceAccum = Vector3d(0, 0, 0);
     m_torqueAccum = Vector3d(0, 0, 0);
-
-    pointForceGeneratorsList.emplace_back(ForcePoint{new AnchoredSpring(), Vector3d(5, 0, 0)});
 }
 
 Rigidbody::~Rigidbody() {
@@ -179,6 +177,9 @@ void Rigidbody::deleteForceAtPoint(ForceGenerator *forceGenerator) {
             break;
         }
     }
+}
+void Rigidbody::addForceToPointList(ForceGenerator* forceGenerator, const Vector3d& point) {
+    pointForceGeneratorsList.emplace_back(ForcePoint{forceGenerator, point});
 }
 
 
