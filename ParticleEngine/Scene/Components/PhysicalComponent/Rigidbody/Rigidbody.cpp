@@ -66,7 +66,7 @@ void Rigidbody::update(float time) {
 //            forcePoint.force->addForce(this);
 //            Vector3d forceValue = m_torqueAccum - before;
 //            std::cout << "Force: " << forceValue << std::endl;
-            addForceAtBodyPoint(forceValue, forcePoint.point);
+//            addForceAtBodyPoint(forceValue, forcePoint.point);
         }
     }
 
