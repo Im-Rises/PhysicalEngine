@@ -42,7 +42,8 @@ void Rigidbody::addForceAtPoint(const Vector3d& force, const Vector3d worldPoint
 
 void Rigidbody::addForceAtBodyPoint(const Vector3d& force, const Vector3d& LocalPoint) {
     m_forceAccum += force;
-    Vector3d point = m_gameObject->transform.getMatrix().TransformPosition(LocalPoint);
+    //Vector3d point = m_gameObject->transform.getMatrix().TransformPosition(LocalPoint);
+    Vector3d point = LocalPoint;
     m_torqueAccum += point.cross(force);
 }
 
