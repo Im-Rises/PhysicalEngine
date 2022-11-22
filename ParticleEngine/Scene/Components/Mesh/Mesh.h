@@ -2,6 +2,7 @@
 #define MESH_H
 
 #include "../../../Utility/Vector3d.h"
+#include "../../../Utility/Matrix33.h"
 #include "../Component.h"
 #include "../DefaultComponent.h"
 #include <iostream>
@@ -33,6 +34,8 @@ public:
     const bool &getVerticesUseIndices() const;
 
     std::string getName() const override;
+
+    Matrix33 getInertiaTensor(float mass) const;
 
 #pragma endregion
 
