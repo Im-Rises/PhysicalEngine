@@ -3,7 +3,7 @@
 
 struct GLFWwindow;
 
-class ParticleEngineLauncher;
+class PhysicalEngineLauncher;
 
 class InputManager {
 
@@ -19,11 +19,11 @@ public:
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 private:
-    static void keyPressed(GLFWwindow* window, int key, ParticleEngineLauncher* engine);
+    static void keyPressed(GLFWwindow* window, int key, PhysicalEngineLauncher* engine);
 
-    static void keyReleased(GLFWwindow* window, int key, ParticleEngineLauncher* engine);
+    static void keyReleased(GLFWwindow* window, int key, PhysicalEngineLauncher* engine);
 
-    static void keyRepeated(GLFWwindow* window, int key, ParticleEngineLauncher* engine);
+    static void keyRepeated(GLFWwindow* window, int key, PhysicalEngineLauncher* engine);
 
 public:
     static void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);

@@ -1,9 +1,9 @@
 #include "InputManager.h"
 
-#include <iostream>
 #include "GLFW/glfw3.h"
+#include <iostream>
 
-#include "ParticleEngineLauncher.h"
+#include "PhysicalEngineLauncher.h"
 #include "Scene/Scene.h"
 #include "Utility/Vector3d.h"
 
@@ -16,7 +16,7 @@ float InputManager::mouseLastPosY = 0.0;
 float InputManager::movementSpeed = 0.2f;
 
 void InputManager::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-    auto* engine = (ParticleEngineLauncher*)glfwGetWindowUserPointer(window);
+    auto* engine = (PhysicalEngineLauncher*)glfwGetWindowUserPointer(window);
 
     switch (action)
     {
@@ -39,7 +39,7 @@ void InputManager::key_callback(GLFWwindow* window, int key, int scancode, int a
     }
 }
 
-void InputManager::keyPressed(GLFWwindow* window, int key, ParticleEngineLauncher* engine) {
+void InputManager::keyPressed(GLFWwindow* window, int key, PhysicalEngineLauncher* engine) {
     switch (key)
     {
     case GLFW_KEY_ESCAPE: {
@@ -76,10 +76,10 @@ void InputManager::keyPressed(GLFWwindow* window, int key, ParticleEngineLaunche
     }
 }
 
-void InputManager::keyReleased(GLFWwindow* window, int key, ParticleEngineLauncher* engine) {
+void InputManager::keyReleased(GLFWwindow* window, int key, PhysicalEngineLauncher* engine) {
 }
 
-void InputManager::keyRepeated(GLFWwindow* window, int key, ParticleEngineLauncher* engine) {
+void InputManager::keyRepeated(GLFWwindow* window, int key, PhysicalEngineLauncher* engine) {
     Camera* camera = engine->scene->getCameraPtr();
     switch (key)
     {
@@ -106,14 +106,14 @@ void InputManager::keyRepeated(GLFWwindow* window, int key, ParticleEngineLaunch
 }
 
 void InputManager::scroll_callback(GLFWwindow* window, double xOffset, double yOffset) {
-    auto* engine = (ParticleEngineLauncher*)glfwGetWindowUserPointer(window);
+    auto* engine = (PhysicalEngineLauncher*)glfwGetWindowUserPointer(window);
     engine->scene->translateCamera(Vector3d(0, 0, movementSpeed * (float)yOffset));
 }
 
 void InputManager::cursor_position_callback(GLFWwindow* window, double xPos, double yPos) {
     if (mouseRightButtonPressed)
     {
-        auto* engine = (ParticleEngineLauncher*)glfwGetWindowUserPointer(window);
+        auto* engine = (PhysicalEngineLauncher*)glfwGetWindowUserPointer(window);
         Camera* camera = engine->scene->getCameraPtr();
         float xOffset = static_cast<float>(xPos) - mouseLastPosX;
         float yOffset = mouseLastPosY - static_cast<float>(yPos);

@@ -1,7 +1,7 @@
-#include "ParticleEngineLauncher.h"
+#include "PhysicalEngineLauncher.h"
 
 int main() {
-    ParticleEngineLauncher physicalEngine;
+    PhysicalEngineLauncher physicalEngine;
     physicalEngine.start();
     return 0;
 }
