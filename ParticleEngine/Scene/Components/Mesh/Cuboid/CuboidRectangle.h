@@ -4,11 +4,15 @@
 #include "../Mesh.h"
 
 class CuboidRectangle : public Mesh {
+protected:
+    float width;
+    float height;
+    float length;
 
 public:
+    CuboidRectangle(float width, float height, float length);
 
-    CuboidRectangle(float longueur, float hauteur, float profondeur);
-
+    Matrix33 getInertiaTensor(float mass) const override;
 };
 
 #endif // !CUBOID_RECTANGLE_H

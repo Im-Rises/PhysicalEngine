@@ -45,12 +45,3 @@ const bool& Mesh::getVerticesUseIndices() const {
 std::string Mesh::getName() const {
     return COMPONENT_TYPE;
 }
-
-
-
-Matrix33 Mesh::getInertiaTensor(float mass) const {
-    float values[9] = { (1.0f / 12) * mass * (12 * 12 + 4 * 4), 0.0f, 0.0f,
-        0.0f, (1.0f / 12) * mass * (12 * 12 + 4 * 4), 0.0f,
-        0.0f, 0.0f, (1.0f / 12) * mass * (12 * 12 + 4 * 4) };
-    return Matrix33(values);
-}

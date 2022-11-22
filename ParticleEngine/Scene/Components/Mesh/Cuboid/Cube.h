@@ -4,6 +4,8 @@
 #include "CuboidRectangle.h"
 
 class Cube : public CuboidRectangle {
+private:
+    int length;
 
 public:
     Cube(float longueur);
