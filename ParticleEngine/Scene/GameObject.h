@@ -135,6 +135,8 @@ public:
             }
         }
     }
+
+    Mesh* getMesh() const;
 };
 
 
