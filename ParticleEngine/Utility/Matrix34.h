@@ -2,10 +2,10 @@
 #define MATRIX34_H
 
 
-#include "Vector3d.h"
-#include "Quaternion.h"
 #include "Matrix33.h"
 #include "Matrix44.h"
+#include "Quaternion.h"
+#include "Vector3d.h"
 
 class Matrix34 {
 
@@ -13,7 +13,6 @@ private:
     float m_value[12];
 
 public:
-
     /// <summary>
     /// Constructeur avec que de 0 dans la matrice
     /// </summary>
@@ -23,7 +22,7 @@ public:
     /// Constructeur de Matrix Ligne par ligne (0-3) ligne 1 ,(4-7) ligne 2 ...)
     /// </summary>
     /// <param name="values"></param>
-    Matrix34(float values[12]);
+    explicit Matrix34(float values[12]);
 
     /// <summary>
     /// Extrait la matrice 33 en haut à gauche de la matrice de transformation affine soit la matrice de rotation
@@ -36,7 +35,7 @@ public:
     /// </summary>
     /// <param name="rotationMatrix"></param>
     /// <param name="translation"></param>
-    void setFromRotationTranslation(const Matrix33 &rotationMatrix, const Vector3d &translation);
+    void setFromRotationTranslation(const Matrix33& rotationMatrix, const Vector3d& translation);
 
     /// <summary>
     /// énère la matrice 34 à partir de sa matrice de rotation et son vecteur de translation
@@ -44,16 +43,16 @@ public:
     /// <param name="rotationMatrix"></param>
     /// <param name="translation"></param>
     /// <returns></returns>
-    Matrix34 matrix34FromRotationTranslation(const Matrix33 &rotationMatrix, const Vector3d &translation) const;
+    Matrix34 matrix34FromRotationTranslation(const Matrix33& rotationMatrix, const Vector3d& translation) const;
 
     /// <summary>
     /// Produit Matriciel avec la matrice de transposition affine (Mat34-> Mat44 affine)*(Mat34->Mat44 affine)  -> Mat34
     /// </summary>
     /// <param name="other"></param>
     /// <returns></returns>
-    Matrix34 operator*(const Matrix34 &other) const;
+    Matrix34 operator*(const Matrix34& other) const;
 
-    Matrix34 &operator=(const Matrix34 &other);
+    Matrix34& operator=(const Matrix34& other);
 
     /// <summary>
     /// renvoie l'élément ligne i colonne j
@@ -78,7 +77,7 @@ public:
     /// </summary>
     /// <param name="mat44"></param>
     /// <returns></returns>
-    Matrix34 transformationAffineMatrixToMatrix34(const Matrix44 &mat44) const;
+    Matrix34 transformationAffineMatrixToMatrix34(const Matrix44& mat44) const;
 
     /// <summary>
     /// Genere la matrix 44 de transformation affine à partir de *this
@@ -91,7 +90,7 @@ public:
     /// </summary>
     /// <param name="quaternion"></param>
     /// <param name="vec"></param>
-    void setOrientationAndPosition(const Quaternion &quaternion, const Vector3d &translation);
+    void setOrientationAndPosition(const Quaternion& quaternion, const Vector3d& translation);
 
 
     /// <summary>
@@ -99,14 +98,14 @@ public:
     /// </summary>
     /// <param name="vec"></param>
     /// <returns></returns>
-    Vector3d TransformPosition(const Vector3d vec) const;
+    Vector3d transformPosition(Vector3d vec) const;
 
     /// <summary>
     /// Effectue un changement de base d'un vecteur suivant la matrice de Transformation this en ignorant la translation
     /// </summary>
     /// <param name="vec"></param>
     /// <returns></returns>
-    Vector3d TransformDirection(const Vector3d vec) const;
+    Vector3d transformDirection(Vector3d vec) const;
 
 
     ~Matrix34();

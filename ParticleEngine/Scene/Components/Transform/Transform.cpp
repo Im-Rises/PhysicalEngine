@@ -1,7 +1,7 @@
 #include "Transform.h"
 
-#include "imgui/imgui.h"
 #include "../../../Utility/Vector3d.h"
+#include "imgui/imgui.h"
 
 Transform::Transform() {
     positionX = 0;
@@ -13,12 +13,12 @@ Transform::Transform() {
 }
 
 Transform::~Transform() {
-
 }
 
 void Transform::drawGui() {
     ImGui::Text("Position");
-    if (ImGui::BeginTable("TransformPosition", 3)) {
+    if (ImGui::BeginTable("transformPosition", 3))
+    {
         ImGui::TableNextColumn();
         ImGui::Text("X:");
         ImGui::SameLine();
@@ -34,8 +34,9 @@ void Transform::drawGui() {
         ImGui::EndTable();
     }
     ImGui::Text("Rotation");
-    if (ImGui::BeginTable("TransformRotation", 4)) {
-        float *values = rotation.getValues();
+    if (ImGui::BeginTable("TransformRotation", 4))
+    {
+        float* values = rotation.getValues();
         ImGui::TableNextColumn();
         ImGui::Text("W:");
         ImGui::SameLine();
@@ -55,7 +56,8 @@ void Transform::drawGui() {
         ImGui::EndTable();
     }
     ImGui::Text("Scale");
-    if (ImGui::BeginTable("TransformScale", 3)) {
+    if (ImGui::BeginTable("TransformScale", 3))
+    {
         ImGui::TableNextColumn();
         ImGui::Text("X:");
         ImGui::SameLine();
@@ -78,17 +80,17 @@ void Transform::setPosition(float x, float y, float z) {
     positionZ = z;
 }
 
-void Transform::setPosition(const Vector3d &position) {
+void Transform::setPosition(const Vector3d& position) {
     positionX = position.getx();
     positionY = position.gety();
     positionZ = position.getz();
 }
 
 Vector3d Transform::getPosition() const {
-    return {positionX, positionY, positionZ};
+    return { positionX, positionY, positionZ };
 }
 
-void Transform::setRotation(const Quaternion &rotation) {
+void Transform::setRotation(const Quaternion& rotation) {
     this->rotation = rotation;
 }
 
