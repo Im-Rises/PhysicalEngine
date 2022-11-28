@@ -16,22 +16,38 @@ It is implemented using Fixed Framerate and Component Oriented Programming.
 > **Note**  
 > The project is a work in progress and is not yet complete.
 
+## Features
+
+### Physics features
+
+- [x] Basic object types (Sphere, Cube, Cylinder, Plane)
+- [x] Particle and Rigid Body Physics
+- [x] Collision Detection
+- [x] Forces (Gravity, Drag, Spring, Buoyancy)
+- [x] Torque forces (Angular Drag, Angular Spring)
+- [x] Different types of constraints
+
+### User Interface features
+
+- [x] Camera Controls
+- [x] GameObjects Inspector
+- [x] Scene Hierarchy
+
+### Other features
+
+- [x] Basic ECS (Entity Component System)
+- [x] Component Oriented Programming
+- [x] Fixed Framerate
+- [x] GameObject's speed Graph visualization
+
 ## Images
 
-| User Interface view                                                                                                          |
-|------------------------------------------------------------------------------------------------------------------------------|
-| ![preview_screenshot](https://user-images.githubusercontent.com/59691442/196303021-781cf236-4bab-4523-9f08-2a85c7dd491c.png) |
-
-[//]: # (|                                                    Mesh view                                                     |                                                  Wireframe view                                                  |)
-
-[//]: # (|:----------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------:|)
-
-[//]: # (| ![image1]&#40;https://user-images.githubusercontent.com/59691442/192190493-f1191715-268e-43e4-8f27-5ed0c2823dfa.png&#41; | ![image2]&#40;https://user-images.githubusercontent.com/59691442/192190499-457463ae-7a34-432a-bb0b-063771021275.png&#41; |)
+![RigidBodyImage](https://user-images.githubusercontent.com/59691442/204342827-5407dc9f-c05e-4a26-b513-b37ce5ab7d14.png)
 
 <!--
-## Videos
-
-PLACEHOLDER
+![preview_screenshot](https://user-images.githubusercontent.com/59691442/196303021-781cf236-4bab-4523-9f08-2a85c7dd491c.png)
+![image1](https://user-images.githubusercontent.com/59691442/192190493-f1191715-268e-43e4-8f27-5ed0c2823dfa.png)
+![image2](https://user-images.githubusercontent.com/59691442/192190499-457463ae-7a34-432a-bb0b-063771021275.png)
 -->
 
 ## Report
