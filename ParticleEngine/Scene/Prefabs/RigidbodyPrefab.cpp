@@ -13,5 +13,14 @@ RigidbodyPrefab::RigidbodyPrefab(Scene* scene) : GameObject(scene, new CuboidRec
     addComponent(rigidbody);
 }
 
+
+
+RigidbodyPrefab::RigidbodyPrefab(Scene* scene, Mesh* mesh) : GameObject(scene, mesh) {
+    gameObjectName = "Rigidbody";
+    auto* rigidbody = new Rigidbody(this);
+    addComponent(rigidbody);
+}
+
+
 RigidbodyPrefab::~RigidbodyPrefab() {
 }

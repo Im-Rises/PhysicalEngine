@@ -11,6 +11,8 @@ private:
 public:
     explicit RigidbodyPrefab(Scene *scene);
 
+    RigidbodyPrefab(Scene *scene, Mesh *mesh);
+
     ~RigidbodyPrefab();
 };
 

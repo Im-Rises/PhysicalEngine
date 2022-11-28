@@ -1,6 +1,7 @@
 #include "Game.h"
 
 #include "Force/Spring.h"
+#include "Scene/Components/Mesh/Cylinder/Cylinder.h"
 #include "Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "Scene/GameObject.h"
 #include "Scene/Prefabs/ParticlePrefab.h"
@@ -30,7 +31,7 @@ void Game::start(Scene* s) {
     rigidbodyPrefab->getComponentByClass(rigidbody);
     rigidbody->addForceToPointList(new AnchoredSpring(Vector3d(0, 12, 0), 3, 3), Vector3d(5, 0, 0));
 
-    auto* rigidbodyPrefab2 = new RigidbodyPrefab(scene);
+    auto* rigidbodyPrefab2 = new RigidbodyPrefab(scene, new Cylinder(10, 18, 10));
     rigidbodyPrefab2->transform.positionX = -20;
     scene->addGameObject(rigidbodyPrefab2);
     Rigidbody* rigidbody2;
