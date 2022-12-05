@@ -128,6 +128,8 @@ PhysicalEngineLauncher::PhysicalEngineLauncher() {
 
     // Bind default frame buffer
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    glEnable(GL_DEPTH_TEST); // Enable depth testing
 }
 
 PhysicalEngineLauncher::~PhysicalEngineLauncher() {
@@ -431,7 +433,6 @@ void PhysicalEngineLauncher::updateScreen() {
         scene->draw(display_w, display_h);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
-
     // Swap buffers
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     glfwSwapBuffers(window);
@@ -439,7 +440,7 @@ void PhysicalEngineLauncher::updateScreen() {
 
 void PhysicalEngineLauncher::clearScreen() {
     glClearColor(backgroundColor[0], backgroundColor[1], backgroundColor[2], backgroundColor[3]);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // also clear the depth buffer now!
 }
 
 void PhysicalEngineLauncher::updateViewport(int width, int height) {
