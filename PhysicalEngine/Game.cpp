@@ -5,6 +5,7 @@
 #include "Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "Scene/GameObject.h"
 #include "Scene/Prefabs/ParticlePrefab.h"
+#include "Scene/Prefabs/PlanePrefab.h"
 #include "Scene/Prefabs/RigidbodyPrefab.h"
 #include "Scene/Scene.h"
 
@@ -39,6 +40,10 @@ void Game::start(Scene* s) {
     auto* spring = new Spring(nullptr, 3, 3);
     rigidbody2->addForceToPointList(spring, Vector3d(5, 0, 0));
     spring->setOtherGameObject(rigidbody->getGameObject());
+
+    /* Plan Generation */
+    auto* plan = new PlanePrefab(scene, 100, 100);
+    scene->addGameObject(plan);
 }
 
 void Game::goLeft() {

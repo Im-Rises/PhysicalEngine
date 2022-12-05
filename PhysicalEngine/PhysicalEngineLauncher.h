@@ -13,7 +13,7 @@
 
 #define PROJECT_GITHUB "https://github.com/Im-Rises/ParticleEngine"
 
-#define WINDOW_WIDTH 1580
+#define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
 
 #define CONSOLE_BUFFER_SIZE 1024
