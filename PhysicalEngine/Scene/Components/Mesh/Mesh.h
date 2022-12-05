@@ -5,6 +5,7 @@
 #include "../../../Utility/Vector3d.h"
 #include "../Component.h"
 #include "../DefaultComponent.h"
+#include "glm/vec4.hpp"
 #include <iostream>
 #include <vector>
 
@@ -19,6 +20,8 @@ protected:
     std::vector<unsigned int> indices;
     std::vector<float> normals;
     bool verticesUseIndices = true;
+
+    glm::vec4 color = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
 
 public:
     void drawGui() override;
@@ -36,6 +39,10 @@ public:
     std::string getName() const override;
 
     virtual Matrix33 getInertiaTensor(float mass) const = 0;
+
+    glm::vec4 getColor() const;
+
+    void setColor(glm::vec4 color);
 
 #pragma endregion
 };

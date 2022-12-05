@@ -110,7 +110,8 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
     defaultShader->setMat4("model", model);
     defaultShader->setMat4("view", view);
     defaultShader->setMat4("projection", projection);
-    defaultShader->setVec4("color", color);
+    //    defaultShader->setVec4("color", color);
+    defaultShader->setVec4("color", mesh->getColor());
 
     // Handle the VAO, VBO and EBO depending on the mesh type (with or without indices)
     glBindVertexArray(VAO);

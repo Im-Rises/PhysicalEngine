@@ -11,6 +11,8 @@ Cylinder::Cylinder(float radius, float height, int rings) {
 
     generatePointsNormales(radius, height, rings);
     generateTriangles(radius, height, rings);
+
+    color = glm::vec4(0.0f, 0.5f, 1.0f, 1.0f);
 }
 
 // Cylinder::Cylinder(float radius, float height) {
@@ -91,7 +93,8 @@ void Cylinder::generatePointsNormales(float radius, float height, int rings) {
 
     float step = 2 * M_PI / rings;
     float angle = 0;
-    for (int i = 0; i < rings; i++) {
+    for (int i = 0; i < rings; i++)
+    {
         float x = r2 * std::cos(angle);
         float y = r2 * std::sin(angle);
         vertices.push_back(x);
@@ -104,11 +107,11 @@ void Cylinder::generatePointsNormales(float radius, float height, int rings) {
     }
     for (auto& normalized : vertices)
         normals.push_back(normalized / r2);
-
 }
 void Cylinder::generateTriangles(float radius, float height, int rings) {
 
-    for (int i = 0; i < rings; i++) {
+    for (int i = 0; i < rings; i++)
+    {
         int next = (i + 1) % rings;
         indices.push_back(i * 2);
         indices.push_back(i * 2 + 1);
@@ -117,7 +120,8 @@ void Cylinder::generateTriangles(float radius, float height, int rings) {
         indices.push_back(next * 2 + 1);
         indices.push_back(next * 2);
     }
-    for (int i = 0; i < rings; i++) {
+    for (int i = 0; i < rings; i++)
+    {
         int next = (i + 1) % rings;
         indices.push_back(i * 2);
         indices.push_back(i * 2 + 1);
@@ -126,5 +130,4 @@ void Cylinder::generateTriangles(float radius, float height, int rings) {
         indices.push_back(next * 2 + 1);
         indices.push_back(rings * 2 + 1);
     }
-
 }

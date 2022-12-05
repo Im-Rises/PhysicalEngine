@@ -45,3 +45,9 @@ const bool& Mesh::getVerticesUseIndices() const {
 std::string Mesh::getName() const {
     return COMPONENT_TYPE;
 }
+glm::vec4 Mesh::getColor() const {
+    return color;
+}
+void Mesh::setColor(glm::vec4 color) {
+    this->color = color;
+}

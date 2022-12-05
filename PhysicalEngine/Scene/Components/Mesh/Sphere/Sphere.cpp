@@ -50,6 +50,7 @@ void Sphere::generatePointsNormales(float radius, int rings, int sectors) {
             */
         }
     }
+    color = glm::vec4(1.0f, 0.5f, 0.5f, 1.0f);
 }
 
 void Sphere::generateTriangles(float radius, int rings, int sectors) {

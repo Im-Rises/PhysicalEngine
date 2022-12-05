@@ -59,6 +59,8 @@ CuboidRectangle::CuboidRectangle(float width, float height, float length) {
         7, 2, 6,
         7, 2, 3
     };
+
+    color = glm::vec4(0.1f, 0.8f, 0.0f, 1.0f);
 }
 Matrix33 CuboidRectangle::getInertiaTensor(float mass) const {
     float values[9] = { (1.0f / 12) * mass * (height * height + length * length), 0.0f, 0.0f,
