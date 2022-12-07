@@ -202,7 +202,7 @@ void GameObject::deleteComponentByName(const std::string& name) {
         if ((*it)->getName() == name)
         {
             components.erase(it);
-            delete *it;
+            //            delete *it;
             return;
         }
     }

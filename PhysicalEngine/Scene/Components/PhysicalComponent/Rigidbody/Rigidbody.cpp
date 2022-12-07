@@ -56,7 +56,7 @@ void Rigidbody::clearAccumulator() {
 
 void Rigidbody::update(float time) {
     // Update sum of forces
-    if (isKinematic)
+    if (!isKinematic)
     {
         gravity.addForce(this);
 
@@ -103,19 +103,6 @@ void Rigidbody::calculateDerivedData() {
         std::cerr << "No mesh found for rigidbody" << std::endl;
         m_inertiaTensor = Matrix33();
     }
-
-    // set inertia -> m_inertiaTensor = dépend de Sphère/cube/cylindre
-
-    //    // Cube:
-    //    float values[9] = { (1.0f / 12) * m_mass * (12 * 12 + 4 * 4), 0.0f, 0.0f,
-    //        0.0f, (1.0f / 12) * m_mass * (12 * 12 + 4 * 4), 0.0f,
-    //        0.0f, 0.0f, (1.0f / 12) * m_mass * (12 * 12 + 4 * 4) };
-    //    Matrix33 matrix(values);
-    //    m_inertiaTensor = matrix;
-    //
-    //    // Cylindre:
-    //
-    //    // Sphère:
 }
 
 void Rigidbody::calculateSpeed(float time) {

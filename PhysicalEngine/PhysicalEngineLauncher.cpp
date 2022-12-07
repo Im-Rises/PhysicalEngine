@@ -361,15 +361,31 @@ void PhysicalEngineLauncher::handleGui() {
                 ImGui::NewLine();
                 if (ImGuiUtility::ButtonCenteredOnLine("Add component", 0.5f))
                 {
-                    ImGui::OpenPopup("Add component##ComponentPopup");
+                    ImGui::OpenPopup("Add component##AddComponentPopup");
                 }
-                if (ImGui::BeginPopup("Add component##ComponentPopup"))
+                if (ImGui::BeginPopup("Add component##AddComponentPopup"))
                 {
                     for (auto& componentName : Component::componentsNamesList)
                     {
                         if (ImGui::MenuItem(componentName))
                         {
                             gameObject->addComponentByName(componentName);
+                        }
+                    }
+                    ImGui::EndPopup();
+                }
+                ImGui::NewLine();
+                if (ImGuiUtility::ButtonCenteredOnLine("Delete component", 0.5f))
+                {
+                    ImGui::OpenPopup("Delete component##DeleteComponentPopup");
+                }
+                if (ImGui::BeginPopup("Delete component##DeleteComponentPopup"))
+                {
+                    for (auto& component : gameObject->getComponents())
+                    {
+                        if (ImGui::MenuItem(component->getName().c_str()))
+                        {
+                            gameObject->deleteComponentByName(component->getName());
                         }
                     }
                     ImGui::EndPopup();

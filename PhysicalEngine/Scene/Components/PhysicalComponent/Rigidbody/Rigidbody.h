@@ -21,7 +21,6 @@ private:
     static constexpr const char* COMPONENT_TYPE = RIGIDBODY_COMPONENT;
 
 protected:
-    float m_mass;
     Vector3d m_speed;
     Vector3d m_acceleration;
     Vector3d m_rotation;

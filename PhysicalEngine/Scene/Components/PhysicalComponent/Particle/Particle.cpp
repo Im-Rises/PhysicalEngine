@@ -1,23 +1,23 @@
 #include "Particle.h"
 
-#include "imgui/imgui.h"
-#include "../../../GameObject.h"
 #include "../../../../Utility/imGuiUtility.h"
+#include "../../../GameObject.h"
+#include "imgui/imgui.h"
 #include <algorithm>
 
-Particle::Particle(GameObject *gameObject) : Component(gameObject) {
-    linearSpeed = {0, 0, 0};
-    linearAcceleration = {0, 0, 0};
+Particle::Particle(GameObject* gameObject) : Component(gameObject) {
+    linearSpeed = { 0, 0, 0 };
+    linearAcceleration = { 0, 0, 0 };
     m_mass = 1;
 }
 
-Particle::Particle(GameObject *gameObject, float m) : Component(gameObject) {
-    linearSpeed = {0, 0, 0};
-    linearAcceleration = {0, 0, 0};
+Particle::Particle(GameObject* gameObject, float m) : Component(gameObject) {
+    linearSpeed = { 0, 0, 0 };
+    linearAcceleration = { 0, 0, 0 };
     m_mass = m;
 }
 
-Particle::Particle(const Particle &particle) : Component(particle.m_gameObject) {
+Particle::Particle(const Particle& particle) : Component(particle.m_gameObject) {
     linearAcceleration = Vector3d(particle.linearAcceleration);
     linearSpeed = Vector3d(particle.linearSpeed);
     m_gameObject->transform.setPosition(particle.m_gameObject->transform.getPosition());
@@ -25,17 +25,20 @@ Particle::Particle(const Particle &particle) : Component(particle.m_gameObject) 
 }
 
 Particle::~Particle() {
-    for (auto &force: forceGeneratorsList) {
+    for (auto& force : forceGeneratorsList)
+    {
         delete force;
     }
 }
 
 void Particle::update(float deltaTime) {
     // Update sum of forces
-    if (isKinematic) {
+    if (!isKinematic)
+    {
         gravity.addForce(this);
 
-        for (ForceGenerator *forceGenerator: forceGeneratorsList) {
+        for (ForceGenerator* forceGenerator : forceGeneratorsList)
+        {
             forceGenerator->addForce(this);
         }
     }
@@ -48,9 +51,9 @@ void Particle::update(float deltaTime) {
     m_forceAccum = Vector3d();
 }
 
-//float Particle::distance(const Particle& p) {
-//    return (m_gameObject->transform.getPosition() - p.getPosition()).norm();
-//}
+// float Particle::distance(const Particle& p) {
+//     return (m_gameObject->transform.getPosition() - p.getPosition()).norm();
+// }
 
 // void Particle::calculatePosition(float time) {
 //     m_gameObject->transform.setPosition(m_gameObject->transform.getPosition() + linearSpeed * time);
