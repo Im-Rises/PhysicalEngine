@@ -3,11 +3,7 @@
 
 #include "../../Component.h"
 
-#define RIGIDBODY_PRIMITIVE_COLLIDER "RigidbodyPrimitiveCollider"
-
-#define RIGIDBODY_PLANE_COLLIDER "RigidbodyPlaneCollider"
-#define RIGIDBODY_SPHERE_COLLIDER "RigidbodySphereCollider"
-#define RIGIDBODY_CUBOID_RECTANGLE_COLLIDER "RigidbodyCuboidRectangleCollider"
+#define RIGIDBODY_PRIMITIVE_COLLIDER "RigidbodyPrimitiveColliderComponent"
 
 class RigidbodyPrimitiveCollider : public Component {
 public:

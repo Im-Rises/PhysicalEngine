@@ -8,6 +8,10 @@
 #define PARTICLE_COMPONENT "Particle"
 //#define COLLIDER_COMPONENT "Collider"
 
+#define RIGIDBODY_PLANE_COLLIDER "RigidbodyPlaneColliderComponent"
+#define RIGIDBODY_SPHERE_COLLIDER "RigidbodySphereColliderComponent"
+#define RIGIDBODY_CUBOID_RECTANGLE_COLLIDER "RigidbodyCuboidRectangleColliderComponent"
+
 class GameObject;
 
 class Component {

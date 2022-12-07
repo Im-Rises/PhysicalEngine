@@ -15,3 +15,6 @@ void RigidbodySphereCollider::drawGui() {
 std::string RigidbodySphereCollider::getName() const {
     return this->COMPONENT_TYPE;
 }
+float RigidbodySphereCollider::getRadius() const {
+    return m_radius;
+}

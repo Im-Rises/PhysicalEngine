@@ -15,6 +15,9 @@ public:
 
 private:
     static constexpr const char* COMPONENT_TYPE = RIGIDBODY_SPHERE_COLLIDER;
+
+public:
+    float getRadius() const;
 };
 
 

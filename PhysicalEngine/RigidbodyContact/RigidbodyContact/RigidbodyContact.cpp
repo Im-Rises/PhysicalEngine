@@ -1,6 +1,8 @@
 #include "RigidbodyContact.h"
 
-RigidbodyContact::RigidbodyContact(Rigidbody* rb1, Rigidbody* rb2, float collision_elasticity, float penetration, Vector3d contactNormal) {
+RigidbodyContact::RigidbodyContact(Rigidbody* rb1, Rigidbody* rb2) {
+    m_rigidbodies[0] = rb1;
+    m_rigidbodies[1] = rb2;
 }
 
 void RigidbodyContact::resolveContact() {
