@@ -1,3 +1,4 @@
+/*
 #include "Collider.h"
 
 #include "imgui/imgui.h"
@@ -53,3 +54,4 @@ void Collider::drawGui() {
 std::string Collider::getName() const {
     return COMPONENT_TYPE;
 };
+*/

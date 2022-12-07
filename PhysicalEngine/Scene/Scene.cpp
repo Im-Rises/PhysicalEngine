@@ -1,13 +1,12 @@
 #include "Scene.h"
 
-#include "GameObject.h"
-#include "Components/Mesh/Mesh.h"
 #include "Components/Mesh/Cuboid/Cube.h"
 #include "Components/Mesh/Cuboid/CuboidRectangle.h"
+#include "Components/Mesh/Mesh.h"
 #include "Components/Mesh/Sphere/Sphere.h"
-#include "glad/glad.h"
 #include "Components/PhysicalComponent/Particle/Particle.h"
-#include "Components/Collider/Collider.h"
+#include "GameObject.h"
+#include "glad/glad.h"
 
 Scene::Scene(int windowWidth, int windowHeight) : particleCollide(1) {
     this->windowWidth = windowWidth;

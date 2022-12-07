@@ -1,3 +1,4 @@
+/*
 #ifndef COLLIDER_H
 #define COLLIDER_H
 
@@ -36,3 +37,4 @@ public:
 
 
 #endif //COLLIDER_H
+*/

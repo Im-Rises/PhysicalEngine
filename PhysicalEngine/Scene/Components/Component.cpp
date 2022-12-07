@@ -1,11 +1,12 @@
 #include "Component.h"
-#include "Collider/Collider.h"
+//#include "Collider/Collider.h"
 #include "PhysicalComponent/Particle/Particle.h"
 #include "PhysicalComponent/Rigidbody/Rigidbody.h"
 
 #include <iostream>
 
-const char* Component::componentsNamesList[] = { RIGIDBODY_COMPONENT, PARTICLE_COMPONENT, COLLIDER_COMPONENT };
+const char* Component::componentsNamesList[] = { RIGIDBODY_COMPONENT, PARTICLE_COMPONENT };
+// const char* Component::componentsNamesList[] = { RIGIDBODY_COMPONENT, PARTICLE_COMPONENT, COLLIDER_COMPONENT };
 
 Component::Component(GameObject* gameObject) {
     this->m_gameObject = gameObject;
@@ -33,9 +34,9 @@ Component* Component::createComponent(const std::string& name, GameObject* gameO
             case 1: {
                 return new Particle(gameObject);
             }
-            case 2: {
-                return new Collider(gameObject);
-            }
+                //            case 2: {
+                //                return new Collider(gameObject);
+                //            }
             default: {
                 std::cerr << "Component::createComponent: Unknown component name" << std::endl;
                 return nullptr;
