@@ -44,16 +44,20 @@ It is implemented using Fixed Framerate and Component Oriented Programming.
 
 ![RigidBodyImage](https://user-images.githubusercontent.com/59691442/204342827-5407dc9f-c05e-4a26-b513-b37ce5ab7d14.png)
 
+![screenshot2](https://user-images.githubusercontent.com/59691442/206077820-3edaff06-8d5e-4187-a575-251b4acec8d3.png)
+
 <!--
 ![preview_screenshot](https://user-images.githubusercontent.com/59691442/196303021-781cf236-4bab-4523-9f08-2a85c7dd491c.png)
 ![image1](https://user-images.githubusercontent.com/59691442/192190493-f1191715-268e-43e4-8f27-5ed0c2823dfa.png)
 ![image2](https://user-images.githubusercontent.com/59691442/192190499-457463ae-7a34-432a-bb0b-063771021275.png)
 -->
 
+<!--
 ## Report
 
 You can find a journal log [here](report/development_log_phase1_REBOUL_CLAVEL_MOREL.pdf).  
 It is also located in the `report` folder.
+-->
 
 ## Quickstart
 
