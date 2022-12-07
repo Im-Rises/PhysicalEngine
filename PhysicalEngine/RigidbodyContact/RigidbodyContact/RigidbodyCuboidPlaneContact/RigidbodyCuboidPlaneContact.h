@@ -1,0 +1,11 @@
+#ifndef RIGIDBODYCUBOIDPLANCONTACT_H
+#define RIGIDBODYCUBOIDPLANCONTACT_H
+
+
+
+class RigidbodyCuboidPlaneContact {
+};
+
+
+
+#endif // RIGIDBODYCUBOIDPLANCONTACT_H

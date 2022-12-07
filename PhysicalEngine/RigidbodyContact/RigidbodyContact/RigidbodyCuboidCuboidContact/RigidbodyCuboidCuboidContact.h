@@ -1,0 +1,11 @@
+#ifndef RIGIDBODYCUBOIDCUBOIDCONTACT_H
+#define RIGIDBODYCUBOIDCUBOIDCONTACT_H
+
+
+
+class RigidbodyCuboidCuboidContact {
+};
+
+
+
+#endif // RIGIDBODYCUBOIDCUBOIDCONTACT_H
