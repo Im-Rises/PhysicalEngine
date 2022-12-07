@@ -1,0 +1,11 @@
+#ifndef RIGIDBODYCOLLIDER_H
+#define RIGIDBODYCOLLIDER_H
+
+
+
+class RigidbodyCollider {
+};
+
+
+
+#endif // PHYSICALENGINE_RIGIDBODYCOLLIDER_H
