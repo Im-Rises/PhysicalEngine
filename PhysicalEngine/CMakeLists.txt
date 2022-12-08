@@ -21,3 +21,5 @@ elseif (UNIX)
 else ()
     message(FATAL_ERROR "OS not configured in CMakeLists.txt")
 endif ()
+
+set_property(TARGET ${PROJECT_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")

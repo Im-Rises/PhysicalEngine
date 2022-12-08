@@ -374,12 +374,15 @@ ImPlot:
 Learn OpenGL:  
 <https://learnopengl.com/Getting-started/Hello-Triangle>
 
-Developpez Learn OpenGL (French):  
+Developpez Learn OpenGL (Translated in French):  
 <https://opengl.developpez.com/tutoriels/apprendre-opengl/?page=creer-une-fenetre#L4-5>  
 <https://opengl.developpez.com/tutoriels/opengl-tutorial/>
 
 Sphere OpenGL:  
 <http://www.songho.ca/opengl/gl_sphere.html>
+
+unrealistic.dev (Change CMake working directory):  
+<https://unrealistic.dev/posts/setting-debug-parameters-with-cmake-tools-for-visual-studio>
 
 ## Contributors
 
