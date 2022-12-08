@@ -32,7 +32,6 @@ protected:
 
     Vector3d m_angularSpeed;
     Vector3d m_angularAcceleration;
-    Vector3d m_forceAccum;
     Vector3d m_torqueAccum;
 
     std::vector<ForcePoint> pointForceGeneratorsList;
