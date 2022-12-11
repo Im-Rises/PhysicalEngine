@@ -12,3 +12,10 @@ void RigidbodyCuboidRectangleCollider::drawGui() {
 std::string RigidbodyCuboidRectangleCollider::getName() const {
     return this->COMPONENT_TYPE;
 }
+
+RigidbodyPrimitiveColliderType RigidbodyCuboidRectangleCollider::getColliderType() const {
+    return this->COLLIDER_TYPE;
+}
+Vector3d RigidbodyCuboidRectangleCollider::getNormalVector() const { // TODO: implement this
+    return { 0, 0, 0 };
+}

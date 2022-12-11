@@ -1,17 +1,17 @@
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
 
-#include <string>
+#include "../../../Utility/Matrix34.h"
+#include "../../../Utility/Matrix44.h"
+#include "../../../Utility/Quaternion.h"
 #include "../../../Utility/Vector3d.h"
 #include "../Component.h"
 #include "../DefaultComponent.h"
-#include "../../../Utility/Quaternion.h"
-#include "../../../Utility/Matrix44.h"
-#include "../../../Utility/Matrix34.h"
+#include <string>
 
 class Transform : private DefaultComponent {
 private:
-    static constexpr const char *COMPONENT_TYPE = "Transform";
+    static constexpr const char* COMPONENT_TYPE = "Transform";
 
 public:
     float positionX, positionY, positionZ;
@@ -28,9 +28,9 @@ public:
 
     void setPosition(float x, float y, float z);
 
-    void setPosition(const Vector3d &position);
+    void setPosition(const Vector3d& position);
 
-    void setRotation(const Quaternion &rotation);
+    void setRotation(const Quaternion& rotation);
 
     Quaternion getRotation() const;
 
@@ -39,7 +39,9 @@ public:
     Matrix34 getMatrix() const;
 
     std::string getName() const override;
+
+    //    virtual Vector3d getForward() const =0;
 };
 
 
-#endif //TRANSFORM_H
+#endif // TRANSFORM_H

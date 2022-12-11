@@ -4,25 +4,68 @@
 
 RigidbodyContactGeneratorRegistry::RigidbodyContactGeneratorRegistry() {
 }
-void RigidbodyContactGeneratorRegistry::checkForContact(RigidbodyPrimitiveCollider* rigidbodySphereCollider1, RigidbodyPrimitiveCollider* rigidbodySphereCollider2) {
+void RigidbodyContactGeneratorRegistry::checkForContact(RigidbodyPrimitiveCollider* rpc1, RigidbodyPrimitiveCollider* rpc2) {
     //    calculateContact((RigidbodySphereCollider*)rigidbodySphereCollider1, (RigidbodySphereCollider*)rigidbodySphereCollider2);
 }
 
-void RigidbodyContactGeneratorRegistry::calculateContact(RigidbodySphereCollider* rigidbodySphereCollider1, RigidbodySphereCollider* rigidbodySphereCollider2) {
-    Vector3d position1 = rigidbodySphereCollider1->getGameObject()->transform.getPosition();
-    Vector3d position2 = rigidbodySphereCollider2->getGameObject()->transform.getPosition();
+void RigidbodyContactGeneratorRegistry::calculateContact(RigidbodyPrimitiveCollider* rpc1, RigidbodyPrimitiveCollider* rpc2) {
+    switch (rpc1->getColliderType())
+    {
+        //    case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_NONE:
+        //        std::cerr << "Collision issue, type is NONE" << std::endl;
+        //        break;
+    case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_SPHERE:
+        calculateContactSphere(dynamic_cast<RigidbodySphereCollider*>(rpc1), rpc2);
+        break;
+    case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_BOX:
+        calculateContactCuboid(dynamic_cast<RigidbodyCuboidRectangleCollider*>(rpc1), rpc2);
+        break;
+    case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_PLANE:
+        calculateContactPlane(dynamic_cast<RigidbodyPlaneCollider*>(rpc1), rpc2);
+        break;
+    default:
+        std::cerr << "Collision issue" << std::endl;
+        break;
+    }
+}
 
-    if (pow(position1.distance(position2), 2) < (rigidbodySphereCollider1->getRadius() + rigidbodySphereCollider2->getRadius()))
-        return;
+void RigidbodyContactGeneratorRegistry::calculateContactSphere(RigidbodySphereCollider* rsc1, RigidbodyPrimitiveCollider* rsc2) {
+    switch (rsc2->getColliderType())
+    {
+    case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_SPHERE: {
+        Vector3d position1 = rsc1->getGameObject()->transform.getPosition();
+        auto* otherSphereCollider = dynamic_cast<RigidbodySphereCollider*>(rsc2);
+        Vector3d position2 = otherSphereCollider->getGameObject()->transform.getPosition();
+        if (pow(position1.distance(position2), 2) < (rsc1->getRadius() + otherSphereCollider->getRadius()))
+        {
+            std::cout << "Sphere to sphere contact between " << rsc1->getGameObject()->getName() << " and " << otherSphereCollider->getGameObject()->getName() << std::endl;
+        }
+        break;
+    }
+    case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_PLANE: {
+        auto* planeCollider = dynamic_cast<RigidbodyPlaneCollider*>(rsc2);
 
-    std::cout << "Sphere to sphere contact between " << rigidbodySphereCollider1->getGameObject()->getName() << " and " << rigidbodySphereCollider2->getGameObject()->getName() << std::endl;
+        float distance = planeCollider->getGameObject()->transform.getPosition().dot(planeCollider->getNormalVector()) - rsc1->getRadius();
 
-    // Todo: Create contact
-    //  COLLISION
+        if (distance <= 0)
+        {
+            std::cout << "Sphere to plane contact between " << rsc1->getGameObject()->getName() << " and " << planeCollider->getGameObject()->getName() << std::endl;
+        }
+        break;
+    }
+    case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_BOX: {
+        break;
+    }
+    default:
+        std::cerr << "Collision issue in Sphere collision function" << std::endl;
+        break;
+    }
+}
 
-    //        Rigidbody* rigidbody1 = rigidbodySphereCollider1->getGameObject()->getComponent<Rigidbody>();
-    //        Rigidbody* rigidbody2 = rigidbodySphereCollider2->getGameObject()->getComponent<Rigidbody>();
+void RigidbodyContactGeneratorRegistry::calculateContactCuboid(RigidbodyCuboidRectangleCollider* rcrc1, RigidbodyPrimitiveCollider* rcrc2) {
 
-    //        RigidbodyContact* rigidbodyContact = new RigidbodyContact(rigidbody1, rigidbody2, 0, 0, Vector3d(0, 0, 0));
-    //        rigidbodyContact->resolveContact();
+
+}
+
+void RigidbodyContactGeneratorRegistry::calculateContactPlane(RigidbodyPlaneCollider* rpc1, RigidbodyPrimitiveCollider* rpc2) {
 }
