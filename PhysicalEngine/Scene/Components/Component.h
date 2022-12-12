@@ -16,7 +16,7 @@ class GameObject;
 
 class Component {
 public:
-    static const char* componentsNamesList[2];
+    static const char* componentsNamesList[5];
 
 private:
     static constexpr const char* COMPONENT_TYPE = "Component";

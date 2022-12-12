@@ -1,11 +1,14 @@
 #include "Component.h"
 //#include "Collider/Collider.h"
+#include "Collider/RigidbodyCollider/RigidbodyCuboidRectangleCollider/RigidbodyCuboidRectangleCollider.h"
+#include "Collider/RigidbodyCollider/RigidbodyPlaneCollider/RigidbodyPlaneCollider.h"
+#include "Collider/RigidbodyCollider/RigidbodySphereCollider/RigidbodySphereCollider.h"
 #include "PhysicalComponent/Particle/Particle.h"
 #include "PhysicalComponent/Rigidbody/Rigidbody.h"
 
 #include <iostream>
 
-const char* Component::componentsNamesList[] = { RIGIDBODY_COMPONENT, PARTICLE_COMPONENT };
+const char* Component::componentsNamesList[] = { RIGIDBODY_COMPONENT, PARTICLE_COMPONENT, RIGIDBODY_PLANE_COLLIDER, RIGIDBODY_SPHERE_COLLIDER, RIGIDBODY_CUBOID_RECTANGLE_COLLIDER };
 // const char* Component::componentsNamesList[] = { RIGIDBODY_COMPONENT, PARTICLE_COMPONENT, COLLIDER_COMPONENT };
 
 Component::Component(GameObject* gameObject) {
@@ -34,9 +37,18 @@ Component* Component::createComponent(const std::string& name, GameObject* gameO
             case 1: {
                 return new Particle(gameObject);
             }
-                //            case 2: {
-                //                return new Collider(gameObject);
-                //            }
+            //            case 2: {
+            //                return new Collider(gameObject);
+            //            }
+            case 2: {
+                return new RigidbodyPlaneCollider(gameObject);
+            }
+            case 3: {
+                return new RigidbodySphereCollider(gameObject, 1.0f);
+            }
+            case 4: {
+                return new RigidbodyCuboidRectangleCollider(gameObject, 1.0f, 1.0f, 1.0f);
+            }
             default: {
                 std::cerr << "Component::createComponent: Unknown component name" << std::endl;
                 return nullptr;

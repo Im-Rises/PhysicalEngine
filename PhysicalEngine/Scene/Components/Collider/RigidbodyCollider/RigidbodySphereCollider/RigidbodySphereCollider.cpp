@@ -26,3 +26,6 @@ RigidbodyPrimitiveColliderType RigidbodySphereCollider::getColliderType() const 
 Vector3d RigidbodySphereCollider::getNormalVector() const { // TODO: implement this
     return { 0, 0, 0 };
 }
+void RigidbodySphereCollider::update(float time) {
+
+}

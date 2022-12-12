@@ -19,6 +19,8 @@ public:
 
     Vector3d getNormalVector() const override;
 
+    void update(float time) override;
+
 private:
     static constexpr const char* COMPONENT_TYPE = RIGIDBODY_CUBOID_RECTANGLE_COLLIDER;
 

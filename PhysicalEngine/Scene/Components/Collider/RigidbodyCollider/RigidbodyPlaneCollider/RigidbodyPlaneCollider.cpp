@@ -22,3 +22,6 @@ Vector3d RigidbodyPlaneCollider::getNormalVector() const {
     rotationMatrix.setOrientation(m_gameObject->transform.rotation);
     return rotationMatrix * Vector3d(0, 1, 0);
 }
+void RigidbodyPlaneCollider::update(float time) {
+
+}
