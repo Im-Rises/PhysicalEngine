@@ -82,6 +82,8 @@ public:
     GameObject* getPtrGameObjectByIndex(int index) const;
 
     Camera* getCameraPtr();
+
+    void deleteGameObject(GameObject* gameObject);
 };
 
 #endif // SCENE_H

@@ -4,6 +4,7 @@
 
 RigidbodyContactGeneratorRegistry::RigidbodyContactGeneratorRegistry() {
 }
+
 void RigidbodyContactGeneratorRegistry::checkForContact(RigidbodyPrimitiveCollider* rpc1, RigidbodyPrimitiveCollider* rpc2) {
     //    calculateContact((RigidbodySphereCollider*)rigidbodySphereCollider1, (RigidbodySphereCollider*)rigidbodySphereCollider2);
 }
@@ -11,9 +12,9 @@ void RigidbodyContactGeneratorRegistry::checkForContact(RigidbodyPrimitiveCollid
 void RigidbodyContactGeneratorRegistry::calculateContact(RigidbodyPrimitiveCollider* rpc1, RigidbodyPrimitiveCollider* rpc2) {
     switch (rpc1->getColliderType())
     {
-        //    case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_NONE:
-        //        std::cerr << "Collision issue, type is NONE" << std::endl;
-        //        break;
+    case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_NONE:
+        std::cerr << "Collision issue, type is NONE" << std::endl;
+        break;
     case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_SPHERE:
         calculateContactSphere(dynamic_cast<RigidbodySphereCollider*>(rpc1), rpc2);
         break;
@@ -24,7 +25,7 @@ void RigidbodyContactGeneratorRegistry::calculateContact(RigidbodyPrimitiveColli
         calculateContactPlane(dynamic_cast<RigidbodyPlaneCollider*>(rpc1), rpc2);
         break;
     default:
-        std::cerr << "Collision issue" << std::endl;
+        std::cerr << "Collision issue, unknown collider type" << std::endl;
         break;
     }
 }
@@ -63,8 +64,6 @@ void RigidbodyContactGeneratorRegistry::calculateContactSphere(RigidbodySphereCo
 }
 
 void RigidbodyContactGeneratorRegistry::calculateContactCuboid(RigidbodyCuboidRectangleCollider* rcrc1, RigidbodyPrimitiveCollider* rcrc2) {
-
-
 }
 
 void RigidbodyContactGeneratorRegistry::calculateContactPlane(RigidbodyPlaneCollider* rpc1, RigidbodyPrimitiveCollider* rpc2) {

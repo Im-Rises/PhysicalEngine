@@ -8,7 +8,7 @@
 #include "GameObject.h"
 #include "glad/glad.h"
 
-Scene::Scene(int windowWidth, int windowHeight) : particleCollide(1), octree(RigidbodyContactGeneratorRegistry()){
+Scene::Scene(int windowWidth, int windowHeight) : particleCollide(1), octree(RigidbodyContactGeneratorRegistry()) {
     this->windowWidth = windowWidth;
     this->windowHeight = windowHeight;
     //    gameObjects.push_back(new GameObject(Cube(1)));
@@ -16,8 +16,8 @@ Scene::Scene(int windowWidth, int windowHeight) : particleCollide(1), octree(Rig
     //    gameObjects.push_back(new GameObject(MyCube(1)));
     particleContactGeneratorRegistry.addParticleGenerator(&particleCollide);
 
-    //TODO REGLER LES PARAMETRES DE L'OCTREE
-    // Create Octree
+    // TODO REGLER LES PARAMETRES DE L'OCTREE
+    //  Create Octree
     octree.root = octree.BuildOctree(Vector3d(0, 0, 0), 50, 5);
     create();
 }
@@ -45,7 +45,7 @@ void Scene::create() {
         rbo);
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
         std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);    
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 Scene::~Scene() {
@@ -87,20 +87,20 @@ void Scene::update(float deltaTime) {
     ParticleContact test = particleContacts[0];
     particleContactResolver.resolveContact(particleContacts, particleContactGeneratorRegistry.getSize(), deltaTime);
 
-    //Clean octree
+    // Clean octree
     octree.CleanOctree(octree.root);
-    //Insert all objects
-    for (GameObject* gameObject : gameObjects) 
+    // Insert all objects
+    for (GameObject* gameObject : gameObjects)
     {
         RigidbodyPrimitiveCollider* collider = nullptr;
         gameObject->getComponentByClass(collider);
-        if (collider != nullptr) 
-        {   
+        if (collider != nullptr)
+        {
             Object* obj = new Object{ collider->getCenter(), collider->getRadius(), NULL, collider };
             octree.InsertObject(octree.root, obj);
         }
     }
-    //Test collisions
+    // Test collisions
     octree.TestAllCollisions(octree.root);
 
     //    }
@@ -177,4 +177,14 @@ GameObject* Scene::getPtrGameObjectByIndex(int index) const {
 
 Camera* Scene::getCameraPtr() {
     return &camera;
+}
+void Scene::deleteGameObject(GameObject* gameObject) {
+    for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it)
+    {
+        if (*it == gameObject)
+        {
+            gameObjects.erase(it);
+            break;
+        }
+    }
 }

@@ -258,6 +258,31 @@ void PhysicalEngineLauncher::handleGui() {
                     this->gameObject = scene->getPtrGameObjectByIndex(i);
                 }
             }
+
+            ImGui::NewLine();
+            if (ImGuiUtility::ButtonCenteredOnLine("Create GameObject", 0.5f))
+            {
+                ImGui::OpenPopup("Create GameObject##CreateGameObjectPopup");
+            }
+            if (ImGui::BeginPopup("Create GameObject##CreateGameObjectPopup"))
+            {
+                for (int i = 0; i < scene->getGameObjects().size(); i++)
+                {
+                    //                    if (ImGui::MenuItem(scene->getPtrGameObjectByIndex(i)->getName().c_str()))
+                    //                    {
+                    //                        ImGui::Text("Create game object");
+                    //                        //                        scene->createGameObject(scene->getPtrGameObjectByIndex(i)->getName());
+                    //                    }
+                }
+                ImGui::EndPopup();
+            }
+
+            if (ImGuiUtility::ButtonCenteredOnLine("Delete selected GameObject", 0.5f))
+            {
+                scene->deleteGameObject(gameObject);
+                gameObject = nullptr;
+            }
+
             ImGui::End();
         }
         {
