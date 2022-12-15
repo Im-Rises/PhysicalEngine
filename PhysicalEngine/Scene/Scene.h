@@ -10,6 +10,7 @@
 #include "../Contact/ParticlesContactGeneratorRegistry.h"
 #include "../Contact/ParticleContactResolver.h"
 #include "../Contact/ContactGenerator/ParticleCollide.h"
+#include "../Octree/Octree.h"
 
 #define PHYSIC_UPDATE_PER_SECOND 50
 
@@ -28,6 +29,8 @@ private:
     ParticleContactGeneratorRegistry particleContactGeneratorRegistry = ParticleContactGeneratorRegistry(1000000);
     ParticleContactResolver particleContactResolver = ParticleContactResolver(2000000);
     ParticleCollide particleCollide;
+    Octree octree;
+
 
     // View settings
     bool wireFrame = false;

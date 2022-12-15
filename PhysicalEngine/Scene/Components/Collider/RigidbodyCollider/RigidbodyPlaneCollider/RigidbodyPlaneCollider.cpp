@@ -25,3 +25,8 @@ Vector3d RigidbodyPlaneCollider::getNormalVector() const {
 void RigidbodyPlaneCollider::update(float time) {
 
 }
+
+//TODO IMPLEMENTER PLUS TARD
+float RigidbodyPlaneCollider::getRadius() const {
+    return 0.0f;
+}

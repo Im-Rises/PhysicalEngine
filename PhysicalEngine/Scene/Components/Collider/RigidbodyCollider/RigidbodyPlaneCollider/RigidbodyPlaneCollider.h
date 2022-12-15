@@ -17,6 +17,8 @@ public:
 
     void update(float time) override;
 
+    float getRadius() const override;
+
 private:
     static constexpr const char* COMPONENT_TYPE = RIGIDBODY_PLANE_COLLIDER;
 

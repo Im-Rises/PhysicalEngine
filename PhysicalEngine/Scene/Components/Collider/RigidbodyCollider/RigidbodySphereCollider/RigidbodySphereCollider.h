@@ -25,7 +25,7 @@ private:
     static constexpr const RigidbodyPrimitiveColliderType COLLIDER_TYPE = RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_SPHERE;
 
 public:
-    float getRadius() const;
+    float getRadius() const override;
 };
 
 

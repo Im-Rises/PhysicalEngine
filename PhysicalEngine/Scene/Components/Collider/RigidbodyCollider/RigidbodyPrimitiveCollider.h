@@ -3,6 +3,7 @@
 
 #include "../../../../Utility/Vector3d.h"
 #include "../../Component.h"
+#include "../../../GameObject.h"
 
 #define RIGIDBODY_PRIMITIVE_COLLIDER "RigidbodyPrimitiveColliderComponent"
 
@@ -36,6 +37,10 @@ public:
     virtual RigidbodyPrimitiveColliderType getColliderType() const = 0;
 
     virtual Vector3d getNormalVector() const = 0;
+
+    virtual float getRadius() const = 0;
+
+    Vector3d getCenter();
 
 private:
     static constexpr const char* COMPONENT_TYPE = RIGIDBODY_PRIMITIVE_COLLIDER;

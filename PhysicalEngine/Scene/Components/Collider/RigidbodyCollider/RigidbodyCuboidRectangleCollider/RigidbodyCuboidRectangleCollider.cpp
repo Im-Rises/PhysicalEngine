@@ -34,3 +34,8 @@ Vector3d RigidbodyCuboidRectangleCollider::getNormalVector() const { // TODO: im
 
 void RigidbodyCuboidRectangleCollider::update(float time) {
 }
+
+// TODO IMPLEMENTER PLUS TARD
+float RigidbodyCuboidRectangleCollider::getRadius() const {
+    return 0.0f;
+}
