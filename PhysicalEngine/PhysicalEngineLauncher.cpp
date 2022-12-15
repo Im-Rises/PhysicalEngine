@@ -266,13 +266,13 @@ void PhysicalEngineLauncher::handleGui() {
             }
             if (ImGui::BeginPopup("Create GameObject##CreateGameObjectPopup"))
             {
-                for (int i = 0; i < scene->getGameObjects().size(); i++)
+                for (auto& gameObjType : Mesh::meshNamesList)
                 {
-                    //                    if (ImGui::MenuItem(scene->getPtrGameObjectByIndex(i)->getName().c_str()))
-                    //                    {
-                    //                        ImGui::Text("Create game object");
-                    //                        //                        scene->createGameObject(scene->getPtrGameObjectByIndex(i)->getName());
-                    //                    }
+                    if (ImGui::MenuItem(gameObjType))
+                    {
+                        //                        scene->addGameObject(gameObjType);
+                        //                        scene->createGameObject(scene->getPtrGameObjectByIndex(i)->getName());
+                    }
                 }
                 ImGui::EndPopup();
             }

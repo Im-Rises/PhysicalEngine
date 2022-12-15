@@ -1,8 +1,13 @@
 #include "Mesh.h"
 
+#include "Cuboid/CuboidRectangle.h"
+#include "Cylinder/Cylinder.h"
+#include "Sphere/Sphere.h"
 #include "imgui/imgui.h"
 
 using namespace std;
+
+const char* Mesh::meshNamesList[3] = { MESHTYPE_CYLINDER, MESHTYPE_SPHERE, MESHTYPE_CUBOID_RECTANGLE };
 
 void Mesh::drawGui() {
     ImGui::Text(verticesUseIndices ? "Vertices use indices" : "Vertices don't use indices");

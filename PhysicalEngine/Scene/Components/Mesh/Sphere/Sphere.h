@@ -3,7 +3,12 @@
 
 #include "../Mesh.h"
 
+#define MESHTYPE_SPHERE "Sphere"
+
 class Sphere : public Mesh {
+private:
+    static constexpr const char* MESH_TYPE = MESHTYPE_SPHERE;
+
 private:
     float radius;
 

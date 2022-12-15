@@ -3,7 +3,12 @@
 
 #include "../Mesh.h"
 
+#define MESHTYPE_CYLINDER "Cylinder"
+
 class Cylinder : public Mesh {
+private:
+    static constexpr const char* MESH_TYPE = MESHTYPE_CYLINDER;
+
 private:
     float radius;
     float height;

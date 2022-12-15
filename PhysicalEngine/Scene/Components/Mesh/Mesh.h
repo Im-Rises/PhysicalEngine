@@ -11,9 +11,17 @@
 
 #include <string>
 
+#define MESH_COMPONENT "Mesh"
+
 class Mesh : private DefaultComponent {
 private:
-    static constexpr const char* COMPONENT_TYPE = "Mesh";
+    static constexpr const char* COMPONENT_TYPE = MESH_COMPONENT;
+
+private:
+    static constexpr const char* MESH_TYPE = MESH_COMPONENT;
+
+public:
+    static const char* meshNamesList[3];
 
 protected:
     std::vector<float> vertices;
