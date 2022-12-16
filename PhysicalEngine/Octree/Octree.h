@@ -17,7 +17,7 @@ struct Object {
         Vector3d center; // Center point of octree node
         float halfWidth; // Half the width of the node volume
         Node *pChild[8]; // Pointers to the eight children nodes
-        Object *pObjList; // Linked list of objects contained at this node
+        Object *pObjList = nullptr; // Linked list of objects contained at this node
     };
 
 class Octree {
@@ -33,14 +33,14 @@ public:
     // Preallocates an octree down to a specific depth
     Node* BuildOctree(Vector3d center, float halfWidth, int stopDepth) {
         if (stopDepth < 0)
-            return NULL;
+            return nullptr;
         else
         {
             // Construct and fill in ’root’ of this subtree
             Node* pNode = new Node;
             pNode->center = center;
             pNode->halfWidth = halfWidth;
-            pNode->pObjList = NULL;
+            pNode->pObjList = nullptr;
             // Recursively construct the eight children of the subtree
             Vector3d offset;
             float step = halfWidth * 0.5f;
@@ -57,11 +57,10 @@ public:
 
     //TODO DELETE TOUTE LA LISTE CHAINEE
     void CleanOctree(Node* Tree) {
-        if (Tree == NULL)
+        if (Tree == nullptr)
             return;
         else 
-        {
-            delete Tree->pObjList;
+        {            
             for (int i = 0; i < 8; i++)
             {
                 CleanOctree(Tree->pChild[i]);
