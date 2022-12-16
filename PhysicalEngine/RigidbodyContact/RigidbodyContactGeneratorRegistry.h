@@ -21,11 +21,11 @@ public:
     void calculateContact(RigidbodyPrimitiveCollider* rpc1, RigidbodyPrimitiveCollider* rpc2);
 
 private:
-    void calculateContactSphere(RigidbodySphereCollider* rsc1, RigidbodyPrimitiveCollider* rsc2);
+    void calculateContactSphere(RigidbodySphereCollider* rsc, RigidbodyPrimitiveCollider* other);
 
-    void calculateContactCuboid(RigidbodyCuboidRectangleCollider* rcrc1, RigidbodyPrimitiveCollider* rcrc2);
+    void calculateContactCuboid(RigidbodyCuboidRectangleCollider* rcrc, RigidbodyPrimitiveCollider* other);
 
-    void calculateContactPlane(RigidbodyPlaneCollider* rpc1, RigidbodyPrimitiveCollider* rpc2);
+    void calculateContactPlane(RigidbodyPlaneCollider* rpc, RigidbodyPrimitiveCollider* other);
 };
 
 
