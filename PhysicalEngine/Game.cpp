@@ -16,14 +16,14 @@ Game::~Game() = default;
 void Game::start(Scene* s) {
     this->scene = s;
 
-    /* Particles generation */
-    //    for (int i = 0; i < 20; i++) {
-    //        for (int j = 0; j < 25; ++j) {
-    //            auto *particlePrefabNew = new ParticlePrefab(scene);
-    //            particlePrefabNew->transform.setPosition({(float) i * 2, (float) j * 2, 0});
-    //            scene->addGameObject(particlePrefabNew);
-    //        }
-    //    }
+//    /* Particles generation */
+//        for (int i = 0; i < 20; i++) {
+//            for (int j = 0; j < 25; ++j) {
+//                auto *particlePrefabNew = new ParticlePrefab(scene);
+//                particlePrefabNew->transform.setPosition({(float) i * 2, (float) j * 2, 0});
+//                scene->addGameObject(particlePrefabNew);
+//            }
+//        }
 
     /* Rigidbody generation*/
     auto* rigidbodyPrefab = new RigidbodyPrefab(scene);

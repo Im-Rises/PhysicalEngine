@@ -3,14 +3,14 @@
 
 #include <vector>
 
+#include "../Contact/ContactGenerator/ParticleCollide.h"
+#include "../Contact/ParticleContactResolver.h"
+#include "../Contact/ParticlesContactGeneratorRegistry.h"
+#include "../Octree/Octree.h"
 #include "../Utility/Vector3d.h"
+#include "Axis.h"
 #include "Camera.h"
 #include "PhysicHandler.h"
-#include "Axis.h"
-#include "../Contact/ParticlesContactGeneratorRegistry.h"
-#include "../Contact/ParticleContactResolver.h"
-#include "../Contact/ContactGenerator/ParticleCollide.h"
-#include "../Octree/Octree.h"
 
 #define PHYSIC_UPDATE_PER_SECOND 50
 
@@ -60,11 +60,11 @@ public:
 public:
     void addGameObject(GameObject* gameObject);
 
-    void translateCamera(const Vector3d& vector3D);
+    //    void translateCamera(const Vector3d& vector3D);
 
     //    void rotateCamera(Vector3d vector3D, float angle);
 
-    void setCameraPosition(const Vector3d& position);
+    //    void setCameraPosition(const Vector3d& position);
 
 public:
     ParticleContactGeneratorRegistry getParticleContactGeneratorRegistry();
