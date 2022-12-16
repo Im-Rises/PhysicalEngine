@@ -3,7 +3,12 @@
 
 #include "../Mesh.h"
 
+#define MESHTYPE_SPHERE "Sphere"
+
 class Sphere : public Mesh {
+private:
+    static constexpr const char* MESH_TYPE = MESHTYPE_SPHERE;
+
 private:
     float radius;
 
@@ -13,7 +18,7 @@ private:
     void generateTriangles(float radius, int rings, int sectors);
 
 public:
-    Sphere(float radius, int rings, int sectors);
+    Sphere(float radius = 1, int rings = 16, int sectors = 16);
 
     Matrix33 getInertiaTensor(float mass) const override;
 };

@@ -17,17 +17,17 @@ public:
 
     void checkForContact(RigidbodyPrimitiveCollider* rpc1, RigidbodyPrimitiveCollider* rpc2);
 
-
     void calculateContact(RigidbodyPrimitiveCollider* rpc1, RigidbodyPrimitiveCollider* rpc2);
 
 private:
-    void calculateContactSphere(RigidbodySphereCollider* rsc1, RigidbodyPrimitiveCollider* rsc2);
+    void calculateContactSphere(RigidbodySphereCollider* rsc, RigidbodyPrimitiveCollider* other);
 
-    void calculateContactCuboid(RigidbodyCuboidRectangleCollider* rcrc1, RigidbodyPrimitiveCollider* rcrc2);
+    void calculateContactCuboid(RigidbodyCuboidRectangleCollider* rcrc, RigidbodyPrimitiveCollider* other);
 
-    void calculateContactPlane(RigidbodyPlaneCollider* rpc1, RigidbodyPrimitiveCollider* rpc2);
 
     float distanceToPlane(Vector3d point,RigidbodyPlaneCollider plane);
+    
+    void calculateContactPlane(RigidbodyPlaneCollider* rpc, RigidbodyPrimitiveCollider* other);
 };
 
 

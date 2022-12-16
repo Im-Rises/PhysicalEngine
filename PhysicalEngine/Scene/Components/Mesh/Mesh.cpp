@@ -1,8 +1,17 @@
 #include "Mesh.h"
 
+#include "Cuboid/CuboidRectangle.h"
+#include "Cylinder/Cylinder.h"
+#include "Sphere/Sphere.h"
 #include "imgui/imgui.h"
 
+#include "Cuboid/CuboidRectangle.h"
+#include "Cylinder/Cylinder.h"
+#include "Sphere/Sphere.h"
+
 using namespace std;
+
+const char* Mesh::meshNamesList[3] = { MESHTYPE_CYLINDER, MESHTYPE_SPHERE, MESHTYPE_CUBOID_RECTANGLE };
 
 void Mesh::drawGui() {
     ImGui::Text(verticesUseIndices ? "Vertices use indices" : "Vertices don't use indices");
@@ -50,4 +59,21 @@ glm::vec4 Mesh::getColor() const {
 }
 void Mesh::setColor(glm::vec4 color) {
     this->color = color;
+}
+Mesh* Mesh::createMesh(const char* meshType) {
+    for (int i = 0; i < 3; i++)
+    {
+        if (strcmp(meshType, meshNamesList[i]) == 0)
+        {
+            switch (i)
+            {
+            case 0:
+                return new Cylinder();
+            case 1:
+                return new Sphere();
+            case 2:
+                return new CuboidRectangle();
+            }
+        }
+    }
 }
