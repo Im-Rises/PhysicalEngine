@@ -74,8 +74,8 @@ private:
 
     bool isMinimized() const;
 
-private:
-    void focusCameraOnGameObject();
+    // private:
+    //     void focusCameraOnGameObject();
 };
 
 

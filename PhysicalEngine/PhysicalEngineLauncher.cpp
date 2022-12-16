@@ -86,7 +86,7 @@ PhysicalEngineLauncher::PhysicalEngineLauncher() {
     // Initialize GLFW callbacks
     glfwSetWindowUserPointer(window, this);
     glfwSetKeyCallback(window, InputManager::key_callback);
-    glfwSetScrollCallback(window, InputManager::scroll_callback);
+    //    glfwSetScrollCallback(window, InputManager::scroll_callback);
     glfwSetCursorPosCallback(window, InputManager::cursor_position_callback);
     glfwSetMouseButtonCallback(window, InputManager::mouse_button_callback);
 
@@ -515,9 +515,9 @@ bool PhysicalEngineLauncher::isMinimized() const {
     return (windowWidth == 0 && windowHeight == 0);
 }
 
-void PhysicalEngineLauncher::focusCameraOnGameObject() {
-    if (gameObject != nullptr)
-        scene->setCameraPosition(gameObject->transform.getPosition());
-}
+// void PhysicalEngineLauncher::focusCameraOnGameObject() {
+//     if (gameObject != nullptr)
+//         scene->setCameraPosition(gameObject->transform.getPosition());
+// }
 
 #pragma endregion

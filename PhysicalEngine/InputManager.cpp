@@ -62,10 +62,10 @@ void InputManager::keyPressed(GLFWwindow* window, int key, PhysicalEngineLaunche
         engine->game.goDown();
         break;
     }
-    case GLFW_KEY_F: {
-        engine->focusCameraOnGameObject();
-        break;
-    }
+        //    case GLFW_KEY_F: {
+        //        engine->focusCameraOnGameObject();
+        //        break;
+        //    }
     case GLFW_KEY_F11: {
         engine->toggleFullScreen();
         break;
@@ -105,10 +105,10 @@ void InputManager::keyRepeated(GLFWwindow* window, int key, PhysicalEngineLaunch
     }
 }
 
-void InputManager::scroll_callback(GLFWwindow* window, double xOffset, double yOffset) {
-    auto* engine = (PhysicalEngineLauncher*)glfwGetWindowUserPointer(window);
-    engine->scene->translateCamera(Vector3d(0, 0, movementSpeed * (float)yOffset));
-}
+// void InputManager::scroll_callback(GLFWwindow* window, double xOffset, double yOffset) {
+//     auto* engine = (PhysicalEngineLauncher*)glfwGetWindowUserPointer(window);
+//     engine->scene->translateCamera(Vector3d(0, 0, movementSpeed * (float)yOffset));
+// }
 
 void InputManager::cursor_position_callback(GLFWwindow* window, double xPos, double yPos) {
     if (mouseRightButtonPressed)
