@@ -72,7 +72,7 @@ public:
             */
             
             if (Tree->pObjList != nullptr) {
-                std::cout << Tree->center << std::endl;
+                //std::cout << Tree->center << std::endl;
             }
             Tree->pObjList = nullptr;
             for (int i = 0; i < 8; i++)
@@ -97,7 +97,7 @@ public:
             if (i == 2)
                 delta = pObject->center.getz() - pTree->center.getz();
 
-            if (abs(delta) < pObject->radius && pTree->halfWidth < abs(delta))
+            if (abs(delta) < pObject->radius || pTree->halfWidth < abs(delta)+pObject->radius)
             {
                 straddle = 1;
                 break;
