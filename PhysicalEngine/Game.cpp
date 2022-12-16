@@ -58,13 +58,12 @@ void Game::start(Scene* s) {
     rigidbodyPrefab->addComponent(rigidbodyCuboidRectangleCollider);
 
     auto* rigidbodyPrefab2 = new RigidbodyPrefab(scene);
+    rigidbodyPrefab2->transform.positionX = 20;
     scene->addGameObject(rigidbodyPrefab2);
     Rigidbody* rigidbody2;
     rigidbodyPrefab2->getComponentByClass(rigidbody2);
-    RigidbodySphereCollider* rigidbodySphereCollider = new RigidbodySphereCollider(plan, 1);
-    rigidbodyPrefab->addComponent(rigidbodySphereCollider);
     RigidbodyCuboidRectangleCollider* rigidbodyCuboidRectangleCollider2 = new RigidbodyCuboidRectangleCollider(rigidbodyPrefab2, 10, 10, 10);
-    rigidbodyPrefab->addComponent(rigidbodyCuboidRectangleCollider2);
+    rigidbodyPrefab2->addComponent(rigidbodyCuboidRectangleCollider2);
 }
 
 void Game::goLeft() {

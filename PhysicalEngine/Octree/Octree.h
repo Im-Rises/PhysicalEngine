@@ -1,24 +1,24 @@
 #ifndef OCTREE_H
 #define OCTREE_H
 
-#include "..\Utility\Vector3d.h"
-#include "..\Scene\Components\Collider\RigidbodyCollider\RigidbodyPrimitiveCollider.h"
 #include "..\RigidbodyContact\RigidbodyContactGeneratorRegistry.h"
+#include "..\Scene\Components\Collider\RigidbodyCollider\RigidbodyPrimitiveCollider.h"
+#include "..\Utility\Vector3d.h"
 
 struct Object {
-        Vector3d center; // Center point for object
-        float radius; // Radius of object bounding sphere
-        Object* pNextObject; // Pointer to next object when linked into list
-        RigidbodyPrimitiveCollider* Collider;
-    };
+    Vector3d center;     // Center point for object
+    float radius;        // Radius of object bounding sphere
+    Object* pNextObject; // Pointer to next object when linked into list
+    RigidbodyPrimitiveCollider* Collider;
+};
 
-    //Octree node data structure
-    struct Node {
-        Vector3d center; // Center point of octree node
-        float halfWidth; // Half the width of the node volume
-        Node *pChild[8]; // Pointers to the eight children nodes
-        Object *pObjList = nullptr; // Linked list of objects contained at this node
-    };
+// Octree node data structure
+struct Node {
+    Vector3d center;            // Center point of octree node
+    float halfWidth;            // Half the width of the node volume
+    Node* pChild[8];            // Pointers to the eight children nodes
+    Object* pObjList = nullptr; // Linked list of objects contained at this node
+};
 
 class Octree {
 
@@ -26,7 +26,7 @@ private:
     RigidbodyContactGeneratorRegistry contactRegistry;
 
 public:
-    Octree(RigidbodyContactGeneratorRegistry ContactRegistry); 
+    Octree(RigidbodyContactGeneratorRegistry ContactRegistry);
 
     Node* root;
 
@@ -59,20 +59,19 @@ public:
     void CleanOctree(Node* Tree) {
         if (Tree == nullptr)
             return;
-        else 
-        {            
-            Object* nextObj=Tree->pObjList;
-            while (nextObj != nullptr) {
-                Object* maj =nextObj->pNextObject;
-                delete nextObj;
-                nextObj = maj;
-            }
+        else
+        {
+            //            Object* nextObj=Tree->pObjList;
+            //            while (nextObj != nullptr) {
+            //                Object* maj =nextObj->pNextObject;
+            //                delete nextObj;
+            //                nextObj = maj;
+            //            }
             for (int i = 0; i < 8; i++)
             {
                 CleanOctree(Tree->pChild[i]);
             }
         }
-        
     }
 
     void InsertObject(Node* pTree, Object* pObject) {
@@ -82,7 +81,7 @@ public:
         for (int i = 0; i < 3; i++)
         {
             float delta;
-            if (i==0)
+            if (i == 0)
                 delta = pObject->center.getx() - pTree->center.getx();
             if (i == 1)
                 delta = pObject->center.gety() - pTree->center.gety();
@@ -133,7 +132,7 @@ public:
                         break;
                     // Now perform the collision test between pA and pB in some manner
                     std::cout << "Potentiel collision" << std::endl;
-                    //contactRegistry.calculateContact(pA->Collider, pB->Collider);
+                    // contactRegistry.calculateContact(pA->Collider, pB->Collider);
                 }
             }
         }
@@ -144,7 +143,6 @@ public:
         // Remove current node from ancestor stack before returning
         depth--;
     }
-
 };
 
 
