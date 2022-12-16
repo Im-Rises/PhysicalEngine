@@ -47,17 +47,17 @@ void Game::start(Scene* s) {
 
 
     /* Plane and box collisions*/
-    auto* plan = new PlanePrefab(scene, 100, 100);
+    auto* plan = new PlanePrefab(scene, 10, 10);
     scene->addGameObject(plan);
 
     auto* rigidbodyPrefab = new RigidbodyPrefab(scene);
     scene->addGameObject(rigidbodyPrefab);
-    rigidbodyPrefab->transform.positionX = 30;
-    rigidbodyPrefab->transform.positionY = 30;
-    rigidbodyPrefab->transform.positionZ = 30;
+    //    rigidbodyPrefab->transform.positionX = 0;
+    //    rigidbodyPrefab->transform.positionY = 30;
+    //    rigidbodyPrefab->transform.positionZ = 30;
     Rigidbody* rigidbody;
     rigidbodyPrefab->getComponentByClass(rigidbody);
-    RigidbodyCuboidRectangleCollider* rigidbodyCuboidRectangleCollider = new RigidbodyCuboidRectangleCollider(rigidbodyPrefab, 10, 10, 10);
+    RigidbodyCuboidRectangleCollider* rigidbodyCuboidRectangleCollider = new RigidbodyCuboidRectangleCollider(rigidbodyPrefab, 2, 1, 1);
     rigidbodyPrefab->addComponent(rigidbodyCuboidRectangleCollider);
 
     //    auto* rigidbodyPrefab2 = new RigidbodyPrefab(scene);

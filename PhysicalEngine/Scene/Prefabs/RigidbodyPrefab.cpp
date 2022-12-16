@@ -5,7 +5,7 @@
 #include "../Components/Mesh/Cylinder/Cylinder.h"
 #include "../Components/PhysicalComponent/Rigidbody/Rigidbody.h"
 
-RigidbodyPrefab::RigidbodyPrefab(Scene* scene) : GameObject(scene, new CuboidRectangle(12, 4, 4)) {
+RigidbodyPrefab::RigidbodyPrefab(Scene* scene) : GameObject(scene, new CuboidRectangle(2, 1, 1)) {
     // RigidbodyPrefab::RigidbodyPrefab(Scene* scene) : GameObject(scene, new Cylinder(2, 4, 10)) {
     //  RigidbodyPrefab::RigidbodyPrefab(Scene *scene) : GameObject(scene, new Cube(1)) {
     gameObjectName = "Rigidbody";
