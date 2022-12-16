@@ -18,7 +18,7 @@ Scene::Scene(int windowWidth, int windowHeight) : particleCollide(1), octree(Rig
 
     // TODO REGLER LES PARAMETRES DE L'OCTREE
     //  Create Octree
-    octree.root = octree.BuildOctree(Vector3d(0, 0, 0), 10, 1);
+    octree.root = octree.BuildOctree(Vector3d(0, 0, 0), 10, 6);
     create();
 }
 
@@ -96,7 +96,7 @@ void Scene::update(float deltaTime) {
         gameObject->getComponentByClass(collider);
         if (collider != nullptr)
         {
-            Object* obj = new Object{ collider->getCenter(), collider->getRadius()/5, NULL, collider };
+            Object* obj = new Object{ collider->getCenter(), collider->getRadius(), NULL, collider };
             octree.InsertObject(octree.root, obj);
         }
     }

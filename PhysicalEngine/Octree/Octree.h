@@ -97,7 +97,7 @@ public:
             if (i == 2)
                 delta = pObject->center.getz() - pTree->center.getz();
 
-            if (abs(delta) < pTree->halfWidth + pObject->radius)
+            if (abs(delta) < pObject->radius && pTree->halfWidth < abs(delta))
             {
                 straddle = 1;
                 break;
