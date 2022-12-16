@@ -5,9 +5,9 @@
 
 class RigidbodyCuboidRectangleCollider : public RigidbodyPrimitiveCollider {
 public:
-    float m_width = 0;
-    float m_height = 0;
-    float m_depth = 0;
+    float m_halfwidth = 0;
+    float m_halfheight = 0;
+    float m_halfdepth = 0;
 
     RigidbodyCuboidRectangleCollider(GameObject* gameObject, float width, float height, float depth);
 
