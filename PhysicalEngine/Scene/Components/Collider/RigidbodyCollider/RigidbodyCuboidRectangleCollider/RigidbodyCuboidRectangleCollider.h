@@ -19,6 +19,8 @@ public:
 
     Vector3d getNormalVector() const override;
 
+    void getAllPoint(Vector3d points[8]);
+
     void update(float time) override;
 
     float getRadius() const override;

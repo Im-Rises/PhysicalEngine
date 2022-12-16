@@ -46,9 +46,9 @@ void RigidbodyContactGeneratorRegistry::calculateContactSphere(RigidbodySphereCo
     case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_PLANE: {
         auto* planeCollider = dynamic_cast<RigidbodyPlaneCollider*>(other);
 
-        float distance = distanceToPlane(rsc1->getGameObject()->transform.getPosition(),planeCollider);
+        float distance = distanceToPlane(rsc->getGameObject()->transform.getPosition(),planeCollider);
 
-        if (distance <= 0)
+        if (distance <= rsc->getRadius())
         {
             std::cout << "Sphere to plane contact between " << rsc->getGameObject()->getName() << " and " << planeCollider->getGameObject()->getName() << std::endl;
         }
