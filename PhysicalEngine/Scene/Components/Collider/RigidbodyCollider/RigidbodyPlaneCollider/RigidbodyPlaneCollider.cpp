@@ -4,6 +4,8 @@
 #include "../../../Transform/Transform.h"
 
 RigidbodyPlaneCollider::RigidbodyPlaneCollider(GameObject* gameObject) : RigidbodyPrimitiveCollider(gameObject) {
+    m_width = 1;
+    m_depth = 1;
 }
 
 void RigidbodyPlaneCollider::drawGui() {
@@ -23,10 +25,24 @@ Vector3d RigidbodyPlaneCollider::getNormalVector() const {
     return rotationMatrix * Vector3d(0, 1, 0);
 }
 void RigidbodyPlaneCollider::update(float time) {
-
 }
 
-//TODO IMPLEMENTER PLUS TARD
+// TODO IMPLEMENTER PLUS TARD
 float RigidbodyPlaneCollider::getRadius() const {
     return 0.0f;
+}
+
+float RigidbodyPlaneCollider::getWidth() const {
+    return m_width;
+}
+
+void RigidbodyPlaneCollider::setWidth(float width) {
+    m_width = width;
+}
+float RigidbodyPlaneCollider::getDepth() const {
+    return m_depth;
+}
+
+void RigidbodyPlaneCollider::setDepth(float depth) {
+    m_depth = depth;
 }

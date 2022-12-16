@@ -12,6 +12,7 @@ void RigidbodySphereCollider::drawGui() {
     ImGui::SameLine();
     ImGui::DragFloat("##Radius", &m_radius, 0.1f, 0.0f, 0.0f, "%.1f");
 }
+
 std::string RigidbodySphereCollider::getName() const {
     return this->COMPONENT_TYPE;
 }
@@ -23,9 +24,11 @@ float RigidbodySphereCollider::getRadius() const {
 RigidbodyPrimitiveColliderType RigidbodySphereCollider::getColliderType() const {
     return this->COLLIDER_TYPE;
 }
+
 Vector3d RigidbodySphereCollider::getNormalVector() const { // TODO: implement this
     return { 0, 0, 0 };
 }
+
 void RigidbodySphereCollider::update(float time) {
 
 }

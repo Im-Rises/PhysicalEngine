@@ -4,6 +4,10 @@
 #include "../RigidbodyPrimitiveCollider.h"
 
 class RigidbodyPlaneCollider : public RigidbodyPrimitiveCollider {
+private:
+    float m_width;
+    float m_depth;
+
 public:
     explicit RigidbodyPlaneCollider(GameObject* gameObject);
 
@@ -23,6 +27,15 @@ private:
     static constexpr const char* COMPONENT_TYPE = RIGIDBODY_PLANE_COLLIDER;
 
     static constexpr const RigidbodyPrimitiveColliderType COLLIDER_TYPE = RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_PLANE;
+
+public:
+    float getWidth() const;
+
+    void setWidth(float width);
+
+    float getDepth() const;
+
+    void setDepth(float depth);
 };
 
 
