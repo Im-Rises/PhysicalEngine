@@ -72,6 +72,7 @@ public:
                 CleanOctree(Tree->pChild[i]);
             }
         }
+        
     }
 
     void InsertObject(Node* pTree, Object* pObject) {
@@ -131,7 +132,8 @@ public:
                     if (pA == pB)
                         break;
                     // Now perform the collision test between pA and pB in some manner
-                    contactRegistry.calculateContact(pA->Collider, pB->Collider);
+                    std::cout << "Potentiel collision" << std::endl;
+                    //contactRegistry.calculateContact(pA->Collider, pB->Collider);
                 }
             }
         }
