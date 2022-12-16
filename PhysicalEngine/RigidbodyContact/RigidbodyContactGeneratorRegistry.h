@@ -26,6 +26,8 @@ private:
     void calculateContactCuboid(RigidbodyCuboidRectangleCollider* rcrc1, RigidbodyPrimitiveCollider* rcrc2);
 
     void calculateContactPlane(RigidbodyPlaneCollider* rpc1, RigidbodyPrimitiveCollider* rpc2);
+
+    float distanceToPlane(Vector3d point,RigidbodyPlaneCollider plane);
 };
 
 

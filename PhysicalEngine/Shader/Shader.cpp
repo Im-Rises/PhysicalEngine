@@ -19,9 +19,16 @@ Shader::Shader() {
                               "uniform vec4 color;\n"
                               "out vec4 ourColor;\n"
                               "\n"
+                             // "uniform vec3 pos_lumiere;\n"
+                              //"varying vec3 _d;\n"
+                              //"varying vec3 _n;\n"
                               "void main()\n"
                               "{\n"
-                              "    gl_Position = projection * view * model * vec4(aPos, 1.0f);\n"
+                              "    gl_Position = projection * view * model * vec4(aPos, 1.0f);\n" 
+                              //"    vec4 tpos = model * vec4(apos, 1.0);\n"
+                              //"    vec3 _pos = tpos.xyz / tpos.w;\n"
+                              //"    _d = pos_lumiere - _pos;\n" 
+                              //"    _n = normalMatrix * normal;\n"
                               "    ourColor = color;\n"
                               "}\0";
 

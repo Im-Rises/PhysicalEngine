@@ -10,6 +10,7 @@ const char *Axis::vShaderCode = "#version 330 core\n"
                                 //                                "uniform mat4 model;\n"
                                 //                                "uniform mat4 view;\n"
                                 //                                "uniform mat4 projection;\n"
+                                
                                 "\n"
                                 "void main()\n"
                                 "{\n"
