@@ -18,7 +18,7 @@ Scene::Scene(int windowWidth, int windowHeight) : particleCollide(1), octree(Rig
 
     // TODO REGLER LES PARAMETRES DE L'OCTREE
     //  Create Octree
-    octree.root = octree.BuildOctree(Vector3d(0, 0, 0), 50, 11);
+    octree.root = octree.BuildOctree(Vector3d(0, 0, 0), 50, 6);
     create();
 }
 
