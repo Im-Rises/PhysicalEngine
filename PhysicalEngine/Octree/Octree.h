@@ -61,6 +61,7 @@ public:
             return;
         else
         {
+            /*
             Object* nextObj = Tree->pObjList;
             while (nextObj != nullptr)
             {
@@ -68,10 +69,13 @@ public:
                 delete nextObj;
                 nextObj = maj;
             }
+            */
+            Tree->pObjList = nullptr;
             for (int i = 0; i < 8; i++)
             {
                 CleanOctree(Tree->pChild[i]);
             }
+            
         }
     }
 
