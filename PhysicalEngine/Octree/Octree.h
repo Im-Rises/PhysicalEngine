@@ -89,13 +89,14 @@ public:
         // If straddling any of the dividing x, y, or z planes, exit directly
         for (int i = 0; i < 3; i++)
         {
-            float delta;
+            float delta=0;
             if (i == 0)
                 delta = pObject->center.getx() - pTree->center.getx();
             if (i == 1)
                 delta = pObject->center.gety() - pTree->center.gety();
             if (i == 2)
                 delta = pObject->center.getz() - pTree->center.getz();
+
             if (abs(delta) < pTree->halfWidth + pObject->radius)
             {
                 straddle = 1;

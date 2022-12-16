@@ -52,9 +52,9 @@ void Game::start(Scene* s) {
 
     auto* rigidbodyPrefab = new RigidbodyPrefab(scene);
     scene->addGameObject(rigidbodyPrefab);
-    //    rigidbodyPrefab->transform.positionX = 0;
-    //    rigidbodyPrefab->transform.positionY = 30;
-    //    rigidbodyPrefab->transform.positionZ = 30;
+    rigidbodyPrefab->transform.positionX = -3;
+    rigidbodyPrefab->transform.positionY = 3;
+    rigidbodyPrefab->transform.positionZ = -3;
     Rigidbody* rigidbody;
     rigidbodyPrefab->getComponentByClass(rigidbody);
     RigidbodyCuboidRectangleCollider* rigidbodyCuboidRectangleCollider = new RigidbodyCuboidRectangleCollider(rigidbodyPrefab, 2, 1, 1);
