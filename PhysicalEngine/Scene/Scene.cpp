@@ -126,17 +126,17 @@ void Scene::addGameObject(GameObject* gameObject) {
     gameObjects.push_back(gameObject);
 }
 
-void Scene::translateCamera(const Vector3d& vector3D) {
-    //    camera.translate(vector3D);
-}
+//void Scene::translateCamera(const Vector3d& vector3D) {
+//    //    camera.translate(vector3D);
+//}
 
 // void Scene::rotateCamera(Vector3d vector3D, float angle) {
 //     camera.rotate(vector3D, angle);
 // }
 
-void Scene::setCameraPosition(const Vector3d& position) {
-    //    camera.setPosition(position);
-}
+//void Scene::setCameraPosition(const Vector3d& position) {
+//    //    camera.setPosition(position);
+//}
 
 ParticleContactGeneratorRegistry Scene::getParticleContactGeneratorRegistry() {
     return particleContactGeneratorRegistry;
