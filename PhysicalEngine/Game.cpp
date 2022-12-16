@@ -16,34 +16,55 @@ Game::~Game() = default;
 void Game::start(Scene* s) {
     this->scene = s;
 
-//    /* Particles generation */
-//        for (int i = 0; i < 20; i++) {
-//            for (int j = 0; j < 25; ++j) {
-//                auto *particlePrefabNew = new ParticlePrefab(scene);
-//                particlePrefabNew->transform.setPosition({(float) i * 2, (float) j * 2, 0});
-//                scene->addGameObject(particlePrefabNew);
-//            }
-//        }
+    /* Simple rigidbody */
+    //    auto* rigidbodyPrefab = new RigidbodyPrefab(scene);
+    //    scene->addGameObject(rigidbodyPrefab);
+    //    Rigidbody* rigidbody;
+    //    rigidbodyPrefab->getComponentByClass(rigidbody);
+    //    rigidbody->addForceToPointList(new AnchoredSpring(Vector3d(0, 12, 0), 3, 3), Vector3d(5, 0, 0));
+    //
+    //    auto* rigidbodyPrefab2 = new RigidbodyPrefab(scene, new Cylinder(8, 12, 10));
+    //    rigidbodyPrefab2->transform.positionX = -20;
+    //    scene->addGameObject(rigidbodyPrefab2);
+    //    Rigidbody* rigidbody2;
+    //    rigidbodyPrefab2->getComponentByClass(rigidbody2);
+    //    auto* spring = new Spring(nullptr, 3, 3);
+    //    rigidbody2->addForceToPointList(spring, Vector3d(5, 0, 0));
+    //    spring->setOtherGameObject(rigidbody->getGameObject());
+    //
+    //    auto* plan = new PlanePrefab(scene, 100, 100);
+    //    scene->addGameObject(plan);
 
-    /* Rigidbody generation*/
+
+    /* Particles collisions */
+    //        for (int i = 0; i < 20; i++) {
+    //            for (int j = 0; j < 25; ++j) {
+    //                auto *particlePrefabNew = new ParticlePrefab(scene);
+    //                particlePrefabNew->transform.setPosition({(float) i * 2, (float) j * 2, 0});
+    //                scene->addGameObject(particlePrefabNew);
+    //            }
+    //        }
+
+
+    /* Plane and box collisions*/
+    auto* plan = new PlanePrefab(scene, 100, 100);
+    scene->addGameObject(plan);
+
     auto* rigidbodyPrefab = new RigidbodyPrefab(scene);
     scene->addGameObject(rigidbodyPrefab);
     Rigidbody* rigidbody;
     rigidbodyPrefab->getComponentByClass(rigidbody);
-    rigidbody->addForceToPointList(new AnchoredSpring(Vector3d(0, 12, 0), 3, 3), Vector3d(5, 0, 0));
+    RigidbodyCuboidRectangleCollider* rigidbodyCuboidRectangleCollider = new RigidbodyCuboidRectangleCollider(rigidbodyPrefab, 10, 10, 10);
+    rigidbodyPrefab->addComponent(rigidbodyCuboidRectangleCollider);
 
-    auto* rigidbodyPrefab2 = new RigidbodyPrefab(scene, new Cylinder(8, 12, 10));
-    rigidbodyPrefab2->transform.positionX = -20;
+    auto* rigidbodyPrefab2 = new RigidbodyPrefab(scene);
     scene->addGameObject(rigidbodyPrefab2);
     Rigidbody* rigidbody2;
     rigidbodyPrefab2->getComponentByClass(rigidbody2);
-    auto* spring = new Spring(nullptr, 3, 3);
-    rigidbody2->addForceToPointList(spring, Vector3d(5, 0, 0));
-    spring->setOtherGameObject(rigidbody->getGameObject());
-
-    /* Plan Generation */
-    auto* plan = new PlanePrefab(scene, 100, 100);
-    scene->addGameObject(plan);
+    RigidbodySphereCollider* rigidbodySphereCollider = new RigidbodySphereCollider(plan, 1);
+    rigidbodyPrefab->addComponent(rigidbodySphereCollider);
+    RigidbodyCuboidRectangleCollider* rigidbodyCuboidRectangleCollider2 = new RigidbodyCuboidRectangleCollider(rigidbodyPrefab2, 10, 10, 10);
+    rigidbodyPrefab->addComponent(rigidbodyCuboidRectangleCollider2);
 }
 
 void Game::goLeft() {
