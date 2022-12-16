@@ -55,12 +55,18 @@ public:
         }
     }
 
-    //TODO DELETE TOUTE LA LISTE CHAINEE
+
     void CleanOctree(Node* Tree) {
         if (Tree == nullptr)
             return;
         else 
         {            
+            Object* nextObj=Tree->pObjList;
+            while (nextObj != nullptr) {
+                Object* maj =nextObj->pNextObject;
+                delete nextObj;
+                nextObj = maj;
+            }
             for (int i = 0; i < 8; i++)
             {
                 CleanOctree(Tree->pChild[i]);

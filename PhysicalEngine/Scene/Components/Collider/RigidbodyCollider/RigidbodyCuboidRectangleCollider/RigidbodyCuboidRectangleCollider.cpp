@@ -32,7 +32,7 @@ Vector3d RigidbodyCuboidRectangleCollider::getNormalVector() const { // TODO: im
     return { 0, 0, 0 };
 }
 
-void RigidbodyCuboidRectangleCollider::getAllPoint(Vector3d points[8]) {
+void RigidbodyCuboidRectangleCollider::getAllPoints(Vector3d points[8]) {
     
     for (int i = 0;i<=1;i++)
     {

@@ -1,6 +1,7 @@
 #include "RigidbodyContactGeneratorRegistry.h"
 
 #include "../Scene/GameObject.h"
+#include <cmath>
 
 RigidbodyContactGeneratorRegistry::RigidbodyContactGeneratorRegistry() {
 }
@@ -70,6 +71,21 @@ void RigidbodyContactGeneratorRegistry::calculateContactCuboid(RigidbodyCuboidRe
         break;
     }
     case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_PLANE: {
+        auto* planeCollider = dynamic_cast<RigidbodyPlaneCollider*>(other);
+        Vector3d points[8];
+        rcrc->getAllPoints(points);
+        Matrix34 transformMatrix = rcrc->getGameObject()->transform.getMatrix();
+        for (int i = 0; i < 8; i++)
+        {
+            points[i] = transformMatrix.transformPosition(points[i]);
+            float distance = distanceToPlane(points[i], planeCollider);
+            if (distance < 0) {
+                float interpenetration = std::abs(distance);
+                Vector3d normal = planeCollider->getNormalVector();
+                Vector3d pointContact = points[i];
+                std::cout << "Collision box plane" << std::endl;
+            }
+        }
         break;
     }
     case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_BOX: {
@@ -91,6 +107,8 @@ void RigidbodyContactGeneratorRegistry::calculateContactPlane(RigidbodyPlaneColl
         break;
     }
     case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_BOX: {
+        auto* boxCollider = dynamic_cast<RigidbodyCuboidRectangleCollider*>(other);
+        calculateContactCuboid(boxCollider, rpc);
         break;
     }
     default:
