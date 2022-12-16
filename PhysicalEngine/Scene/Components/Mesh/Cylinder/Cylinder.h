@@ -15,7 +15,7 @@ private:
 
 public:
     //    Cylinder(float radius, float height);
-    Cylinder(float radius, float height, int rings);
+    Cylinder(float radius = 1, float height = 1, int rings = 16);
 
     void generatePointsNormales(float radius, float height, int rings);
     void generateTriangles(float radius, float height, int rings);

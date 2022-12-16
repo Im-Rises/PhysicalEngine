@@ -188,3 +188,14 @@ void Scene::deleteGameObject(GameObject* gameObject) {
         }
     }
 }
+
+void Scene::createGameObject(std::string name) {
+    for (auto& meshName : Mesh::meshNamesList)
+    {
+        if (meshName == name)
+        {
+            gameObjects.emplace_back(new GameObject(this, Mesh::createMesh(name.c_str())));
+            return;
+        }
+    }
+}

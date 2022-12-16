@@ -52,6 +52,8 @@ public:
 
     void setColor(glm::vec4 color);
 
+    static Mesh* createMesh(const char* meshType);
+
 #pragma endregion
 };
 

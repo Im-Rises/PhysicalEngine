@@ -84,6 +84,8 @@ public:
     Camera* getCameraPtr();
 
     void deleteGameObject(GameObject* gameObject);
+
+    void createGameObject(std::string name);
 };
 
 #endif // SCENE_H

@@ -15,7 +15,7 @@ protected:
     float length;
 
 public:
-    CuboidRectangle(float width, float height, float length);
+    CuboidRectangle(float width = 1, float height = 1, float length = 1);
 
     Matrix33 getInertiaTensor(float mass) const override;
 };
