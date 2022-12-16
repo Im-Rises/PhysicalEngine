@@ -67,7 +67,7 @@ void Game::start(Scene* s) {
     scene->addGameObject(rigidbodyPrefab2);
     Rigidbody* rigidbody2;
     rigidbodyPrefab2->getComponentByClass(rigidbody2);
-    RigidbodyCuboidRectangleCollider* rigidbodyCuboidRectangleCollider2 = new RigidbodyCuboidRectangleCollider(rigidbodyPrefab2, 10, 10, 10);
+    RigidbodyCuboidRectangleCollider* rigidbodyCuboidRectangleCollider2 = new RigidbodyCuboidRectangleCollider(rigidbodyPrefab2, 2, 1, 1);
     rigidbodyPrefab2->addComponent(rigidbodyCuboidRectangleCollider2);
 }
 
