@@ -70,6 +70,10 @@ public:
                 nextObj = maj;
             }
             */
+            
+            if (Tree->pObjList != nullptr) {
+                std::cout << Tree->center << std::endl;
+            }
             Tree->pObjList = nullptr;
             for (int i = 0; i < 8; i++)
             {
