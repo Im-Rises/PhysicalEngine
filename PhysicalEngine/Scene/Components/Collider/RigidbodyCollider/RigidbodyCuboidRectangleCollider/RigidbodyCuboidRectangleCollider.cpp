@@ -49,7 +49,6 @@ void RigidbodyCuboidRectangleCollider::getAllPoint(Vector3d points[8]) {
 void RigidbodyCuboidRectangleCollider::update(float time) {
 }
 
-// TODO IMPLEMENTER PLUS TARD
 float RigidbodyCuboidRectangleCollider::getRadius() const {
-    return 0.0f;
+    return sqrt(m_halfwidth * m_halfwidth + m_halfheight * m_halfheight + m_halfdepth * m_halfdepth);
 }
