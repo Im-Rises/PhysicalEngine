@@ -1,16 +1,17 @@
 #include "PhysicalComponent.h"
 
+#include "../../../Utility/imGuiUtility.h"
 #include "../../GameObject.h"
 #include <imgui/imgui.h>
-#include "../../../Utility/imGuiUtility.h"
 
 PhysicalComponent::~PhysicalComponent() {
-    for (auto &forceGenerator: forceGeneratorsList) {
+    for (auto& forceGenerator : forceGeneratorsList)
+    {
         delete forceGenerator;
     }
 }
 
-float PhysicalComponent::distance(const PhysicalComponent &p) {
+float PhysicalComponent::distance(const PhysicalComponent& p) {
     return (m_gameObject->transform.getPosition() - p.m_gameObject->transform.getPosition()).norm();
 }
 
@@ -18,11 +19,11 @@ Vector3d PhysicalComponent::getPosition() const {
     return m_gameObject->transform.getPosition();
 }
 
-const Vector3d &PhysicalComponent::getNetForce() const {
+const Vector3d& PhysicalComponent::getNetForce() const {
     return m_forceAccum;
 }
 
-void PhysicalComponent::setNetForce(const Vector3d &force) {
+void PhysicalComponent::setNetForce(const Vector3d& force) {
     m_forceAccum = force;
 }
 
@@ -34,33 +35,34 @@ Vector3d PhysicalComponent::getLinearSpeed() const {
     return linearSpeed;
 }
 
-void PhysicalComponent::setPosition(const Vector3d &position) {
+void PhysicalComponent::setPosition(const Vector3d& position) {
     m_gameObject->transform.setPosition(position);
 }
 
-void PhysicalComponent::setLinearSpeed(const Vector3d &linearSpeed) {
+void PhysicalComponent::setLinearSpeed(const Vector3d& linearSpeed) {
     PhysicalComponent::linearSpeed = linearSpeed;
 }
 
 
-void PhysicalComponent::addForceToList(ForceGenerator *forceGenerator) {
+void PhysicalComponent::addForceToList(ForceGenerator* forceGenerator) {
     forceGeneratorsList.push_back(forceGenerator);
 }
 
-void PhysicalComponent::addForceByName(const std::string &forceName) {
+void PhysicalComponent::addForceByName(const std::string& forceName) {
     addForceToList(ForceGenerator::createForceGenerator(forceName, m_gameObject));
 }
 
-ForceGenerator *PhysicalComponent::getForceByName(const std::string &name) const {
-    for (auto &force: forceGeneratorsList) {
+ForceGenerator* PhysicalComponent::getForceByName(const std::string& name) const {
+    for (auto& force : forceGeneratorsList)
+    {
         if (force->getName() == name)
-            return static_cast<ForceGenerator *>(force);
+            return static_cast<ForceGenerator*>(force);
     }
     return nullptr;
 }
 
-bool PhysicalComponent::hasForce(const std::string &name) const {
-    return std::any_of(forceGeneratorsList.begin(), forceGeneratorsList.end(), [&name](ForceGenerator *forceGenerator) {
+bool PhysicalComponent::hasForce(const std::string& name) const {
+    return std::any_of(forceGeneratorsList.begin(), forceGeneratorsList.end(), [&name](ForceGenerator* forceGenerator) {
         return forceGenerator->getName() == name;
     });
 }
@@ -79,7 +81,8 @@ void PhysicalComponent::drawGui() {
 
     // linearSpeed, acceleration
     ImGui::Text("linearSpeed");
-    if (ImGui::BeginTable("PhysicalComponentlinearSpeed", 3)) {
+    if (ImGui::BeginTable("PhysicalComponentlinearSpeed", 3))
+    {
         ImGui::TableNextColumn();
         ImGui::Text("X:");
         ImGui::SameLine();
@@ -95,7 +98,8 @@ void PhysicalComponent::drawGui() {
         ImGui::EndTable();
     }
     ImGui::Text("Acceleration");
-    if (ImGui::BeginTable("PhysicalComponentAcceleration", 3)) {
+    if (ImGui::BeginTable("PhysicalComponentAcceleration", 3))
+    {
         ImGui::TableNextColumn();
         ImGui::Text("X:");
         ImGui::SameLine();
@@ -123,14 +127,17 @@ void PhysicalComponent::drawGuiForceGenerators() {
                                  ImGuiUtility::CalculateTextWidth(deleteForcesText.c_str())));
 
     // Forces list
-    if (ImGui::Button(forcesListText.c_str())) {
+    if (ImGui::Button(forcesListText.c_str()))
+    {
         ImGui::OpenPopup("##PhysicalForceListPopup");
     }
-    if (ImGui::BeginPopup("##PhysicalForceListPopup")) {
+    if (ImGui::BeginPopup("##PhysicalForceListPopup"))
+    {
         if (forceGeneratorsList.empty())
             ImGui::Text("Empty");
         else
-            for (auto &forceGenerator: forceGeneratorsList) {
+            for (auto& forceGenerator : forceGeneratorsList)
+            {
                 forceGenerator->drawGui(m_gameObject->getScenePtr());
             }
         ImGui::EndPopup();
@@ -139,12 +146,16 @@ void PhysicalComponent::drawGuiForceGenerators() {
     ImGui::SameLine();
 
     // Add force
-    if (ImGui::Button(addForcesText.c_str())) {
+    if (ImGui::Button(addForcesText.c_str()))
+    {
         ImGui::OpenPopup("##PhysicalAddForcePopup");
     }
-    if (ImGui::BeginPopup("##PhysicalAddForcePopup")) {
-        for (auto &forcesName: ForceGenerator::forcesNamesList) {
-            if (ImGui::MenuItem(forcesName)) {
+    if (ImGui::BeginPopup("##PhysicalAddForcePopup"))
+    {
+        for (auto& forcesName : ForceGenerator::forcesNamesList)
+        {
+            if (ImGui::MenuItem(forcesName))
+            {
                 addForceToList(ForceGenerator::createForceGenerator(forcesName, m_gameObject));
             }
         }
@@ -154,17 +165,19 @@ void PhysicalComponent::drawGuiForceGenerators() {
     ImGui::SameLine();
 
     // Delete force
-    if (ImGui::Button(deleteForcesText.c_str())) {
+    if (ImGui::Button(deleteForcesText.c_str()))
+    {
         ImGui::OpenPopup("##PhysicalDeleteForcePopup");
     }
-    if (ImGui::BeginPopup("##PhysicalDeleteForcePopup")) {
-        for (auto &forceGenerator: forceGeneratorsList) {
-            if (ImGui::MenuItem(forceGenerator->getName().c_str())) {
+    if (ImGui::BeginPopup("##PhysicalDeleteForcePopup"))
+    {
+        for (auto& forceGenerator : forceGeneratorsList)
+        {
+            if (ImGui::MenuItem(forceGenerator->getName().c_str()))
+            {
                 deleteForceByClass(forceGenerator);
             }
         }
         ImGui::EndPopup();
     }
 }
-
-
