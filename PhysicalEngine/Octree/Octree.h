@@ -141,8 +141,8 @@ public:
                     if (pA == pB)
                         break;
                     // Now perform the collision test between pA and pB in some manner
-                    std::cout << "Potentiel collision" << std::endl;
-                    // contactRegistry.calculateContact(pA->Collider, pB->Collider);
+                    //std::cout << "Potentiel collision" << std::endl;
+                    contactRegistry.calculateContact(pA->Collider, pB->Collider);
                 }
             }
         }
