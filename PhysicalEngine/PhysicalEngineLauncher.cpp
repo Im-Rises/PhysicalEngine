@@ -189,12 +189,12 @@ void PhysicalEngineLauncher::handleGui() {
             {
                 if (ImGui::BeginMenu("File"))
                 {
-                    if (ImGui::MenuItem("Open..", "Ctrl+O"))
-                    { /* Do stuff */
-                    }
-                    if (ImGui::MenuItem("Save", "Ctrl+S"))
-                    { /* Do stuff */
-                    }
+                    //                    if (ImGui::MenuItem("Open..", "Ctrl+O"))
+                    //                    { /* Do stuff */
+                    //                    }
+                    //                    if (ImGui::MenuItem("Save", "Ctrl+S"))
+                    //                    { /* Do stuff */
+                    //                    }
                     if (ImGui::MenuItem("Close", "Ctrl+W"))
                     { my_tool_active = false; }
                     if (ImGui::MenuItem("Exit", "Alt+F4"))
