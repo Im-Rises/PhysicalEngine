@@ -236,3 +236,16 @@ void Rigidbody::drawGui() {
 std::string Rigidbody::getName() const {
     return COMPONENT_TYPE;
 }
+
+void Rigidbody::stop() {
+    m_forceAccum = Vector3d();
+    linearSpeed = Vector3d(0, 0, 0);
+    linearAcceleration = Vector3d(0, 0, 0);
+
+    m_speed = Vector3d(0, 0, 0);
+    m_acceleration = Vector3d(0, 0, 0);
+
+    m_angularSpeed = Vector3d(0, 0, 0);
+    m_angularAcceleration = Vector3d(0, 0, 0);
+
+}

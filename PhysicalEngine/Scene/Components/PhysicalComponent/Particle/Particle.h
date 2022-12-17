@@ -51,6 +51,8 @@ public:
 
     std::string getName() const override;
 
+    void stop() override;
+
 };
 
 #endif

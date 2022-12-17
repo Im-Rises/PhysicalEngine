@@ -43,6 +43,8 @@ public:
 
     void addForceToPointList(ForceGenerator* forceGenerator, const Vector3d& point);
 
+    void stop() override;
+
 private:
     void addForceAtPoint(const Vector3d& force, Vector3d worldPoint);
 

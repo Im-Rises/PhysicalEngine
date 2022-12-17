@@ -54,6 +54,8 @@ public:
 
     std::string getName() const override = 0;
 
+    virtual void stop()=0;
+
 
     void addForceToList(ForceGenerator *forceGenerator);
 

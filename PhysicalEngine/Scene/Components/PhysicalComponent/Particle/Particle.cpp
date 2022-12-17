@@ -75,3 +75,8 @@ void Particle::drawGui() {
 std::string Particle::getName() const {
     return COMPONENT_TYPE;
 }
+
+void Particle::stop() {
+    linearSpeed = { 0, 0, 0 };
+    linearAcceleration = { 0, 0, 0 };
+}
