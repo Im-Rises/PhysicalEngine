@@ -49,6 +49,7 @@ void Game::start(Scene* s) {
     /* Plane and box collisions*/
     auto* plan = new PlanePrefab(scene, 10, 10);
     scene->addGameObject(plan);
+    plan->addComponent(new RigidbodyPlaneCollider(plan, 10, 10));
 
     auto* rigidbodyPrefab = new RigidbodyPrefab(scene);
     scene->addGameObject(rigidbodyPrefab);

@@ -9,7 +9,7 @@ private:
     float m_depth;
 
 public:
-    explicit RigidbodyPlaneCollider(GameObject* gameObject);
+    explicit RigidbodyPlaneCollider(GameObject* gameObject, float width = 1, float depth = 1);
 
     void drawGui() override;
 

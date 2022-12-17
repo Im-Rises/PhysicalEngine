@@ -3,9 +3,9 @@
 #include "../../../../GameObject.h"
 #include "../../../Transform/Transform.h"
 
-RigidbodyPlaneCollider::RigidbodyPlaneCollider(GameObject* gameObject) : RigidbodyPrimitiveCollider(gameObject) {
-    m_width = 1;
-    m_depth = 1;
+RigidbodyPlaneCollider::RigidbodyPlaneCollider(GameObject* gameObject, float width, float depth) : RigidbodyPrimitiveCollider(gameObject) {
+    m_width = width;
+    m_depth = depth;
 }
 
 void RigidbodyPlaneCollider::drawGui() {
