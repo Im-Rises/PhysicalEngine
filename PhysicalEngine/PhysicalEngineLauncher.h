@@ -11,7 +11,7 @@
 
 #define PROJECT_VERSION VERSION_MAJOR "." VERSION_MINOR "." VERSION_PATCH
 
-#define PROJECT_GITHUB "https://github.com/Im-Rises/ParticleEngine"
+#define PROJECT_GITHUB "https://github.com/Im-Rises/PhysicalEngine"
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
