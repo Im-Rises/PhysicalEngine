@@ -19,7 +19,7 @@ struct ForcePoint {
 class Rigidbody : public PhysicalComponent {
 private:
     static constexpr const char* COMPONENT_TYPE = RIGIDBODY_COMPONENT;
-
+    // TODO: Delete variables that are the same with the parent class
 protected:
     Vector3d m_speed;
     Vector3d m_acceleration;
