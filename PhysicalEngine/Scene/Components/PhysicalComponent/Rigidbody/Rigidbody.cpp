@@ -248,4 +248,6 @@ void Rigidbody::stop() {
     m_angularSpeed = Vector3d(0, 0, 0);
     m_angularAcceleration = Vector3d(0, 0, 0);
 
+    isKinematic = true;
+
 }

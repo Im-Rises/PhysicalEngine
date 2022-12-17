@@ -79,4 +79,5 @@ std::string Particle::getName() const {
 void Particle::stop() {
     linearSpeed = { 0, 0, 0 };
     linearAcceleration = { 0, 0, 0 };
+    isKinematic = true;
 }
