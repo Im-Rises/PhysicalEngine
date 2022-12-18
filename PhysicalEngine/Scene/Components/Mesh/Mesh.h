@@ -54,6 +54,8 @@ public:
 
     static Mesh* createMesh(const char* meshType);
 
+    virtual const char* getMeshType() const;
+
 #pragma endregion
 };
 
