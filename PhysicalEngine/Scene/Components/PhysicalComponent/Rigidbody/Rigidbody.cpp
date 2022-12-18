@@ -26,10 +26,10 @@ Rigidbody::Rigidbody(GameObject* gameObject) : Component(gameObject) {
 }
 
 Rigidbody::~Rigidbody() {
-    for (ForceGenerator* forceGenerator : forceGeneratorsList)
-    {
-        delete forceGenerator;
-    }
+//    for (ForceGenerator* forceGenerator : forceGeneratorsList)
+//    {
+//        delete forceGenerator;
+//    }
     for (ForcePoint& forcePoint : pointForceGeneratorsList)
     {
         delete forcePoint.force;

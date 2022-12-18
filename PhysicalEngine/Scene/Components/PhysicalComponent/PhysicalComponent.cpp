@@ -5,10 +5,10 @@
 #include <imgui/imgui.h>
 
 PhysicalComponent::~PhysicalComponent() {
-    //        for (auto& forceGenerator : forceGeneratorsList)
-    //        {
-    //            delete forceGenerator;
-    //        }
+    for (auto& forceGenerator : forceGeneratorsList)
+    {
+        delete forceGenerator;
+    }
 }
 
 float PhysicalComponent::distance(const PhysicalComponent& p) {
