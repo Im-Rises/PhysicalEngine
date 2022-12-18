@@ -17,6 +17,11 @@ int ParticleCollide::addContact(ParticleContact* particleContact, unsigned int l
         {
             if (current < limit)
             {
+                // Check if the
+                if (m_colliders[i] == nullptr || m_colliders[j] == nullptr)
+                    continue;
+
+                // Get the two particles
                 Particle* particle0 = nullptr;
                 m_colliders[i]->getGameObject()->getComponentByClass(particle0);
                 Particle* particle1 = nullptr;
