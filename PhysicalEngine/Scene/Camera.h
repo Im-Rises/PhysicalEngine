@@ -23,7 +23,10 @@ public:
 
     bool constrainPitch = true;
 
+    // Buffers for camera movement
     glm::vec3 cameraPosMovementBuffer = glm::vec3(0.0f, 0.0f, 0.0f);
+    glm::vec3 frontBuffer;
+
 
 public:
     Camera();
@@ -43,8 +46,6 @@ public:
     glm::mat4 getViewMatrix() const;
 
     float getFov() const;
-
-    void resetCameraPosMovementBuffer();
 
     void update(float deltaTime);
 };

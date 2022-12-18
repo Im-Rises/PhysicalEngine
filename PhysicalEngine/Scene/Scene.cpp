@@ -62,7 +62,6 @@ void Scene::destroy() {
 
 void Scene::update(float deltaTime) {
     camera.update(deltaTime);
-    camera.resetCameraPosMovementBuffer();
 
     //    physicalUpdateTimer += deltaTime;
 

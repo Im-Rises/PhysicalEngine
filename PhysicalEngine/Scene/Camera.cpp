@@ -38,11 +38,10 @@ void Camera::processMouseMovement(float xOffset, float yOffset) {
             pitch = -89.0f;
     }
 
-    glm::vec3 front;
-    front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-    front.y = sin(glm::radians(pitch));
-    front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-    cameraFront = glm::normalize(front);
+
+    frontBuffer.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    frontBuffer.y = sin(glm::radians(pitch));
+    frontBuffer.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 }
 
 float Camera::getFov() const {
@@ -53,9 +52,6 @@ glm::mat4 Camera::getViewMatrix() const {
     return glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 }
 
-void Camera::resetCameraPosMovementBuffer() {
-    cameraPosMovementBuffer = glm::vec3(0.0f, 0.0f, 0.0f);
-}
 
 void Camera::update(float deltaTime) {
     if (InputManager::isForwardKeyPressed())
@@ -74,5 +70,14 @@ void Camera::update(float deltaTime) {
     {
         moveRight();
     }
+
+    // Update camera position and rotation
     cameraPos += cameraPosMovementBuffer * deltaTime;
+    if (frontBuffer != glm::vec3(0.0f, 0.0f, 0.0f))
+    {
+        cameraFront = glm::normalize(frontBuffer);
+    }
+    // Reset camera buffers
+    cameraPosMovementBuffer = glm::vec3(0.0f, 0.0f, 0.0f);
+    frontBuffer = glm::vec3(0.0f, 0.0f, 0.0f);
 }
