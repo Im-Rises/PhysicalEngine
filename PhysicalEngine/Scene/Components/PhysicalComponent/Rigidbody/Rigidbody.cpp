@@ -246,6 +246,7 @@ void Rigidbody::drawGui() {
         ImGui::InputFloat("##PhysicalComponentAngularAccelerationZ", &m_angularAcceleration.z);
         ImGui::EndTable();
     }
+    ImGui::NewLine();
 
     ImGui::Text("Force Generators");
     PhysicalComponent::drawGuiForceGenerators();
@@ -253,6 +254,7 @@ void Rigidbody::drawGui() {
     ImGui::NewLine();
     ImGui::Text("Force Generators at Point");
     drawGuiForceGeneratorsAtPoint();
+    ImGui::NewLine();
 }
 
 std::string Rigidbody::getName() const {

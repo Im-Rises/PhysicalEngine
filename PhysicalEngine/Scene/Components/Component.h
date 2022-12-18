@@ -2,15 +2,15 @@
 #define COMPONENT_H
 
 #include <string>
-//#include <map>
+// #include <map>
 
 #define RIGIDBODY_COMPONENT "Rigidbody"
 #define PARTICLE_COMPONENT "Particle"
-//#define COLLIDER_COMPONENT "Collider"
+// #define COLLIDER_COMPONENT "Collider"
 
-#define RIGIDBODY_PLANE_COLLIDER "RigidbodyPlaneColliderComponent"
-#define RIGIDBODY_SPHERE_COLLIDER "RigidbodySphereColliderComponent"
-#define RIGIDBODY_CUBOID_RECTANGLE_COLLIDER "RigidbodyCuboidRectangleColliderComponent"
+#define RIGIDBODY_PLANE_COLLIDER "Rigidbody_Plane_Collider"
+#define RIGIDBODY_SPHERE_COLLIDER "Rigidbody_Sphere_Collider"
+#define RIGIDBODY_CUBOID_RECTANGLE_COLLIDER "Rigidbody_CuboidRectangle_Collider"
 
 class GameObject;
 

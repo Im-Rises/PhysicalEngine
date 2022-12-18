@@ -79,6 +79,8 @@ void PhysicalComponent::drawGui() {
     // Gravity
     gravity.drawGui(m_gameObject->getScenePtr());
 
+    ImGui::NewLine();
+
     // linearSpeed, acceleration
     ImGui::Text("linear Speed");
     if (ImGui::BeginTable("PhysicalComponentlinearSpeed", 3))

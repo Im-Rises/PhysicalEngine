@@ -3,12 +3,16 @@
 #include "../../../../GameObject.h"
 #include "../../../Transform/Transform.h"
 
+#include <imgui/imgui.h>
+
 RigidbodyPlaneCollider::RigidbodyPlaneCollider(GameObject* gameObject, float width, float depth) : RigidbodyPrimitiveCollider(gameObject) {
     m_width = width;
     m_depth = depth;
 }
 
 void RigidbodyPlaneCollider::drawGui() {
+    ImGui::DragFloat("Width", &m_width, 0.1f, 0.0f, 100.0f);
+    ImGui::DragFloat("Depth", &m_depth, 0.1f, 0.0f, 100.0f);
 }
 
 std::string RigidbodyPlaneCollider::getName() const {
@@ -28,7 +32,7 @@ void RigidbodyPlaneCollider::update(float time) {
 }
 
 float RigidbodyPlaneCollider::getRadius() const {
-    return sqrt(m_width*m_width + m_depth*m_depth)/2;
+    return sqrt(m_width * m_width + m_depth * m_depth) / 2;
 }
 
 float RigidbodyPlaneCollider::getWidth() const {
