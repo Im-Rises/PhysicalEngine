@@ -2,6 +2,7 @@
 
 #include "Force/Spring.h"
 #include "Scene/Components/Mesh/Cylinder/Cylinder.h"
+#include "Scene/Components/Mesh/Sphere/Sphere.h"
 #include "Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "Scene/GameObject.h"
 #include "Scene/Prefabs/ParticlePrefab.h"
@@ -51,99 +52,117 @@ void Game::start(Scene* s) {
     scene->addGameObject(plan);
     plan->addComponent(new RigidbodyPlaneCollider(plan, 10, 10));
 
+    auto* sphere = new RigidbodyPrefab(scene, new Sphere(1));
+    sphere->addComponent(new RigidbodySphereCollider(sphere, 1));
+    sphere->transform.setPosition({ -4, 0, 0 });
+    scene->addGameObject(sphere);
+
     auto* rigidbodyPrefab = new RigidbodyPrefab(scene);
     scene->addGameObject(rigidbodyPrefab);
-    rigidbodyPrefab->transform.positionX = -3;
+    rigidbodyPrefab->transform.positionX = -1.5;
     rigidbodyPrefab->transform.positionY = 3;
-    rigidbodyPrefab->transform.positionZ = -3;
+    rigidbodyPrefab->transform.positionZ = 0;
     Rigidbody* rigidbody;
     rigidbodyPrefab->getComponentByClass(rigidbody);
-    RigidbodyCuboidRectangleCollider* rigidbodyCuboidRectangleCollider = new RigidbodyCuboidRectangleCollider(rigidbodyPrefab, 2, 1, 1);
+    rigidbody->setAngularSpeed({ 0, 1, 0 });
+    RigidbodyCuboidRectangleCollider* rigidbodyCuboidRectangleCollider = new RigidbodyCuboidRectangleCollider(rigidbodyPrefab, 1, 0.5f, 0.5f);
     rigidbodyPrefab->addComponent(rigidbodyCuboidRectangleCollider);
 
     auto* rigidbodyPrefab2 = new RigidbodyPrefab(scene);
-    rigidbodyPrefab2->transform.positionX = 3;
+    rigidbodyPrefab2->transform.positionX = 1.5;
     rigidbodyPrefab2->transform.positionY = 3;
     rigidbodyPrefab2->transform.positionZ = -3;
     scene->addGameObject(rigidbodyPrefab2);
     Rigidbody* rigidbody2;
     rigidbodyPrefab2->getComponentByClass(rigidbody2);
-    RigidbodyCuboidRectangleCollider* rigidbodyCuboidRectangleCollider2 = new RigidbodyCuboidRectangleCollider(rigidbodyPrefab2, 2, 1, 1);
+    rigidbody2->setAngularSpeed({ 0, 0, -1 });
+    RigidbodyCuboidRectangleCollider* rigidbodyCuboidRectangleCollider2 = new RigidbodyCuboidRectangleCollider(rigidbodyPrefab2, 1, 0.5f, 0.5f);
     rigidbodyPrefab2->addComponent(rigidbodyCuboidRectangleCollider2);
+
+    auto* rigidbodyPrefab3 = new RigidbodyPrefab(scene);
+    rigidbodyPrefab3->transform.positionX = 3;
+    rigidbodyPrefab3->transform.positionY = 3;
+    rigidbodyPrefab3->transform.positionZ = 0;
+    scene->addGameObject(rigidbodyPrefab3);
+    Rigidbody* rigidbody3;
+    rigidbodyPrefab3->getComponentByClass(rigidbody3);
+    rigidbody3->setAngularSpeed({ 2, 0, 0 });
+    RigidbodyCuboidRectangleCollider* rigidbodyCuboidRectangleCollider3 = new RigidbodyCuboidRectangleCollider(rigidbodyPrefab3, 1, 0.5f, 0.5f);
+    rigidbodyPrefab3->addComponent(rigidbodyCuboidRectangleCollider3);
 }
 
-void Game::goLeft() {
-    //    m_p->setSpeed(-m_speed, 0, 0);
+//void Game::goLeft() {
+//    //    m_p->setSpeed(-m_speed, 0, 0);
+//
+//    for (auto& gameObject : scene->getGameObjects())
+//    {
+//        auto* particle = dynamic_cast<Particle*>(gameObject->getComponentByName(PARTICLE_COMPONENT));
+//        if (particle != nullptr)
+//        {
+//            AnchoredSpring* anchoredSpring;
+//            particle->getForceByClass(anchoredSpring);
+//            if (anchoredSpring != nullptr)
+//            {
+//                anchoredSpring->translate({ -m_speed, 0, 0 });
+//            }
+//        }
+//    }
+//}
+//
+//void Game::goRight() {
+//    //    m_p->setSpeed(m_speed, 0, 0);
+//
+//    for (auto& gameObject : scene->getGameObjects())
+//    {
+//        auto* particle = dynamic_cast<Particle*>(gameObject->getComponentByName(PARTICLE_COMPONENT));
+//        if (particle != nullptr)
+//        {
+//            AnchoredSpring* anchoredSpring;
+//            particle->getForceByClass(anchoredSpring);
+//            if (anchoredSpring != nullptr)
+//            {
+//                anchoredSpring->translate({ m_speed, 0, 0 });
+//            }
+//        }
+//    }
+//}
+//
+//void Game::goUp() {
+//    //    m_p->setSpeed(0, m_speed, 0);
+//
+//    for (auto& gameObject : scene->getGameObjects())
+//    {
+//        auto* particle = dynamic_cast<Particle*>(gameObject->getComponentByName(PARTICLE_COMPONENT));
+//        if (particle != nullptr)
+//        {
+//            AnchoredSpring* anchoredSpring;
+//            particle->getForceByClass(anchoredSpring);
+//            if (anchoredSpring != nullptr)
+//            {
+//                anchoredSpring->translate({ 0, m_speed, 0 });
+//            }
+//        }
+//    }
+//}
+//
+//void Game::goDown() {
+//    //    m_p->setSpeed(0, -m_speed, 0);
+//
+//    for (auto& gameObject : scene->getGameObjects())
+//    {
+//        auto* particle = dynamic_cast<Particle*>(gameObject->getComponentByName(PARTICLE_COMPONENT));
+//        if (particle != nullptr)
+//        {
+//            AnchoredSpring* anchoredSpring;
+//            particle->getForceByClass(anchoredSpring);
+//            if (anchoredSpring != nullptr)
+//            {
+//                anchoredSpring->translate({ 0, -m_speed, 0 });
+//            }
+//        }
+//    }
+//}
 
-    for (auto& gameObject : scene->getGameObjects())
-    {
-        auto* particle = dynamic_cast<Particle*>(gameObject->getComponentByName(PARTICLE_COMPONENT));
-        if (particle != nullptr)
-        {
-            AnchoredSpring* anchoredSpring;
-            particle->getForceByClass(anchoredSpring);
-            if (anchoredSpring != nullptr)
-            {
-                anchoredSpring->translate({ -m_speed, 0, 0 });
-            }
-        }
-    }
-}
-
-void Game::goRight() {
-    //    m_p->setSpeed(m_speed, 0, 0);
-
-    for (auto& gameObject : scene->getGameObjects())
-    {
-        auto* particle = dynamic_cast<Particle*>(gameObject->getComponentByName(PARTICLE_COMPONENT));
-        if (particle != nullptr)
-        {
-            AnchoredSpring* anchoredSpring;
-            particle->getForceByClass(anchoredSpring);
-            if (anchoredSpring != nullptr)
-            {
-                anchoredSpring->translate({ m_speed, 0, 0 });
-            }
-        }
-    }
-}
-
-void Game::goUp() {
-    //    m_p->setSpeed(0, m_speed, 0);
-
-    for (auto& gameObject : scene->getGameObjects())
-    {
-        auto* particle = dynamic_cast<Particle*>(gameObject->getComponentByName(PARTICLE_COMPONENT));
-        if (particle != nullptr)
-        {
-            AnchoredSpring* anchoredSpring;
-            particle->getForceByClass(anchoredSpring);
-            if (anchoredSpring != nullptr)
-            {
-                anchoredSpring->translate({ 0, m_speed, 0 });
-            }
-        }
-    }
-}
-
-void Game::goDown() {
-    //    m_p->setSpeed(0, -m_speed, 0);
-
-    for (auto& gameObject : scene->getGameObjects())
-    {
-        auto* particle = dynamic_cast<Particle*>(gameObject->getComponentByName(PARTICLE_COMPONENT));
-        if (particle != nullptr)
-        {
-            AnchoredSpring* anchoredSpring;
-            particle->getForceByClass(anchoredSpring);
-            if (anchoredSpring != nullptr)
-            {
-                anchoredSpring->translate({ 0, -m_speed, 0 });
-            }
-        }
-    }
-}
-
-float* Game::getPtrSpeed() {
-    return &m_speed;
-}
+//float* Game::getPtrSpeed() {
+//    return &m_speed;
+//}

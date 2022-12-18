@@ -70,6 +70,8 @@ public:
 
     Vector3d getAngularSpeed() const;
 
+    void setAngularSpeed(const Vector3d& angularSpeed);
+
     void deleteForceAtPoint(ForceGenerator* forceGenerator);
 
     //    template<class T>

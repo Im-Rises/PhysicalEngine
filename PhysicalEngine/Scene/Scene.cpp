@@ -61,6 +61,8 @@ void Scene::destroy() {
 }
 
 void Scene::update(float deltaTime) {
+    camera.update(deltaTime);
+
     //    physicalUpdateTimer += deltaTime;
 
     // Update the game objects (particles, ...)

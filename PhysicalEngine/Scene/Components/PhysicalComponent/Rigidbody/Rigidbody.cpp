@@ -274,3 +274,6 @@ void Rigidbody::stop() {
 
     isKinematic = true;
 }
+void Rigidbody::setAngularSpeed(const Vector3d& angularSpeed) {
+    m_angularSpeed = angularSpeed;
+}
