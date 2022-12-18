@@ -1,5 +1,5 @@
 #include "ParticlePrefab.h"
-#include "../../ParticleContact/ParticleCollider/ParticleCollider.h"
+#include "../Components/Collider/ParticleCollider/ParticleCollider.h"
 #include "../Components/Mesh/Sphere/Sphere.h"
 #include "../Components/PhysicalComponent/Particle/Particle.h"
 #include "../PhysicalEngine/Force/AnchoredSpring.h"
@@ -11,7 +11,7 @@ ParticlePrefab::ParticlePrefab(Scene* scene) : GameObject(scene, new Sphere(1, 2
     auto* particle = new Particle(this);
     particle->addForceToList(new AnchoredSpring({ 0, 0, 0 }, 0.5f, 0.5f));
     addComponent(particle);
-    ParticleCollider particleCollider(particle, 1);
+    ParticleCollider particleCollider(GameObject, 1);
     scene->addParticleCollider(particleCollider);
 }
 

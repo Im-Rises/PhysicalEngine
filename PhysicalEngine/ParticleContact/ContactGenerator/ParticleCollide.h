@@ -3,7 +3,7 @@
 
 #include "ParticleContactGenerator.h"
 
-#include "../ParticleCollider/ParticleCollider.h"
+#include "../../Scene/Components/Collider/ParticleCollider/ParticleCollider.h"
 
 #include <vector>
 
