@@ -22,13 +22,13 @@ jobs:
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
       - name: Copy exe to root
         run: |
-          cp ./build/ParticleEngine/Release/ParticleEngine.exe .
+          cp ./build/PhysicalEngine/Release/PhysicalEngine.exe .
       - name: Upload artifact release
         uses: actions/upload-artifact@v2
         with:
           name: artifact-windows
           path: |
-            ./ParticleEngine.exe
+            ./PhysicalEngine.exe
             ./imgui.ini
   build-ubuntu:
     name: Build ubuntu
@@ -38,19 +38,18 @@ jobs:
       - name: Install libs
         run: |
           sudo apt-get install libglfw3-dev
-          sudo apt install xorg-dev
       - name: Configure CMake
         run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
       - name: Build
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
       - name: Copy exe to root
-        run: cp ./build/ParticleEngine/ParticleEngine ./ParticleEngineLauncher
+        run: cp ./build/PhysicalEngine/PhysicalEngine ./PhysicalEngineLauncher
       - name: Upload artifact release
         uses: actions/upload-artifact@v2
         with:
           name: artifact-ubuntu
           path: |
-            ./ParticleEngineLauncher
+            ./PhysicalEngineLauncher
             ./imgui.ini
   build-macos:
     name: Build macos
@@ -64,13 +63,13 @@ jobs:
       - name: Build
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
       - name: Copy exe to root
-        run: cp ./build/ParticleEngine/ParticleEngine ./ParticleEngineLauncher
+        run: cp ./build/PhysicalEngine/PhysicalEngine ./PhysicalEngineLauncher
       - name: Upload artifact release
         uses: actions/upload-artifact@v2
         with:
           name: artifact-macos
           path: |
-            ./ParticleEngineLauncher
+            ./PhysicalEngineLauncher
             ./imgui.ini
   release-project:
     name: Release project
@@ -102,12 +101,12 @@ jobs:
         with:
           upload_url: ${{ steps.create-new-release.outputs.upload_url }}
           asset_path: release-windows.zip
-          asset_name: ParticleEngine-windows-v${{ github.run_number }}.zip
+          asset_name: PhysicalEngine-windows-v${{ github.run_number }}.zip
           asset_content_type: application/zip
       - name: Delete windows release files
         run: |
           rm release-windows.zip
-          rm ParticleEngine.exe
+          rm PhysicalEngine.exe
       - name: Download ubuntu artifact content
         uses: actions/download-artifact@v2
         with:
@@ -125,12 +124,12 @@ jobs:
         with:
           upload_url: ${{ steps.create-new-release.outputs.upload_url }}
           asset_path: release-linux.tar.gz
-          asset_name: ParticleEngine-linux-v${{ github.run_number }}.tar.gz
+          asset_name: PhysicalEngine-linux-v${{ github.run_number }}.tar.gz
           asset_content_type: application/zip
       - name: Delete ubuntu release files
         run: |
           rm release-linux.tar.gz
-          rm ParticleEngineLauncher
+          rm PhysicalEngineLauncher
       - name: Download macos artifact content
         uses: actions/download-artifact@v2
         with:
@@ -148,5 +147,5 @@ jobs:
         with:
           upload_url: ${{ steps.create-new-release.outputs.upload_url }}
           asset_path: release-macos.tar.gz
-          asset_name: ParticleEngine-macos-v${{ github.run_number }}.tar.gz
+          asset_name: PhysicalEngine-macos-v${{ github.run_number }}.tar.gz
           asset_content_type: application/zip
