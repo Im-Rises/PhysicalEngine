@@ -16,6 +16,7 @@ const char* Mesh::meshNamesList[3] = { MESHTYPE_CYLINDER, MESHTYPE_SPHERE, MESHT
 void Mesh::drawGui() {
     ImGui::Text("Mesh type: %s", getMeshType());
     ImGui::Text(verticesUseIndices ? "Vertices use indices" : "Vertices don't use indices");
+    ImGui::DragFloat4("Color", &color[0], 0.01f, 0.0f, 1.0f);
     if (ImGui::BeginTable("", 3))
     {
         ImGui::TableNextColumn();
