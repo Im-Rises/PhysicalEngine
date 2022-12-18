@@ -86,7 +86,7 @@ PhysicalEngineLauncher::PhysicalEngineLauncher() {
     // Initialize GLFW callbacks
     glfwSetWindowUserPointer(window, this);
     glfwSetKeyCallback(window, InputManager::key_callback);
-    //    glfwSetScrollCallback(window, InputManager::scroll_callback);
+    glfwSetScrollCallback(window, InputManager::scroll_callback);
     glfwSetCursorPosCallback(window, InputManager::cursor_position_callback);
     glfwSetMouseButtonCallback(window, InputManager::mouse_button_callback);
 
@@ -130,6 +130,9 @@ PhysicalEngineLauncher::PhysicalEngineLauncher() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     glEnable(GL_DEPTH_TEST); // Enable depth testing
+
+    // Setup window for inputs
+    InputManager::m_window = window;
 }
 
 PhysicalEngineLauncher::~PhysicalEngineLauncher() {
