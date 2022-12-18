@@ -123,8 +123,6 @@ void RigidbodyContactGeneratorRegistry::calculateContactCuboid(RigidbodyCuboidRe
             {
                 rigid->stop();
             }
-            float offset=planeCollider->getCenter().dot(planeCollider->getNormalVector().normalize());
-            std::cout << "offset : " <<offset << std::endl;
             std::cout << "Collision box plane:" << std::endl;
             std::cout << contactInfo << std::endl;
         }
