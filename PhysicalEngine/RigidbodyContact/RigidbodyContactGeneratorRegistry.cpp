@@ -59,7 +59,7 @@ void RigidbodyContactGeneratorRegistry::calculateContactSphere(RigidbodySphereCo
         
         if (distance <= rsc->getRadius())
         {
-            Vector3d normal = planeCollider->getNormalVector();
+            Vector3d normal = planeCollider->getNormalVector().normalize();
             Vector3d pointContact = rsc->getGameObject()->transform.getPosition() - (planeCollider->getNormalVector() * rsc->getRadius());
             float interpenetration = rsc->getRadius() -distance;
             contactInfo.m_normal = normal;
@@ -106,7 +106,7 @@ void RigidbodyContactGeneratorRegistry::calculateContactCuboid(RigidbodyCuboidRe
             if (distance < 0)
             {
                 float interpenetration = std::abs(distance);
-                Vector3d normal = planeCollider->getNormalVector();
+                Vector3d normal = planeCollider->getNormalVector().normalize();
                 Vector3d pointContact = points[i];
                 collision = true;
                 contactInfo.m_points.push_back(pointContact);
@@ -123,6 +123,8 @@ void RigidbodyContactGeneratorRegistry::calculateContactCuboid(RigidbodyCuboidRe
             {
                 rigid->stop();
             }
+            float offset=planeCollider->getCenter().dot(planeCollider->getNormalVector().normalize());
+            std::cout << "offset : " <<offset << std::endl;
             std::cout << "Collision box plane:" << std::endl;
             std::cout << contactInfo << std::endl;
         }
@@ -159,5 +161,5 @@ void RigidbodyContactGeneratorRegistry::calculateContactPlane(RigidbodyPlaneColl
 }
 
 float RigidbodyContactGeneratorRegistry::distanceToPlane(Vector3d point, RigidbodyPlaneCollider* plane) {
-    return point.dot(plane->getNormalVector()) - plane->getCenter().dot(plane->getNormalVector());
+    return point.dot(plane->getNormalVector().normalize()) - plane->getCenter().dot(plane->getNormalVector().normalize());
 }
