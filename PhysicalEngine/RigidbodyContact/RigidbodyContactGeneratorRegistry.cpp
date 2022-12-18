@@ -85,9 +85,10 @@ void RigidbodyContactGeneratorRegistry::calculateContactCuboid(RigidbodyCuboidRe
         RigidbodyContact contactInfo(rigid);
         for (int i = 0; i < 8; i++)
         {
+            std::cout << points[i] << "    face to";
             points[i] = transformMatrix.transformPosition(points[i]);
             float distance = distanceToPlane(points[i], planeCollider);
-
+            std::cout << points[i] << ""<< std::endl;
             if (distance < 0)
             {
                 float interpenetration = std::abs(distance);
