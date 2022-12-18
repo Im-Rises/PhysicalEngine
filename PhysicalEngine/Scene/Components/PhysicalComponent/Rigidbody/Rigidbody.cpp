@@ -211,10 +211,44 @@ void Rigidbody::drawGuiForceGeneratorsAtPoint() {
 void Rigidbody::drawGui() {
     PhysicalComponent::drawGui();
 
+    // linearSpeed, acceleration
+    ImGui::Text("Angular Speed");
+    if (ImGui::BeginTable("PhysicalComponentAngularSpeed", 3))
+    {
+        ImGui::TableNextColumn();
+        ImGui::Text("X:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##PhysicalComponentAngularSpeedX", &m_angularSpeed.x);
+        ImGui::TableNextColumn();
+        ImGui::Text("Y:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##PhysicalComponentAngularSpeedY", &m_angularSpeed.y);
+        ImGui::TableNextColumn();
+        ImGui::Text("Z:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##PhysicalComponentAngularSpeedZ", &m_angularSpeed.z);
+        ImGui::EndTable();
+    }
+    ImGui::Text("Angular Acceleration");
+    if (ImGui::BeginTable("PhysicalComponentAngularAcceleration", 3))
+    {
+        ImGui::TableNextColumn();
+        ImGui::Text("X:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##PhysicalComponentAngularAccelerationX", &m_angularAcceleration.x);
+        ImGui::TableNextColumn();
+        ImGui::Text("Y:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##PhysicalComponentAngularAccelerationY", &m_angularAcceleration.y);
+        ImGui::TableNextColumn();
+        ImGui::Text("Z:");
+        ImGui::SameLine();
+        ImGui::InputFloat("##PhysicalComponentAngularAccelerationZ", &m_angularAcceleration.z);
+        ImGui::EndTable();
+    }
+
     ImGui::Text("Force Generators");
     PhysicalComponent::drawGuiForceGenerators();
-
-    ImGui::Text("");
 
     ImGui::NewLine();
     ImGui::Text("Force Generators at Point");

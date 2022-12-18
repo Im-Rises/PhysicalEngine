@@ -80,7 +80,7 @@ void PhysicalComponent::drawGui() {
     gravity.drawGui(m_gameObject->getScenePtr());
 
     // linearSpeed, acceleration
-    ImGui::Text("linearSpeed");
+    ImGui::Text("linear Speed");
     if (ImGui::BeginTable("PhysicalComponentlinearSpeed", 3))
     {
         ImGui::TableNextColumn();
@@ -97,7 +97,7 @@ void PhysicalComponent::drawGui() {
         ImGui::InputFloat("##PhysicalComponentlinearSpeedZ", &linearSpeed.z);
         ImGui::EndTable();
     }
-    ImGui::Text("Acceleration");
+    ImGui::Text("Linear Acceleration");
     if (ImGui::BeginTable("PhysicalComponentAcceleration", 3))
     {
         ImGui::TableNextColumn();
