@@ -21,6 +21,8 @@ public:
     Sphere(float radius = 1, int rings = 16, int sectors = 16);
 
     Matrix33 getInertiaTensor(float mass) const override;
+
+    const char* getMeshType() const;
 };
 
 #endif // !SPHERE_H

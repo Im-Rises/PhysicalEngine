@@ -21,6 +21,8 @@ public:
     void generateTriangles(float radius, float height, int rings);
 
     Matrix33 getInertiaTensor(float mass) const override;
+
+    const char* getMeshType() const;
 };
 
 

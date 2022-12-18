@@ -5,7 +5,7 @@
 #include "../../Component.h"
 #include "../../../GameObject.h"
 
-#define RIGIDBODY_PRIMITIVE_COLLIDER "RigidbodyPrimitiveColliderComponent"
+#define RIGIDBODY_PRIMITIVE_COLLIDER "Rigidbody_Primitive_Collider"
 
 enum RigidbodyPrimitiveColliderType {
     RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_NONE = 0,

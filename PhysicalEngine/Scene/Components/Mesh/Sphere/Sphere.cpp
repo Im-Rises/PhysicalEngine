@@ -99,3 +99,6 @@ Matrix33 Sphere::getInertiaTensor(float mass) const {
 
     return Matrix33(values);
 }
+const char* Sphere::getMeshType() const {
+    return MESH_TYPE;
+}

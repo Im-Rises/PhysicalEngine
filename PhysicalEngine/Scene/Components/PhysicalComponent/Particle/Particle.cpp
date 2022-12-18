@@ -25,10 +25,10 @@ Particle::Particle(const Particle& particle) : Component(particle.m_gameObject) 
 }
 
 Particle::~Particle() {
-    for (auto& force : forceGeneratorsList)
-    {
-        delete force;
-    }
+//    for (auto& force : forceGeneratorsList)
+//    {
+//        delete force;
+//    }
 }
 
 void Particle::update(float deltaTime) {

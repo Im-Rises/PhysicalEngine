@@ -68,3 +68,6 @@ Matrix33 CuboidRectangle::getInertiaTensor(float mass) const {
         0.0f, 0.0f, (1.0f / 12) * mass * (width * width + height * height) };
     return Matrix33(values);
 }
+const char* CuboidRectangle::getMeshType() const {
+    return MESH_TYPE;
+}

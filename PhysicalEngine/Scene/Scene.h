@@ -69,7 +69,11 @@ public:
 public:
     ParticleContactGeneratorRegistry getParticleContactGeneratorRegistry();
 
-    void addParticleCollider(ParticleCollider particleCollider);
+//    void addParticleCollider(ParticleCollider* particleCollider);
+
+    void collectParticleColliders();
+
+    void cleanParticleColliders();
 
     unsigned int getFrameBufferId() const;
 

@@ -10,4 +10,3 @@ foreach (test ${SRCS_TEST})
     add_executable(${testName} ${test} ${HEADERS} ${SRCS})
     add_test(${testName} ${testName})
 endforeach ()
-

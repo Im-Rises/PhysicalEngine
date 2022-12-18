@@ -26,10 +26,10 @@ Rigidbody::Rigidbody(GameObject* gameObject) : Component(gameObject) {
 }
 
 Rigidbody::~Rigidbody() {
-    for (ForceGenerator* forceGenerator : forceGeneratorsList)
-    {
-        delete forceGenerator;
-    }
+//    for (ForceGenerator* forceGenerator : forceGeneratorsList)
+//    {
+//        delete forceGenerator;
+//    }
     for (ForcePoint& forcePoint : pointForceGeneratorsList)
     {
         delete forcePoint.force;
@@ -273,4 +273,7 @@ void Rigidbody::stop() {
     m_angularAcceleration = Vector3d(0, 0, 0);
 
     isKinematic = true;
+}
+void Rigidbody::setAngularSpeed(const Vector3d& angularSpeed) {
+    m_angularSpeed = angularSpeed;
 }

@@ -3,7 +3,7 @@
 
 #include "../Mesh.h"
 
-#define MESHTYPE_CUBOID_RECTANGLE "CuboidRectangle"
+#define MESHTYPE_CUBOID_RECTANGLE "Cuboid_Rectangle"
 
 class CuboidRectangle : public Mesh {
 private:
@@ -18,6 +18,8 @@ public:
     CuboidRectangle(float width = 1, float height = 1, float length = 1);
 
     Matrix33 getInertiaTensor(float mass) const override;
+
+    const char* getMeshType() const;
 };
 
 #endif // !CUBOID_RECTANGLE_H
