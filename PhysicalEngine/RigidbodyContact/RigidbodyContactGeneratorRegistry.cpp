@@ -2,6 +2,7 @@
 
 #include "../Scene/GameObject.h"
 #include <cmath>
+#include "RigidbodyContact/RigidbodyContact.h"
 
 RigidbodyContactGeneratorRegistry::RigidbodyContactGeneratorRegistry() {
 }
@@ -76,26 +77,48 @@ void RigidbodyContactGeneratorRegistry::calculateContactCuboid(RigidbodyCuboidRe
         rcrc->getAllPoints(points);
         Matrix34 transformMatrix = rcrc->getGameObject()->transform.getMatrix();
         bool collision = false;
+        Rigidbody* rigid = nullptr;
+        rcrc->getGameObject()->getComponentByClass(rigid);
+        if (rigid == nullptr || rigid->getIsKinematic()) {
+            return;
+        }
+        RigidbodyContact contactInfo(rigid);
         for (int i = 0; i < 8; i++)
         {
             points[i] = transformMatrix.transformPosition(points[i]);
             float distance = distanceToPlane(points[i], planeCollider);
+
             if (distance < 0)
             {
                 float interpenetration = std::abs(distance);
                 Vector3d normal = planeCollider->getNormalVector();
                 Vector3d pointContact = points[i];
                 collision = true;
-                std::cout << "Collision box plane" << std::endl;
+                contactInfo.m_points.push_back(pointContact);
+                contactInfo.m_normal = normal;
+                contactInfo.m_interpenetration.push_back(interpenetration);
             }
         }
         if (collision)
         {
+            
             Rigidbody* rigid = nullptr;
             rcrc->getGameObject()->getComponentByClass(rigid);
             if (rigid != nullptr)
             {
                 rigid->stop();
+            }
+            std::cout << "Collision box plane:" << std::endl;
+            Vector3d n = contactInfo.m_normal;
+            std::cout << "  -normal: "
+                      << "(" << n.getx() << "," << n.gety() << "," << n.getz() << ")" << std::endl;
+            for (int i = 0; i < contactInfo.m_points.size(); i++) {
+                Vector3d pContact = contactInfo.m_points[i];
+                float interp = contactInfo.m_interpenetration[i];
+
+                std::cout << "  Point " << (i + 1) << " : "
+                          << "(" << pContact.getx() << "," << pContact.gety() << "," << pContact.getz() << ")" << std::endl;
+                std::cout << "  Interpenetration "<< (i+1) <<" : "<< interp << std::endl;
             }
         }
     }
