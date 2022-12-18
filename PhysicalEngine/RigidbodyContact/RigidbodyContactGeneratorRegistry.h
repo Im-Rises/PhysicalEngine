@@ -28,6 +28,7 @@ private:
     float distanceToPlane(Vector3d point,RigidbodyPlaneCollider* plane);
     
     void calculateContactPlane(RigidbodyPlaneCollider* rpc, RigidbodyPrimitiveCollider* other);
+
 };
 
 

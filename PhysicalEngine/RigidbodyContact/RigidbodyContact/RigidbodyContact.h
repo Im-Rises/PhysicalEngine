@@ -26,6 +26,23 @@ private:
     void resolveSpeed();
 
     void resolveInterpenetration();
+
+
+public:
+    friend std::ostream& operator<<(std::ostream& stream, const RigidbodyContact contactInfo) {
+        Vector3d n = contactInfo.m_normal;
+            stream << "  -normal: "
+                      << "(" << n.getx() << "," << n.gety() << "," << n.getz() << ")" << std::endl;
+            for (int i = 0; i < contactInfo.m_points.size(); i++) {
+                Vector3d pContact = contactInfo.m_points[i];
+                float interp = contactInfo.m_interpenetration[i];
+
+                stream << "  Point " << (i + 1) << " : "
+                          << "(" << pContact.getx() << "," << pContact.gety() << "," << pContact.getz() << ")" << std::endl;
+                stream << "  Interpenetration "<< (i+1) <<" : "<< interp << std::endl;
+            }
+            return stream;
+    }
 };
 
 
