@@ -98,6 +98,8 @@ public:
             }
         }
     }
+
+    bool getIsKinematic() const;
 };
 
 

@@ -181,3 +181,7 @@ void PhysicalComponent::drawGuiForceGenerators() {
         ImGui::EndPopup();
     }
 }
+
+bool PhysicalComponent::getIsKinematic() const {
+    return isKinematic;
+}

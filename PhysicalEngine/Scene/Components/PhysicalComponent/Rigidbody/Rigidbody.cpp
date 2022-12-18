@@ -12,8 +12,8 @@
 #include "../../../Components/Mesh/Cuboid/CuboidRectangle.h"
 
 Rigidbody::Rigidbody(GameObject* gameObject) : Component(gameObject) {
-//    m_speed = { 0, 0, 0 };
-//    m_acceleration = { 0, 0, 0 };
+    //    m_speed = { 0, 0, 0 };
+    //    m_acceleration = { 0, 0, 0 };
     m_mass = 1;
     m_rotation = { 0, 0, 0 };
     m_inertiaTensor = Matrix33();
@@ -214,24 +214,12 @@ void Rigidbody::drawGui() {
     ImGui::Text("Force Generators");
     PhysicalComponent::drawGuiForceGenerators();
 
-    //    // Angular Damping
-    //    ImGui::Text("Angular Damping");
-    //    ImGui::DragFloat("##ParticleAngularDamping", &m_angularDamping, 0.1f, 0.0f, 100.0f);
-    //
-    //    // Angular Speed
-    //    ImGui::Text("Angular Speed");
-    //    ImGui::DragFloat3("##ParticleAngularSpeed", &angularSpeed.x, 0.1f, 0.0f, 100.0f);
-    //
-    //    // Angular Acceleration
-    //    ImGui::Text("Angular Acceleration");
-    //    ImGui::DragFloat3("##ParticleAngularAcceleration", &angularAcceleration.x, 0.1f, 0.0f, 100.0f);
+    ImGui::Text("");
 
     ImGui::NewLine();
     ImGui::Text("Force Generators at Point");
     drawGuiForceGeneratorsAtPoint();
 }
-
-
 
 std::string Rigidbody::getName() const {
     return COMPONENT_TYPE;
@@ -242,8 +230,8 @@ void Rigidbody::stop() {
     linearSpeed = Vector3d(0, 0, 0);
     linearAcceleration = Vector3d(0, 0, 0);
 
-//    m_speed = Vector3d(0, 0, 0);
-//    m_acceleration = Vector3d(0, 0, 0);
+    //    m_speed = Vector3d(0, 0, 0);
+    //    m_acceleration = Vector3d(0, 0, 0);
 
     m_angularSpeed = Vector3d(0, 0, 0);
     m_angularAcceleration = Vector3d(0, 0, 0);
