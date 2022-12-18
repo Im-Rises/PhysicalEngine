@@ -1,27 +1,26 @@
 #include "Camera.h"
 
+#include "../InputManager.h"
+
 Camera::Camera() {
 }
 
 Camera::~Camera() = default;
 
-void Camera::moveForward(float speed) {
-    cameraPos += cameraMoveSpeed * cameraFront;
+void Camera::moveForward() {
+    cameraPosMovementBuffer += cameraMoveSpeed * cameraFront;
 }
 
-void Camera::moveBackward(float speed) {
-
-    cameraPos -= cameraMoveSpeed * cameraFront;
+void Camera::moveBackward() {
+    cameraPosMovementBuffer -= cameraMoveSpeed * cameraFront;
 }
 
-void Camera::moveLeft(float speed) {
-
-    cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraMoveSpeed;
+void Camera::moveLeft() {
+    cameraPosMovementBuffer -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraMoveSpeed;
 }
 
-void Camera::moveRight(float speed) {
-
-    cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraMoveSpeed;
+void Camera::moveRight() {
+    cameraPosMovementBuffer += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraMoveSpeed;
 }
 
 void Camera::processMouseMovement(float xOffset, float yOffset) {
@@ -31,7 +30,8 @@ void Camera::processMouseMovement(float xOffset, float yOffset) {
     yaw += xOffset;
     pitch += yOffset;
 
-    if (constrainPitch) {
+    if (constrainPitch)
+    {
         if (pitch > 89.0f)
             pitch = 89.0f;
         if (pitch < -89.0f)
@@ -51,4 +51,28 @@ float Camera::getFov() const {
 
 glm::mat4 Camera::getViewMatrix() const {
     return glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+}
+
+void Camera::resetCameraPosMovementBuffer() {
+    cameraPosMovementBuffer = glm::vec3(0.0f, 0.0f, 0.0f);
+}
+
+void Camera::update(float deltaTime) {
+    if (InputManager::isForwardKeyPressed())
+    {
+        moveForward();
+    }
+    if (InputManager::isBackwardKeyPressed())
+    {
+        moveBackward();
+    }
+    if (InputManager::isLeftKeyPressed())
+    {
+        moveLeft();
+    }
+    if (InputManager::isRightKeyPressed())
+    {
+        moveRight();
+    }
+    cameraPos += cameraPosMovementBuffer * deltaTime;
 }

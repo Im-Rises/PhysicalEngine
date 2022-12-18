@@ -130,6 +130,8 @@ PhysicalEngineLauncher::PhysicalEngineLauncher() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     glEnable(GL_DEPTH_TEST); // Enable depth testing
+
+    InputManager::m_window = window;
 }
 
 PhysicalEngineLauncher::~PhysicalEngineLauncher() {

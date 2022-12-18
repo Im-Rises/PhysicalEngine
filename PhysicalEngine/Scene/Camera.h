@@ -15,7 +15,7 @@ public:
     glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
     glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
-    float cameraMoveSpeed = 0.4f;
+    float cameraMoveSpeed = 4.0f;
     float cameraSensitivity = 0.1f;
 
     float yaw = -90.0f;
@@ -23,24 +23,30 @@ public:
 
     bool constrainPitch = true;
 
+    glm::vec3 cameraPosMovementBuffer = glm::vec3(0.0f, 0.0f, 0.0f);
+
 public:
     Camera();
 
     ~Camera();
 
-    void moveForward(float speed);
+    void moveForward();
 
-    void moveBackward(float speed);
+    void moveBackward();
 
-    void moveLeft(float speed);
+    void moveLeft();
 
-    void moveRight(float speed);
+    void moveRight();
 
     void processMouseMovement(float xOffset, float yOffset);
 
     glm::mat4 getViewMatrix() const;
 
     float getFov() const;
+
+    void resetCameraPosMovementBuffer();
+
+    void update(float deltaTime);
 };
 
 
