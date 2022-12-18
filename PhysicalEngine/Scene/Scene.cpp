@@ -146,10 +146,9 @@ unsigned int Scene::getFrameBufferId() const {
     return fbo;
 }
 
-void Scene::addParticleCollider(ParticleCollider particleCollider) {
+void Scene::addParticleCollider(ParticleCollider* particleCollider) {
     particleCollide.addCollider(particleCollider);
 }
-
 
 std::vector<GameObject*>& Scene::getGameObjects() {
     return gameObjects;

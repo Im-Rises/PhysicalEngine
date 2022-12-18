@@ -20,7 +20,7 @@ public:
 
     float getRadius() const;
 
-    Particle* getParticle();
+    //    Particle* getParticle();
 
     std::string getName() const override;
 
