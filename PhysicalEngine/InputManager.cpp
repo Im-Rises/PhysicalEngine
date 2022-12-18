@@ -46,22 +46,22 @@ void InputManager::keyPressed(GLFWwindow* window, int key, PhysicalEngineLaunche
         glfwSetWindowShouldClose(window, GLFW_TRUE);
         break;
     }
-    case GLFW_KEY_RIGHT: {
-        engine->game.goRight();
-        break;
-    }
-    case GLFW_KEY_LEFT: {
-        engine->game.goLeft();
-        break;
-    }
-    case GLFW_KEY_UP: {
-        engine->game.goUp();
-        break;
-    }
-    case GLFW_KEY_DOWN: {
-        engine->game.goDown();
-        break;
-    }
+        //    case GLFW_KEY_RIGHT: {
+        //        engine->game.goRight();
+        //        break;
+        //    }
+        //    case GLFW_KEY_LEFT: {
+        //        engine->game.goLeft();
+        //        break;
+        //    }
+        //    case GLFW_KEY_UP: {
+        //        engine->game.goUp();
+        //        break;
+        //    }
+        //    case GLFW_KEY_DOWN: {
+        //        engine->game.goDown();
+        //        break;
+        //    }
         //    case GLFW_KEY_F: {
         //        engine->focusCameraOnGameObject();
         //        break;

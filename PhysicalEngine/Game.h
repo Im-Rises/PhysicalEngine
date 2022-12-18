@@ -20,16 +20,16 @@ public:
 
     void start(Scene* scene);
 
-    void goLeft();
-
-    void goRight();
-
-    void goUp();
-
-    void goDown();
+//    void goLeft();
+//
+//    void goRight();
+//
+//    void goUp();
+//
+//    void goDown();
 
 public:
-    float* getPtrSpeed();
+//    float* getPtrSpeed();
 };
 
 #endif // GAME_H
