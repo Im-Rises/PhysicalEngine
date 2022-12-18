@@ -21,8 +21,14 @@ int ParticleCollide::addContact(ParticleContact* particleContact, unsigned int l
                 m_colliders[i]->getGameObject()->getComponentByClass(particle0);
                 Particle* particle1 = nullptr;
                 m_colliders[j]->getGameObject()->getComponentByClass(particle1);
+
+                // Check if the particles have colliders if not, skip these particles
                 //                Particle* particle0 = m_colliders[i]->getParticle();
                 //                Particle* particle1 = m_colliders[j]->getParticle();
+                if (particle0 == nullptr || particle1 == nullptr)
+                    continue;
+
+                // Check if the particles are colliding
                 float distance = particle0->getPosition().distance(particle1->getPosition());
                 float sumRadius = m_colliders[i]->getRadius() + m_colliders[j]->getRadius();
                 if (distance < sumRadius)
@@ -42,4 +48,7 @@ int ParticleCollide::addContact(ParticleContact* particleContact, unsigned int l
         }
     }
     return current;
+}
+void ParticleCollide::cleanColliders() {
+    m_colliders.clear();
 }

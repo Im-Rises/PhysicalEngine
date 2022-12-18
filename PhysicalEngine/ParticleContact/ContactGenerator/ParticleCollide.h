@@ -20,6 +20,8 @@ public:
     void addCollider(ParticleCollider* particleCollider);
 
     int addContact(ParticleContact* particleContact, unsigned int limit, unsigned int current) override;
+
+    void cleanColliders();
 };
 
 #endif // !PARTICLECOLLIDE_H

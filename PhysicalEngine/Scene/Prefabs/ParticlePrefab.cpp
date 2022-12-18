@@ -11,7 +11,7 @@ ParticlePrefab::ParticlePrefab(Scene* scene) : GameObject(scene, new Sphere(1, 2
     auto* particle = new Particle(this);
     particle->addForceToList(new AnchoredSpring({ 0, 0, 0 }, 0.5f, 0.5f));
     addComponent(particle);
-    scene->addParticleCollider(new ParticleCollider(this, 1));
+    //    scene->addParticleCollider(new ParticleCollider(this, 1));
 }
 
 ParticlePrefab::~ParticlePrefab() {
