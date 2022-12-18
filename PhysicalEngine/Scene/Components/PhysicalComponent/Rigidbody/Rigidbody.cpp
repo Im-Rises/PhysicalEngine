@@ -12,8 +12,8 @@
 #include "../../../Components/Mesh/Cuboid/CuboidRectangle.h"
 
 Rigidbody::Rigidbody(GameObject* gameObject) : Component(gameObject) {
-    m_speed = { 0, 0, 0 };
-    m_acceleration = { 0, 0, 0 };
+//    m_speed = { 0, 0, 0 };
+//    m_acceleration = { 0, 0, 0 };
     m_mass = 1;
     m_rotation = { 0, 0, 0 };
     m_inertiaTensor = Matrix33();
@@ -242,12 +242,11 @@ void Rigidbody::stop() {
     linearSpeed = Vector3d(0, 0, 0);
     linearAcceleration = Vector3d(0, 0, 0);
 
-    m_speed = Vector3d(0, 0, 0);
-    m_acceleration = Vector3d(0, 0, 0);
+//    m_speed = Vector3d(0, 0, 0);
+//    m_acceleration = Vector3d(0, 0, 0);
 
     m_angularSpeed = Vector3d(0, 0, 0);
     m_angularAcceleration = Vector3d(0, 0, 0);
 
     isKinematic = true;
-
 }

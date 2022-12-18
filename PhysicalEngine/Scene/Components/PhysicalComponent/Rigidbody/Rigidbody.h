@@ -19,20 +19,19 @@ struct ForcePoint {
 class Rigidbody : public PhysicalComponent {
 private:
     static constexpr const char* COMPONENT_TYPE = RIGIDBODY_COMPONENT;
-    // TODO: Delete variables that are the same with the parent class
+
 protected:
-    Vector3d m_speed;
-    Vector3d m_acceleration;
-    Vector3d m_rotation;
-
-    Matrix33 m_inertiaTensor;
-    Matrix34 m_transformMatrix;
-
-    Quaternion m_orientation;
+//    Vector3d m_speed;
+//    Vector3d m_acceleration;
 
     Vector3d m_angularSpeed;
     Vector3d m_angularAcceleration;
+    Matrix33 m_inertiaTensor;
     Vector3d m_torqueAccum;
+
+    Quaternion m_orientation;
+    Vector3d m_rotation;
+    Matrix34 m_transformMatrix;
 
     std::vector<ForcePoint> pointForceGeneratorsList;
 

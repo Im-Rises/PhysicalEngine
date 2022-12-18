@@ -4,8 +4,6 @@
 #include "../../Scene/Components/PhysicalComponent/Particle/Particle.h"
 
 class ParticleCollider {
-
-
 private:
     float m_radius;
     Particle* m_particle;

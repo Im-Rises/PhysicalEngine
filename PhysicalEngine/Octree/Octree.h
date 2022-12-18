@@ -1,9 +1,9 @@
 #ifndef OCTREE_H
 #define OCTREE_H
 
-#include "..\RigidbodyContact\RigidbodyContactGeneratorRegistry.h"
-#include "..\Scene\Components\Collider\RigidbodyCollider\RigidbodyPrimitiveCollider.h"
-#include "..\Utility\Vector3d.h"
+#include "../RigidbodyContact/RigidbodyContactGeneratorRegistry.h"
+#include "../Scene/Components/Collider/RigidbodyCollider/RigidbodyPrimitiveCollider.h"
+#include "../Utility/Vector3d.h"
 
 struct Object {
     Vector3d center;     // Center point for object
@@ -70,16 +70,16 @@ public:
                 nextObj = maj;
             }
             */
-            
-            if (Tree->pObjList != nullptr) {
-                //std::cout << Tree->center << std::endl;
+
+            if (Tree->pObjList != nullptr)
+            {
+                // std::cout << Tree->center << std::endl;
             }
             Tree->pObjList = nullptr;
             for (int i = 0; i < 8; i++)
             {
                 CleanOctree(Tree->pChild[i]);
             }
-            
         }
     }
 
@@ -89,7 +89,7 @@ public:
         // If straddling any of the dividing x, y, or z planes, exit directly
         for (int i = 0; i < 3; i++)
         {
-            float delta=0;
+            float delta = 0;
             if (i == 0)
                 delta = pObject->center.getx() - pTree->center.getx();
             if (i == 1)
@@ -97,7 +97,7 @@ public:
             if (i == 2)
                 delta = pObject->center.getz() - pTree->center.getz();
 
-            if (abs(delta) < pObject->radius || pTree->halfWidth < abs(delta)+pObject->radius)
+            if (abs(delta) < pObject->radius || pTree->halfWidth < abs(delta) + pObject->radius)
             {
                 straddle = 1;
                 break;
@@ -141,7 +141,7 @@ public:
                     if (pA == pB)
                         break;
                     // Now perform the collision test between pA and pB in some manner
-                    //std::cout << "Potentiel collision" << std::endl;
+                    // std::cout << "Potentiel collision" << std::endl;
                     contactRegistry.calculateContact(pA->Collider, pB->Collider);
                 }
             }

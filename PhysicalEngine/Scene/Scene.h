@@ -3,10 +3,10 @@
 
 #include <vector>
 
-#include "../Contact/ContactGenerator/ParticleCollide.h"
-#include "../Contact/ParticleContactResolver.h"
-#include "../Contact/ParticlesContactGeneratorRegistry.h"
 #include "../Octree/Octree.h"
+#include "../ParticleContact/ContactGenerator/ParticleCollide.h"
+#include "../ParticleContact/ParticleContactResolver.h"
+#include "../ParticleContact/ParticlesContactGeneratorRegistry.h"
 #include "../Utility/Vector3d.h"
 #include "Axis.h"
 #include "Camera.h"
@@ -85,7 +85,7 @@ public:
 
     void deleteGameObject(GameObject* gameObject);
 
-    void createGameObject(std::string name);
+    GameObject* createGameObject(std::string name);
 };
 
 #endif // SCENE_H

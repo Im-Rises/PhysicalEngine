@@ -270,7 +270,8 @@ void PhysicalEngineLauncher::handleGui() {
                 {
                     if (ImGui::MenuItem(gameObjType))
                     {
-                        scene->createGameObject(gameObjType);
+                        // Create and select game object in hierarchy
+                        gameObject = scene->createGameObject(gameObjType);
                     }
                 }
                 ImGui::EndPopup();

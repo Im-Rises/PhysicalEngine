@@ -126,17 +126,17 @@ void Scene::addGameObject(GameObject* gameObject) {
     gameObjects.push_back(gameObject);
 }
 
-//void Scene::translateCamera(const Vector3d& vector3D) {
-//    //    camera.translate(vector3D);
-//}
+// void Scene::translateCamera(const Vector3d& vector3D) {
+//     //    camera.translate(vector3D);
+// }
 
 // void Scene::rotateCamera(Vector3d vector3D, float angle) {
 //     camera.rotate(vector3D, angle);
 // }
 
-//void Scene::setCameraPosition(const Vector3d& position) {
-//    //    camera.setPosition(position);
-//}
+// void Scene::setCameraPosition(const Vector3d& position) {
+//     //    camera.setPosition(position);
+// }
 
 ParticleContactGeneratorRegistry Scene::getParticleContactGeneratorRegistry() {
     return particleContactGeneratorRegistry;
@@ -189,13 +189,14 @@ void Scene::deleteGameObject(GameObject* gameObject) {
     }
 }
 
-void Scene::createGameObject(std::string name) {
+GameObject* Scene::createGameObject(std::string name) {
     for (auto& meshName : Mesh::meshNamesList)
     {
         if (meshName == name)
         {
-            gameObjects.emplace_back(new GameObject(this, Mesh::createMesh(name.c_str())));
-            return;
+            GameObject* gameObject = new GameObject(this, Mesh::createMesh(name.c_str()));
+            gameObjects.emplace_back(gameObject);
+            return gameObject;
         }
     }
 }

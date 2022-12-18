@@ -9,7 +9,6 @@ private:
     float m_length;
 
 public:
-
     ParticleRode(Particle *particle1, Particle *particle2, float length);
 
     int addContact(ParticleContact *particleContact, unsigned int limit, unsigned int current) override;

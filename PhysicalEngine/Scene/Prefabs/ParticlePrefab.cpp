@@ -1,5 +1,5 @@
 #include "ParticlePrefab.h"
-#include "../../Contact/ParticleCollider/ParticleCollider.h"
+#include "../../ParticleContact/ParticleCollider/ParticleCollider.h"
 #include "../Components/Mesh/Sphere/Sphere.h"
 #include "../Components/PhysicalComponent/Particle/Particle.h"
 #include "../PhysicalEngine/Force/AnchoredSpring.h"
