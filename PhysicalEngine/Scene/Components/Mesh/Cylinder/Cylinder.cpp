@@ -131,3 +131,6 @@ void Cylinder::generateTriangles(float radius, float height, int rings) {
         indices.push_back(rings * 2 + 1);
     }
 }
+const char* Cylinder::getMeshType() const {
+    return MESH_TYPE;
+}

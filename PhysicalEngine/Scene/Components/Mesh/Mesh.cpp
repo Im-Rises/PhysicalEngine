@@ -14,6 +14,7 @@ using namespace std;
 const char* Mesh::meshNamesList[3] = { MESHTYPE_CYLINDER, MESHTYPE_SPHERE, MESHTYPE_CUBOID_RECTANGLE };
 
 void Mesh::drawGui() {
+    ImGui::Text("Mesh type: %s", getMeshType());
     ImGui::Text(verticesUseIndices ? "Vertices use indices" : "Vertices don't use indices");
     if (ImGui::BeginTable("", 3))
     {
@@ -76,4 +77,8 @@ Mesh* Mesh::createMesh(const char* meshType) {
             }
         }
     }
+}
+
+const char* Mesh::getMeshType() const {
+    return MESH_TYPE;
 }
