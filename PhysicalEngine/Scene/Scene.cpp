@@ -82,12 +82,14 @@ void Scene::update(float deltaTime) {
         physicHandler.update(gameObject, deltaTime);
     }
 
-    // Detect collision
+    // Detect particles collision
+    collectParticleColliders();
     ParticleContact* particleContacts = particleContactGeneratorRegistry.generateAllContacts();
 
     // Resolve collisions
     ParticleContact test = particleContacts[0];
     particleContactResolver.resolveContact(particleContacts, particleContactGeneratorRegistry.getSize(), deltaTime);
+    cleanParticleColliders();
 
     // Clean octree
     octree.CleanOctree(octree.root);
@@ -104,8 +106,6 @@ void Scene::update(float deltaTime) {
     }
     // Test collisions
     octree.TestAllCollisions(octree.root);
-
-    //    }
 }
 
 void Scene::draw(int display_w, int display_h) {
@@ -148,10 +148,9 @@ unsigned int Scene::getFrameBufferId() const {
     return fbo;
 }
 
-void Scene::addParticleCollider(ParticleCollider particleCollider) {
-    particleCollide.addCollider(particleCollider);
-}
-
+// void Scene::addParticleCollider(ParticleCollider* particleCollider) {
+//     particleCollide.addCollider(particleCollider);
+// }
 
 std::vector<GameObject*>& Scene::getGameObjects() {
     return gameObjects;
@@ -180,6 +179,7 @@ GameObject* Scene::getPtrGameObjectByIndex(int index) const {
 Camera* Scene::getCameraPtr() {
     return &camera;
 }
+
 void Scene::deleteGameObject(GameObject* gameObject) {
     for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it)
     {
@@ -199,6 +199,22 @@ GameObject* Scene::createGameObject(std::string name) {
             GameObject* gameObject = new GameObject(this, Mesh::createMesh(name.c_str()));
             gameObjects.emplace_back(gameObject);
             return gameObject;
+        }
+    }
+}
+
+void Scene::cleanParticleColliders() {
+    particleCollide.cleanColliders();
+}
+
+void Scene::collectParticleColliders() {
+    for (GameObject* gameObject : gameObjects)
+    {
+        ParticleCollider* particleCollider = nullptr;
+        gameObject->getComponentByClass(particleCollider);
+        if (particleCollider != nullptr)
+        {
+            particleCollide.addCollider(particleCollider);
         }
     }
 }
