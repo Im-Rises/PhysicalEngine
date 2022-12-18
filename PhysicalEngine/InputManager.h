@@ -26,7 +26,7 @@ private:
     static void keyRepeated(GLFWwindow* window, int key, PhysicalEngineLauncher* engine);
 
 public:
-    //    static void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
+    static void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
 
     static void cursor_position_callback(GLFWwindow* window, double xPos, double yPos);
 
@@ -37,6 +37,8 @@ public:
     static bool isBackwardKeyPressed();
     static bool isLeftKeyPressed();
     static bool isRightKeyPressed();
+    static bool isUpKeyPressed();
+    static bool isDownKeyPressed();
 };
 
 #endif // INPUT_MANAGER_H

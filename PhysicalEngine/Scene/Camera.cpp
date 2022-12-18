@@ -70,6 +70,16 @@ void Camera::update(float deltaTime) {
     {
         moveRight();
     }
+    if (InputManager::isUpKeyPressed())
+    {
+        cameraPosMovementBuffer += cameraMoveSpeed * cameraUp;
+    }
+    if (InputManager::isDownKeyPressed())
+    {
+        cameraPosMovementBuffer -= cameraMoveSpeed * cameraUp;
+    }
+
+    cameraPosMovementBuffer += scrollOffset * cameraMoveSpeed * cameraUp;
 
     // Update camera position and rotation
     cameraPos += cameraPosMovementBuffer * deltaTime;
@@ -80,4 +90,9 @@ void Camera::update(float deltaTime) {
     // Reset camera buffers
     cameraPosMovementBuffer = glm::vec3(0.0f, 0.0f, 0.0f);
     frontBuffer = glm::vec3(0.0f, 0.0f, 0.0f);
+    scrollOffset = 0.0f;
+}
+
+void Camera::setScrollOffset(float offset) {
+    scrollOffset = offset * scrollSensitivity;
 }

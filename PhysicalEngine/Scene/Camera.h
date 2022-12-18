@@ -27,6 +27,10 @@ public:
     glm::vec3 cameraPosMovementBuffer = glm::vec3(0.0f, 0.0f, 0.0f);
     glm::vec3 frontBuffer;
 
+    // Scroll values
+    float scrollOffset = 0.0f;
+    float scrollSensitivity = 4.0f;
+
 
 public:
     Camera();
@@ -48,6 +52,8 @@ public:
     float getFov() const;
 
     void update(float deltaTime);
+
+    void setScrollOffset(float offset);
 };
 
 

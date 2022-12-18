@@ -135,10 +135,11 @@ void InputManager::keyPressed(GLFWwindow* window, int key, PhysicalEngineLaunche
 //     }
 // }
 
-// void InputManager::scroll_callback(GLFWwindow* window, double xOffset, double yOffset) {
-//     auto* engine = (PhysicalEngineLauncher*)glfwGetWindowUserPointer(window);
-//     engine->scene->translateCamera(Vector3d(0, 0, movementSpeed * (float)yOffset));
-// }
+void InputManager::scroll_callback(GLFWwindow* window, double xOffset, double yOffset) {
+    auto* engine = (PhysicalEngineLauncher*)glfwGetWindowUserPointer(window);
+    Camera* camera = engine->scene->getCameraPtr();
+    camera->setScrollOffset(yOffset);
+}
 
 void InputManager::cursor_position_callback(GLFWwindow* window, double xPos, double yPos) {
     if (mouseRightButtonPressed)
@@ -169,4 +170,10 @@ bool InputManager::isLeftKeyPressed() {
 }
 bool InputManager::isRightKeyPressed() {
     return glfwGetKey(m_window, GLFW_KEY_RIGHT) == GLFW_PRESS;
+}
+bool InputManager::isUpKeyPressed() {
+    return glfwGetKey(m_window, GLFW_KEY_PAGE_UP) == GLFW_PRESS;
+}
+bool InputManager::isDownKeyPressed() {
+    return glfwGetKey(m_window, GLFW_KEY_PAGE_DOWN) == GLFW_PRESS;
 }
