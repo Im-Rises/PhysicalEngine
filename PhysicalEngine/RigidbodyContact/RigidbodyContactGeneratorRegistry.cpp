@@ -41,18 +41,34 @@ void RigidbodyContactGeneratorRegistry::calculateContactSphere(RigidbodySphereCo
         Vector3d position2 = otherSphereCollider->getGameObject()->transform.getPosition();
         if (pow(position1.distance(position2), 2) < (rsc->getRadius() + otherSphereCollider->getRadius()))
         {
+            
             std::cout << "Sphere to sphere contact between " << rsc->getGameObject()->getName() << " and " << otherSphereCollider->getGameObject()->getName() << std::endl;
         }
         break;                
     }
     case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_PLANE: {
         auto* planeCollider = dynamic_cast<RigidbodyPlaneCollider*>(other);
-
+        Rigidbody* rigid = nullptr;
+        rsc->getGameObject()->getComponentByClass(rigid);
+        if (rigid == nullptr || rigid->getIsKinematic())
+        {
+            return;
+        }
+        RigidbodyContact contactInfo(rigid);
         float distance = distanceToPlane(rsc->getGameObject()->transform.getPosition(),planeCollider);
-
+        
         if (distance <= rsc->getRadius())
         {
-            std::cout << "Sphere to plane contact between " << rsc->getGameObject()->getName() << " and " << planeCollider->getGameObject()->getName() << std::endl;
+            Vector3d normal = planeCollider->getNormalVector();
+            Vector3d pointContact = rsc->getGameObject()->transform.getPosition() - (planeCollider->getNormalVector() * rsc->getRadius());
+            float interpenetration = rsc->getRadius() -distance;
+            contactInfo.m_normal = normal;
+            contactInfo.m_points.push_back(pointContact);
+            contactInfo.m_interpenetration.push_back(interpenetration);
+            std::cout << "Contact sphere plan " <<std::endl;
+            std::cout << contactInfo << std::endl;
+            rigid->stop();
+
         }
         break;
     }
@@ -87,7 +103,6 @@ void RigidbodyContactGeneratorRegistry::calculateContactCuboid(RigidbodyCuboidRe
         {
             points[i] = transformMatrix.transformPosition(points[i]);
             float distance = distanceToPlane(points[i], planeCollider);
-
             if (distance < 0)
             {
                 float interpenetration = std::abs(distance);
@@ -109,17 +124,7 @@ void RigidbodyContactGeneratorRegistry::calculateContactCuboid(RigidbodyCuboidRe
                 rigid->stop();
             }
             std::cout << "Collision box plane:" << std::endl;
-            Vector3d n = contactInfo.m_normal;
-            std::cout << "  -normal: "
-                      << "(" << n.getx() << "," << n.gety() << "," << n.getz() << ")" << std::endl;
-            for (int i = 0; i < contactInfo.m_points.size(); i++) {
-                Vector3d pContact = contactInfo.m_points[i];
-                float interp = contactInfo.m_interpenetration[i];
-
-                std::cout << "  Point " << (i + 1) << " : "
-                          << "(" << pContact.getx() << "," << pContact.gety() << "," << pContact.getz() << ")" << std::endl;
-                std::cout << "  Interpenetration "<< (i+1) <<" : "<< interp << std::endl;
-            }
+            std::cout << contactInfo << std::endl;
         }
     }
     case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_BOX: {
@@ -135,6 +140,8 @@ void RigidbodyContactGeneratorRegistry::calculateContactPlane(RigidbodyPlaneColl
     switch (other->getColliderType())
     {
     case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_SPHERE: {
+        auto* sphereCollider = dynamic_cast<RigidbodySphereCollider*>(other);
+        calculateContactSphere(sphereCollider, rpc);
         break;
     }
     case RIGIDBODY_PRIMITIVE_COLLIDER_TYPE_PLANE: {

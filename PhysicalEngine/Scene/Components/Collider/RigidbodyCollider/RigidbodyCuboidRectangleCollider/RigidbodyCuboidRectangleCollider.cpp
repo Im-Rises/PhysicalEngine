@@ -37,10 +37,10 @@ void RigidbodyCuboidRectangleCollider::getAllPoints(Vector3d points[8]) {
     for (int i = 0;i<=1;i++)
     {
         int j = (i == 0) ? 1 : -1;
-        points[i] = Vector3d(j*m_halfwidth,m_halfheight,m_halfdepth);
-        points[i + 1] = Vector3d(j*m_halfwidth, m_halfheight, -m_halfdepth);
-        points[i + 2] = Vector3d(j*m_halfwidth, -m_halfheight, m_halfdepth);
-        points[i + 3] = Vector3d(j*m_halfwidth, -m_halfheight, -m_halfdepth);
+        points[i*4] = Vector3d(j*m_halfwidth,m_halfheight,m_halfdepth);
+        points[i*4 + 1] = Vector3d(j*m_halfwidth, m_halfheight, -m_halfdepth);
+        points[i*4 + 2] = Vector3d(j*m_halfwidth, -m_halfheight, m_halfdepth);
+        points[i*4 + 3] = Vector3d(j*m_halfwidth, -m_halfheight, -m_halfdepth);
     }
 }
 
