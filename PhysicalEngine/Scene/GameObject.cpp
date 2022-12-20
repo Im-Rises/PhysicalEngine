@@ -100,10 +100,10 @@ void GameObject::draw(int display_w, int display_h, glm::mat4 view, float fov) {
 
     // Matrix calculations
     auto matrix = transform.getMatrix();
-    //auto m3 = matrix.extractMatrix33();
-    //m3.inverseMat();
-    //Matrix34 m4=matrix.matrix34FromRotationTranslation(m3, Vector3d(matrix(0, 3), matrix(1, 3), matrix(2, 3)));
-    
+    // auto m3 = matrix.extractMatrix33();
+    // m3.inverseMat();
+    // Matrix34 m4=matrix.matrix34FromRotationTranslation(m3, Vector3d(matrix(0, 3), matrix(1, 3), matrix(2, 3)));
+
     glm::mat4 model = convertToGlmMat4(matrix);
     glm::mat4 projection = glm::mat4(1.0f);
     projection = glm::perspective(glm::radians(fov / 2), static_cast<float>(display_w) / static_cast<float>(display_h),
@@ -176,10 +176,10 @@ Scene* GameObject::getScenePtr() const {
 }
 
 glm::mat4 GameObject::convertToGlmMat4(Matrix34& matrix) const {
-    //remplire colonne par colonne ... oui c'est con
+    // remplire colonne par colonne
     return glm::mat4(matrix(0, 0), matrix(1, 0), matrix(2, 0), 0,
         matrix(0, 1), matrix(1, 1), matrix(2, 1), 0,
-        matrix(0, 2), matrix(2, 1), matrix(2, 2), 0,
+        matrix(0, 2), matrix(1, 2), matrix(2, 2), 0,
         matrix(0, 3), matrix(1, 3), matrix(2, 3), 1);
 }
 
