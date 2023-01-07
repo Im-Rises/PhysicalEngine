@@ -14,7 +14,7 @@ This is a simple physics engine written in C++ using Glad, GLFW, OpenGl3 and Dea
 It is implemented using Fixed Framerate and Component Oriented Programming.
 
 > **Note**  
-> The project is a work in progress and is not yet complete.
+> The project is a test for the implementation of a physics engine, it is not intended to be used in production.
 
 ## Features
 
