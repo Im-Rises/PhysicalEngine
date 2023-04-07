@@ -76,11 +76,13 @@ void Scene::update(float deltaTime) {
     //    physicalUpdateTimer = 0;
 
 
+    std::cout << "Update" << std::endl;
     // Move gameObjects
     for (GameObject* gameObject : gameObjects)
     {
         physicHandler.update(gameObject, deltaTime);
     }
+    std::cout << "Update end" << std::endl;
 
     // Detect particles collision
     collectParticleColliders();
