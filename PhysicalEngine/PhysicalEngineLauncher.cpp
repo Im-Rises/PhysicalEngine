@@ -66,8 +66,8 @@ PhysicalEngineLauncher::PhysicalEngineLauncher() {
     const char* glsl_version = "#version 330";
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // 3.2+ only
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);            // 3.0+ only
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 3.2+ only
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);           // 3.0+ only
 #endif
 
     // Create window with graphics context
@@ -86,12 +86,14 @@ PhysicalEngineLauncher::PhysicalEngineLauncher() {
     glfwSetCursorPosCallback(window, InputManager::cursor_position_callback);
     glfwSetMouseButtonCallback(window, InputManager::mouse_button_callback);
 
+#ifndef __EMSCRIPTEN__
     // Center window
     GLFWmonitor* monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode* mode = glfwGetVideoMode(monitor);
     auto xPos = mode->width / 2 - windowWidth / 2;
     auto yPos = mode->height / 2 - windowHeight / 2;
     glfwSetWindowPos(window, xPos, yPos);
+#endif
 
     // Initialize OpenGL loader
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -495,6 +497,7 @@ void PhysicalEngineLauncher::updateViewport(int width, int height) {
 
 
 void PhysicalEngineLauncher::toggleFullScreen() {
+#ifndef __EMSCRIPTEN__
     GLFWmonitor* monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode* mode = glfwGetVideoMode(monitor);
     if (isFullScreen)
@@ -509,6 +512,7 @@ void PhysicalEngineLauncher::toggleFullScreen() {
         glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
         isFullScreen = true;
     }
+#endif
 }
 
 bool PhysicalEngineLauncher::isMinimized() const {

@@ -11,30 +11,41 @@
 
 Shader::Shader() {
 
-const char* vShaderCode = R"(
-    #version 300 es
-    layout (location = 0) in vec3 aPos;
-    uniform mat4 model;
-    uniform mat4 view;
-    uniform mat4 projection;
-    uniform vec4 color;
-    out vec4 ourColor;
-    void main()
-    {
-        gl_Position = projection * view * model * vec4(aPos, 1.0f);
-        ourColor = color;
-    }
+    const char* vShaderCode =
+        R"(#version 300 es
+
+precision highp float;
+
+layout (location = 0) in vec3 aPos;
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+uniform vec4 color;
+
+out vec4 ourColor;
+
+void main()
+{
+    gl_Position = projection * view * model * vec4(aPos, 1.0f);
+    ourColor = color;
+}
 )";
 
-    const char* fShaderCode = R"(
-        #version 300 es
-        in vec4 ourColor;
-        out vec4 FragColor;
-        void main()
-        {
-            FragColor = ourColor;
-        }
-    )";
+    const char* fShaderCode =
+        R"(#version 300 es
+
+precision highp float;
+
+in vec4 ourColor;
+
+out vec4 FragColor;
+
+void main()
+{
+    FragColor = ourColor;
+}
+)";
 
     create(vShaderCode, fShaderCode);
 }
