@@ -5,7 +5,12 @@ out/
 [Ll]ibraries/
 [Dd]ocumentations/
 *.idea/
-
+.cmake/
+web/*.js
+web/*.js.mem
+web/*.wasm
+[Mm]akefile
+*.cbp
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudio,intellij+all,cmake
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,intellij+all,cmake

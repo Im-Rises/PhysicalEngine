@@ -8,7 +8,6 @@
 // Includes
 #include "InputManager.h"
 #include "Scene/Components/Component.h"
-#include "Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "Scene/GameObject.h"
 #include "Scene/Scene.h"
 #include "Utility/RollingBuffer.h"

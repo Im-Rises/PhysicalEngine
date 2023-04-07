@@ -1,1 +1,54 @@
-Checks:          'cppcoreguidelines-*,modernize-*,-modernize-use-trailing-return-type,bugprone-*,clang-analyzer-*,readability-*,performance-*,portability-*,clang-diagnostic-*'
+Checks: >
+  -*,
+  bugprone-*,
+  google-*,
+  misc-*,
+  modernize-*,
+  performance-*,
+  portability-*,
+  readability-*,
+  cppcoreguidelines-*,
+  clang-diagnostic-*
+  clang-analyzer-*,
+  bugprone-*
+  -google-readability-namespace-comments,
+  -google-runtime-int,
+  -google-runtime-references,
+  -google-readability-braces-around-statements,
+  -readability-magic-numbers,
+  -readability-redundant-access-specifiers,
+  -readability-braces-around-statements,
+  -readability-identifier-length,
+  -misc-non-private-member-variables-in-classes,
+  -clang-diagnostic-uninitialized-union,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -bugprone-easily-swappable-parameters,
+  -readability-isolate-declaration,
+  -cppcoreguidelines-pro-bounds-constant-array-index,
+  -cppcoreguidelines-pro-type-union-access,
+#  -modernize-use-trailing-return-type,
+#  -readability-named-parameter,
+
+# Turn all the warnings from the checks above into errors.
+WarningsAsErrors: "*"
+
+CheckOptions:
+  - { key: readability-identifier-naming.NamespaceCase,          value: lower_case }
+  - { key: readability-identifier-naming.ClassCase,              value: CamelCase }
+  - { key: readability-identifier-naming.StructCase,             value: CamelCase }
+  #  - { key: readability-identifier-naming.TemplateParameterCase,  value: CamelCase }
+  #  - { key: readability-identifier-naming.FunctionCase,           value: CamelCase }
+  #  - { key: readability-identifier-naming.VariableCase,           value: CamelCase }
+  #  - { key: readability-identifier-naming.PrivateMemberSuffix,    value: _ }
+  #  - { key: readability-identifier-naming.ProtectedMemberSuffix,  value: _ }
+  - { key: readability-identifier-naming.MacroDefinitionCase,    value: UPPER_CASE }
+  - { key: readability-identifier-naming.EnumConstantCase,         value: CamelCase }
+  #  - { key: readability-identifier-naming.EnumConstantPrefix,       value: k }
+  - { key: readability-identifier-naming.ConstexprVariableCase,    value: UPPER_CASE }
+  #  - { key: readability-identifier-naming.ConstexprVariablePrefix,  value: k }
+  - { key: readability-identifier-naming.GlobalConstantCase,       value: CamelCase }
+  #  - { key: readability-identifier-naming.GlobalConstantPrefix,     value: k }
+  - { key: readability-identifier-naming.MemberConstantCase,       value: CamelCase }
+  #  - { key: readability-identifier-naming.MemberConstantPrefix,     value: k }
+  - { key: readability-identifier-naming.StaticConstantCase,       value: CamelCase }
+#  - { key: readability-identifier-naming.StaticConstantPrefix,     value: k }

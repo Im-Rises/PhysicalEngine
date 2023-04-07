@@ -10,36 +10,61 @@
 // https://opengl.developpez.com/tutoriels/apprendre-opengl/?page=les-shaders#L7-1-3
 
 Shader::Shader() {
-    const char* vShaderCode = "#version 330 core\n"
-                              "layout (location = 0) in vec3 aPos;\n"
-                              "\n"
-                              "uniform mat4 model;\n"
-                              "uniform mat4 view;\n"
-                              "uniform mat4 projection;\n"
-                              "uniform vec4 color;\n"
-                              "out vec4 ourColor;\n"
-                              "\n"
-                             // "uniform vec3 pos_lumiere;\n"
-                              //"varying vec3 _d;\n"
-                              //"varying vec3 _n;\n"
-                              "void main()\n"
-                              "{\n"
-                              "    gl_Position = projection * view * model * vec4(aPos, 1.0f);\n" 
-                              //"    vec4 tpos = model * vec4(apos, 1.0);\n"
-                              //"    vec3 _pos = tpos.xyz / tpos.w;\n"
-                              //"    _d = pos_lumiere - _pos;\n" 
-                              //"    _n = normalMatrix * normal;\n"
-                              "    ourColor = color;\n"
-                              "}\0";
+//    const char* vShaderCode = "#version 330 core\n"
+//                              "layout (location = 0) in vec3 aPos;\n"
+//                              "\n"
+//                              "uniform mat4 model;\n"
+//                              "uniform mat4 view;\n"
+//                              "uniform mat4 projection;\n"
+//                              "uniform vec4 color;\n"
+//                              "out vec4 ourColor;\n"
+//                              "\n"
+//                             // "uniform vec3 pos_lumiere;\n"
+//                              //"varying vec3 _d;\n"
+//                              //"varying vec3 _n;\n"
+//                              "void main()\n"
+//                              "{\n"
+//                              "    gl_Position = projection * view * model * vec4(aPos, 1.0f);\n"
+//                              //"    vec4 tpos = model * vec4(apos, 1.0);\n"
+//                              //"    vec3 _pos = tpos.xyz / tpos.w;\n"
+//                              //"    _d = pos_lumiere - _pos;\n"
+//                              //"    _n = normalMatrix * normal;\n"
+//                              "    ourColor = color;\n"
+//                              "}\0";
 
-    const char* fShaderCode = "#version 330 core\n"
-                              "in vec4 ourColor;\n"
-                              "out vec4 FragColor;\n"
-                              "\n"
-                              "void main()\n"
-                              "{\n"
-                              "    FragColor = ourColor;\n"
-                              "}\0";
+const char* vShaderCode = R"(
+    #version 300 es
+    layout (location = 0) in vec3 aPos;
+    uniform mat4 model;
+    uniform mat4 view;
+    uniform mat4 projection;
+    uniform vec4 color;
+    out vec4 ourColor;
+    void main()
+    {
+        gl_Position = projection * view * model * vec4(aPos, 1.0f);
+        ourColor = color;
+    }
+)";
+
+//    const char* fShaderCode = "#version 330 core\n"
+//                              "in vec4 ourColor;\n"
+//                              "out vec4 FragColor;\n"
+//                              "\n"
+//                              "void main()\n"
+//                              "{\n"
+//                              "    FragColor = ourColor;\n"
+//                              "}\0";
+
+    const char* fShaderCode = R"(
+        #version 300 es
+        in vec4 ourColor;
+        out vec4 FragColor;
+        void main()
+        {
+            FragColor = ourColor;
+        }
+    )";
 
     create(vShaderCode, fShaderCode);
 }
