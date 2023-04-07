@@ -136,9 +136,9 @@ void InputManager::keyPressed(GLFWwindow* window, int key, PhysicalEngineLaunche
 // }
 
 void InputManager::scroll_callback(GLFWwindow* window, double xOffset, double yOffset) {
-    auto* engine = (PhysicalEngineLauncher*)glfwGetWindowUserPointer(window);
-    Camera* camera = engine->scene->getCameraPtr();
-    camera->setScrollOffset(yOffset);
+//    auto* engine = (PhysicalEngineLauncher*)glfwGetWindowUserPointer(window);
+//    Camera* camera = engine->scene->getCameraPtr();
+//    camera->setScrollOffset(yOffset);
 }
 
 void InputManager::cursor_position_callback(GLFWwindow* window, double xPos, double yPos) {
