@@ -1,14 +1,11 @@
 #include "PhysicalEngineLauncher.h"
 
-#pragma region Includes
-
 // OpenGL Loader
 #include <glad/glad.h>
 
 // Includes
 #include "InputManager.h"
 #include "Scene/Components/Component.h"
-#include "Scene/Components/PhysicalComponent/Particle/Particle.h"
 #include "Scene/GameObject.h"
 #include "Scene/Scene.h"
 #include "Utility/RollingBuffer.h"
@@ -22,6 +19,7 @@
 
 #include <cstdio>
 
+#define GL_SILENCE_DEPRECATION
 #if defined(IMGUI_IMPL_OPENGL_ES2)
 #include <GLES2/gl2.h>
 #endif
@@ -33,45 +31,44 @@
 #pragma comment(lib, "legacy_stdio_definitions")
 #endif
 
-#pragma endregion
-
-#pragma region Callback functions
+#ifdef __EMSCRIPTEN__
+#include "imgui/libs/emscripten/emscripten_mainloop_stub.h"
+#include <emscripten/html5.h>
+#endif
 
 static void glfw_error_callback(int error, const char* description) {
     fprintf(stderr, "Glfw Error %d: %s\n", error, description);
 }
 
-#pragma endregion
-
-#pragma region Constructor and Destructor
-
 PhysicalEngineLauncher::PhysicalEngineLauncher() {
     // Setup window
     glfwSetErrorCallback(glfw_error_callback);
-    if (!glfwInit())
+    if (glfwInit() == 0)
         exit(1);
 
         // Decide GL+GLSL versions
 #if defined(IMGUI_IMPL_OPENGL_ES2)
-    // GL ES 2.0 + GLSL 100
-    const char* glsl_version = "#version 100";
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+    const char* glsl_version = "#version 300 es";
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
     glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
 #elif defined(__APPLE__)
-    // GL 3.2 + GLSL 150
-    const char* glsl_version = "#version 150";
+    const char* glsl_version = "#version 330";
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 3.2+ only
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);           // Required on Mac
 #else
-    // GL 3.0 + GLSL 130
-    const char* glsl_version = "#version 130";
+    const char* glsl_version = "#version 330";
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-//    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // 3.2+ only
-//    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);            // 3.0+ only
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 3.2+ only
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);           // 3.0+ only
+#endif
+
+    // Set display size
+#ifdef __EMSCRIPTEN__
+    emscripten_get_canvas_element_size("#canvas", &windowWidth, &windowHeight);
 #endif
 
     // Create window with graphics context
@@ -90,16 +87,24 @@ PhysicalEngineLauncher::PhysicalEngineLauncher() {
     glfwSetCursorPosCallback(window, InputManager::cursor_position_callback);
     glfwSetMouseButtonCallback(window, InputManager::mouse_button_callback);
 
+#ifndef __EMSCRIPTEN__
     // Center window
     GLFWmonitor* monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode* mode = glfwGetVideoMode(monitor);
     auto xPos = mode->width / 2 - windowWidth / 2;
     auto yPos = mode->height / 2 - windowHeight / 2;
     glfwSetWindowPos(window, xPos, yPos);
+#endif
 
+#ifdef __EMSCRIPTEN__
     // Initialize OpenGL loader
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    if (gladLoadGLES2Loader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress)) == 0)
         exit(1);
+#else
+    // Initialize OpenGL loader
+    if (gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress)) == 0)
+        exit(1);
+#endif
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
@@ -131,6 +136,9 @@ PhysicalEngineLauncher::PhysicalEngineLauncher() {
 
     glEnable(GL_DEPTH_TEST); // Enable depth testing
 
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     // Setup window for inputs
     InputManager::m_window = window;
 }
@@ -148,10 +156,6 @@ PhysicalEngineLauncher::~PhysicalEngineLauncher() {
     glfwTerminate();
 }
 
-#pragma endregion
-
-#pragma region Game Loop methods
-
 void PhysicalEngineLauncher::start() {
     auto start = std::chrono::steady_clock::now();
 
@@ -160,7 +164,16 @@ void PhysicalEngineLauncher::start() {
     game.start(scene);
 
     // Game loop
-    while (!glfwWindowShouldClose(window))
+#ifdef __EMSCRIPTEN__
+    // For an Emscripten build we are disabling file-system access, so let's not attempt to do a fopen() of the imgui.ini file.
+    // You may manually call LoadIniSettingsFromMemory() to load settings from your own storage.
+    ImGuiIO& io = ImGui::GetIO();
+    (void)io;
+    io.IniFilename = nullptr;
+    EMSCRIPTEN_MAINLOOP_BEGIN
+#else
+    while (glfwWindowShouldClose(window) == 0)
+#endif
     {
         // Inputs
         handleEvents();
@@ -172,6 +185,9 @@ void PhysicalEngineLauncher::start() {
         // Refresh screen
         updateScreen();
     }
+#ifdef __EMSCRIPTEN__
+    EMSCRIPTEN_MAINLOOP_END;
+#endif
 }
 
 void PhysicalEngineLauncher::handleEvents() {
@@ -499,6 +515,7 @@ void PhysicalEngineLauncher::updateViewport(int width, int height) {
 
 
 void PhysicalEngineLauncher::toggleFullScreen() {
+#ifndef __EMSCRIPTEN__
     GLFWmonitor* monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode* mode = glfwGetVideoMode(monitor);
     if (isFullScreen)
@@ -513,6 +530,7 @@ void PhysicalEngineLauncher::toggleFullScreen() {
         glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
         isFullScreen = true;
     }
+#endif
 }
 
 bool PhysicalEngineLauncher::isMinimized() const {
@@ -523,5 +541,3 @@ bool PhysicalEngineLauncher::isMinimized() const {
 //     if (gameObject != nullptr)
 //         scene->setCameraPosition(gameObject->transform.getPosition());
 // }
-
-#pragma endregion

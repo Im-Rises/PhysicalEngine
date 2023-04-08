@@ -13,8 +13,13 @@ This is a simple physics engine written in C++ using Glad, GLFW, OpenGl3 and Dea
 
 It is implemented using Fixed Framerate and Component Oriented Programming.
 
+## 🚀🚀 [You can test it online here](https://im-rises.github.io/physical-engine-webgl/) 🚀🚀
+
+The source code of the WebGL can be found at the following link:  
+<https://github.com/Im-Rises/physical-engine-webgl>
+
 > **Note**  
-> The project is a test for the implementation of a physics engine, it is not intended to be used in production.
+> The project is made as a educational project to learn more about physics and game engine development.
 
 ## Features
 
