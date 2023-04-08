@@ -209,6 +209,7 @@ void PhysicalEngineLauncher::handleGui() {
             static bool my_tool_active = true;
             static bool showAboutPopup = false;
             if (ImGui::BeginMainMenuBar()) {
+#ifndef __EMSCRIPTEN__
                 if (ImGui::BeginMenu("File")) {
                     //                    if (ImGui::MenuItem("Open..", "Ctrl+O"))
                     //                    { /* Do stuff */
@@ -224,6 +225,7 @@ void PhysicalEngineLauncher::handleGui() {
                     if (ImGui::MenuItem("FullScreen", "F11")) { toggleFullScreen(); }
                     ImGui::EndMenu();
                 }
+#endif
                 if (ImGui::BeginMenu("Help")) {
                     if (ImGui::MenuItem("About " PROJECT_NAME "...")) {
                         showAboutPopup = true;
@@ -255,8 +257,8 @@ void PhysicalEngineLauncher::handleGui() {
         {
 #ifdef __EMSCRIPTEN__
             if (startPosition) {
-                ImGui::SetNextWindowPos(ImVec2(windowWidth - 200, 0));
-    //            ImGui::SetNextWindowSize(ImVec2(windowWidth, windowHeight));
+                ImGui::SetNextWindowPos(ImVec2(2 + 0, 2 + 20));
+                ImGui::SetNextWindowSize(ImVec2(200, 100));
             }
 #endif
             ImGui::Begin("Window info");
@@ -269,8 +271,8 @@ void PhysicalEngineLauncher::handleGui() {
         {
 #ifdef __EMSCRIPTEN__
             if (startPosition) {
-                ImGui::SetNextWindowPos(ImVec2(2, 20));
-                ImGui::SetNextWindowSize(ImVec2(200, windowHeight/4));
+                ImGui::SetNextWindowPos(ImVec2(2 + 0, 2 + 20 + 100 + 2));
+                ImGui::SetNextWindowSize(ImVec2(200, windowHeight/2));
             }
 #endif
             ImGui::Begin("Hierarchy");
@@ -306,8 +308,8 @@ void PhysicalEngineLauncher::handleGui() {
         {
 #ifdef __EMSCRIPTEN__
             if (startPosition) {
-                ImGui::SetNextWindowPos(ImVec2(windowWidth - 200, windowHeight * 1/3));
-                ImGui::SetNextWindowSize(ImVec2(100, windowHeight/3));
+                ImGui::SetNextWindowPos(ImVec2(2 + 0, 2 + 20 + 100 + 2 + windowHeight/2 + 2));
+                ImGui::SetNextWindowSize(ImVec2(200, windowHeight - 20 - 100 - 2 - windowHeight/2 - 2 -2));
             }
 #endif
             ImGui::Begin("View tools");
@@ -343,8 +345,60 @@ void PhysicalEngineLauncher::handleGui() {
         {
 #ifdef __EMSCRIPTEN__
             if (startPosition) {
-                ImGui::SetNextWindowPos(ImVec2(windowWidth - 200, windowHeight * 2/3));
-                ImGui::SetNextWindowSize(ImVec2(100, 100));
+                ImGui::SetNextWindowPos(ImVec2(windowWidth - 200 - 2, 2 + 20));
+                ImGui::SetNextWindowSize(ImVec2(200, windowHeight - 20 - 2 - 2));
+            }
+#endif
+            ImGui::Begin("Inspector");
+            if (gameObject != nullptr) {
+                ImGui::Text("Name: %s", gameObject->getName().c_str());
+                if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen)) {
+                    gameObject->drawTransformGui();
+                }
+                if (ImGui::CollapsingHeader("Mesh", ImGuiTreeNodeFlags_DefaultOpen)) {
+                    gameObject->drawMeshGui();
+                }
+                for (Component *component: gameObject->getComponents()) {
+                    if (ImGui::CollapsingHeader(component->getName().c_str(), ImGuiTreeNodeFlags_DefaultOpen)) {
+                        component->drawGui();
+                    }
+                }
+                ImGui::NewLine();
+                if (ImGuiUtility::ButtonCenteredOnLine("Add component", 0.5f)) {
+                    ImGui::OpenPopup("Add component##AddComponentPopup");
+                }
+                if (ImGui::BeginPopup("Add component##AddComponentPopup")) {
+                    for (auto &componentName: Component::componentsNamesList) {
+                        if (ImGui::MenuItem(componentName)) {
+                            gameObject->addComponentByName(componentName);
+                        }
+                    }
+                    ImGui::EndPopup();
+                }
+                ImGui::NewLine();
+                if (ImGuiUtility::ButtonCenteredOnLine("Delete component", 0.5f)) {
+                    ImGui::OpenPopup("Delete component##DeleteComponentPopup");
+                }
+                if (ImGui::BeginPopup("Delete component##DeleteComponentPopup")) {
+                    for (auto &component: gameObject->getComponents()) {
+                        if (ImGui::MenuItem(component->getName().c_str())) {
+                            gameObject->deleteComponentByName(component->getName());
+                        }
+                    }
+                    ImGui::EndPopup();
+                }
+            }
+            ImGui::End();
+        }
+        {
+#ifdef __EMSCRIPTEN__
+            if (startPosition) {
+                //center at the bottom
+//                ImGui::SetNextWindowPos(ImVec2(windowWidth/2 - 300/2, windowHeight - 210));
+                ImGui::SetNextWindowPos(ImVec2(200 + 2 + 2, windowHeight - 210));
+                ImGui::SetNextWindowSize(ImVec2(300, 210));
+//                // set to minimize
+//                ImGui::SetNextWindowCollapsed(true);
             }
 #endif
             ImGui::Begin("Speed graph viewer");
@@ -388,54 +442,6 @@ void PhysicalEngineLauncher::handleGui() {
                 }
                 ImGui::SliderFloat("History", &history, 1, 30, "%.1f s");
                 rdata1.Span = history;
-            }
-            ImGui::End();
-        }
-        {
-#ifdef __EMSCRIPTEN__
-            if (startPosition) {
-                ImGui::SetNextWindowPos(ImVec2(2, 22 + windowHeight/4));
-                ImGui::SetNextWindowSize(ImVec2(200, windowHeight*1/2));
-            }
-#endif
-            ImGui::Begin("Inspector");
-            if (gameObject != nullptr) {
-                ImGui::Text("Name: %s", gameObject->getName().c_str());
-                if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen)) {
-                    gameObject->drawTransformGui();
-                }
-                if (ImGui::CollapsingHeader("Mesh", ImGuiTreeNodeFlags_DefaultOpen)) {
-                    gameObject->drawMeshGui();
-                }
-                for (Component *component: gameObject->getComponents()) {
-                    if (ImGui::CollapsingHeader(component->getName().c_str(), ImGuiTreeNodeFlags_DefaultOpen)) {
-                        component->drawGui();
-                    }
-                }
-                ImGui::NewLine();
-                if (ImGuiUtility::ButtonCenteredOnLine("Add component", 0.5f)) {
-                    ImGui::OpenPopup("Add component##AddComponentPopup");
-                }
-                if (ImGui::BeginPopup("Add component##AddComponentPopup")) {
-                    for (auto &componentName: Component::componentsNamesList) {
-                        if (ImGui::MenuItem(componentName)) {
-                            gameObject->addComponentByName(componentName);
-                        }
-                    }
-                    ImGui::EndPopup();
-                }
-                ImGui::NewLine();
-                if (ImGuiUtility::ButtonCenteredOnLine("Delete component", 0.5f)) {
-                    ImGui::OpenPopup("Delete component##DeleteComponentPopup");
-                }
-                if (ImGui::BeginPopup("Delete component##DeleteComponentPopup")) {
-                    for (auto &component: gameObject->getComponents()) {
-                        if (ImGui::MenuItem(component->getName().c_str())) {
-                            gameObject->deleteComponentByName(component->getName());
-                        }
-                    }
-                    ImGui::EndPopup();
-                }
             }
             ImGui::End();
         }
