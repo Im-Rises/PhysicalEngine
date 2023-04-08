@@ -11,7 +11,7 @@
 
 class Transform : private DefaultComponent {
 private:
-    static constexpr const char* COMPONENT_TYPE = "Transform";
+    static constexpr const char *COMPONENT_TYPE = "Transform";
 
 public:
     float positionX, positionY, positionZ;
@@ -28,17 +28,17 @@ public:
 
     void setPosition(float x, float y, float z);
 
-    void setPosition(const Vector3d& position);
+    void setPosition(const Vector3d &position);
 
-    void setRotation(const Quaternion& rotation);
+    void setRotation(const Quaternion &rotation);
 
-    Quaternion getRotation() const;
+    [[nodiscard]] auto getRotation() const -> Quaternion;
 
-    Vector3d getPosition() const;
+    [[nodiscard]] auto getPosition() const -> Vector3d;
 
-    Matrix34 getMatrix() const;
+    [[nodiscard]] auto getMatrix() const -> Matrix34;
 
-    std::string getName() const override;
+    [[nodiscard]] auto getName() const -> std::string override;
 
     //    virtual Vector3d getForward() const =0;
 };

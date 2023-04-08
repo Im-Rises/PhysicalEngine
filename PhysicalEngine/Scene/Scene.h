@@ -8,7 +8,7 @@
 #include "../ParticleContact/ParticleContactResolver.h"
 #include "../ParticleContact/ParticlesContactGeneratorRegistry.h"
 #include "../Utility/Vector3d.h"
-#include "Axis.h"
+//#include "Axis.h"
 #include "Camera.h"
 #include "PhysicHandler.h"
 
@@ -22,10 +22,10 @@ private:
     int windowHeight, windowWidth;
 
     // Scene elements
-    Axis axis;
+//    Axis axis;
     Camera camera;
     PhysicHandler physicHandler;
-    std::vector<GameObject*> gameObjects;
+    std::vector<GameObject *> gameObjects;
     ParticleContactGeneratorRegistry particleContactGeneratorRegistry = ParticleContactGeneratorRegistry(1000000);
     ParticleContactResolver particleContactResolver = ParticleContactResolver(2000000);
     ParticleCollide particleCollide;
@@ -34,7 +34,7 @@ private:
 
     // View settings
     bool wireFrame = false;
-    bool showAxis = false;
+//    bool showAxis = false;
 
     // OpenGL framebuffer
     unsigned int fbo;
@@ -58,7 +58,7 @@ public:
     void updateViewport(int width, int height);
 
 public:
-    void addGameObject(GameObject* gameObject);
+    void addGameObject(GameObject *gameObject);
 
     //    void translateCamera(const Vector3d& vector3D);
 
@@ -77,19 +77,23 @@ public:
 
     unsigned int getFrameBufferId() const;
 
-    std::vector<GameObject*>& getGameObjects();
+    std::vector<GameObject *> &getGameObjects();
 
-    bool* getPtrWireFrameState();
+#ifndef __EMSCRIPTEN__
 
-    bool* getPtrShowAxis();
+    bool *getPtrWireFrameState();
 
-    GameObject* getPtrGameObjectByIndex(int index) const;
+#endif
 
-    Camera* getCameraPtr();
+//    bool *getPtrShowAxis();
 
-    void deleteGameObject(GameObject* gameObject);
+    GameObject *getPtrGameObjectByIndex(int index) const;
 
-    GameObject* createGameObject(std::string name);
+    Camera *getCameraPtr();
+
+    void deleteGameObject(GameObject *gameObject);
+
+    GameObject *createGameObject(std::string name);
 };
 
 #endif // SCENE_H
