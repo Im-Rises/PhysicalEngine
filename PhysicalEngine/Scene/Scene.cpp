@@ -42,15 +42,14 @@ void Scene::create() {
     glBindRenderbuffer(GL_RENDERBUFFER, rbo);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, windowWidth, windowHeight);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER,
-        rbo);
+                              rbo);
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
         std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 Scene::~Scene() {
-    for (auto& gameObject : gameObjects)
-    {
+    for (auto &gameObject: gameObjects) {
         delete gameObject;
     }
     destroy();
@@ -66,8 +65,7 @@ void Scene::update(float deltaTime) {
     //    physicalUpdateTimer += deltaTime;
 
     // Update the game objects (particles, ...)
-    for (GameObject* gameObject : gameObjects)
-    {
+    for (GameObject *gameObject: gameObjects) {
         gameObject->update(deltaTime);
     }
 
@@ -77,14 +75,13 @@ void Scene::update(float deltaTime) {
 
 
     // Move gameObjects
-    for (GameObject* gameObject : gameObjects)
-    {
+    for (GameObject *gameObject: gameObjects) {
         physicHandler.update(gameObject, deltaTime);
     }
 
     // Detect particles collision
     collectParticleColliders();
-    ParticleContact* particleContacts = particleContactGeneratorRegistry.generateAllContacts();
+    ParticleContact *particleContacts = particleContactGeneratorRegistry.generateAllContacts();
 
     // Resolve collisions
     ParticleContact test = particleContacts[0];
@@ -94,13 +91,11 @@ void Scene::update(float deltaTime) {
     // Clean octree
     octree.CleanOctree(octree.root);
     // Insert all objects
-    for (GameObject* gameObject : gameObjects)
-    {
-        RigidbodyPrimitiveCollider* collider = nullptr;
+    for (GameObject *gameObject: gameObjects) {
+        RigidbodyPrimitiveCollider *collider = nullptr;
         gameObject->getComponentByClass(collider);
-        if (collider != nullptr)
-        {
-            Object* obj = new Object{ collider->getCenter(), collider->getRadius(), NULL, collider };
+        if (collider != nullptr) {
+            Object *obj = new Object{collider->getCenter(), collider->getRadius(), NULL, collider};
             octree.InsertObject(octree.root, obj);
         }
     }
@@ -110,13 +105,12 @@ void Scene::update(float deltaTime) {
 
 void Scene::draw(int display_w, int display_h) {
     // Draw the gameObjects
-    for (GameObject* gameObject : gameObjects)
-    {
+    for (GameObject *gameObject: gameObjects) {
         gameObject->draw(display_w, display_h, camera.getViewMatrix(), camera.getFov());
     }
-    // Draw the axis
-    if (showAxis)
-        axis.draw(display_w, display_h, camera.getViewMatrix(), camera.getFov());
+//    // Draw the axis
+//    if (showAxis)
+//        axis.draw(display_w, display_h, camera.getViewMatrix(), camera.getFov());
 }
 
 void Scene::updateViewport(int width, int height) {
@@ -124,7 +118,7 @@ void Scene::updateViewport(int width, int height) {
     windowWidth = width;
 }
 
-void Scene::addGameObject(GameObject* gameObject) {
+void Scene::addGameObject(GameObject *gameObject) {
     gameObjects.push_back(gameObject);
 }
 
@@ -152,51 +146,48 @@ unsigned int Scene::getFrameBufferId() const {
 //     particleCollide.addCollider(particleCollider);
 // }
 
-std::vector<GameObject*>& Scene::getGameObjects() {
+std::vector<GameObject *> &Scene::getGameObjects() {
     return gameObjects;
 }
 
-bool* Scene::getPtrWireFrameState() {
-    if (wireFrame)
-    {
+#ifndef __EMSCRIPTEN__
+
+bool *Scene::getPtrWireFrameState() {
+    if (wireFrame) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    }
-    else
-    {
+    } else {
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
     return &wireFrame;
 }
 
-bool* Scene::getPtrShowAxis() {
-    return &showAxis;
-}
+#endif
 
-GameObject* Scene::getPtrGameObjectByIndex(int index) const {
+//bool *Scene::getPtrShowAxis() {
+//    return &showAxis;
+//}
+
+GameObject *Scene::getPtrGameObjectByIndex(int index) const {
     return gameObjects[index];
 }
 
-Camera* Scene::getCameraPtr() {
+Camera *Scene::getCameraPtr() {
     return &camera;
 }
 
-void Scene::deleteGameObject(GameObject* gameObject) {
-    for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it)
-    {
-        if (*it == gameObject)
-        {
+void Scene::deleteGameObject(GameObject *gameObject) {
+    for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it) {
+        if (*it == gameObject) {
             gameObjects.erase(it);
             break;
         }
     }
 }
 
-GameObject* Scene::createGameObject(std::string name) {
-    for (auto& meshName : Mesh::meshNamesList)
-    {
-        if (meshName == name)
-        {
-            GameObject* gameObject = new GameObject(this, Mesh::createMesh(name.c_str()));
+GameObject *Scene::createGameObject(std::string name) {
+    for (auto &meshName: Mesh::meshNamesList) {
+        if (meshName == name) {
+            GameObject *gameObject = new GameObject(this, Mesh::createMesh(name.c_str()));
             gameObjects.emplace_back(gameObject);
             return gameObject;
         }
@@ -208,12 +199,10 @@ void Scene::cleanParticleColliders() {
 }
 
 void Scene::collectParticleColliders() {
-    for (GameObject* gameObject : gameObjects)
-    {
-        ParticleCollider* particleCollider = nullptr;
+    for (GameObject *gameObject: gameObjects) {
+        ParticleCollider *particleCollider = nullptr;
         gameObject->getComponentByClass(particleCollider);
-        if (particleCollider != nullptr)
-        {
+        if (particleCollider != nullptr) {
             particleCollide.addCollider(particleCollider);
         }
     }

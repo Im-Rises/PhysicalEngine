@@ -7,7 +7,7 @@ class DefaultComponent {
 public:
     virtual void drawGui() = 0;
 
-    virtual std::string getName() const = 0;
+    [[nodiscard]] virtual auto getName() const -> std::string = 0;
 
 };
 

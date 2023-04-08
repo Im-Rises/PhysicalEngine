@@ -16,16 +16,16 @@ class GameObject;
 
 class Component {
 public:
-    static const char* componentsNamesList[6];
+    static const char *componentsNamesList[6];
 
 private:
-    static constexpr const char* COMPONENT_TYPE = "Component";
+    static constexpr const char *COMPONENT_TYPE = "Component";
 
 protected:
-    GameObject* m_gameObject;
+    GameObject *m_gameObject;
 
 public:
-    explicit Component(GameObject* gameObject);
+    explicit Component(GameObject *gameObject);
 
     virtual ~Component();
 
@@ -33,11 +33,11 @@ public:
 
     virtual void drawGui() = 0;
 
-    virtual std::string getName() const = 0;
+    [[nodiscard]] virtual auto getName() const -> std::string = 0;
 
-    GameObject* getGameObject();
+    auto getGameObject() -> GameObject *;
 
-    static Component* createComponent(const std::string& name, GameObject* gameObject);
+    static auto createComponent(const std::string &name, GameObject *gameObject) -> Component *;
 };
 
 
