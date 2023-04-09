@@ -6,7 +6,7 @@
 #define PROJECT_AUTHOR "  - Quentin MOREL\n  - Clémence CLAVEL\n  - Gabriel REBOUL"
 
 #define VERSION_MAJOR "1"
-#define VERSION_MINOR "1"
+#define VERSION_MINOR "5"
 #define VERSION_PATCH "0"
 
 #define PROJECT_VERSION VERSION_MAJOR "." VERSION_MINOR "." VERSION_PATCH
