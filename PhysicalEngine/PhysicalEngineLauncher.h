@@ -1,7 +1,7 @@
 #ifndef PARTICLE_ENGINE_H
 #define PARTICLE_ENGINE_H
 
-#define PROJECT_NAME "Physical Engine WebGL"
+#define PROJECT_NAME "Physical Engine 3D"
 
 #define PROJECT_AUTHOR "  - Quentin MOREL\n  - Clémence CLAVEL\n  - Gabriel REBOUL"
 
@@ -34,8 +34,8 @@ class PhysicalEngineLauncher {
 
 private:
     // Window, Scene and Game objects
-    GLFWwindow *window = nullptr;
-    Scene *scene;
+    GLFWwindow* window = nullptr;
+    Scene* scene;
     Game game;
 
     // Window variables
@@ -44,7 +44,7 @@ private:
     int windowWidth = WINDOW_WIDTH, windowHeight = WINDOW_HEIGHT;
 
     // Selected GameObject in the scene
-    GameObject *gameObject = nullptr;
+    GameObject* gameObject = nullptr;
 
     // Widgets terminal variables
     std::array<char, CONSOLE_BUFFER_SIZE> consoleBuffer = {};
@@ -61,7 +61,7 @@ private:
 
     void handleGui();
 
-    void updateGame(std::chrono::steady_clock::time_point &start);
+    void updateGame(std::chrono::steady_clock::time_point& start);
 
     void updateScreen();
 
